@@ -10,9 +10,9 @@
                 </div>
                 <div class="col-lg-12 col-md-12">
                     <div class="d-flex justify-content-end">
-                        <button id="addColor"
+                        <button id="addFur"
                             class="btn teal lighten-1 btn-rounded pl-5 pr-5 text-white waves-effect waves-light text-transform-none m-0 mb-3">
-                            Dodaj kolor <i class="ml-2 fas fa-lg text-white fa-plus"></i></button>
+                            Dodaj długość futra <i class="ml-2 fas fa-lg text-white fa-plus"></i></button>
                     </div>
                     <table id="adminAnimalFursTable" class="table table-striped table-bordered" cellspacing="0"
                            width="100%">
@@ -64,7 +64,7 @@
                             </div>
                             <div class="md-form mt-0 mb-0 text-left">
                                 <input type="hidden" name="action" id="action" />
-                                <input type="hidden" name="animalColorId" id="animalFurId" />
+                                <input type="hidden" name="animalFurId" id="animalFurId" />
                                 <button type="submit" name="action_button" id="action_button" class="btn indigo lighten-1 btn-rounded pl-5 pr-5 text-white waves-effect waves-light text-transform-none m-0 mb-3">
                                     Zapisz</button>
                             </div>

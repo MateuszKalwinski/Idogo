@@ -11,16 +11,16 @@ class BackendAnimalFurs {
     UX() {
         let self = this;
 
-        $('#addColor').click(function () {
+        $('#addFur').click(function () {
             $('#addEditModalTitle').text('Dodaj długość futra')
             $('.modal-header ').addClass('teal lighten-1').removeClass('yellow darken-2')
-            $('#FurName').val('');
-            $('label[for="colorName"]').removeClass('active');
+            $('#furName').val('');
+            $('label[for="furName"]').removeClass('active');
             $('#action').val('add');
             $('#animalFurId').val('');
             $('#addEditFurModal').modal('show')
         })
-        $(document).on('click', '.edit-animal-color', function () {
+        $(document).on('click', '.edit-animal-fur', function () {
             $('#addEditModalTitle').text('Edytuj długość futra')
             $('.modal-header ').addClass('yellow darken-2').removeClass('teal lighten-1')
             let animalFurName = $(this).closest('tr').find('.animal-fur-name').text();
@@ -32,30 +32,30 @@ class BackendAnimalFurs {
             $('#addEditFurModal').modal('show')
         })
 
-        $('#addEditColor').on('submit', function (e) {
+        $('#addEditFur').on('submit', function (e) {
             e.preventDefault();
             if ($('#action').val() === 'add'){
-                self.saveAnimalColor(new FormData(this), base_url+ "/adminStoreAnimalColor")
+                self.saveAnimalColor(new FormData(this), base_url+ "/adminStoreAnimalFur")
             }else{
-                self.saveAnimalColor(new FormData(this), base_url+ "/adminUpdateAnimalColor")
+                self.saveAnimalColor(new FormData(this), base_url+ "/adminUpdateAnimalFur")
             }
         })
 
-        $(document).on('click', '.delete-animal-color', function () {
-            let animalColorId = $(this).closest('tr').find('.animal-color-name').attr('data-animal-color-id');
-            $('#confirm-yes').attr('data-animal-color-id', animalColorId);
-            let animalColorName = $(this).closest('tr').find('.animal-color-name').text();
-            $('#animalColorName').text(animalColorName);
+        $(document).on('click', '.delete-animal-fur', function () {
+            let AnimalfurId = $(this).closest('tr').find('.animal-fur-name').attr('data-animal-fur-id');
+            $('#confirm-yes').attr('data-animal-fur-id', AnimalfurId);
+            let animalFurName = $(this).closest('tr').find('.animal-fur-name').text();
+            $('#animalFurName').text(animalFurName);
             $('#confirmModal').modal('show');
         })
 
         $('#confirm-yes').on('click', function () {
-            let animalColorId = $('#confirm-yes').attr('data-animal-color-id');
-            self.deleteAnimalColor(animalColorId);
+            let animalFurId = $('#confirm-yes').attr('data-animal-fur-id');
+            self.deleteAnimalFur(animalFurId);
         })
     }
 
-    deleteAnimalColor(animalColorId){
+    deleteAnimalFur(animalFurId){
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -65,9 +65,9 @@ class BackendAnimalFurs {
 
         $.ajax({
             type: 'POST',
-            url: base_url + "/deleteAnimalColor",
+            url: base_url + "/deleteAnimalFur",
             data: {
-                animalColorId: animalColorId,
+                animalFurId: animalFurId,
             },
             dataType: 'json',
             beforeSend: function () {
@@ -91,7 +91,7 @@ class BackendAnimalFurs {
                 if(data.success)
                 {
                     html = '<div class="alert alert-success">' + data.success + '</div>';
-                    $('#adminAnimalColorsTable').DataTable().ajax.reload();
+                    $('#adminAnimalFursTable').DataTable().ajax.reload();
                 }
                 $('#form_result').html(html);
             },
@@ -130,8 +130,8 @@ class BackendAnimalFurs {
                 if(data.success)
                 {
                     html = '<div class="alert alert-success">' + data.success + '</div>';
-                    $('#colorName').val('');
-                    $('#adminAnimalColorsTable').DataTable().ajax.reload();
+                    $('#furName').val('');
+                    $('#adminAnimalFursTable').DataTable().ajax.reload();
                 }
                 $('#form_result').html(html);
             }

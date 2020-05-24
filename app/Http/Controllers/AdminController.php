@@ -195,4 +195,25 @@ class AdminController extends Controller
         return view('backend.animalFur.index');
     }
 
+    public function adminStoreAnimalFur(Request $request)
+    {
+        $storeAnimalFur = $this->aG->storeAnimalFur($request);
+
+        return $storeAnimalFur;
+    }
+
+    public function adminUpdateAnimalFur(Request $request)
+    {
+        $updateAnimalFur = $this->aG->updateAnimalFur($request);
+
+        return $updateAnimalFur;
+    }
+
+    public function deleteAnimalFur(Request $request)
+    {
+        $deleteAnimalFur = $this->aG->deleteAnimalFur($request);
+
+        return $deleteAnimalFur;
+    }
+
 }

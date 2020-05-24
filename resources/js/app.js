@@ -37,6 +37,9 @@ $(document).ready(function () {
         if (module == 'backendAnimalSpecies'){
             new BackendAnimalSpecies(base_url);
         }
+        if (module == 'backendAnimalFurs'){
+            new BackendAnimalFurs(base_url)
+        }
     }
 
     $('.mdb-select').materialSelect();

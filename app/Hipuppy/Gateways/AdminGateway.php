@@ -196,4 +196,63 @@ class AdminGateway
 
         return $this->aR->deleteAnimalSpecies($request);
     }
+
+    public function storeAnimalFur($request)
+    {
+        $validator = Validator::make($request->all(), [
+            'furName' => 'required|string|max:255',
+        ],
+            [
+                'furName.required' => __('Pole "długość futra" jest wymagane.'),
+                'furName.string' => __('Pole "długość futra" musi być typu tekstowego.'),
+                'furName.max' => __('Pole "długość futra" nie może mieć więcej niż 255 znaków.'),
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
+        return $this->aR->storeAnimalFur($request);
+    }
+
+    public function updateAnimalFur($request)
+    {
+        $validator = Validator::make($request->all(), [
+            'furName' => 'required|string|max:255',
+            'animalFurId' => 'required|integer',
+        ],
+            [
+                'furName.required' => __('Pole "długość futra" jest wymagane.'),
+                'furName.string' => __('Pole "długość futra" musi być typu tekstowego.'),
+                'furName.max' => __('Pole "długość futra" nie może mieć więcej niż 255 znaków.'),
+
+                'animalFurId.required' => __('Ups!coś poszło nie tak.'),
+                'animalFurId.integer' => __('Ups!coś poszło nie tak.'),
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
+        return $this->aR->updateAnimalFur($request);
+    }
+
+    public function deleteAnimalFur($request){
+        $validator = Validator::make($request->all(), [
+            'animalFurId' => 'required|integer',
+        ],
+            [
+                'animalFurId.required' => 'Ups!coś poszło nie tak.',
+                'animalFurId.integer' => 'Ups!coś poszło nie tak.',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
+        return $this->aR->deleteAnimalFur($request);
+    }
 }

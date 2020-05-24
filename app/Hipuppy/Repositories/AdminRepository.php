@@ -3,7 +3,7 @@
 namespace App\Hipuppy\Repositories;
 
 use App\{Hipuppy\Interfaces\AdminRepositoryInterface};
-use App\{AnimalColor, AnimalSpecies, CharacteristicDictionary};
+use App\{AnimalColor, AnimalSpecies, CharacteristicDictionary, Fur};
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -969,7 +969,8 @@ class AdminRepository implements AdminRepositoryInterface
         return response()->json(['success' => __('Cecha zwierzaka została usunięta.')]);
     }
 
-    public function adminAnimalFur(){
+    public function adminAnimalFur()
+    {
         $datatable = datatables()->of($this->getAnimalFurForDatatable())
             ->addColumn('animal_fur_id', function ($data) {
 
@@ -1024,7 +1025,8 @@ class AdminRepository implements AdminRepositoryInterface
         return $datatable;
     }
 
-    public function getAnimalFurForDatatable(){
+    public function getAnimalFurForDatatable()
+    {
         $animalFursForDatatable = DB::table('fur AS f')
             ->select(
                 'f.id AS fur_id',
@@ -1042,5 +1044,59 @@ class AdminRepository implements AdminRepositoryInterface
             ->leftJoin('users AS edited_user', 'f.edited_user_id', '=', 'edited_user.id')
             ->get();
         return $animalFursForDatatable;
+    }
+
+    public function storeAnimalFur($request)
+    {
+
+        $furName = trim(strtolower($request->furName));
+        $isExist = Fur::where('name', '=', $furName)->exists();
+
+        if ($isExist) {
+            return response()->json(['errors' => [__('Taka długość futra już istnieje.')]]);
+        }
+
+        Fur::create([
+            'name' => $furName,
+            'created_at' => Carbon::now('Europe/Warsaw'),
+            'created_user_id' => Auth::user()->id,
+        ]);
+
+        return response()->json(['success' => __('Dodano nawą długość futra.')]);
+    }
+
+    public function updateAnimalFur($request)
+    {
+        $furName = trim(strtolower($request->furName));
+
+        $isExist = Fur::where('name', '=', $furName)->where('id', '!=', $request->animalFurId)->exists();
+
+
+        if ($isExist) {
+            return response()->json(['errors' => ['Taka długość futra już istnieje.']]);
+        }
+
+        Fur::where('id', '=', $request->animalFurId)->update([
+            'name' => $furName,
+            'edited_at' => Carbon::now('Europe/Warsaw'),
+            'edited_user_id' => Auth::user()->id,
+        ]);
+
+
+        return response()->json(['success' => 'Edycja zakończona pomyślnie.']);
+    }
+
+    public function deleteAnimalFur($request)
+    {
+        $isExist = Fur::where('id', '=', $request->animalFurId)->exists();
+
+        if (!$isExist) {
+            return response()->json(['errors' => ['Nie znaleziono takiej długości futra.']]);
+        }
+
+        $animalFur = Fur::findOrFail($request->animalFurId);
+        $animalFur->delete();
+
+        return response()->json(['success' => 'Długość futra zostaa usunięta.']);
     }
 }
