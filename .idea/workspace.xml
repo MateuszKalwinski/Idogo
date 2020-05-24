@@ -2,205 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b2f87717-95e0-42d1-82e3-9be85e76505a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/AnimalBreedDescription.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Hipuppy/Gateways/AdminGateway.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Hipuppy/Gateways/BreedsGateway.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Hipuppy/Gateways/FrontendGateway.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Hipuppy/Gateways/SheltersGateway.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Hipuppy/Interfaces/AdminRepositoryInterface.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Hipuppy/Interfaces/BreedsRepositoryInterface.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Hipuppy/Repositories/AdminRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Hipuppy/Repositories/BreedsRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Hipuppy/Repositories/SheltersRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/BreedsController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/ShelterApplication.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/ShelterApplicationStatus.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/login-bg-v6.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/placeholder-breed.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/modules/backendAnimalCharacteristics.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/modules/backendAnimalColors.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/modules/backendAnimalSpecies.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/modules/backendProfile.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/modules/frontendShelters.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/modules/frontendUser.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/modules/success.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/backend/animalCharacteristics/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/backend/animalColors/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/backend/animals/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/backend/breeds/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/backend/shelterApplication/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/backend/species/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/backend/users/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/backend/violationReports/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/frontend/breedDescription.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/frontend/breeds.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/frontend/joinShelter.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/frontend/user.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/hi-puppy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/hi-puppy.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/backend/animalFur/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Address.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Address.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Animal.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Animal.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/AnimalBreed.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AnimalBreed.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/AnimalCharacteristic.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AnimalCharacteristic.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/AnimalColor.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AnimalColor.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/AnimalDictionary.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AnimalDictionary.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/AnimalDictionarySpecies.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AnimalDictionarySpecies.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/AnimalSize.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AnimalSize.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/AnimalSpecies.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AnimalSpecies.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/AnimalStatus.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AnimalStatus.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Article.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CharacteristicDictionary.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CharacteristicDictionary.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/City.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/City.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Comment.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/DayDictionary.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DayDictionary.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Gateways/AnimalGateway.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Gateways/AnimalGateway.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Gateways/AnimalsGateway.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Gateways/AnimalsGateway.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Gateways/BackendGateway.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Gateways/BackendGateway.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Gateways/FrontendGateway.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Gateways/ShelterGateway.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Gateways/ShelterGateway.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Gateways/SheltersGateway.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/components/datatable_pl_PL.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Interfaces/AnimalRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Interfaces/AnimalRepositoryInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Interfaces/AnimalsRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Interfaces/AnimalsRepositoryInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Interfaces/BackendRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Interfaces/BackendRepositoryInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Interfaces/FrontendRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Interfaces/FrontendRepositoryInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Interfaces/ShelterRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Interfaces/ShelterRepositoryInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Interfaces/SheltersRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Interfaces/SheltersRepositoryInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Presenters/ArticlePresenter.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Presenters/CommentPresenter.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Presenters/ObjectPresenter.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Presenters/UserPresenter.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Presenters/UserPresenter.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Repositories/AnimalRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Repositories/AnimalRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Repositories/AnimalsRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Repositories/AnimalsRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Repositories/BackendRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Repositories/BackendRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Repositories/FrontendRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Repositories/FrontendRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Repositories/ShelterRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Repositories/ShelterRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Repositories/SheltersRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Traits/Ajax.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Traits/Ajax.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/ViewComposers/BackendComposer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/ViewComposers/BackendComposer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Events/OrderPlacedEvent.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Events/ReservationConfirmedEvent.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Fur.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Fur.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Gender.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Gender.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/GlobalArticle.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/GlobalArticle.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AnimalController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AnimalController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AnimalsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AnimalsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BackendController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BackendController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CityController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FrontendController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FrontendController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ShelterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ShelterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SheltersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SheltersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SocialAuthFacebookController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SocialAuthFacebookController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/CheckAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/CheckAdmin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/CheckOwner.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/CheckOwner.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Listeners/OrderPlacedEventListener.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Listeners/ReservationConfirmedListener.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Notification.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/OpenHour.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/OpenHour.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Phone.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Phone.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Photo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Photo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Policies/ArticlePolicy.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Policies/ObjectPolicy.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Policies/ObjectPolicy.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Policies/PhotoPolicy.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Policies/PhotoPolicy.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Policies/ReservationPolicy.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Policies/RoomPolicy.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Policies/RoomPolicy.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Province.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Province.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Reservation.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Role.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Role.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Room.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Shelter.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Shelter.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/TouristObject.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_05_170907_create_cities_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_05_170907_create_cities_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_05_173506_create_notifications_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_05_173506_create_notifications_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_05_175307_create_comments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_05_175307_create_comments_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_05_190021_create_likeables_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_05_190021_create_likeables_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_05_190237_create_photos_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_05_190237_create_photos_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_06_131710_create_addresses_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_06_131710_create_addresses_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_06_131939_create_articles_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_06_131939_create_articles_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_11_02_155023_create_animals_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_11_02_155023_create_animals_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_11_02_171741_create_shelters_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_11_02_171741_create_shelters_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_11_21_201012_create_phones_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_11_21_201012_create_phones_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/AddressesTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/AddressesTableSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/ArticlesTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/ArticlesTableSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/CitiesTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/CitiesTableSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/CommentsTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/CommentsTableSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/FavouriteablesTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/FavouriteablesTableSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/GlobalArticlesTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/GlobalArticlesTableSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/LikeablesTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/LikeablesTableSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/NotificationsTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/NotificationsTableSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/ObjectsTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/ObjectsTableSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/OpenHoursTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/OpenHoursTableSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/PhotosTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/PhotosTableSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/ReservationsTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/ReservationsTableSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/RoleUserTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/RoleUserTableSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/RolesTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/RolesTableSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/SheltersSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/SheltersSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/UsersTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/UsersTableSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/login-bg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/assets/images/apple.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/assets/images/google.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/assets/images/header.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/assets/images/mobile-app.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/assets/images/windows.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/assets/js/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/assets/js/admin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/assets/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/assets/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/assets/sass/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/resources/assets/sass/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/admin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/modules/errors.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/modules/errors.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/modules/frontendAnimal.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/modules/frontendAnimal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/modules/frontendAnimals.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/modules/frontendAnimals.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/modules/frontendIndex.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/modules/frontendIndex.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/modules/frontendShelter.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/modules/frontendShelter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/en/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/routes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/pl.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/pl.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/pl/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/pl/routes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/cities/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/cities/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/cities/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/cities/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/cities/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/cities/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/favourites.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/favourites.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/myobjects.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/profile.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/saveobject.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/saveroom.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/animal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/animal.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/animals.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/animals.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/article.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/object.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/person.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/person.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/room.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/roomsearch.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/shelter.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/shelter.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/shelter_copy.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/shelters.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/shelters.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Hipuppy/Repositories/AdminRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Repositories/AdminRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/backend.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/backend.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/frontend.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/frontend.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/indexFronend.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/indexFronend.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/menu.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
     </list>
@@ -341,7 +147,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/backend/animalColors" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/backend/animalFur" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -350,19 +156,19 @@
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/resources/views/backend/animalColors" />
-      <recent name="$PROJECT_DIR$/resources/views/backend/violationReports" />
-      <recent name="$PROJECT_DIR$/resources/views/backend/animalCharacteristics" />
-      <recent name="$PROJECT_DIR$/resources/views/backend/animals" />
-      <recent name="$PROJECT_DIR$/resources/views/backend/breeds" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public/components" />
       <recent name="$PROJECT_DIR$/public/images" />
       <recent name="$PROJECT_DIR$/resources/sass" />
       <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$/resources/js" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/backend/animalFur" />
+      <recent name="$PROJECT_DIR$/resources/views/backend/animalColors" />
+      <recent name="$PROJECT_DIR$/resources/views/backend/violationReports" />
+      <recent name="$PROJECT_DIR$/resources/views/backend/animalCharacteristics" />
+      <recent name="$PROJECT_DIR$/resources/views/backend/animals" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -615,6 +421,7 @@
       <workItem from="1590003257486" duration="5964000" />
       <workItem from="1590228304159" duration="3467000" />
       <workItem from="1590240240672" duration="13934000" />
+      <workItem from="1590316720295" duration="4526000" />
     </task>
     <task id="LOCAL-00001" summary="basic functionalities">
       <created>1586718573109</created>

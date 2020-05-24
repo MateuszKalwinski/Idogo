@@ -67,7 +67,8 @@ class AdminController extends Controller
         return $updateAnimalSpecies;
     }
 
-    public function deleteAnimalSpecies(Request $request){
+    public function deleteAnimalSpecies(Request $request)
+    {
         $deleteAnimalSpecies = $this->aG->deleteAnimalSpecies($request);
 
         return $deleteAnimalSpecies;
@@ -181,6 +182,17 @@ class AdminController extends Controller
         }
 
         return view('backend.violationReports.index');
+    }
+
+    public function adminAnimalFur()
+    {
+        if (request()->ajax()) {
+            $datatable = $this->aR->adminAnimalFur();
+
+            return $datatable;
+        }
+
+        return view('backend.animalFur.index');
     }
 
 }

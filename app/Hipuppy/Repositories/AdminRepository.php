@@ -234,7 +234,7 @@ class AdminRepository implements AdminRepositoryInterface
             })
             ->addColumn('edited_user', function ($data) {
                 if ($data->edited_user_id) {
-                    $linkToUser = route('user', ['id' => $data->created_user_id]);
+                    $linkToUser = route('user', ['id' => $data->edited_user_id]);
                     $nameAndSurname = '<a href="' . $linkToUser . '">' . $data->edited_user_name . ' ' . $data->edited_user_surname . '</a>';
                 } else {
                     $nameAndSurname = '<span>Brak</span>';
@@ -967,5 +967,80 @@ class AdminRepository implements AdminRepositoryInterface
         $animalColor->delete();
 
         return response()->json(['success' => __('Cecha zwierzaka została usunięta.')]);
+    }
+
+    public function adminAnimalFur(){
+        $datatable = datatables()->of($this->getAnimalFurForDatatable())
+            ->addColumn('animal_fur_id', function ($data) {
+
+                $animalFurId = '<span data-animal-fur-id="' . $data->fur_id . '">' . $data->fur_id . '</span>';
+                return $animalFurId;
+            })
+            ->addColumn('animal_fur_name', function ($data) {
+
+                $animalSpeciesName = '<span class="animal-fur-name" data-animal-fur-id="' . $data->fur_id . '">' . $data->fur_name . '</span>';
+                return $animalSpeciesName;
+            })
+            ->addColumn('fur_created_at', function ($data) {
+
+                $animalFurCreatedAt = '<span>' . $data->fur_created_at . '</span>';
+                return $animalFurCreatedAt;
+            })
+            ->addColumn('added_user', function ($data) {
+
+                $linkToUser = route('user', ['id' => $data->fur_created_user_id]);
+                $nameAndSurname = '<a href="' . $linkToUser . '">' . $data->created_user_name . ' ' . $data->created_user_surname . '</a>';
+                return $nameAndSurname;
+            })
+            ->addColumn('fur_edited_at', function ($data) {
+                $animalFurEditeddAt = ($data->fur_edited_at) ? '<span>' . $data->fur_edited_at . '</span>' : '<span>Brak</span>';
+                return $animalFurEditeddAt;
+            })
+            ->addColumn('edited_user', function ($data) {
+                if ($data->fur_edited_user_id) {
+                    $linkToUser = route('user', ['id' => $data->fur_edited_user_id]);
+                    $nameAndSurname = '<a href="' . $linkToUser . '">' . $data->edited_user_name . ' ' . $data->edited_user_surname . '</a>';
+                } else {
+                    $nameAndSurname = '<span>Brak</span>';
+                }
+                return $nameAndSurname;
+
+            })
+            ->addColumn('action', function ($data) {
+
+                $actions = '<div class="d-flex">
+                                <button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-yellow border-none edit-animal-fur waves-effect waves-light" data-animal-fur-id="' . $data->fur_id . '">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-danger border-none delete-animal-fur waves-effect waves-light" data-animal-fur-id="' . $data->fur_id . '">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>';
+                return $actions;
+            })
+            ->rawColumns(['animal_fur_id', 'animal_fur_name', 'fur_created_at', 'added_user', 'fur_edited_at', 'edited_user', 'action'])
+            ->make(true);
+
+        return $datatable;
+    }
+
+    public function getAnimalFurForDatatable(){
+        $animalFursForDatatable = DB::table('fur AS f')
+            ->select(
+                'f.id AS fur_id',
+                'f.name AS fur_name',
+                'f.created_at AS fur_created_at',
+                'f.created_user_id AS fur_created_user_id',
+                'f.edited_at AS fur_edited_at',
+                'f.edited_user_id AS fur_edited_user_id',
+                'created_user.name AS created_user_name',
+                'created_user.surname AS created_user_surname',
+                'edited_user.name AS edited_user_name',
+                'edited_user.surname AS edited_user_surname'
+            )
+            ->leftJoin('users AS created_user', 'f.created_user_id', '=', 'created_user.id')
+            ->leftJoin('users AS edited_user', 'f.edited_user_id', '=', 'edited_user.id')
+            ->get();
+        return $animalFursForDatatable;
     }
 }
