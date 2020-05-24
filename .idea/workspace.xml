@@ -1,0 +1,763 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b2f87717-95e0-42d1-82e3-9be85e76505a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/AnimalBreedDescription.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Hipuppy/Gateways/AdminGateway.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Hipuppy/Gateways/BreedsGateway.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Hipuppy/Gateways/FrontendGateway.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Hipuppy/Gateways/SheltersGateway.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Hipuppy/Interfaces/AdminRepositoryInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Hipuppy/Interfaces/BreedsRepositoryInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Hipuppy/Repositories/AdminRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Hipuppy/Repositories/BreedsRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Hipuppy/Repositories/SheltersRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/BreedsController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/ShelterApplication.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/ShelterApplicationStatus.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/login-bg-v6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/placeholder-breed.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/modules/backendAnimalCharacteristics.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/modules/backendAnimalColors.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/modules/backendAnimalSpecies.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/modules/backendProfile.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/modules/frontendShelters.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/modules/frontendUser.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/modules/success.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/backend/animalCharacteristics/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/backend/animalColors/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/backend/animals/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/backend/breeds/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/backend/shelterApplication/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/backend/species/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/backend/users/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/backend/violationReports/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/frontend/breedDescription.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/frontend/breeds.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/frontend/joinShelter.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/frontend/user.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/hi-puppy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/hi-puppy.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Address.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Address.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Animal.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Animal.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/AnimalBreed.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AnimalBreed.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/AnimalCharacteristic.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AnimalCharacteristic.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/AnimalColor.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AnimalColor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/AnimalDictionary.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AnimalDictionary.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/AnimalDictionarySpecies.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AnimalDictionarySpecies.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/AnimalSize.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AnimalSize.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/AnimalSpecies.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AnimalSpecies.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/AnimalStatus.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AnimalStatus.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Article.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/CharacteristicDictionary.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CharacteristicDictionary.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/City.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/City.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Comment.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/DayDictionary.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DayDictionary.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Gateways/AnimalGateway.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Gateways/AnimalGateway.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Gateways/AnimalsGateway.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Gateways/AnimalsGateway.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Gateways/BackendGateway.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Gateways/BackendGateway.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Gateways/FrontendGateway.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Gateways/ShelterGateway.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Gateways/ShelterGateway.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Gateways/SheltersGateway.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/components/datatable_pl_PL.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Interfaces/AnimalRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Interfaces/AnimalRepositoryInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Interfaces/AnimalsRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Interfaces/AnimalsRepositoryInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Interfaces/BackendRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Interfaces/BackendRepositoryInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Interfaces/FrontendRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Interfaces/FrontendRepositoryInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Interfaces/ShelterRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Interfaces/ShelterRepositoryInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Interfaces/SheltersRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Interfaces/SheltersRepositoryInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Presenters/ArticlePresenter.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Presenters/CommentPresenter.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Presenters/ObjectPresenter.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Presenters/UserPresenter.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Presenters/UserPresenter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Repositories/AnimalRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Repositories/AnimalRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Repositories/AnimalsRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Repositories/AnimalsRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Repositories/BackendRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Repositories/BackendRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Repositories/FrontendRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Repositories/FrontendRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Repositories/ShelterRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Repositories/ShelterRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Repositories/SheltersRepository.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Traits/Ajax.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Traits/Ajax.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/ViewComposers/BackendComposer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/ViewComposers/BackendComposer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Events/OrderPlacedEvent.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Events/ReservationConfirmedEvent.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Fur.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Fur.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Gender.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Gender.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/GlobalArticle.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/GlobalArticle.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AnimalController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AnimalController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AnimalsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AnimalsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BackendController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BackendController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CityController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FrontendController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FrontendController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ShelterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ShelterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SheltersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SheltersController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SocialAuthFacebookController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SocialAuthFacebookController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/CheckAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/CheckAdmin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/CheckOwner.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/CheckOwner.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Listeners/OrderPlacedEventListener.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Listeners/ReservationConfirmedListener.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Notification.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/OpenHour.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/OpenHour.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Phone.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Phone.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Photo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Photo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Policies/ArticlePolicy.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Policies/ObjectPolicy.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Policies/ObjectPolicy.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Policies/PhotoPolicy.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Policies/PhotoPolicy.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Policies/ReservationPolicy.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Policies/RoomPolicy.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Policies/RoomPolicy.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Province.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Province.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Reservation.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Role.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Role.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Room.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Shelter.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Shelter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/TouristObject.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_05_170907_create_cities_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_05_170907_create_cities_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_05_173506_create_notifications_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_05_173506_create_notifications_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_05_175307_create_comments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_05_175307_create_comments_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_05_190021_create_likeables_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_05_190021_create_likeables_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_05_190237_create_photos_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_05_190237_create_photos_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_06_131710_create_addresses_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_06_131710_create_addresses_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_06_131939_create_articles_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_06_131939_create_articles_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_11_02_155023_create_animals_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_11_02_155023_create_animals_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_11_02_171741_create_shelters_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_11_02_171741_create_shelters_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_11_21_201012_create_phones_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_11_21_201012_create_phones_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/AddressesTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/AddressesTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/ArticlesTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/ArticlesTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/CitiesTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/CitiesTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/CommentsTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/CommentsTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/FavouriteablesTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/FavouriteablesTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/GlobalArticlesTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/GlobalArticlesTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/LikeablesTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/LikeablesTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/NotificationsTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/NotificationsTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/ObjectsTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/ObjectsTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/OpenHoursTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/OpenHoursTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/PhotosTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/PhotosTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/ReservationsTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/ReservationsTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/RoleUserTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/RoleUserTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/RolesTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/RolesTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/SheltersSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/SheltersSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/UsersTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/UsersTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/login-bg.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/assets/images/apple.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/assets/images/google.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/assets/images/header.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/assets/images/mobile-app.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/assets/images/windows.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/assets/js/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/assets/js/admin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/assets/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/assets/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/assets/sass/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/resources/assets/sass/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/admin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/modules/errors.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/modules/errors.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/modules/frontendAnimal.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/modules/frontendAnimal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/modules/frontendAnimals.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/modules/frontendAnimals.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/modules/frontendIndex.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/modules/frontendIndex.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/modules/frontendShelter.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/modules/frontendShelter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/en/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/routes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/pl.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/pl.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/pl/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/pl/routes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/cities/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/cities/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/cities/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/cities/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/cities/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/cities/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/favourites.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/favourites.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/myobjects.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/profile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/saveobject.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/saveroom.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/animal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/animal.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/animals.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/animals.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/article.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/object.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/person.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/person.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/room.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/roomsearch.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/shelter.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/shelter.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/shelter_copy.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/shelters.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/shelters.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/backend.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/backend.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/frontend.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/frontend.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/indexFronend.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/indexFronend.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+    <execution />
+  </component>
+  <component name="DatabaseLocalColorSettings">
+    <colors>
+      <entry key="96c12fe4-f426-4e9f-b42a-443eb47552c6" value="Blue" />
+    </colors>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/resources/js/app.js" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-token-stream" />
+      <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/vendor/beyondcode/laravel-dump-server" />
+      <path value="$PROJECT_DIR$/vendor/hamcrest/hamcrest-php" />
+      <path value="$PROJECT_DIR$/vendor/phpspec/prophecy" />
+      <path value="$PROJECT_DIR$/vendor/fzaninotto/faker" />
+      <path value="$PROJECT_DIR$/vendor/tijsverkoyen/css-to-inline-styles" />
+      <path value="$PROJECT_DIR$/vendor/laravel/tinker" />
+      <path value="$PROJECT_DIR$/vendor/laravel/framework" />
+      <path value="$PROJECT_DIR$/vendor/vlucas/phpdotenv" />
+      <path value="$PROJECT_DIR$/vendor/dragonmantank/cron-expression" />
+      <path value="$PROJECT_DIR$/vendor/opis/closure" />
+      <path value="$PROJECT_DIR$/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/vendor/nesbot/carbon" />
+      <path value="$PROJECT_DIR$/vendor/erusev/parsedown" />
+      <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/vendor/fideloper/proxy" />
+      <path value="$PROJECT_DIR$/vendor/psy/psysh" />
+      <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/vendor/league/flysystem" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/vendor/jakub-onderka/php-console-color" />
+      <path value="$PROJECT_DIR$/vendor/jakub-onderka/php-console-highlighter" />
+      <path value="$PROJECT_DIR$/vendor/dnoegel/php-xdg-base-dir" />
+      <path value="$PROJECT_DIR$/vendor/phpoption/phpoption" />
+      <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/vendor/mockery/mockery" />
+      <path value="$PROJECT_DIR$/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/type-resolver" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/vendor/nunomaduro/collision" />
+      <path value="$PROJECT_DIR$/vendor/filp/whoops" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/vendor/ramsey/uuid" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/vendor/symfony/debug" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/resource-operations" />
+      <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mime" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-iconv" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
+      <path value="$PROJECT_DIR$/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-debugbar" />
+      <path value="$PROJECT_DIR$/vendor/maximebf/debugbar" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/league/oauth1-client" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/vendor/laravel/socialite" />
+      <path value="$PROJECT_DIR$/vendor/seld/phar-utils" />
+      <path value="$PROJECT_DIR$/vendor/seld/jsonlint" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-ide-helper" />
+      <path value="$PROJECT_DIR$/vendor/barryvdh/reflection-docblock" />
+      <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
+      <path value="$PROJECT_DIR$/vendor/justinrainbow/json-schema" />
+      <path value="$PROJECT_DIR$/vendor/yajra/laravel-datatables-oracle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/error-handler" />
+    </include_path>
+  </component>
+  <component name="ProjectId" id="1SeXAaHiC2TdN9NEIJhO1Yhik9D" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/backend/animalColors" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/backend/animalColors" />
+      <recent name="$PROJECT_DIR$/resources/views/backend/violationReports" />
+      <recent name="$PROJECT_DIR$/resources/views/backend/animalCharacteristics" />
+      <recent name="$PROJECT_DIR$/resources/views/backend/animals" />
+      <recent name="$PROJECT_DIR$/resources/views/backend/breeds" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/components" />
+      <recent name="$PROJECT_DIR$/public/images" />
+      <recent name="$PROJECT_DIR$/resources/sass" />
+      <recent name="$PROJECT_DIR$/public" />
+      <recent name="$PROJECT_DIR$/resources/js" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="npm run watch-poll" />
+      <command value="php artisan migrate:fresh  --seed" />
+      <command value="npm run watch" />
+      <command value="npm run production" />
+    </option>
+  </component>
+  <component name="RunManager" selected="PHPUnit.phpunit.xml">
+    <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner scope="XML" />
+      <method v="2" />
+    </configuration>
+    <configuration name="production" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="production" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="watch-poll" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="watch-poll" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="watch" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="watch" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.production" />
+        <item itemvalue="npm.watch" />
+        <item itemvalue="npm.watch-poll" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b2f87717-95e0-42d1-82e3-9be85e76505a" name="Default Changelist" comment="" />
+      <created>1570270008594</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1570270008594</updated>
+      <workItem from="1570270009960" duration="1041000" />
+      <workItem from="1570271072476" duration="599000" />
+      <workItem from="1570275635989" duration="1272000" />
+      <workItem from="1570279067685" duration="1420000" />
+      <workItem from="1570288090854" duration="870000" />
+      <workItem from="1570290271904" duration="599000" />
+      <workItem from="1570293249793" duration="1104000" />
+      <workItem from="1570295190246" duration="1147000" />
+      <workItem from="1570297008877" duration="1856000" />
+      <workItem from="1570301999468" duration="1340000" />
+      <workItem from="1570304174197" duration="1793000" />
+      <workItem from="1570306061388" duration="1124000" />
+      <workItem from="1570367475296" duration="1818000" />
+      <workItem from="1570373431054" duration="1573000" />
+      <workItem from="1570377727839" duration="2042000" />
+      <workItem from="1570379791469" duration="971000" />
+      <workItem from="1570388110408" duration="1471000" />
+      <workItem from="1570561949636" duration="1255000" />
+      <workItem from="1570563245844" duration="1385000" />
+      <workItem from="1570647847008" duration="2240000" />
+      <workItem from="1570734359809" duration="1792000" />
+      <workItem from="1570900999650" duration="1073000" />
+      <workItem from="1570902113468" duration="1800000" />
+      <workItem from="1570903942898" duration="1719000" />
+      <workItem from="1570906036952" duration="914000" />
+      <workItem from="1570965616472" duration="332000" />
+      <workItem from="1570966362421" duration="889000" />
+      <workItem from="1570969664422" duration="914000" />
+      <workItem from="1570983339418" duration="1467000" />
+      <workItem from="1570986947099" duration="1590000" />
+      <workItem from="1570988726046" duration="1037000" />
+      <workItem from="1570990620684" duration="610000" />
+      <workItem from="1570993650943" duration="1150000" />
+      <workItem from="1571080936450" duration="1167000" />
+      <workItem from="1571164406857" duration="1774000" />
+      <workItem from="1571166219495" duration="1559000" />
+      <workItem from="1571246990370" duration="2096000" />
+      <workItem from="1571249451274" duration="1783000" />
+      <workItem from="1571478000380" duration="1498000" />
+      <workItem from="1571480020881" duration="1705000" />
+      <workItem from="1571481956357" duration="1073000" />
+      <workItem from="1571488770947" duration="1750000" />
+      <workItem from="1571491735514" duration="1271000" />
+      <workItem from="1571507114625" duration="1405000" />
+      <workItem from="1571586405980" duration="1631000" />
+      <workItem from="1571588415944" duration="1237000" />
+      <workItem from="1571593662662" duration="1405000" />
+      <workItem from="1571595407029" duration="1845000" />
+      <workItem from="1571923339356" duration="300000" />
+      <workItem from="1571924897723" duration="37000" />
+      <workItem from="1571924956163" duration="43000" />
+      <workItem from="1571925091871" duration="5132000" />
+      <workItem from="1571940234795" duration="4485000" />
+      <workItem from="1572028243175" duration="1157000" />
+      <workItem from="1572030117937" duration="2837000" />
+      <workItem from="1572380533934" duration="1143000" />
+      <workItem from="1572546808349" duration="303000" />
+      <workItem from="1572689231512" duration="16157000" />
+      <workItem from="1572715793501" duration="1628000" />
+      <workItem from="1572728116936" duration="2272000" />
+      <workItem from="1572774126312" duration="13406000" />
+      <workItem from="1572798664549" duration="6857000" />
+      <workItem from="1572887753751" duration="8509000" />
+      <workItem from="1572981781918" duration="2629000" />
+      <workItem from="1573060536567" duration="6603000" />
+      <workItem from="1573068149936" duration="3768000" />
+      <workItem from="1573147204434" duration="5452000" />
+      <workItem from="1573153785423" duration="2484000" />
+      <workItem from="1573236000227" duration="6920000" />
+      <workItem from="1573291270575" duration="12898000" />
+      <workItem from="1573304903269" duration="3995000" />
+      <workItem from="1573314021091" duration="6161000" />
+      <workItem from="1573327316482" duration="8873000" />
+      <workItem from="1573388252872" duration="5503000" />
+      <workItem from="1573393994490" duration="10502000" />
+      <workItem from="1573405477546" duration="8394000" />
+      <workItem from="1573418025024" duration="4881000" />
+      <workItem from="1573465623374" duration="16678000" />
+      <workItem from="1573591276940" duration="3426000" />
+      <workItem from="1573674842887" duration="5521000" />
+      <workItem from="1573750504668" duration="11754000" />
+      <workItem from="1573835812291" duration="3839000" />
+      <workItem from="1573840439609" duration="8737000" />
+      <workItem from="1573912333522" duration="226000" />
+      <workItem from="1573913448093" duration="1450000" />
+      <workItem from="1573915415235" duration="7879000" />
+      <workItem from="1573924841176" duration="6478000" />
+      <workItem from="1573974739422" duration="18556000" />
+      <workItem from="1574106534861" duration="538000" />
+      <workItem from="1574107212439" duration="931000" />
+      <workItem from="1574109250706" duration="1402000" />
+      <workItem from="1574190613690" duration="4145000" />
+      <workItem from="1574280900668" duration="2033000" />
+      <workItem from="1574356049408" duration="10067000" />
+      <workItem from="1574443667887" duration="6414000" />
+      <workItem from="1574520067712" duration="9148000" />
+      <workItem from="1574618601333" duration="8269000" />
+      <workItem from="1574880875338" duration="1546000" />
+      <workItem from="1574964686055" duration="1785000" />
+      <workItem from="1575102967290" duration="18182000" />
+      <workItem from="1575126510094" duration="1727000" />
+      <workItem from="1575185098974" duration="18142000" />
+      <workItem from="1575220190345" duration="8470000" />
+      <workItem from="1575302882330" duration="6676000" />
+      <workItem from="1575393632850" duration="12825000" />
+      <workItem from="1575485652725" duration="10348000" />
+      <workItem from="1575562723449" duration="10527000" />
+      <workItem from="1575815931540" duration="11601000" />
+      <workItem from="1576001917251" duration="5940000" />
+      <workItem from="1576167093404" duration="2242000" />
+      <workItem from="1576702937963" duration="230000" />
+      <workItem from="1576703203912" duration="1597000" />
+      <workItem from="1576772842443" duration="6561000" />
+      <workItem from="1576836166655" duration="12891000" />
+      <workItem from="1576859812479" duration="2724000" />
+      <workItem from="1576925916568" duration="4064000" />
+      <workItem from="1576937100206" duration="5348000" />
+      <workItem from="1578845941483" duration="651000" />
+      <workItem from="1579110350807" duration="430000" />
+      <workItem from="1580562515553" duration="18518000" />
+      <workItem from="1580650105457" duration="10919000" />
+      <workItem from="1580848911675" duration="5318000" />
+      <workItem from="1580927034432" duration="7775000" />
+      <workItem from="1581015922626" duration="8588000" />
+      <workItem from="1581095200129" duration="4622000" />
+      <workItem from="1581250926555" duration="1077000" />
+      <workItem from="1581263217830" duration="10961000" />
+      <workItem from="1581370529256" duration="911000" />
+      <workItem from="1582391322471" duration="14847000" />
+      <workItem from="1583693715109" duration="238000" />
+      <workItem from="1584822283483" duration="6114000" />
+      <workItem from="1584882747689" duration="28806000" />
+      <workItem from="1584982314123" duration="167000" />
+      <workItem from="1584982495611" duration="8493000" />
+      <workItem from="1585175212488" duration="4466000" />
+      <workItem from="1585254943254" duration="9315000" />
+      <workItem from="1585426918312" duration="13691000" />
+      <workItem from="1585489924235" duration="14361000" />
+      <workItem from="1585519749198" duration="3937000" />
+      <workItem from="1585588271546" duration="10932000" />
+      <workItem from="1585688988307" duration="9685000" />
+      <workItem from="1585771519095" duration="6000000" />
+      <workItem from="1586023276342" duration="9670000" />
+      <workItem from="1586109422346" duration="11958000" />
+      <workItem from="1586205838353" duration="7695000" />
+      <workItem from="1586282906260" duration="590000" />
+      <workItem from="1586457223250" duration="4287000" />
+      <workItem from="1586595530677" duration="4692000" />
+      <workItem from="1586640999336" duration="3942000" />
+      <workItem from="1586683166349" duration="18508000" />
+      <workItem from="1586724041386" duration="2404000" />
+      <workItem from="1586801974656" duration="11123000" />
+      <workItem from="1586897149407" duration="5338000" />
+      <workItem from="1586966383194" duration="11501000" />
+      <workItem from="1587068977425" duration="6453000" />
+      <workItem from="1587222970232" duration="18265000" />
+      <workItem from="1587251684533" duration="2039000" />
+      <workItem from="1587303832299" duration="21065000" />
+      <workItem from="1587685474601" duration="112000" />
+      <workItem from="1587815921727" duration="269000" />
+      <workItem from="1587816290225" duration="298000" />
+      <workItem from="1587816598169" duration="1234000" />
+      <workItem from="1587822746652" duration="11693000" />
+      <workItem from="1587899434333" duration="13435000" />
+      <workItem from="1587934890501" duration="5898000" />
+      <workItem from="1588097875107" duration="9395000" />
+      <workItem from="1588180426080" duration="2875000" />
+      <workItem from="1588191701355" duration="8557000" />
+      <workItem from="1588279829761" duration="11586000" />
+      <workItem from="1588366580201" duration="2400000" />
+      <workItem from="1588419634853" duration="9514000" />
+      <workItem from="1588439321551" duration="4642000" />
+      <workItem from="1588528483223" duration="6665000" />
+      <workItem from="1588623747252" duration="8200000" />
+      <workItem from="1588709180965" duration="4461000" />
+      <workItem from="1588792213817" duration="7718000" />
+      <workItem from="1589024657673" duration="10264000" />
+      <workItem from="1589110669967" duration="7677000" />
+      <workItem from="1589143837795" duration="4243000" />
+      <workItem from="1589219128496" duration="6867000" />
+      <workItem from="1589292762070" duration="6622000" />
+      <workItem from="1589391158736" duration="17611000" />
+      <workItem from="1589469185682" duration="4449000" />
+      <workItem from="1589644122302" duration="17864000" />
+      <workItem from="1589721919496" duration="9005000" />
+      <workItem from="1589904168677" duration="5088000" />
+      <workItem from="1590003257486" duration="5964000" />
+      <workItem from="1590228304159" duration="3467000" />
+      <workItem from="1590240240672" duration="13934000" />
+    </task>
+    <task id="LOCAL-00001" summary="basic functionalities">
+      <created>1586718573109</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1586718573109</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="basic functionalities" />
+    <option name="LAST_COMMIT_MESSAGE" value="basic functionalities" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1787" y="166" width="800" height="677" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587916840215">
+      <screen x="1280" y="0" width="1920" height="1080" />
+    </state>
+    <state x="1787" y="166" width="800" height="677" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1587916840215" />
+    <state x="3755" y="200" width="800" height="677" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1584993913941" />
+    <state x="3893" y="288" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1590244862337">
+      <screen x="3200" y="0" width="1920" height="1080" />
+    </state>
+    <state x="3893" y="288" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1590244862337" />
+    <state x="3893" y="297" width="524" height="484" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1589669730898">
+      <screen x="3200" y="0" width="1920" height="1080" />
+    </state>
+    <state x="1973" y="297" width="524" height="484" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1589406501279" />
+    <state x="3893" y="297" width="524" height="484" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1589669730898" />
+    <state x="3896" y="380" width="518" height="317" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1590241353563">
+      <screen x="3200" y="0" width="1920" height="1080" />
+    </state>
+    <state x="3896" y="380" width="518" height="317" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1590241353563" />
+    <state x="3673" y="115" width="860" height="847" key="CommitChangelistDialog2" timestamp="1586718571960">
+      <screen x="3200" y="0" width="1920" height="1080" />
+    </state>
+    <state x="1753" y="115" width="964" height="847" key="CommitChangelistDialog2/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1585497124237" />
+    <state x="3673" y="115" width="860" height="847" key="CommitChangelistDialog2/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1586718571960" />
+    <state x="1718" y="141" width="1024" height="794" key="DiffContextDialog" timestamp="1585497091701">
+      <screen x="1280" y="0" width="1920" height="1080" />
+    </state>
+    <state x="1718" y="141" width="1024" height="794" key="DiffContextDialog/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1585497091701" />
+    <state x="2023" y="297" width="424" height="484" key="FileChooserDialogImpl" timestamp="1589469252545">
+      <screen x="1280" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2023" y="297" width="424" height="484" key="FileChooserDialogImpl/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1589469252545" />
+    <state x="3943" y="297" width="424" height="484" key="FileChooserDialogImpl/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1587922408556" />
+    <state width="1874" height="279" key="GridCell.Tab.0.bottom" timestamp="1590266424529">
+      <screen x="3200" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="279" key="GridCell.Tab.0.bottom/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1590010161146" />
+    <state width="1874" height="279" key="GridCell.Tab.0.bottom/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1590266424529" />
+    <state width="1874" height="279" key="GridCell.Tab.0.center" timestamp="1590266424528">
+      <screen x="3200" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="279" key="GridCell.Tab.0.center/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1590010161146" />
+    <state width="1874" height="279" key="GridCell.Tab.0.center/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1590266424528" />
+    <state width="1874" height="279" key="GridCell.Tab.0.left" timestamp="1590266424528">
+      <screen x="3200" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="279" key="GridCell.Tab.0.left/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1590010161146" />
+    <state width="1874" height="279" key="GridCell.Tab.0.left/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1590266424528" />
+    <state width="1874" height="279" key="GridCell.Tab.0.right" timestamp="1590266424528">
+      <screen x="3200" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="279" key="GridCell.Tab.0.right/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1590010161146" />
+    <state width="1874" height="279" key="GridCell.Tab.0.right/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1590266424528" />
+    <state width="263" height="500" key="HiddenNamespacesPopup" timestamp="1589646396520">
+      <screen x="1280" y="0" width="1920" height="1080" />
+    </state>
+    <state width="263" height="500" key="HiddenNamespacesPopup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1589646396520" />
+    <state width="263" height="500" key="HiddenNamespacesPopup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1584993875643" />
+    <state x="1729" y="174" key="SettingsEditor" timestamp="1587816190113">
+      <screen x="1280" y="0" width="1920" height="1080" />
+    </state>
+    <state x="1729" y="174" key="SettingsEditor/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1587816190113" />
+    <state x="3649" y="174" key="SettingsEditor/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1584982949826" />
+    <state x="3755" y="275" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1586718757981">
+      <screen x="3200" y="0" width="1920" height="1080" />
+    </state>
+    <state x="3755" y="275" width="800" height="528" key="Vcs.Push.Dialog.v2/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1586718757981" />
+    <state x="3917" y="296" width="476" height="486" key="com.intellij.database.run.ParametersPanel.Standalone" timestamp="1587238983634">
+      <screen x="3200" y="0" width="1920" height="1080" />
+    </state>
+    <state x="1997" y="296" key="com.intellij.database.run.ParametersPanel.Standalone/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1585591166805" />
+    <state x="3917" y="296" width="476" height="486" key="com.intellij.database.run.ParametersPanel.Standalone/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1587238983634" />
+    <state x="3983" y="245" width="344" height="588" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1588193336426">
+      <screen x="3200" y="0" width="1920" height="1080" />
+    </state>
+    <state x="3983" y="245" width="344" height="588" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1588193336426" />
+    <state x="1724" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1587685508014">
+      <screen x="1280" y="0" width="1920" height="1080" />
+    </state>
+    <state x="296" y="388" key="com.intellij.ide.util.TipDialog/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@0.83.1280.956" timestamp="1582311856180" />
+    <state x="1724" y="345" key="com.intellij.ide.util.TipDialog/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1584822284959" />
+    <state x="1724" y="345" key="com.intellij.ide.util.TipDialog/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1587685508014" />
+    <state x="1850" y="152" width="770" height="773" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1588626675991">
+      <screen x="1280" y="0" width="1920" height="1080" />
+    </state>
+    <state x="1850" y="152" width="770" height="773" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1588626675991" />
+    <state x="2008" y="459" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585497058529">
+      <screen x="1280" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2008" y="459" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1585497058529" />
+    <state x="3928" y="459" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1584993397549" />
+    <state x="3127" y="0" width="1498" height="1038" maximized="true" key="dock-window-1" timestamp="1588429294885">
+      <screen x="3200" y="0" width="1920" height="1080" />
+    </state>
+    <state x="3127" y="0" width="1498" height="1038" maximized="true" key="dock-window-1/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1588429294885" />
+    <state x="1386" y="0" width="1543" height="614" maximized="true" key="dock-window-2" timestamp="1585609010785">
+      <screen x="1280" y="0" width="1920" height="1080" />
+    </state>
+    <state x="1386" y="0" width="1543" height="614" maximized="true" key="dock-window-2/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1585609010785" />
+    <state x="3478" y="273" width="1311" height="807" key="find.popup" timestamp="1590266376295">
+      <screen x="3200" y="0" width="1920" height="1080" />
+    </state>
+    <state x="1505" y="113" width="1311" height="807" key="find.popup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1590007667316" />
+    <state x="3478" y="273" width="1311" height="807" key="find.popup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1590266376295" />
+    <state x="3824" y="246" width="672" height="677" key="run.anything.popup" timestamp="1590266401911">
+      <screen x="3200" y="0" width="1920" height="1080" />
+    </state>
+    <state x="1904" y="246" width="672" height="677" key="run.anything.popup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1590010160965" />
+    <state x="3824" y="246" width="672" height="677" key="run.anything.popup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1590266401911" />
+    <state x="3823" y="237" width="672" height="678" key="search.everywhere.popup" timestamp="1590264344805">
+      <screen x="3200" y="0" width="1920" height="1080" />
+    </state>
+    <state x="1903" y="237" width="672" height="678" key="search.everywhere.popup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1589413983140" />
+    <state x="3823" y="237" width="672" height="678" key="search.everywhere.popup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1590264344805" />
+  </component>
+</project>

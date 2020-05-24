@@ -1,0 +1,92 @@
+html,
+body,
+header,
+.jarallax {
+    height: 600px;
+}
+
+@media (max-width: 740px) {
+    html,
+    body,
+    header,
+    .jarallax {
+        height: 100vh;
+    }
+}
+
+@media (min-width: 800px) and (max-width: 850px) {
+    html,
+    body,
+    header,
+    .jarallax {
+        height: 100vh;
+    }
+}
+
+@media (min-width: 560px) and (max-width: 650px) {
+    header .jarallax h1 {
+        margin-bottom: 1.5rem !important;
+    }
+    header .jarallax h5 {
+        margin-bottom: 1.5rem !important;
+    }
+}
+
+.top-nav-collapse {
+    background-color: #212121!important;
+}
+.navbar:not(.top-nav-collapse) {
+    background: transparent!important;
+}
+@media (max-width: 768px) {
+    .navbar:not(.top-nav-collapse) {
+        background: #212121!important;
+    }
+}
+@media (min-width: 800px) and (max-width: 850px) {
+    .navbar:not(.top-nav-collapse) {
+        background: #212121!important;
+    }
+}
+h5 {
+    letter-spacing: 3px;
+}
+
+
+/*
+* CUSTOM STYLES     CUSTOM STYLES     CUSTOM STYLES     CUSTOM STYLES     CUSTOM STYLES     CUSTOM STYLES     CUSTOM STYLES
+*/
+
+.bg-mask{
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.video-overview {
+    bottom: 0;
+    z-index: -1;
+}
+.video-position{
+    top: -200px;
+}
+
+.quotes {display: none;}
+
+.btn-header-right{
+    background: #fff;
+    border: none;
+    padding: 10px 20px 10px 20px;
+    border-radius: 0px 10px 10px 0px;
+    position: relative;
+    text-align: left;
+    width: 35%;
+}
+
+.btn-header-left{
+    background: #fff;
+    border-width: 0px 1px 0px 0px;
+    border-color: #fff !important;
+    padding: 10px 20px 10px 20px;
+    border-radius: 10px 0px 0px 10px;
+    position: relative;
+    text-align: left;
+    width: 35%;
+}

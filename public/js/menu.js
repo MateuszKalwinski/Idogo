@@ -1,0 +1,1 @@
+jQuery,function(a){a(window).on("scroll",function(){var n=a(".navbar");n.length&&n.offset().top>500?(a(".scrolling-navbar").addClass("top-nav-collapse"),$(".nav-btn-search").css({opacity:1,top:"0px"})):(a(".scrolling-navbar").removeClass("top-nav-collapse"),$(".nav-btn-search").css({opacity:0,top:"-100px"}))})}(jQuery);
