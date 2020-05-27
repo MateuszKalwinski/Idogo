@@ -97,6 +97,8 @@
                                     </li>
                                     <li><a href="{{route('adminAnimalFur')}}" class="waves-effect">Długość futra zwierzaków</a>
                                     </li>
+                                    <li><a href="{{route('adminAnimalSize')}}" class="waves-effect">wielkość zwierzaków</a>
+                                    </li>
                                 </ul>
                             </div>
                         </li>

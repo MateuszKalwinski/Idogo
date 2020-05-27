@@ -216,4 +216,14 @@ class AdminController extends Controller
         return $deleteAnimalFur;
     }
 
+    public function adminAnimalSize(){
+        if (request()->ajax()) {
+            $datatable = $this->aR->adminAnimalSize();
+
+            return $datatable;
+        }
+
+        return view('backend.animalSize.index');
+    }
+
 }
