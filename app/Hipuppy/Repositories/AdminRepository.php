@@ -1099,4 +1099,80 @@ class AdminRepository implements AdminRepositoryInterface
 
         return response()->json(['success' => 'Długość futra zostaa usunięta.']);
     }
+
+    public function adminAnimalSize(){
+        $datatable = datatables()->of($this->getAnimalSizeForDatatable())
+            ->addColumn('animal_size_id', function ($data) {
+
+                $animalSizeId = '<span data-animal-size-id="' . $data->size_id . '">' . $data->size_id . '</span>';
+                return $animalSizeId;
+            })
+            ->addColumn('animal_size_name', function ($data) {
+
+                $animalSizeName = '<span class="animal-size-name" data-animal-size-id="' . $data->size_id . '">' . $data->size_name . '</span>';
+                return $animalSizeName;
+            })
+            ->addColumn('size_created_at', function ($data) {
+
+                $animalSizeCreatedAt = '<span>' . $data->size_created_at . '</span>';
+                return $animalSizeCreatedAt;
+            })
+            ->addColumn('added_user', function ($data) {
+
+                $linkToUser = route('user', ['id' => $data->size_created_user_id]);
+                $nameAndSurname = '<a href="' . $linkToUser . '">' . $data->created_user_name . ' ' . $data->created_user_surname . '</a>';
+                return $nameAndSurname;
+            })
+            ->addColumn('size_edited_at', function ($data) {
+                $animalFurEditeddAt = ($data->size_edited_at) ? '<span>' . $data->size_edited_at . '</span>' : '<span>Brak</span>';
+                return $animalFurEditeddAt;
+            })
+            ->addColumn('edited_user', function ($data) {
+                if ($data->size_edited_user_id) {
+                    $linkToUser = route('user', ['id' => $data->size_edited_user_id]);
+                    $nameAndSurname = '<a href="' . $linkToUser . '">' . $data->edited_user_name . ' ' . $data->edited_user_surname . '</a>';
+                } else {
+                    $nameAndSurname = '<span>Brak</span>';
+                }
+                return $nameAndSurname;
+
+            })
+            ->addColumn('action', function ($data) {
+
+                $actions = '<div class="d-flex">
+                                <button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-yellow border-none edit-animal-size waves-effect waves-light" data-animal-size-id="' . $data->size_id . '">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-danger border-none delete-animal-size waves-effect waves-light" data-animal-size-id="' . $data->size_id . '">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>';
+                return $actions;
+            })
+            ->rawColumns(['animal_size_id', 'animal_size_name', 'size_created_at', 'added_user', 'size_edited_at', 'edited_user', 'action'])
+            ->make(true);
+
+        return $datatable;
+    }
+
+    public function getAnimalSizeForDatatable(){
+        $animalSizeForDatatable = DB::table('animal_sizes AS asz')
+            ->select(
+                'asz.id AS size_id',
+                'asz.name AS size_name',
+                'asz.created_at AS size_created_at',
+                'asz.created_user_id AS size_created_user_id',
+                'asz.edited_at AS size_edited_at',
+                'asz.edited_user_id AS size_edited_user_id',
+                'created_user.name AS created_user_name',
+                'created_user.surname AS created_user_surname',
+                'edited_user.name AS edited_user_name',
+                'edited_user.surname AS edited_user_surname'
+            )
+            ->leftJoin('users AS created_user', 'asz.created_user_id', '=', 'created_user.id')
+            ->leftJoin('users AS edited_user', 'asz.edited_user_id', '=', 'edited_user.id')
+            ->get();
+
+        return $animalSizeForDatatable;
+    }
 }

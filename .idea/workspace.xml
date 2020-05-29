@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b2f87717-95e0-42d1-82e3-9be85e76505a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/backend/animalSize/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/backend.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/backend.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Hipuppy/Repositories/AdminRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Repositories/AdminRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/animalSize/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/animalSize/index.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -421,6 +419,7 @@
       <workItem from="1590240240672" duration="13934000" />
       <workItem from="1590316720295" duration="10450000" />
       <workItem from="1590612315211" duration="201000" />
+      <workItem from="1590780873871" duration="1468000" />
     </task>
     <task id="LOCAL-00001" summary="basic functionalities">
       <created>1586718573109</created>
