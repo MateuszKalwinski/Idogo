@@ -216,7 +216,8 @@ class AdminController extends Controller
         return $deleteAnimalFur;
     }
 
-    public function adminAnimalSize(){
+    public function adminAnimalSize()
+    {
         if (request()->ajax()) {
             $datatable = $this->aR->adminAnimalSize();
 
@@ -224,6 +225,20 @@ class AdminController extends Controller
         }
 
         return view('backend.animalSize.index');
+    }
+
+    public function adminStoreAnimalSize(Request $request)
+    {
+        $storeAnimalSize = $this->aG->storeAnimalSize($request);
+
+        return $storeAnimalSize;
+    }
+
+    public function adminUpdateAnimalSize(Request $request)
+    {
+        $updateAnimalSize = $this->aG->updateAnimalSize($request);
+
+        return $updateAnimalSize;
     }
 
 }

@@ -239,7 +239,8 @@ class AdminGateway
         return $this->aR->updateAnimalFur($request);
     }
 
-    public function deleteAnimalFur($request){
+    public function deleteAnimalFur($request)
+    {
         $validator = Validator::make($request->all(), [
             'animalFurId' => 'required|integer',
         ],
@@ -254,5 +255,47 @@ class AdminGateway
         }
 
         return $this->aR->deleteAnimalFur($request);
+    }
+
+    public function storeAnimalSize($request)
+    {
+        $validator = Validator::make($request->all(), [
+            'sizeName' => 'required|string|max:255',
+        ],
+            [
+                'sizeName.required' => __('Pole "wielkość zwierzaka" jest wymagane.'),
+                'sizeName.string' => __('Pole "wielkość zwierzaka" musi być typu tekstowego.'),
+                'sizeName.max' => __('Pole "wielkość zwierzaka" nie może mieć więcej niż 255 znaków.'),
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
+        return $this->aR->storeAnimalSize($request);
+    }
+
+    public function updateAnimalSize($request)
+    {
+        $validator = Validator::make($request->all(), [
+            'sizeName' => 'required|string|max:255',
+            'animalSizeId' => 'required|integer',
+        ],
+            [
+                'sizeName.required' => __('Pole "wielkość zwierzaka" jest wymagane.'),
+                'sizeName.string' => __('Pole "wielkość zwierzaka" musi być typu tekstowego.'),
+                'sizeName.max' => __('Pole "wielkość zwierzaka" nie może mieć więcej niż 255 znaków.'),
+
+                'animalSizeId.required' => __('Ups!coś poszło nie tak.'),
+                'animalSizeId.integer' => __('Ups!coś poszło nie tak.'),
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
+        return $this->aR->updateAnimalSize($request);
     }
 }

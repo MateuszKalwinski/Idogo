@@ -94,6 +94,9 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
 
 
     Route::get('/adminAnimalSize', 'AdminController@adminAnimalSize')->name('adminAnimalSize');
+    Route::post('/adminStoreAnimalSize', 'AdminController@adminStoreAnimalSize')->name('adminStoreAnimalSize');
+    Route::post('/adminUpdateAnimalSize', 'AdminController@adminUpdateAnimalSize')->name('adminUpdateAnimalSize');
+
 
     Route::get('/adminViolationReports', 'AdminController@adminViolationReports')->name('adminViolationReports');
 

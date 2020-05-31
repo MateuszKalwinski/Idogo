@@ -3,7 +3,7 @@
 namespace App\Hipuppy\Repositories;
 
 use App\{Hipuppy\Interfaces\AdminRepositoryInterface};
-use App\{AnimalColor, AnimalSpecies, CharacteristicDictionary, Fur};
+use App\{AnimalColor, AnimalSpecies, CharacteristicDictionary, Fur, AnimalSize};
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -1100,7 +1100,8 @@ class AdminRepository implements AdminRepositoryInterface
         return response()->json(['success' => 'Długość futra zostaa usunięta.']);
     }
 
-    public function adminAnimalSize(){
+    public function adminAnimalSize()
+    {
         $datatable = datatables()->of($this->getAnimalSizeForDatatable())
             ->addColumn('animal_size_id', function ($data) {
 
@@ -1155,7 +1156,8 @@ class AdminRepository implements AdminRepositoryInterface
         return $datatable;
     }
 
-    public function getAnimalSizeForDatatable(){
+    public function getAnimalSizeForDatatable()
+    {
         $animalSizeForDatatable = DB::table('animal_sizes AS asz')
             ->select(
                 'asz.id AS size_id',
@@ -1174,5 +1176,42 @@ class AdminRepository implements AdminRepositoryInterface
             ->get();
 
         return $animalSizeForDatatable;
+    }
+
+    public function storeAnimalSize($request)
+    {
+        $sizeName = trim(strtolower($request->sizeName));
+        $isExist = AnimalSize::where('name', '=', $sizeName)->exists();
+
+        if ($isExist) {
+            return response()->json(['errors' => [__('Taka wielkość zwierzaka już istnieje.')]]);
+        }
+
+        AnimalSize::create([
+            'name' => $sizeName,
+            'created_at' => Carbon::now('Europe/Warsaw'),
+            'created_user_id' => Auth::user()->id,
+        ]);
+
+        return response()->json(['success' => __('Dodano nawą wielkość zwierzaka.')]);
+    }
+
+    public function updateAnimalSize($request)
+    {
+        $sizeName = trim(strtolower($request->sizeName));
+
+        $isExist = AnimalSize::where('name', '=', $sizeName)->where('id', '!=', $request->animalSizeId)->exists();
+
+        if ($isExist) {
+            return response()->json(['errors' => ['Taka wielkość zwierzaka już istnieje.']]);
+        }
+
+        AnimalSize::where('id', '=', $request->animalSizeId)->update([
+            'name' => $sizeName,
+            'edited_at' => Carbon::now('Europe/Warsaw'),
+            'edited_user_id' => Auth::user()->id,
+        ]);
+
+        return response()->json(['success' => 'Edycja zakończona pomyślnie.']);
     }
 }

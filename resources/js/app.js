@@ -40,6 +40,9 @@ $(document).ready(function () {
         if (module == 'backendAnimalFurs'){
             new BackendAnimalFurs(base_url)
         }
+        if (module == 'backendAnimalSizes'){
+            new BackendAnimalSizes(base_url);
+        }
     }
 
     $('.mdb-select').materialSelect();
