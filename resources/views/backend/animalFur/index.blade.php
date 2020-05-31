@@ -34,6 +34,12 @@
                             <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
                                 title="Dodane przez użytkowania">Edytował
                             </th>
+                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data usunięcia">Data
+                                usunięcia
+                            </th>
+                            <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
+                                title="Usunięte przez użytkowania">Usunął
+                            </th>
                             <th colspan="th-sm" data-toggle="tooltip" data-placement="top" title="Akcje Usuń/Edytuj">
                                 Akcje
                             </th>
@@ -78,7 +84,7 @@
              aria-hidden="true">
             <div class="modal-dialog modal-lg modal-notify mt-5" role="document">
                 <div class="modal-content">
-                    <div class="modal-header text-center danger-color">
+                    <div id="confirmModalHeader" class="modal-header text-center danger-color">
                         <h4 class="modal-title white-text w-100 font-weight-bold py-2">Potwierdzenie</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" class="white-text">&times;</span>
@@ -86,19 +92,24 @@
                     </div>
                     <div class="modal-body">
                         <span id="form_result"></span>
-                        <p class="text-center">Czy na pewno chcesz długość futra <span id="animalFurName" class="font-weight-bold"></span></p>
+                        <p id="animalDeleteText" class="text-center">Czy na pewno chcesz usunąć długość furta <span class="font-weight-bold confirm-animal-fur-name d-none"></span></p>
+                        <p id="animalRestoreText" class="text-center">Czy na pewno chcesz przywrócić długość futra <span class="font-weight-bold confirm-animal-fur-name d-none"></span></p>
                         <div class="w-50 mx-auto">
                             <div class="d-flex justify-content-around">
                                 <button type="button" id="confirm-yes" data-animal-fur-id="" class="btn success-color btn-rounded pl-5 pr-5 text-white waves-effect waves-light text-transform-none m-0 mb-3">
-                                    Tak</button>
+                                    Tak
+                                </button>
                                 <button type="button" id="confirm-no" data-dismiss="modal" class="btn danger-color btn-rounded pl-5 pr-5 text-white waves-effect waves-light text-transform-none m-0 mb-3">
-                                    Nie</button>
+                                    Nie
+                                </button>
                             </div>
+                            <input id="actionDeleteRestore" type="hidden" value="">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 
 
@@ -165,6 +176,14 @@
                     {
                         data: 'edited_user',
                         name: 'edited_user',
+                    },
+                    {
+                        data: 'fur_deleted_at',
+                        name: 'fur_deleted_at',
+                    },
+                    {
+                        data: 'deleted_user',
+                        name: 'deleted_user',
                     },
                     {
                         data: 'action',

@@ -34,40 +34,57 @@ class BackendAnimalFurs {
 
         $('#addEditFur').on('submit', function (e) {
             e.preventDefault();
-            if ($('#action').val() === 'add'){
-                self.saveAnimalColor(new FormData(this), base_url+ "/adminStoreAnimalFur")
-            }else{
-                self.saveAnimalColor(new FormData(this), base_url+ "/adminUpdateAnimalFur")
+            if ($('#action').val() === 'add') {
+                self.saveAnimalColor(new FormData(this), base_url + "/adminStoreAnimalFur")
+            } else {
+                self.saveAnimalColor(new FormData(this), base_url + "/adminUpdateAnimalFur")
             }
         })
 
-        $(document).on('click', '.delete-animal-fur', function () {
-            let AnimalfurId = $(this).closest('tr').find('.animal-fur-name').attr('data-animal-fur-id');
-            $('#confirm-yes').attr('data-animal-fur-id', AnimalfurId);
+        $(document).on('click', '.restore-animal-fur, .delete-animal-fur', function () {
+
+            if ($(this).hasClass('restore-animal-fur')) {
+                $('#actionDeleteRestore').val('restore');
+                $('#animalRestoreText').removeClass('d-none').children().removeClass('d-none');
+                $('#animalDeleteText').addClass('d-none').children().addClass('d-none')
+                $('#confirmModalHeader').addClass('green darken-2').removeClass(' danger-color')
+            } else {
+                $('#actionDeleteRestore').val('delete');
+                $('#animalDeleteText').removeClass('d-none').children().removeClass('d-none');
+                $('#animalRestoreText').addClass('d-none').children().addClass('d-none')
+                $('#confirmModalHeader').addClass('danger-color').removeClass('green darken-2')
+            }
+
+            let animalFurId = $(this).closest('tr').find('.animal-fur-name').attr('data-animal-fur-id');
+            $('#confirm-yes').attr('data-animal-fur-id', animalFurId);
             let animalFurName = $(this).closest('tr').find('.animal-fur-name').text();
-            $('#animalFurName').text(animalFurName);
+            $('.confirm-animal-fur-name').text(animalFurName);
             $('#confirmModal').modal('show');
         })
 
         $('#confirm-yes').on('click', function () {
+            console.log($('#confirm-yes'));
             let animalFurId = $('#confirm-yes').attr('data-animal-fur-id');
-            self.deleteAnimalFur(animalFurId);
+            let action = $('#actionDeleteRestore').val();
+
+            self.deleteRestoreAnimalFur(animalFurId, action, base_url + "/deleteRestoreAnimalFur");
+
         })
     }
 
-    deleteAnimalFur(animalFurId){
+    deleteRestoreAnimalFur(animalFurId, action, url) {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
 
-
         $.ajax({
             type: 'POST',
-            url: base_url + "/deleteAnimalFur",
+            url: url,
             data: {
                 animalFurId: animalFurId,
+                action: action,
             },
             dataType: 'json',
             beforeSend: function () {
@@ -76,20 +93,16 @@ class BackendAnimalFurs {
                 * TODO DODAĆ EFEKT WCZYTYWANIA CAŁEJ TABELI
                 * */
             },
-            success:function(data)
-            {
+            success: function (data) {
                 var html = '';
-                if(data.errors)
-                {
+                if (data.errors) {
                     html = '<div class="alert alert-danger">';
-                    for(var count = 0; count < data.errors.length; count++)
-                    {
+                    for (var count = 0; count < data.errors.length; count++) {
                         html += '<p>' + data.errors[count] + '</p>';
                     }
                     html += '</div>';
                 }
-                if(data.success)
-                {
+                if (data.success) {
                     html = '<div class="alert alert-success">' + data.success + '</div>';
                     $('#adminAnimalFursTable').DataTable().ajax.reload();
                 }
@@ -106,29 +119,25 @@ class BackendAnimalFurs {
         });
     }
 
-    saveAnimalColor(formData, url){
+    saveAnimalColor(formData, url) {
         $.ajax({
             url: url,
-            method:"POST",
+            method: "POST",
             data: formData,
             contentType: false,
-            cache:false,
+            cache: false,
             processData: false,
-            dataType:"json",
-            success:function(data)
-            {
+            dataType: "json",
+            success: function (data) {
                 var html = '';
-                if(data.errors)
-                {
+                if (data.errors) {
                     html = '<div class="alert alert-danger">';
-                    for(var count = 0; count < data.errors.length; count++)
-                    {
+                    for (var count = 0; count < data.errors.length; count++) {
                         html += '<p>' + data.errors[count] + '</p>';
                     }
                     html += '</div>';
                 }
-                if(data.success)
-                {
+                if (data.success) {
                     html = '<div class="alert alert-success">' + data.success + '</div>';
                     $('#furName').val('');
                     $('#adminAnimalFursTable').DataTable().ajax.reload();

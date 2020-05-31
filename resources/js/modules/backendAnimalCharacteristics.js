@@ -91,7 +91,7 @@ class backendAnimalCharacteristics {
                 if(data.success)
                 {
                     html = '<div class="alert alert-success">' + data.success + '</div>';
-                    $('#adminAnimalColorsTable').DataTable().ajax.reload();
+                    $('#adminAnimalCharacteristicsTable').DataTable().ajax.reload();
                 }
                 $('#form_result').html(html);
             },

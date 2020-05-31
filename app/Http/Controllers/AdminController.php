@@ -209,11 +209,11 @@ class AdminController extends Controller
         return $updateAnimalFur;
     }
 
-    public function deleteAnimalFur(Request $request)
+    public function deleteRestoreAnimalFur(Request $request)
     {
-        $deleteAnimalFur = $this->aG->deleteAnimalFur($request);
+        $deleteRestoreAnimalFur = $this->aG->deleteRestoreAnimalFur($request);
 
-        return $deleteAnimalFur;
+        return $deleteRestoreAnimalFur;
     }
 
     public function adminAnimalSize()

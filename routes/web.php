@@ -90,7 +90,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::get('/adminAnimalFur', 'AdminController@adminAnimalFur')->name('adminAnimalFur');
     Route::post('/adminStoreAnimalFur', 'AdminController@adminStoreAnimalFur')->name('adminStoreAnimalFur');
     Route::post('/adminUpdateAnimalFur', 'AdminController@adminUpdateAnimalFur')->name('adminUpdateAnimalFur');
-    Route::post('/deleteAnimalFur', 'AdminController@deleteAnimalFur')->name('deleteAnimalFur');
+    Route::post('/deleteRestoreAnimalFur', 'AdminController@deleteRestoreAnimalFur')->name('deleteRestoreAnimalFur');
 
 
     Route::get('/adminAnimalSize', 'AdminController@adminAnimalSize')->name('adminAnimalSize');

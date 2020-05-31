@@ -239,7 +239,7 @@ class AdminGateway
         return $this->aR->updateAnimalFur($request);
     }
 
-    public function deleteAnimalFur($request)
+    public function deleteRestoreAnimalFur($request)
     {
         $validator = Validator::make($request->all(), [
             'animalFurId' => 'required|integer',
@@ -254,7 +254,15 @@ class AdminGateway
             return response()->json(['errors' => $validator->errors()->all()]);
         }
 
-        return $this->aR->deleteAnimalFur($request);
+        if ($request->action === 'delete') {
+            $executeActionResult = $this->aR->deleteAnimalFur($request);
+        } elseif ($request->action === 'restore') {
+            $executeActionResult = $this->aR->restoreAnimalFur($request);
+        }else{
+            return response()->json(['errors' => [__('Ups!coś poszło nie tak.')]]);
+        }
+
+        return $executeActionResult;
     }
 
     public function storeAnimalSize($request)
