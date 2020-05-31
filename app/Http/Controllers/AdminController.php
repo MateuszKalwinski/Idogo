@@ -241,4 +241,18 @@ class AdminController extends Controller
         return $updateAnimalSize;
     }
 
+    public function deleteAnimalSize(Request $request)
+    {
+        $deleteAnimalSize = $this->aG->deleteAnimalSize($request);
+
+        return $deleteAnimalSize;
+    }
+
+    public function restoreAnimalSize(Request $request)
+    {
+        $restoreAnimalSize = $this->aG->restoreAnimalSize($request);
+
+        return $restoreAnimalSize;
+    }
+
 }

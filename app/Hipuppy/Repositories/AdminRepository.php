@@ -1125,8 +1125,8 @@ class AdminRepository implements AdminRepositoryInterface
                 return $nameAndSurname;
             })
             ->addColumn('size_edited_at', function ($data) {
-                $animalFurEditeddAt = ($data->size_edited_at) ? '<span>' . $data->size_edited_at . '</span>' : '<span>Brak</span>';
-                return $animalFurEditeddAt;
+                $animalSizeEditeddAt = ($data->size_edited_at) ? '<span>' . $data->size_edited_at . '</span>' : '<span>Brak</span>';
+                return $animalSizeEditeddAt;
             })
             ->addColumn('edited_user', function ($data) {
                 if ($data->size_edited_user_id) {
@@ -1138,19 +1138,41 @@ class AdminRepository implements AdminRepositoryInterface
                 return $nameAndSurname;
 
             })
+            ->addColumn('size_deleted_at', function ($data) {
+                $animalSizeDeletedAt = ($data->size_deleted_at) ? '<span>' . $data->size_deleted_at . '</span>' : '<span>Brak</span>';
+                return $animalSizeDeletedAt;
+            })
+            ->addColumn('deleted_user', function ($data) {
+                if ($data->size_deleted_user_id) {
+                    $linkToUser = route('user', ['id' => $data->size_deleted_user_id]);
+                    $nameAndSurname = '<a href="' . $linkToUser . '">' . $data->deleted_user_name . ' ' . $data->deleted_user_surname . '</a>';
+                } else {
+                    $nameAndSurname = '<span>Brak</span>';
+                }
+                return $nameAndSurname;
+
+            })
             ->addColumn('action', function ($data) {
 
                 $actions = '<div class="d-flex">
                                 <button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-yellow border-none edit-animal-size waves-effect waves-light" data-animal-size-id="' . $data->size_id . '">
                                     <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-danger border-none delete-animal-size waves-effect waves-light" data-animal-size-id="' . $data->size_id . '">
+                                </button>';
+
+                if ($data->size_deleted_at) {
+                    $actions .= '<button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-dark-green border-none restore-animal-size waves-effect waves-light" data-animal-size-id="' . $data->size_id . '">
+                                    <i class="fas fa-undo"></i>
+                                </button>';
+                } else {
+                    $actions .= '<button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-danger border-none delete-animal-size waves-effect waves-light" data-animal-size-id="' . $data->size_id . '">
                                     <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </div>';
+                                </button>';
+                }
+                $actions .= '</div>';
+
                 return $actions;
             })
-            ->rawColumns(['animal_size_id', 'animal_size_name', 'size_created_at', 'added_user', 'size_edited_at', 'edited_user', 'action'])
+            ->rawColumns(['animal_size_id', 'animal_size_name', 'size_created_at', 'added_user', 'size_edited_at', 'edited_user', 'size_deleted_at', 'deleted_user', 'action'])
             ->make(true);
 
         return $datatable;
@@ -1166,13 +1188,18 @@ class AdminRepository implements AdminRepositoryInterface
                 'asz.created_user_id AS size_created_user_id',
                 'asz.edited_at AS size_edited_at',
                 'asz.edited_user_id AS size_edited_user_id',
+                'asz.deleted_at AS size_deleted_at',
+                'asz.deleted_user_id AS size_deleted_user_id',
                 'created_user.name AS created_user_name',
                 'created_user.surname AS created_user_surname',
                 'edited_user.name AS edited_user_name',
-                'edited_user.surname AS edited_user_surname'
+                'edited_user.surname AS edited_user_surname',
+                'deleted_user.name AS deleted_user_name',
+                'deleted_user.surname AS deleted_user_surname'
             )
             ->leftJoin('users AS created_user', 'asz.created_user_id', '=', 'created_user.id')
             ->leftJoin('users AS edited_user', 'asz.edited_user_id', '=', 'edited_user.id')
+            ->leftJoin('users AS deleted_user', 'asz.edited_user_id', '=', 'deleted_user.id')
             ->get();
 
         return $animalSizeForDatatable;
@@ -1213,5 +1240,37 @@ class AdminRepository implements AdminRepositoryInterface
         ]);
 
         return response()->json(['success' => 'Edycja zakończona pomyślnie.']);
+    }
+
+    public function deleteAnimalSize($request)
+    {
+        $isExist = AnimalSize::where('id', '=', $request->animalSizeId)->exists();
+
+        if (!$isExist) {
+            return response()->json(['errors' => [__('Nie znaleziono takiej wielkości zwierzaka.')]]);
+        }
+
+        AnimalSize::where('id', '=', $request->animalSizeId)->update([
+            'deleted_at' => Carbon::now('Europe/Warsaw'),
+            'deleted_user_id' => Auth::user()->id,
+        ]);
+
+        return response()->json(['success' => 'Usuwanie zakończone pomyślnie.']);
+    }
+
+    public function restoreAnimalSize($request)
+    {
+        $isExist = AnimalSize::where('id', '=', $request->animalSizeId)->exists();
+
+        if (!$isExist) {
+            return response()->json(['errors' => [__('Nie znaleziono takiej wielkości zwierzaka.')]]);
+        }
+
+        AnimalSize::where('id', '=', $request->animalSizeId)->update([
+            'deleted_at' => null,
+            'deleted_user_id' => null,
+        ]);
+
+        return response()->json(['success' => 'Przywracanie zakończone pomyślnie.']);
     }
 }

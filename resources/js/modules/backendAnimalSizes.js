@@ -13,7 +13,7 @@ class BackendAnimalSizes {
 
         $('#addSize').click(function () {
             $('#addEditModalTitle').text('Dodaj wielkość zwierzaka')
-            $('.modal-header ').addClass('teal lighten-1').removeClass('yellow darken-2')
+            $('.modal-header ').addClass('teal lighten-1').removeClass('yellow darken-2 danger-color')
             $('#sizeName').val('');
             $('label[for="sizeName"]').removeClass('active');
             $('#action').val('add');
@@ -22,7 +22,7 @@ class BackendAnimalSizes {
         })
         $(document).on('click', '.edit-animal-size', function () {
             $('#addEditModalTitle').text('Edytuj wielkość zwierzaka')
-            $('.modal-header ').addClass('yellow darken-2').removeClass('teal lighten-1')
+            $('.modal-header ').addClass('yellow darken-2').removeClass('teal lighten-1 danger-color')
             let animalSizeName = $(this).closest('tr').find('.animal-size-name').text();
             $('#sizeName').val(animalSizeName);
             $('label[for="sizeName"]').addClass('active');
@@ -34,28 +34,49 @@ class BackendAnimalSizes {
 
         $('#addEditSize').on('submit', function (e) {
             e.preventDefault();
-            if ($('#action').val() === 'add'){
-                self.saveAnimalSize(new FormData(this), base_url+ "/adminStoreAnimalSize")
-            }else{
-                self.saveAnimalSize(new FormData(this), base_url+ "/adminUpdateAnimalSize")
+            if ($('#action').val() === 'add') {
+                self.saveAnimalSize(new FormData(this), base_url + "/adminStoreAnimalSize")
+            } else {
+                self.saveAnimalSize(new FormData(this), base_url + "/adminUpdateAnimalSize")
             }
         })
 
-        $(document).on('click', '.delete-animal-fur', function () {
-            let AnimalfurId = $(this).closest('tr').find('.animal-fur-name').attr('data-animal-fur-id');
-            $('#confirm-yes').attr('data-animal-fur-id', AnimalfurId);
-            let animalFurName = $(this).closest('tr').find('.animal-fur-name').text();
-            $('#animalFurName').text(animalFurName);
+        $(document).on('click', '.restore-animal-size, .delete-animal-size', function () {
+
+            if ($(this).hasClass('restore-animal-size')) {
+                $('#actionDeleteRestore').val('restore');
+                $('#animalRestoreText').removeClass('d-none').children().removeClass('d-none');
+                $('#animalDeleteText').addClass('d-none').children().addClass('d-none')
+                $('#confirmModalHeader').addClass('green darken-2').removeClass(' danger-color')
+            } else {
+                $('#actionDeleteRestore').val('delete');
+                $('#animalDeleteText').removeClass('d-none').children().removeClass('d-none');
+                $('#animalRestoreText').addClass('d-none').children().addClass('d-none')
+                $('#confirmModalHeader').addClass('danger-color').removeClass('green darken-2')
+            }
+
+            let animalSizeId = $(this).closest('tr').find('.animal-size-name').attr('data-animal-size-id');
+            $('#confirm-yes').attr('data-animal-size-id', animalSizeId);
+            let animalSizeName = $(this).closest('tr').find('.animal-size-name').text();
+            $('.confirm-animal-size-name').text(animalSizeName);
             $('#confirmModal').modal('show');
         })
 
+
         $('#confirm-yes').on('click', function () {
-            let animalFurId = $('#confirm-yes').attr('data-animal-fur-id');
-            self.deleteAnimalFur(animalFurId);
+            let animalSizeId = $('#confirm-yes').attr('data-animal-size-id');
+            let action = $('#actionDeleteRestore').val();
+
+            if (action === 'restore'){
+                self.deleteRestoreAnimalSize(animalSizeId, base_url + "/restoreAnimalSize");
+            }else{
+                self.deleteRestoreAnimalSize(animalSizeId, base_url + "/deleteAnimalSize");
+            }
+
         })
     }
 
-    deleteAnimalFur(animalFurId){
+    deleteRestoreAnimalSize(animalSizeId, url) {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -65,9 +86,9 @@ class BackendAnimalSizes {
 
         $.ajax({
             type: 'POST',
-            url: base_url + "/deleteAnimalFur",
+            url: url,
             data: {
-                animalFurId: animalFurId,
+                animalSizeId: animalSizeId,
             },
             dataType: 'json',
             beforeSend: function () {
@@ -76,22 +97,18 @@ class BackendAnimalSizes {
                 * TODO DODAĆ EFEKT WCZYTYWANIA CAŁEJ TABELI
                 * */
             },
-            success:function(data)
-            {
+            success: function (data) {
                 var html = '';
-                if(data.errors)
-                {
+                if (data.errors) {
                     html = '<div class="alert alert-danger">';
-                    for(var count = 0; count < data.errors.length; count++)
-                    {
+                    for (var count = 0; count < data.errors.length; count++) {
                         html += '<p>' + data.errors[count] + '</p>';
                     }
                     html += '</div>';
                 }
-                if(data.success)
-                {
+                if (data.success) {
                     html = '<div class="alert alert-success">' + data.success + '</div>';
-                    $('#adminAnimalFursTable').DataTable().ajax.reload();
+                    $('#adminAnimalSizeTable').DataTable().ajax.reload();
                 }
                 $('#form_result').html(html);
             },
@@ -106,29 +123,25 @@ class BackendAnimalSizes {
         });
     }
 
-    saveAnimalSize(formData, url){
+    saveAnimalSize(formData, url) {
         $.ajax({
             url: url,
-            method:"POST",
+            method: "POST",
             data: formData,
             contentType: false,
-            cache:false,
+            cache: false,
             processData: false,
-            dataType:"json",
-            success:function(data)
-            {
+            dataType: "json",
+            success: function (data) {
                 var html = '';
-                if(data.errors)
-                {
+                if (data.errors) {
                     html = '<div class="alert alert-danger">';
-                    for(var count = 0; count < data.errors.length; count++)
-                    {
+                    for (var count = 0; count < data.errors.length; count++) {
                         html += '<p>' + data.errors[count] + '</p>';
                     }
                     html += '</div>';
                 }
-                if(data.success)
-                {
+                if (data.success) {
                     html = '<div class="alert alert-success">' + data.success + '</div>';
                     $('#sizeName').val('');
                     $('#adminAnimalSizeTable').DataTable().ajax.reload();

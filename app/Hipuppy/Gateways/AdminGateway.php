@@ -298,4 +298,41 @@ class AdminGateway
 
         return $this->aR->updateAnimalSize($request);
     }
+
+    public function deleteAnimalSize($request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'animalSizeId' => 'required|integer',
+        ],
+            [
+                'animalSizeId.required' => 'Ups!coś poszło nie tak.',
+                'animalSizeId.integer' => 'Ups!coś poszło nie tak.',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
+        return $this->aR->deleteAnimalSize($request);
+    }
+
+    public function restoreAnimalSize($request)
+    {
+        $validator = Validator::make($request->all(), [
+            'animalSizeId' => 'required|integer',
+        ],
+            [
+                'animalSizeId.required' => 'Ups!coś poszło nie tak.',
+                'animalSizeId.integer' => 'Ups!coś poszło nie tak.',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
+        return $this->aR->restoreAnimalSize($request);
+    }
 }
