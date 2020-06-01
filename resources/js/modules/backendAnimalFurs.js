@@ -47,12 +47,12 @@ class BackendAnimalFurs {
                 $('#actionDeleteRestore').val('restore');
                 $('#animalRestoreText').removeClass('d-none').children().removeClass('d-none');
                 $('#animalDeleteText').addClass('d-none').children().addClass('d-none')
-                $('#confirmModalHeader').addClass('green darken-2').removeClass(' danger-color')
+                $('#confirmModalHeader').addClass('green darken-2').removeClass('danger-color teal lighten-1 yellow darken-2')
             } else {
                 $('#actionDeleteRestore').val('delete');
                 $('#animalDeleteText').removeClass('d-none').children().removeClass('d-none');
                 $('#animalRestoreText').addClass('d-none').children().addClass('d-none')
-                $('#confirmModalHeader').addClass('danger-color').removeClass('green darken-2')
+                $('#confirmModalHeader').addClass('danger-color').removeClass('green darken-2 teal lighten-1 yellow darken-2')
             }
 
             let animalFurId = $(this).closest('tr').find('.animal-fur-name').attr('data-animal-fur-id');

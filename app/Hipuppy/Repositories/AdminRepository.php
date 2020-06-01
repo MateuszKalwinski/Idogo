@@ -808,10 +808,20 @@ class AdminRepository implements AdminRepositoryInterface
                 'ac.name as animal_color_name',
                 'ac.created_at AS animal_color_created_at',
                 'ac.created_user_id AS animal_color_created_user_id',
-                'u.name AS user_name',
-                'u.surname AS user_surname'
+                'ac.edited_at AS animal_color_edited_at',
+                'ac.edited_user_id AS animal_color_edited_user_id',
+                'ac.deleted_at AS animal_color_deleted_at',
+                'ac.deleted_user_id AS animal_color_deleted_user_id',
+                'created_user.name AS created_user_name',
+                'created_user.surname AS created_user_surname',
+                'edited_user.name AS edited_user_name',
+                'edited_user.surname AS edited_user_surname',
+                'deleted_user.name AS deleted_user_name',
+                'deleted_user.surname AS deleted_user_surname'
             )
-            ->leftJoin('users AS u', 'ac.created_user_id', '=', 'u.id')
+            ->leftJoin('users AS created_user', 'ac.created_user_id', '=', 'created_user.id')
+            ->leftJoin('users AS edited_user', 'ac.edited_user_id', '=', 'edited_user.id')
+            ->leftJoin('users AS deleted_user', 'ac.deleted_user_id', '=', 'deleted_user.id')
             ->get();
 
         return $animalColorsForDatatable;

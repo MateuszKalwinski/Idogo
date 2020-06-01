@@ -47,7 +47,7 @@ class BackendAnimalSizes {
                 $('#actionDeleteRestore').val('restore');
                 $('#animalRestoreText').removeClass('d-none').children().removeClass('d-none');
                 $('#animalDeleteText').addClass('d-none').children().addClass('d-none')
-                $('#confirmModalHeader').addClass('green darken-2').removeClass(' danger-color')
+                $('#confirmModalHeader').addClass('green darken-2').removeClass('danger-color')
             } else {
                 $('#actionDeleteRestore').val('delete');
                 $('#animalDeleteText').removeClass('d-none').children().removeClass('d-none');
