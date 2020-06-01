@@ -779,22 +779,58 @@ class AdminRepository implements AdminRepositoryInterface
             ->addColumn('added_user', function ($data) {
 
                 $linkToUser = route('user', ['id' => $data->animal_color_created_user_id]);
-                $nameAndSurname = '<a href="' . $linkToUser . '">' . $data->user_name . ' ' . $data->user_surname . '</a>';
+                $nameAndSurname = '<a href="' . $linkToUser . '">' . $data->created_user_name . ' ' . $data->created_user_surname . '</a>';
                 return $nameAndSurname;
+            })
+            ->addColumn('animal_color_edited_at', function ($data) {
+                $animalColorEditedAt = ($data->animal_color_edited_at) ? '<span>' . $data->animal_color_edited_at . '</span>' : '<span>Brak</span>';
+                return $animalColorEditedAt;
+            })
+            ->addColumn('edited_user', function ($data) {
+                if ($data->animal_color_edited_user_id) {
+                    $linkToUser = route('user', ['id' => $data->animal_color_edited_user_id]);
+                    $nameAndSurname = '<a href="' . $linkToUser . '">' . $data->edited_user_name . ' ' . $data->edited_user_surname . '</a>';
+                } else {
+                    $nameAndSurname = '<span>Brak</span>';
+                }
+                return $nameAndSurname;
+            })
+            ->addColumn('animal_color_deleted_at', function ($data) {
+                $animalColorDeletedAt = ($data->animal_color_deleted_at) ? '<span>' . $data->animal_color_deleted_at . '</span>' : '<span>Brak</span>';
+                return $animalColorDeletedAt;
+            })
+            ->addColumn('deleted_user', function ($data) {
+                if ($data->animal_color_deleted_user_id) {
+                    $linkToUser = route('user', ['id' => $data->animal_color_deleted_user_id]);
+                    $nameAndSurname = '<a href="' . $linkToUser . '">' . $data->deleted_user_name . ' ' . $data->deleted_user_surname . '</a>';
+                } else {
+                    $nameAndSurname = '<span>Brak</span>';
+                }
+                return $nameAndSurname;
+
             })
             ->addColumn('action', function ($data) {
 
                 $actions = '<div class="d-flex">
                                 <button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-yellow border-none edit-animal-color waves-effect waves-light" data-animal-color-id="' . $data->animal_color_id . '">
                                     <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-danger border-none delete-animal-color waves-effect waves-light" data-animal-color-id="' . $data->animal_color_id . '">
+                                </button>';
+
+                if ($data->animal_color_edited_at) {
+                    $actions .= '<button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-dark-green border-none restore-animal-color waves-effect waves-light" data-animal-color-id="' . $data->animal_color_id . '">
+                                    <i class="fas fa-undo"></i>
+                                </button>';
+                } else {
+                    $actions .= '<button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-danger border-none delete-animal-color waves-effect waves-light" data-animal-color-id="' . $data->animal_color_id . '">
                                     <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </div>';
+                                </button>';
+                }
+                $actions .= '</div>';
+
                 return $actions;
+
             })
-            ->rawColumns(['animal_color_id', 'animal_color_name', 'animal_color_created_at', 'added_user', 'action'])
+            ->rawColumns(['animal_color_id', 'animal_color_name', 'animal_color_created_at', 'added_user', 'animal_color_edited_at', 'edited_user', 'animal_color_deleted_at', 'deleted_user', 'action'])
             ->make(true);
 
         return $datatable;
@@ -823,7 +859,6 @@ class AdminRepository implements AdminRepositoryInterface
             ->leftJoin('users AS edited_user', 'ac.edited_user_id', '=', 'edited_user.id')
             ->leftJoin('users AS deleted_user', 'ac.deleted_user_id', '=', 'deleted_user.id')
             ->get();
-
         return $animalColorsForDatatable;
     }
 

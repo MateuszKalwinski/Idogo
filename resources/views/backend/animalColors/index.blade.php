@@ -28,6 +28,18 @@
                             <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
                                 title="Dodane przez użytkowania">Dodał
                             </th>
+                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data edycji">Data
+                                edycji
+                            </th>
+                            <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
+                                title="Dodane przez użytkowania">Edytował
+                            </th>
+                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data usunięcia">Data
+                                usunięcia
+                            </th>
+                            <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
+                                title="Usunięte przez użytkowania">Usunął
+                            </th>
                             <th colspan="th-sm" data-toggle="tooltip" data-placement="top" title="Akcje Usuń/Edytuj">
                                 Akcje
                             </th>
@@ -151,6 +163,22 @@
                     {
                         data: 'added_user',
                         name: 'added_user',
+                    },
+                    {
+                        data: 'animal_color_edited_at',
+                        name: 'animal_color_edited_at',
+                    },
+                    {
+                        data: 'edited_user',
+                        name: 'edited_user',
+                    },
+                    {
+                        data: 'animal_color_deleted_at',
+                        name: 'animal_color_deleted_at',
+                    },
+                    {
+                        data: 'deleted_user',
+                        name: 'deleted_user',
                     },
                     {
                         data: 'action',
