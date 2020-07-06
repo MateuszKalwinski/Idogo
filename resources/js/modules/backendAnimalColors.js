@@ -41,21 +41,41 @@ class BackendAnimalColors {
             }
         })
 
-        $(document).on('click', '.delete-animal-color', function () {
+        $(document).on('click', '.restore-animal-color, .delete-animal-color', function () {
+
+            if ($(this).hasClass('restore-animal-color')) {
+                $('#actionDeleteRestore').val('restore');
+                $('#animalRestoreText').removeClass('d-none').children().removeClass('d-none');
+                $('#animalDeleteText').addClass('d-none').children().addClass('d-none')
+                $('#confirmModalHeader').addClass('green darken-2').removeClass('danger-color')
+            } else {
+                $('#actionDeleteRestore').val('delete');
+                $('#animalDeleteText').removeClass('d-none').children().removeClass('d-none');
+                $('#animalRestoreText').addClass('d-none').children().addClass('d-none')
+                $('#confirmModalHeader').addClass('danger-color').removeClass('green darken-2')
+            }
+
             let animalColorId = $(this).closest('tr').find('.animal-color-name').attr('data-animal-color-id');
             $('#confirm-yes').attr('data-animal-color-id', animalColorId);
             let animalColorName = $(this).closest('tr').find('.animal-color-name').text();
-            $('#animalColorName').text(animalColorName);
+            $('.confirm-animal-color-name').text(animalColorName);
             $('#confirmModal').modal('show');
         })
 
         $('#confirm-yes').on('click', function () {
             let animalColorId = $('#confirm-yes').attr('data-animal-color-id');
-            self.deleteAnimalColor(animalColorId);
+            let action = $('#actionDeleteRestore').val();
+
+            if (action === 'restore'){
+                self.deleteRestoreAnimalColor(animalColorId, base_url + "/restoreAnimalColor");
+            }else{
+                self.deleteRestoreAnimalColor(animalColorId, base_url + "/deleteAnimalColor");
+            }
+
         })
     }
 
-    deleteAnimalColor(animalColorId){
+    deleteRestoreAnimalColor(animalColorId, url){
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -65,7 +85,7 @@ class BackendAnimalColors {
 
         $.ajax({
             type: 'POST',
-            url: base_url + "/deleteAnimalColor",
+            url: url,
             data: {
                 animalColorId: animalColorId,
             },

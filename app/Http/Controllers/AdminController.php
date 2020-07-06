@@ -173,6 +173,13 @@ class AdminController extends Controller
         return $deleteAnimalColor;
     }
 
+    public function restoreAnimalColor(Request $request)
+    {
+        $restoreAnimalColor = $this->aG->restoreAnimalColor($request);
+
+        return $restoreAnimalColor;
+    }
+
     public function adminViolationReports()
     {
         if (request()->ajax()) {

@@ -77,6 +77,24 @@ class AdminGateway
         return $this->aR->deleteAnimalColor($request);
     }
 
+    public function restoreAnimalColor($request)
+    {
+        $validator = Validator::make($request->all(), [
+            'animalColorId' => 'required|integer',
+        ],
+            [
+                'animalColorId.required' => 'Ups!coś poszło nie tak.',
+                'animalColorId.integer' => 'Ups!coś poszło nie tak.',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
+        return $this->aR->restoreAnimalColor($request);
+    }
+
     public function storeAnimalCharacteristic($request)
     {
         $validator = Validator::make($request->all(), [

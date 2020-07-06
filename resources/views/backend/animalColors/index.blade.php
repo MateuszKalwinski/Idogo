@@ -84,7 +84,7 @@
              aria-hidden="true">
             <div class="modal-dialog modal-lg modal-notify mt-5" role="document">
                 <div class="modal-content">
-                    <div class="modal-header text-center danger-color">
+                    <div id="confirmModalHeader" class="modal-header text-center danger-color">
                         <h4 class="modal-title white-text w-100 font-weight-bold py-2">Potwierdzenie</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" class="white-text">&times;</span>
@@ -92,20 +92,50 @@
                     </div>
                     <div class="modal-body">
                         <span id="form_result"></span>
-                        <p class="text-center">Czy na pewno chcesz usunąć kolor <span id="animalColorName" class="font-weight-bold"></span></p>
+                        <p id="animalDeleteText" class="text-center">Czy na pewno chcesz usunąć kolor zwierzaka <span class="font-weight-bold confirm-animal-color-name d-none"></span></p>
+                        <p id="animalRestoreText" class="text-center">Czy na pewno chcesz przywrócić kolor zwierzaka <span class="font-weight-bold confirm-animal-color-name d-none"></span></p>
                         <div class="w-50 mx-auto">
                             <div class="d-flex justify-content-around">
                                 <button type="button" id="confirm-yes" data-animal-color-id="" class="btn success-color btn-rounded pl-5 pr-5 text-white waves-effect waves-light text-transform-none m-0 mb-3">
-                                    Tak</button>
+                                    Tak
+                                </button>
                                 <button type="button" id="confirm-no" data-dismiss="modal" class="btn danger-color btn-rounded pl-5 pr-5 text-white waves-effect waves-light text-transform-none m-0 mb-3">
-                                    Nie</button>
+                                    Nie
+                                </button>
                             </div>
+                            <input id="actionDeleteRestore" type="hidden" value="">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+
+{{--        <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="Usuń kolor"--}}
+{{--             aria-hidden="true">--}}
+{{--            <div class="modal-dialog modal-lg modal-notify mt-5" role="document">--}}
+{{--                <div class="modal-content">--}}
+{{--                    <div class="modal-header text-center danger-color">--}}
+{{--                        <h4 class="modal-title white-text w-100 font-weight-bold py-2">Potwierdzenie</h4>--}}
+{{--                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
+{{--                            <span aria-hidden="true" class="white-text">&times;</span>--}}
+{{--                        </button>--}}
+{{--                    </div>--}}
+{{--                    <div class="modal-body">--}}
+{{--                        <span id="form_result"></span>--}}
+{{--                        <p class="text-center">Czy na pewno chcesz usunąć kolor <span id="animalColorName" class="font-weight-bold"></span></p>--}}
+{{--                        <div class="w-50 mx-auto">--}}
+{{--                            <div class="d-flex justify-content-around">--}}
+{{--                                <button type="button" id="confirm-yes" data-animal-color-id="" class="btn success-color btn-rounded pl-5 pr-5 text-white waves-effect waves-light text-transform-none m-0 mb-3">--}}
+{{--                                    Tak</button>--}}
+{{--                                <button type="button" id="confirm-no" data-dismiss="modal" class="btn danger-color btn-rounded pl-5 pr-5 text-white waves-effect waves-light text-transform-none m-0 mb-3">--}}
+{{--                                    Nie</button>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
 
     @push('scripts')

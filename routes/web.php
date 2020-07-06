@@ -86,6 +86,8 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::post('/adminStoreAnimalColor', 'AdminController@adminStoreAnimalColor')->name('adminStoreAnimalColor');
     Route::post('/adminUpdateAnimalColor', 'AdminController@adminUpdateAnimalColor')->name('adminUpdateAnimalColor');
     Route::post('/deleteAnimalColor', 'AdminController@deleteAnimalColor')->name('deleteAnimalColor');
+    Route::post('/restoreAnimalColor', 'AdminController@restoreAnimalColor')->name('restoreAnimalColor');
+
 
     Route::get('/adminAnimalFur', 'AdminController@adminAnimalFur')->name('adminAnimalFur');
     Route::post('/adminStoreAnimalFur', 'AdminController@adminStoreAnimalFur')->name('adminStoreAnimalFur');

@@ -816,7 +816,7 @@ class AdminRepository implements AdminRepositoryInterface
                                     <i class="fas fa-edit"></i>
                                 </button>';
 
-                if ($data->animal_color_edited_at) {
+                if ($data->animal_color_deleted_at) {
                     $actions .= '<button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-dark-green border-none restore-animal-color waves-effect waves-light" data-animal-color-id="' . $data->animal_color_id . '">
                                     <i class="fas fa-undo"></i>
                                 </button>';
@@ -908,10 +908,29 @@ class AdminRepository implements AdminRepositoryInterface
             return response()->json(['errors' => ['Nie znaleziono takiego koloru.']]);
         }
 
-        $animalColor = AnimalColor::findOrFail($request->animalColorId);
-        $animalColor->delete();
+        AnimalColor::where('id', '=', $request->animalColorId)->update([
+            'deleted_at' => Carbon::now('Europe/Warsaw'),
+            'deleted_user_id' => Auth::user()->id,
+        ]);
 
         return response()->json(['success' => 'Kolor został usunięty.']);
+
+    }
+
+    public function restoreAnimalColor($request)
+    {
+        $isExist = AnimalColor::where('id', '=', $request->animalColorId)->exists();
+
+        if (!$isExist) {
+            return response()->json(['errors' => [__('Nie znaleniono takiego koloru.')]]);
+        }
+
+        AnimalColor::where('id', '=', $request->animalColorId)->update([
+            'deleted_at' => null,
+            'deleted_user_id' => null,
+        ]);
+
+        return response()->json(['success' => 'Przywracanie zakończone pomyślnie.']);
     }
 
     public function storeAnimalCharacteristic($request)
