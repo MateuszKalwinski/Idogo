@@ -13,7 +13,7 @@ class BackendAnimalColors {
 
         $('#addColor').click(function () {
             $('#addEditModalTitle').text('Dodaj kolor')
-            $('.modal-header ').addClass('teal lighten-1').removeClass('yellow darken-2')
+            $('.modal-header ').addClass('teal lighten-1').removeClass('yellow darken-2 danger-color green darken-2')
             $('#colorName').val('');
             $('label[for="colorName"]').removeClass('active');
             $('#action').val('add');
@@ -22,7 +22,7 @@ class BackendAnimalColors {
         })
         $(document).on('click', '.edit-animal-color', function () {
             $('#addEditModalTitle').text('Edytuj kolor')
-            $('.modal-header ').addClass('yellow darken-2').removeClass('teal lighten-1')
+            $('.modal-header ').addClass('yellow darken-2').removeClass('teal lighten-1 danger-color green')
             let animalColorName = $(this).closest('tr').find('.animal-color-name').text();
             $('#colorName').val(animalColorName);
             $('label[for="colorName"]').addClass('active');
@@ -48,12 +48,12 @@ class BackendAnimalColors {
                 $('#actionDeleteRestore').val('restore');
                 $('#animalRestoreText').removeClass('d-none').children().removeClass('d-none');
                 $('#animalDeleteText').addClass('d-none').children().addClass('d-none')
-                $('#confirmModalHeader').addClass('green darken-2').removeClass('danger-color')
+                $('#confirmModalHeader').addClass('green darken-2').removeClass('danger-color yellow darken-2 teal lighten-1')
             } else {
                 $('#actionDeleteRestore').val('delete');
                 $('#animalDeleteText').removeClass('d-none').children().removeClass('d-none');
                 $('#animalRestoreText').addClass('d-none').children().addClass('d-none')
-                $('#confirmModalHeader').addClass('danger-color').removeClass('green darken-2')
+                $('#confirmModalHeader').addClass('danger-color').removeClass('green darken-2 yellow darken-2 teal lighten-1')
             }
 
             let animalColorId = $(this).closest('tr').find('.animal-color-name').attr('data-animal-color-id');

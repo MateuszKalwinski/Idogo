@@ -13,7 +13,7 @@ class BackendAnimalSizes {
 
         $('#addSize').click(function () {
             $('#addEditModalTitle').text('Dodaj wielkość zwierzaka')
-            $('.modal-header ').addClass('teal lighten-1').removeClass('yellow darken-2 danger-color')
+            $('.modal-header ').addClass('teal lighten-1').removeClass('yellow darken-2 danger-color green darken-2')
             $('#sizeName').val('');
             $('label[for="sizeName"]').removeClass('active');
             $('#action').val('add');
@@ -22,7 +22,7 @@ class BackendAnimalSizes {
         })
         $(document).on('click', '.edit-animal-size', function () {
             $('#addEditModalTitle').text('Edytuj wielkość zwierzaka')
-            $('.modal-header ').addClass('yellow darken-2').removeClass('teal lighten-1 danger-color')
+            $('.modal-header ').addClass('yellow darken-2').removeClass('teal lighten-1 danger-color green')
             let animalSizeName = $(this).closest('tr').find('.animal-size-name').text();
             $('#sizeName').val(animalSizeName);
             $('label[for="sizeName"]').addClass('active');
@@ -47,12 +47,12 @@ class BackendAnimalSizes {
                 $('#actionDeleteRestore').val('restore');
                 $('#animalRestoreText').removeClass('d-none').children().removeClass('d-none');
                 $('#animalDeleteText').addClass('d-none').children().addClass('d-none')
-                $('#confirmModalHeader').addClass('green darken-2').removeClass('danger-color')
+                $('#confirmModalHeader').addClass('green darken-2').removeClass('danger-color yellow darken-2 teal lighten-1')
             } else {
                 $('#actionDeleteRestore').val('delete');
                 $('#animalDeleteText').removeClass('d-none').children().removeClass('d-none');
                 $('#animalRestoreText').addClass('d-none').children().addClass('d-none')
-                $('#confirmModalHeader').addClass('danger-color').removeClass('green darken-2')
+                $('#confirmModalHeader').addClass('danger-color').removeClass('green darken-2 yellow darken-2 teal lighten-1')
             }
 
             let animalSizeId = $(this).closest('tr').find('.animal-size-name').attr('data-animal-size-id');

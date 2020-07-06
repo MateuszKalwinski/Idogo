@@ -598,38 +598,74 @@ class AdminRepository implements AdminRepositoryInterface
         $datatable = datatables()->of($this->getAnimalCharacteristicsForDatatable())
             ->addColumn('characteristic_dictionary_id', function ($data) {
 
-                $characteristicDictionaryId = '<span data-characteristic-dictionary-id="' . $data->characteristic_dictionary_id . '">' . $data->characteristic_dictionary_id . '</span>';
-                return $characteristicDictionaryId;
+                $dictionaryCharacteristicId = '<span data-characteristic-dictionary-id="' . $data->characteristic_dictionary_id . '">' . $data->characteristic_dictionary_id . '</span>';
+                return $dictionaryCharacteristicId;
             })
             ->addColumn('characteristic_dictionary_name', function ($data) {
 
-                $characteristicDictionaryName = '<span class="animal-characteristic-name" data-characteristic-dictionary-id="' . $data->characteristic_dictionary_id . '">' . $data->characteristic_dictionary_name . '</span>';
-                return $characteristicDictionaryName;
+                $dictionaryCharacteristicName = '<span class="characteristic-dictionary-name" data-characteristic-dictionary-id="' . $data->characteristic_dictionary_name . '">' . $data->characteristic_dictionary_name . '</span>';
+                return $dictionaryCharacteristicName;
             })
             ->addColumn('characteristic_dictionary_created_at', function ($data) {
 
-                $characteristicDictionaryCreatedAt = '<span>' . $data->characteristic_dictionary_created_at . '</span>';
-                return $characteristicDictionaryCreatedAt;
+                $dictionaryCharacteristicCreatedAt = '<span>' . $data->characteristic_dictionary_created_at . '</span>';
+                return $dictionaryCharacteristicCreatedAt;
             })
-            ->addColumn('added_user', function ($data) {
+            ->addColumn('characteristic_dictionary_created_user_id', function ($data) {
 
                 $linkToUser = route('user', ['id' => $data->characteristic_dictionary_created_user_id]);
-                $nameAndSurname = '<a href="' . $linkToUser . '">' . $data->user_name . ' ' . $data->user_surname . '</a>';
+                $nameAndSurname = '<a href="' . $linkToUser . '">' . $data->created_user_name . ' ' . $data->created_user_surname . '</a>';
                 return $nameAndSurname;
+            })
+            ->addColumn('characteristic_dictionary_edited_at', function ($data) {
+                $dictionaryCharacteristcEdutedAt = ($data->characteristic_dictionary_edited_at) ? '<span>' . $data->characteristic_dictionary_edited_at . '</span>' : '<span>Brak</span>';
+                return $dictionaryCharacteristcEdutedAt;
+            })
+            ->addColumn('characteristic_dictionary_edited_user_id', function ($data) {
+                if ($data->characteristic_dictionary_edited_user_id) {
+                    $linkToUser = route('user', ['id' => $data->characteristic_dictionary_edited_user_id]);
+                    $nameAndSurname = '<a href="' . $linkToUser . '">' . $data->edited_user_name . ' ' . $data->edited_user_surname . '</a>';
+                } else {
+                    $nameAndSurname = '<span>Brak</span>';
+                }
+                return $nameAndSurname;
+            })
+            ->addColumn('characteristic_dictionary_deleted_at', function ($data) {
+                $dictionaryCharacteristicDeletedAt = ($data->characteristic_dictionary_deleted_at) ? '<span>' . $data->characteristic_dictionary_deleted_at . '</span>' : '<span>Brak</span>';
+                return $dictionaryCharacteristicDeletedAt;
+            })
+            ->addColumn('characteristic_dictionary_deleted_user_id', function ($data) {
+                if ($data->characteristic_dictionary_deleted_user_id) {
+                    $linkToUser = route('user', ['id' => $data->characteristic_dictionary_deleted_user_id]);
+                    $nameAndSurname = '<a href="' . $linkToUser . '">' . $data->deleted_user_name . ' ' . $data->deleted_user_surname . '</a>';
+                } else {
+                    $nameAndSurname = '<span>Brak</span>';
+                }
+                return $nameAndSurname;
+
             })
             ->addColumn('action', function ($data) {
 
                 $actions = '<div class="d-flex">
-                                <button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-yellow border-none edit-animal-characteristic waves-effect waves-light" data-species-id="' . $data->characteristic_dictionary_id . '">
+                                <button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-yellow border-none edit-dictionary-characteristic waves-effect waves-light" data-characteristic-dictionary-id="' . $data->characteristic_dictionary_id . '">
                                     <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-danger border-none delete-animal-characteristic waves-effect waves-light" data-species-id="' . $data->characteristic_dictionary_id . '">
+                                </button>';
+
+                if ($data->characteristic_dictionary_deleted_at) {
+                    $actions .= '<button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-dark-green border-none restore-dictionary-characteristic waves-effect waves-light" data-characteristic-dictionary-id="' . $data->characteristic_dictionary_id . '">
+                                    <i class="fas fa-undo"></i>
+                                </button>';
+                } else {
+                    $actions .= '<button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-danger border-none delete-dictionary-characteristic waves-effect waves-light" data-characteristic-dictionary-id="' . $data->characteristic_dictionary_id . '">
                                     <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </div>';
+                                </button>';
+                }
+                $actions .= '</div>';
+
                 return $actions;
+
             })
-            ->rawColumns(['characteristic_dictionary_id', 'characteristic_dictionary_name', 'characteristic_dictionary_created_at', 'added_user', 'action'])
+            ->rawColumns(['characteristic_dictionary_id', 'characteristic_dictionary_name', 'characteristic_dictionary_created_at', 'characteristic_dictionary_created_user_id', 'characteristic_dictionary_edited_at', 'characteristic_dictionary_edited_user_id', 'characteristic_dictionary_deleted_at', 'characteristic_dictionary_deleted_user_id',  'action'])
             ->make(true);
 
         return $datatable;
@@ -643,10 +679,20 @@ class AdminRepository implements AdminRepositoryInterface
                 'chd.name as characteristic_dictionary_name',
                 'chd.created_at AS characteristic_dictionary_created_at',
                 'chd.created_user_id AS characteristic_dictionary_created_user_id',
-                'users.name AS user_name',
-                'users.surname AS user_surname'
+                'chd.edited_at AS characteristic_dictionary_edited_at',
+                'chd.edited_user_id AS characteristic_dictionary_edited_user_id',
+                'chd.deleted_at AS characteristic_dictionary_deleted_at',
+                'chd.deleted_user_id AS characteristic_dictionary_deleted_user_id',
+                'created_user.name AS created_user_name',
+                'created_user.surname AS created_user_surname',
+                'edited_user.name AS edited_user_name',
+                'edited_user.surname AS edited_user_surname',
+                'deleted_user.name AS deleted_user_name',
+                'deleted_user.surname AS deleted_user_surname'
             )
-            ->leftJoin('users', 'chd.created_user_id', '=', 'users.id')
+            ->leftJoin('users AS created_user', 'chd.created_user_id', '=', 'created_user.id')
+            ->leftJoin('users AS edited_user', 'chd.edited_user_id', '=', 'edited_user.id')
+            ->leftJoin('users AS deleted_user', 'chd.deleted_user_id', '=', 'deleted_user.id')
             ->get();
         return $animalCharacteristicDictionaryForDatatable;
     }

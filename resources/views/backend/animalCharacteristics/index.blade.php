@@ -29,6 +29,18 @@
                             <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
                                 title="Dodane przez użytkowania">Dodał
                             </th>
+                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data edycji">Data
+                                edycji
+                            </th>
+                            <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
+                                title="Edytowane przez użytkowania">Edytował
+                            </th>
+                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data usunięcia">Data
+                                usunięcia
+                            </th>
+                            <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
+                                title="Usunięte przez użytkowania">Usunął
+                            </th>
                             <th colspan="th-sm" data-toggle="tooltip" data-placement="top" title="Akcje Usuń/Edytuj">
                                 Akcje
                             </th>
@@ -147,9 +159,27 @@
                         name: 'characteristic_dictionary_created_at',
                     },
                     {
-                        data: 'added_user',
-                        name: 'added_user',
+                        data: 'characteristic_dictionary_created_user_id',
+                        name: 'characteristic_dictionary_created_user_id',
                     },
+
+                    {
+                        data: 'characteristic_dictionary_edited_at',
+                        name: 'characteristic_dictionary_edited_at',
+                    },
+                    {
+                        data: 'characteristic_dictionary_edited_user_id',
+                        name: 'characteristic_dictionary_edited_user_id',
+                    },
+                    {
+                        data: 'characteristic_dictionary_deleted_at',
+                        name: 'characteristic_dictionary_deleted_at',
+                    },
+                    {
+                        data: 'characteristic_dictionary_deleted_user_id',
+                        name: 'characteristic_dictionary_deleted_user_id',
+                    },
+
                     {
                         data: 'action',
                         name: 'action',
