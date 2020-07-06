@@ -40,6 +40,7 @@ class BackendAnimalColors {
                 self.saveAnimalColor(new FormData(this), base_url+ "/adminUpdateAnimalColor")
             }
         })
+        console.log('test');
 
         $(document).on('click', '.restore-animal-color, .delete-animal-color', function () {
 
