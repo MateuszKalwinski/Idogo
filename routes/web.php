@@ -80,6 +80,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::post('/adminStoreAnimalCharacteristic', 'AdminController@adminStoreAnimalCharacteristic')->name('adminStoreAnimalCharacteristic');
     Route::post('/adminUpdateAnimalCharacteristic', 'AdminController@adminUpdateAnimalCharacteristic')->name('adminUpdateAnimalCharacteristic');
     Route::post('/deleteAnimalCharacteristic', 'AdminController@deleteAnimalCharacteristic')->name('deleteAnimalCharacteristic');
+    Route::post('/restoreAnimalCharacteristic', 'AdminController@restoreAnimalCharacteristic')->name('restoreAnimalCharacteristic');
 
 
     Route::get('/adminAnimalColors', 'AdminController@adminAnimalColors')->name('adminAnimalColors');

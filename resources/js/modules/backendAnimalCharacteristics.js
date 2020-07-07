@@ -20,14 +20,14 @@ class backendAnimalCharacteristics {
             $('#animalCharacteristicId').val('');
             $('#addEditCharacteristicModal').modal('show')
         })
-        $(document).on('click', '.edit-animal-characteristic', function () {
+        $(document).on('click', '.edit-dictionary-characteristic', function () {
             $('#addEditModalTitle').text('Edytuj cechę zwierzaka')
             $('.modal-header ').addClass('yellow darken-2').removeClass('teal lighten-1')
-            let animalCharacteristicName = $(this).closest('tr').find('.animal-characteristic-name').text();
+            let animalCharacteristicName = $(this).closest('tr').find('.characteristic-dictionary-name').text();
             $('#characteristicName').val(animalCharacteristicName);
-            $('label[for="colorName"]').addClass('active');
+            $('label[for="characteristicName"]').addClass('active');
             $('#action').val('edit');
-            let AnimalCharacteristicId = $(this).closest('tr').find('.animal-characteristic-name').attr('data-characteristic-dictionary-id');
+            let AnimalCharacteristicId = $(this).closest('tr').find('.characteristic-dictionary-name').attr('data-characteristic-dictionary-id');
             $('#animalCharacteristicId').val(AnimalCharacteristicId);
             $('#addEditCharacteristicModal').modal('show')
         })
@@ -41,7 +41,7 @@ class backendAnimalCharacteristics {
             }
         })
 
-        $(document).on('click', '.delete-animal-characteristic', function () {
+        $(document).on('click', '.delete-dictionary-characteristic', function () {
             let animalCharacteristicId = $(this).closest('tr').find('.animal-characteristic-name').attr('data-characteristic-dictionary-id');
             $('#confirm-yes').attr('data-characteristic-dictionary-id', animalCharacteristicId);
             let animalCharacteristicName = $(this).closest('tr').find('.animal-characteristic-name').text();
@@ -49,13 +49,42 @@ class backendAnimalCharacteristics {
             $('#confirmModal').modal('show');
         })
 
+        $(document).on('click', '.restore-dictionary-characteristic, .delete-dictionary-characteristic', function () {
+
+            if ($(this).hasClass('restore-dictionary-characteristic')) {
+                $('#actionDeleteRestore').val('restore');
+                $('#animalRestoreText').removeClass('d-none').children().removeClass('d-none');
+                $('#animalDeleteText').addClass('d-none').children().addClass('d-none')
+                $('#confirmModalHeader').addClass('green darken-2').removeClass('danger-color yellow darken-2 teal lighten-1')
+            } else {
+                $('#actionDeleteRestore').val('delete');
+                $('#animalDeleteText').removeClass('d-none').children().removeClass('d-none');
+                $('#animalRestoreText').addClass('d-none').children().addClass('d-none')
+                $('#confirmModalHeader').addClass('danger-color').removeClass('green darken-2 yellow darken-2 teal lighten-1')
+            }
+
+            let dictionaryCharacteristicId = $(this).closest('tr').find('.characteristic-dictionary-name').attr('data-characteristic-dictionary-id');
+            $('#confirm-yes').attr('data-dictionary-characteristic-id', dictionaryCharacteristicId);
+            let dictionaryCharacteristicName = $(this).closest('tr').find('.characteristic-dictionary-name').text();
+            $('.confirm-dictionary-characteristic-name').text(dictionaryCharacteristicName);
+            $('##showHideContent').show();
+            $('#confirmModal').modal('show');
+        })
+
         $('#confirm-yes').on('click', function () {
-            let animalCharacteristicId = $('#confirm-yes').attr('data-characteristic-dictionary-id');
-            self.deleteAnimalCharacteristic(animalCharacteristicId);
+            let dictionaryCharacteristicId = $('#confirm-yes').attr('data-dictionary-characteristic-id');
+            let action = $('#actionDeleteRestore').val();
+
+            if (action === 'restore'){
+                self.deleteRestoreDictionaryCharacteristic(dictionaryCharacteristicId, base_url + "/restoreAnimalCharacteristic");
+            }else{
+                self.deleteRestoreDictionaryCharacteristic(dictionaryCharacteristicId, base_url + "/deleteAnimalCharacteristic");
+            }
+
         })
     }
 
-    deleteAnimalCharacteristic(animalCharacteristicId){
+    deleteRestoreDictionaryCharacteristic(animalCharacteristicId, url){
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -65,7 +94,7 @@ class backendAnimalCharacteristics {
 
         $.ajax({
             type: 'POST',
-            url: base_url + "/deleteAnimalCharacteristic",
+            url: url,
             data: {
                 animalCharacteristicId: animalCharacteristicId,
             },
@@ -91,9 +120,10 @@ class backendAnimalCharacteristics {
                 if(data.success)
                 {
                     html = '<div class="alert alert-success">' + data.success + '</div>';
+                    $('#showHideContent').slideUp();
                     $('#adminAnimalCharacteristicsTable').DataTable().ajax.reload();
                 }
-                $('#form_result').html(html);
+                $('#confirmFormResult').html(html);
             },
             complete: function () {
                 /*
@@ -133,7 +163,7 @@ class backendAnimalCharacteristics {
                     $('#characteristicName').val('');
                     $('#adminAnimalCharacteristicsTable').DataTable().ajax.reload();
                 }
-                $('#form_result').html(html);
+                $('#formResult').html(html);
             }
         })
     }

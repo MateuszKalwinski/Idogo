@@ -603,7 +603,7 @@ class AdminRepository implements AdminRepositoryInterface
             })
             ->addColumn('characteristic_dictionary_name', function ($data) {
 
-                $dictionaryCharacteristicName = '<span class="characteristic-dictionary-name" data-characteristic-dictionary-id="' . $data->characteristic_dictionary_name . '">' . $data->characteristic_dictionary_name . '</span>';
+                $dictionaryCharacteristicName = '<span class="characteristic-dictionary-name" data-characteristic-dictionary-id="' . $data->characteristic_dictionary_id . '">' . $data->characteristic_dictionary_name . '</span>';
                 return $dictionaryCharacteristicName;
             })
             ->addColumn('characteristic_dictionary_created_at', function ($data) {
@@ -665,7 +665,7 @@ class AdminRepository implements AdminRepositoryInterface
                 return $actions;
 
             })
-            ->rawColumns(['characteristic_dictionary_id', 'characteristic_dictionary_name', 'characteristic_dictionary_created_at', 'characteristic_dictionary_created_user_id', 'characteristic_dictionary_edited_at', 'characteristic_dictionary_edited_user_id', 'characteristic_dictionary_deleted_at', 'characteristic_dictionary_deleted_user_id',  'action'])
+            ->rawColumns(['characteristic_dictionary_id', 'characteristic_dictionary_name', 'characteristic_dictionary_created_at', 'characteristic_dictionary_created_user_id', 'characteristic_dictionary_edited_at', 'characteristic_dictionary_edited_user_id', 'characteristic_dictionary_deleted_at', 'characteristic_dictionary_deleted_user_id', 'action'])
             ->make(true);
 
         return $datatable;
@@ -1023,10 +1023,29 @@ class AdminRepository implements AdminRepositoryInterface
             return response()->json(['errors' => ['Nie znaleziono takiej cechy zwierzaka.']]);
         }
 
-        $animalColor = CharacteristicDictionary::findOrFail($request->animalCharacteristicId);
-        $animalColor->delete();
+        CharacteristicDictionary::where('id', '=', $request->animalCharacteristicId)->update([
+            'deleted_at' => Carbon::now('Europe/Warsaw'),
+            'deleted_user_id' => Auth::user()->id,
+        ]);
 
         return response()->json(['success' => 'Cecha zwierzaka została usunięta.']);
+
+    }
+
+    public function restoreAnimalCharacteristic($request)
+    {
+        $isExist = CharacteristicDictionary::where('id', '=', $request->animalCharacteristicId)->exists();
+
+        if (!$isExist) {
+            return response()->json(['errors' => ['Nie znaleziono takiej cechy zwierzaka.']]);
+        }
+
+        CharacteristicDictionary::where('id', '=', $request->animalCharacteristicId)->update([
+            'deleted_at' => null,
+            'deleted_user_id' => null,
+        ]);
+
+        return response()->json(['success' => 'Przywracanie zakończone pomyślnie.']);
     }
 
     public function storeAnimalSpecies($request)
@@ -1179,7 +1198,6 @@ class AdminRepository implements AdminRepositoryInterface
             ->leftJoin('users AS created_user', 'f.created_user_id', '=', 'created_user.id')
             ->leftJoin('users AS edited_user', 'f.edited_user_id', '=', 'edited_user.id')
             ->leftJoin('users AS deleted_user', 'f.deleted_user_id', '=', 'deleted_user.id')
-
             ->get();
         return $animalFursForDatatable;
     }
@@ -1240,7 +1258,8 @@ class AdminRepository implements AdminRepositoryInterface
         return response()->json(['success' => 'Usuwanie zakończone pomyślnie.']);
     }
 
-    public function restoreAnimalFur($request){
+    public function restoreAnimalFur($request)
+    {
 
         $isExist = Fur::where('id', '=', $request->animalFurId)->exists();
 

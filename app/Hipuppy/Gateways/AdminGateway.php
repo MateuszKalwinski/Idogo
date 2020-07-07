@@ -155,6 +155,24 @@ class AdminGateway
         return $this->aR->deleteAnimalCharacteristic($request);
     }
 
+    public function restoreAnimalCharacteristic($request){
+
+        $validator = Validator::make($request->all(), [
+            'animalCharacteristicId' => 'required|integer',
+        ],
+            [
+                'animalCharacteristicId.required' => 'Ups!coś poszło nie tak.',
+                'animalCharacteristicId.integer' => 'Ups!coś poszło nie tak.',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
+        return $this->aR->restoreAnimalCharacteristic($request);
+    }
+
     public function storeAnimalSpecies($request)
     {
         $validator = Validator::make($request->all(), [

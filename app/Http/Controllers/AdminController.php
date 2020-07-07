@@ -140,6 +140,13 @@ class AdminController extends Controller
         return $deleteAnimalCharacteristic;
     }
 
+    public function restoreAnimalCharacteristic(Request $request){
+
+        $restoreAnimalCharacteristic = $this->aG->restoreAnimalCharacteristic($request);
+
+        return $restoreAnimalCharacteristic;
+    }
+
 
     public function adminAnimalColors()
     {

@@ -51,29 +51,34 @@
             </div>
         </div>
 
-        <div class="modal fade" id="addEditCharacteristicModal" tabindex="-1" role="dialog" aria-labelledby="Dodaj/Edytuj cechę zwierzaka"
+        <div class="modal fade" id="addEditCharacteristicModal" tabindex="-1" role="dialog"
+             aria-labelledby="Dodaj/Edytuj cechę zwierzaka"
              aria-hidden="true">
             <div class="modal-dialog modal-lg modal-notify mt-5" role="document">
                 <div class="modal-content">
                     <div class="modal-header text-center teal lighten-1">
-                        <h4 class="modal-title white-text w-100 font-weight-bold py-2"><span id="addEditModalTitle">Dodaj cechę zwierzaka</span></h4>
+                        <h4 class="modal-title white-text w-100 font-weight-bold py-2"><span id="addEditModalTitle">Dodaj cechę zwierzaka</span>
+                        </h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" class="white-text">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <span id="form_result"></span>
+                        <span id="formResult"></span>
                         <form id="addEditCharacteristic" style="color: #757575;" method="post">
                             @csrf
                             <div class="md-form mt-0">
-                                <input type="text" id="characteristicName" name="characteristicName" class="form-control">
-                                <label for="colorName">Cecha zwierzaka</label>
+                                <input type="text" id="characteristicName" name="characteristicName"
+                                       class="form-control">
+                                <label for="characteristicName">Cecha zwierzaka</label>
                             </div>
                             <div class="md-form mt-0 mb-0 text-left">
-                                <input type="hidden" name="action" id="action" />
-                                <input type="hidden" name="animalCharacteristicId" id="animalCharacteristicId" />
-                                <button type="submit" name="action_button" id="action_button" class="btn indigo lighten-1 btn-rounded pl-5 pr-5 text-white waves-effect waves-light text-transform-none m-0 mb-3">
-                                    Zapisz</button>
+                                <input type="hidden" name="action" id="action"/>
+                                <input type="hidden" name="animalCharacteristicId" id="animalCharacteristicId"/>
+                                <button type="submit" name="action_button" id="action_button"
+                                        class="btn indigo lighten-1 btn-rounded pl-5 pr-5 text-white waves-effect waves-light text-transform-none m-0 mb-3">
+                                    Zapisz
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -81,25 +86,35 @@
             </div>
         </div>
 
-        <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="Usuń kolor"
+        <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="Usuń cechę zwierzaka"
              aria-hidden="true">
             <div class="modal-dialog modal-lg modal-notify mt-5" role="document">
                 <div class="modal-content">
-                    <div class="modal-header text-center danger-color">
+                    <div id="confirmModalHeader" class="modal-header text-center danger-color">
                         <h4 class="modal-title white-text w-100 font-weight-bold py-2">Potwierdzenie</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" class="white-text">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <span id="form_result"></span>
-                        <p class="text-center">Czy na pewno chcesz usunąć cechę zwierzaka: <span id="animalCharacteristicName" class="font-weight-bold"></span></p>
-                        <div class="w-50 mx-auto">
-                            <div class="d-flex justify-content-around">
-                                <button type="button" id="confirm-yes" data-characteristic-dictionary-id="" class="btn success-color btn-rounded pl-5 pr-5 text-white waves-effect waves-light text-transform-none m-0 mb-3">
-                                    Tak</button>
-                                <button type="button" id="confirm-no" data-dismiss="modal" class="btn danger-color btn-rounded pl-5 pr-5 text-white waves-effect waves-light text-transform-none m-0 mb-3">
-                                    Nie</button>
+                        <span id="confirmFormResult"></span>
+                        <div id="showHideContent">
+                            <p id="animalDeleteText" class="text-center">Czy na pewno chcesz usunąć cechę zwierzaka
+                                <span class="font-weight-bold confirm-dictionary-characteristic-name d-none"></span></p>
+                            <p id="animalRestoreText" class="text-center">Czy na pewno chcesz przywrócić cechę zwierzaka
+                                <span class="font-weight-bold confirm-dictionary-characteristic-name d-none"></span></p>
+                            <div class="w-50 mx-auto">
+                                <div class="d-flex justify-content-around">
+                                    <button type="button" id="confirm-yes" data-dictionary-characteristic-id=""
+                                            class="confirm-action-btn btn success-color btn-rounded pl-5 pr-5 text-white waves-effect waves-light text-transform-none m-0 mb-3">
+                                        Tak
+                                    </button>
+                                    <button type="button" id="confirm-no" data-dismiss="modal"
+                                            class="confirm-action-btn btn danger-color btn-rounded pl-5 pr-5 text-white waves-effect waves-light text-transform-none m-0 mb-3">
+                                        Nie
+                                    </button>
+                                </div>
+                                <input id="actionDeleteRestore" type="hidden" value="">
                             </div>
                         </div>
                     </div>

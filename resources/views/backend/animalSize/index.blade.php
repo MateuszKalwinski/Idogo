@@ -91,7 +91,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <span id="form_result"></span>
+                        <span id="confirm_form_result"></span>
                         <p id="animalDeleteText" class="text-center">Czy na pewno chcesz usunąć wielkość zwierzaka <span class="font-weight-bold confirm-animal-size-name d-none"></span></p>
                         <p id="animalRestoreText" class="text-center">Czy na pewno chcesz przywrócić wielkość zwierzaka <span class="font-weight-bold confirm-animal-size-name d-none"></span></p>
                         <div class="w-50 mx-auto">
