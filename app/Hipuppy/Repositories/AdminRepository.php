@@ -229,8 +229,8 @@ class AdminRepository implements AdminRepositoryInterface
                 return $nameAndSurname;
             })
             ->addColumn('species_edited_at', function ($data) {
-                $animalSpeciesEditeddAt = ($data->edited_at) ? '<span>' . $data->edited_at . '</span>' : '<span>Brak</span>';
-                return $animalSpeciesEditeddAt;
+                $animalSpeciesEditedAt = ($data->edited_at) ? '<span>' . $data->edited_at . '</span>' : '<span>Brak</span>';
+                return $animalSpeciesEditedAt;
             })
             ->addColumn('edited_user', function ($data) {
                 if ($data->edited_user_id) {
@@ -284,7 +284,7 @@ class AdminRepository implements AdminRepositoryInterface
 
     public function getSpeciesForDatatable()
     {
-        $speciesForDatatable = DB::table('animal_species as asp')
+        $speciesForDatatable = DB::table('animal_species AS asp')
             ->select(
                 'asp.id AS species_id',
                 'asp.name AS species_name',
@@ -340,23 +340,61 @@ class AdminRepository implements AdminRepositoryInterface
             })
             ->addColumn('added_user', function ($data) {
 
-                $linkToUser = route('user', ['id' => $data->animal_dictionary_created_user_id]);
-                $nameAndSurname = '<a href="' . $linkToUser . '">' . $data->user_name . ' ' . $data->user_surname . '</a>';
+                $linkToUser = route('user', ['id' => $data->created_user_id]);
+                $nameAndSurname = '<a href="' . $linkToUser . '">' . $data->created_user_name . ' ' . $data->created_user_surname . '</a>';
+                return $nameAndSurname;
+            })
+            ->addColumn('animal_dictionary_edited_at', function ($data) {
+
+                $animalDictionaryEditedAt = ($data->animal_dictionary_edited_at) ? '<span>' . $data->animal_dictionary_edited_at . '</span>' : '<span>Brak</span>';
+                return $animalDictionaryEditedAt;
+            })
+            ->addColumn('edited_user', function ($data) {
+
+                if ($data->edited_user_id) {
+                    $linkToUser = route('user', ['id' => $data->deleted_user_id]);
+                    $nameAndSurname = '<a href="' . $linkToUser . '">' . $data->edited_user_name . ' ' . $data->edited_user_name . '</a>';
+                } else {
+                    $nameAndSurname = '<span>Brak</span>';
+                }
+                return $nameAndSurname;
+            })
+            ->addColumn('animal_dictionary_deleted_at', function ($data) {
+
+                $animalDictionaryDeletedAt = ($data->animal_dictionary_deleted_at) ? '<span>' . $data->animal_dictionary_deleted_at . '</span>' : '<span>Brak</span>';
+                return $animalDictionaryDeletedAt;
+            })
+            ->addColumn('deleted_user', function ($data) {
+
+                if ($data->deleted_user_id) {
+                    $linkToUser = route('user', ['id' => $data->deleted_user_id]);
+                    $nameAndSurname = '<a href="' . $linkToUser . '">' . $data->deleted_user_name . ' ' . $data->deleted_user_surname . '</a>';
+                } else {
+                    $nameAndSurname = '<span>Brak</span>';
+                }
                 return $nameAndSurname;
             })
             ->addColumn('action', function ($data) {
 
                 $actions = '<div class="d-flex">
-                                <button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-yellow border-none edit-species waves-effect waves-light" data-species-id="' . $data->animal_dictionary_id . '">
+                                <button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-yellow border-none edit-animal-dictionary waves-effect waves-light" data-animal-dictionary-id="' . $data->animal_dictionary_id . '">
                                     <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-danger border-none delete-species waves-effect waves-light" data-species-id="' . $data->animal_dictionary_id . '">
+                                </button>';
+
+                if ($data->animal_dictionary_deleted_at) {
+                    $actions .= '<button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-dark-green border-none restore-animal-dictionary waves-effect waves-light" data-animal-dictionary-id="' . $data->animal_dictionary_id . '">
+                                    <i class="fas fa-undo"></i>
+                                </button>';
+                } else {
+                    $actions .= '<button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-danger border-none delete-animal-dictionary waves-effect waves-light" data-animal-dictionary-id="' . $data->animal_dictionary_id . '">
                                     <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </div>';
+                                </button>';
+                }
+                $actions .= '</div>';
+
                 return $actions;
             })
-            ->rawColumns(['animal_dictionary_id', 'animal_dictionary_name', 'animal_species_name', 'animal_gender_name', 'animal_dictionary_created_at', 'added_user', 'action'])
+            ->rawColumns(['animal_dictionary_id', 'animal_dictionary_name', 'animal_species_name', 'animal_gender_name', 'animal_dictionary_created_at', 'added_user', 'animal_dictionary_edited_at', 'edited_user', 'animal_dictionary_deleted_at', 'deleted_user', 'action'])
             ->make(true);
 
         return $datatable;
@@ -364,24 +402,33 @@ class AdminRepository implements AdminRepositoryInterface
 
     public function getSpeciesWithGenderForDatatable()
     {
-        $speciesWithGenderForDatatable = DB::table('animal_dictionary')
+        $speciesWithGenderForDatatable = DB::table('animal_dictionary AS ad')
             ->select(
-                'animal_dictionary.id AS animal_dictionary_id',
-                'animal_dictionary.name AS animal_dictionary_name',
-                'animal_dictionary.created_at AS animal_dictionary_created_at',
-                'animal_dictionary.created_user_id AS animal_dictionary_created_user_id',
-                'animal_dictionary.gender_id AS animal_dictionary_gender_id',
-                'genders.name AS gender_name',
-                'animal_dictionary.species_id AS animal_dictionary_species_id',
-                'animal_species.name AS animal_species_name',
-                'animal_dictionary.created_user_id',
-                'users.name AS user_name',
-                'users.surname AS user_surname'
+                'ad.id AS animal_dictionary_id',
+                'ad.name AS animal_dictionary_name',
+                'ad.created_at AS animal_dictionary_created_at',
+                'ad.edited_at AS animal_dictionary_edited_at',
+                'ad.deleted_at AS animal_dictionary_deleted_at',
+                'ad.gender_id AS animal_dictionary_gender_id',
+                'g.name AS gender_name',
+                'ad.species_id AS animal_dictionary_species_id',
+                'asp.name AS animal_species_name',
+                'ad.created_user_id',
+                'ad.edited_user_id',
+                'ad.deleted_user_id',
+                'created_user.name AS created_user_name',
+                'created_user.surname AS created_user_surname',
+                'edited_user.name AS edited_user_name',
+                'edited_user.surname AS edited_user_surname',
+                'deleted_user.name AS deleted_user_name',
+                'deleted_user.surname AS deleted_user_surname'
             )
-            ->leftJoin('users', 'animal_dictionary.created_user_id', '=', 'users.id')
-            ->leftJoin('animal_species', 'animal_dictionary.species_id', '=', 'animal_species.id')
-            ->leftJoin('genders', 'animal_dictionary.gender_id', '=', 'genders.id')
-            ->orderBy('animal_dictionary.id', 'asc')
+            ->leftJoin('users AS created_user', 'ad.created_user_id', '=', 'created_user.id')
+            ->leftJoin('users AS edited_user', 'ad.edited_user_id', '=', 'edited_user.id')
+            ->leftJoin('users AS deleted_user', 'ad.deleted_user_id', '=', 'deleted_user.id')
+            ->leftJoin('animal_species AS asp', 'ad.species_id', '=', 'asp.id')
+            ->leftJoin('genders AS g', 'ad.gender_id', '=', 'g.id')
+            ->orderBy('ad.id', 'asc')
             ->get();
 
         return $speciesWithGenderForDatatable;
