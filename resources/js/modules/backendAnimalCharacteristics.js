@@ -13,7 +13,7 @@ class backendAnimalCharacteristics {
 
         $('#addCharacteristic').click(function () {
             $('#addEditModalTitle').text('Dodaj cechę zwierzaka');
-            $('.modal-header ').addClass('teal lighten-1').removeClass('yellow darken-2');
+            $('.modal-header ').addClass('teal lighten-1').removeClass('yellow darken-2 danger-color green darken-2');
             $('#characteristicName').val('');
             $('label[for="colorName"]').removeClass('active');
             $('#action').val('add');
@@ -22,7 +22,7 @@ class backendAnimalCharacteristics {
         })
         $(document).on('click', '.edit-dictionary-characteristic', function () {
             $('#addEditModalTitle').text('Edytuj cechę zwierzaka')
-            $('.modal-header ').addClass('yellow darken-2').removeClass('teal lighten-1')
+            $('.modal-header ').addClass('yellow darken-2').removeClass('teal lighten-1 danger-color green')
             let animalCharacteristicName = $(this).closest('tr').find('.characteristic-dictionary-name').text();
             $('#characteristicName').val(animalCharacteristicName);
             $('label[for="characteristicName"]').addClass('active');
@@ -39,14 +39,6 @@ class backendAnimalCharacteristics {
             }else{
                 self.saveAnimalCharacteristic(new FormData(this), base_url+ "/adminUpdateAnimalCharacteristic")
             }
-        })
-
-        $(document).on('click', '.delete-dictionary-characteristic', function () {
-            let animalCharacteristicId = $(this).closest('tr').find('.animal-characteristic-name').attr('data-characteristic-dictionary-id');
-            $('#confirm-yes').attr('data-characteristic-dictionary-id', animalCharacteristicId);
-            let animalCharacteristicName = $(this).closest('tr').find('.animal-characteristic-name').text();
-            $('#animalCharacteristicName').text(animalCharacteristicName);
-            $('#confirmModal').modal('show');
         })
 
         $(document).on('click', '.restore-dictionary-characteristic, .delete-dictionary-characteristic', function () {
@@ -67,7 +59,7 @@ class backendAnimalCharacteristics {
             $('#confirm-yes').attr('data-dictionary-characteristic-id', dictionaryCharacteristicId);
             let dictionaryCharacteristicName = $(this).closest('tr').find('.characteristic-dictionary-name').text();
             $('.confirm-dictionary-characteristic-name').text(dictionaryCharacteristicName);
-            $('##showHideContent').show();
+            $('#showHideContent').show();
             $('#confirmModal').modal('show');
         })
 

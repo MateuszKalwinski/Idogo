@@ -242,19 +242,41 @@ class AdminRepository implements AdminRepositoryInterface
                 return $nameAndSurname;
 
             })
+            ->addColumn('species_deleted_at', function ($data) {
+                $animalSpeciesDeletedAt = ($data->deleted_at) ? '<span>' . $data->deleted_at . '</span>' : '<span>Brak</span>';
+                return $animalSpeciesDeletedAt;
+            })
+            ->addColumn('deleted_user', function ($data) {
+                if ($data->deleted_user_id) {
+                    $linkToUser = route('user', ['id' => $data->deleted_user_id]);
+                    $nameAndSurname = '<a href="' . $linkToUser . '">' . $data->deleted_user_name . ' ' . $data->deleted_user_surname . '</a>';
+                } else {
+                    $nameAndSurname = '<span>Brak</span>';
+                }
+                return $nameAndSurname;
+
+            })
             ->addColumn('action', function ($data) {
 
                 $actions = '<div class="d-flex">
                                 <button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-yellow border-none edit-animal-species waves-effect waves-light" data-animal-species-id="' . $data->species_id . '">
                                     <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-danger border-none delete-animal-species waves-effect waves-light" data-animal-species-id="' . $data->species_id . '">
+                                </button>';
+
+                if ($data->deleted_at) {
+                    $actions .= '<button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-dark-green border-none restore-animal-species waves-effect waves-light" data-animal-species-id="' . $data->species_id . '">
+                                    <i class="fas fa-undo"></i>
+                                </button>';
+                } else {
+                    $actions .= '<button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-danger border-none delete-animal-species waves-effect waves-light" data-animal-species-id="' . $data->species_id . '">
                                     <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </div>';
+                                </button>';
+                }
+                $actions .= '</div>';
+
                 return $actions;
             })
-            ->rawColumns(['animal_species_id', 'animal_species_name', 'count_animals_with_species', 'species_created_at', 'added_user', 'species_edited_at', 'edited_user', 'action'])
+            ->rawColumns(['animal_species_id', 'animal_species_name', 'count_animals_with_species', 'species_created_at', 'added_user', 'species_edited_at', 'edited_user', 'species_deleted_at', 'deleted_user', 'action'])
             ->make(true);
 
         return $datatable;
@@ -262,27 +284,29 @@ class AdminRepository implements AdminRepositoryInterface
 
     public function getSpeciesForDatatable()
     {
-
-        $speciesForDatatable = DB::table('animal_species')
+        $speciesForDatatable = DB::table('animal_species as asp')
             ->select(
-                'animal_species.id AS species_id',
-                'animal_species.name AS species_name',
-                'animal_species.created_at AS species_created_at',
-                DB::raw("(SELECT COUNT(animals.id) FROM animals
-                                WHERE animals.species_id = animal_species.id) as count_animals_with_species"),
-                'animal_species.created_user_id',
-                'animal_species.edited_at',
-                'animal_species.edited_user_id',
+                'asp.id AS species_id',
+                'asp.name AS species_name',
+                'asp.created_at AS species_created_at',
+                DB::raw("(SELECT COUNT(a.id) FROM animals AS a
+                                WHERE a.species_id = asp.id) as count_animals_with_species"),
+                'asp.created_user_id',
+                'asp.edited_at',
+                'asp.edited_user_id',
+                'asp.deleted_at',
+                'asp.deleted_user_id',
                 'created_user.name AS created_user_name',
                 'created_user.surname AS created_user_surname',
                 'edited_user.name AS edited_user_name',
-                'edited_user.surname AS edited_user_surname'
-
+                'edited_user.surname AS edited_user_surname',
+                'deleted_user.name AS deleted_user_name',
+                'deleted_user.surname AS deleted_user_surname'
             )
-            ->leftJoin('users AS created_user', 'animal_species.created_user_id', '=', 'created_user.id')
-            ->leftJoin('users AS edited_user', 'animal_species.edited_user_id', '=', 'edited_user.id')
+            ->leftJoin('users AS created_user', 'asp.created_user_id', '=', 'created_user.id')
+            ->leftJoin('users AS edited_user', 'asp.edited_user_id', '=', 'edited_user.id')
+            ->leftJoin('users AS deleted_user', 'asp.deleted_user_id', '=', 'deleted_user.id')
             ->get();
-
         return $speciesForDatatable;
     }
 
@@ -1092,10 +1116,28 @@ class AdminRepository implements AdminRepositoryInterface
             return response()->json(['errors' => [__('Nie znaleziono takiego gatunku.')]]);
         }
 
-        $animalColor = AnimalSpecies::findOrFail($request->animalSpeciesId);
-        $animalColor->delete();
+        AnimalSpecies::where('id', '=', $request->animalSpeciesId)->update([
+            'deleted_at' => Carbon::now('Europe/Warsaw'),
+            'deleted_user_id' => Auth::user()->id,
+        ]);
 
-        return response()->json(['success' => __('Cecha zwierzaka została usunięta.')]);
+        return response()->json(['success' => __('Gatunek został usunięty')]);
+    }
+
+    public function restoreAnimalSpecies($request)
+    {
+        $isExist = AnimalSpecies::where('id', '=', $request->animalSpeciesId)->exists();
+
+        if (!$isExist) {
+            return response()->json(['errors' => [__('Nie znaleziono takiego gatunku.')]]);
+        }
+
+        AnimalSpecies::where('id', '=', $request->animalSpeciesId)->update([
+            'deleted_at' => null,
+            'deleted_user_id' => null,
+        ]);
+
+        return response()->json(['success' => __('Przywracanie zakończone pomyślnie.')]);
     }
 
     public function adminAnimalFur()

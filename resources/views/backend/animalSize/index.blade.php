@@ -3,7 +3,7 @@
 @section('content')
 
     <div id="ModuleName" data-moduleName="backendAnimalSizes">
-        <div id="contact" class="container-fluid mb-4 min-vh-100">
+        <div class="container-fluid mb-4 min-vh-100">
             <div class="row">
                 <div class="col-lg-12 col-md-12 mb-4">
                     <h2 class="color-mid-grey">Wielkość zwierzaków</h2>

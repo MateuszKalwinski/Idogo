@@ -29,6 +29,7 @@ class BackendAnimalSizes {
             $('#action').val('edit');
             let animalSizeId = $(this).closest('tr').find('.animal-size-name').attr('data-animal-size-id');
             $('#animalSizeId').val(animalSizeId);
+            $('#form_result').html('');
             $('#addEditSizeModal').modal('show')
         })
 

@@ -67,6 +67,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::post('/adminStoreAnimalSpecies', 'AdminController@adminStoreAnimalSpecies')->name('adminStoreAnimalSpecies');
     Route::post('/adminUpdateAnimalSpecies', 'AdminController@adminUpdateAnimalSpecies')->name('adminUpdateAnimalSpecies');
     Route::post('/deleteAnimalSpecies', 'AdminController@deleteAnimalSpecies')->name('deleteAnimalSpecies');
+    Route::post('/restoreAnimalSpecies', 'AdminController@restoreAnimalSpecies')->name('restoreAnimalSpecies');
 
 
     Route::get('/adminSpeciesWithGender', 'AdminController@adminSpeciesWithGender')->name('adminSpeciesWithGender');

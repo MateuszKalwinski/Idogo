@@ -155,7 +155,8 @@ class AdminGateway
         return $this->aR->deleteAnimalCharacteristic($request);
     }
 
-    public function restoreAnimalCharacteristic($request){
+    public function restoreAnimalCharacteristic($request)
+    {
 
         $validator = Validator::make($request->all(), [
             'animalCharacteristicId' => 'required|integer',
@@ -233,6 +234,24 @@ class AdminGateway
         return $this->aR->deleteAnimalSpecies($request);
     }
 
+    public function restoreAnimalSpecies($request)
+    {
+        $validator = Validator::make($request->all(), [
+            'animalSpeciesId' => 'required|integer',
+        ],
+            [
+                'animalSpeciesId.required' => __('Ups!coś poszło nie tak.'),
+                'animalSpeciesId.integer' => __('Ups!coś poszło nie tak.'),
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
+        return $this->aR->restoreAnimalSpecies($request);
+    }
+
     public function storeAnimalFur($request)
     {
         $validator = Validator::make($request->all(), [
@@ -294,7 +313,7 @@ class AdminGateway
             $executeActionResult = $this->aR->deleteAnimalFur($request);
         } elseif ($request->action === 'restore') {
             $executeActionResult = $this->aR->restoreAnimalFur($request);
-        }else{
+        } else {
             return response()->json(['errors' => [__('Ups!coś poszło nie tak.')]]);
         }
 

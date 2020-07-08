@@ -13,7 +13,7 @@ class BackendAnimalSpecies {
 
         $('#addSpecies').click(function () {
             $('#addEditModalTitle').text('Dodaj gatunek')
-            $('.modal-header ').addClass('teal lighten-1').removeClass('yellow darken-2')
+            $('.modal-header ').addClass('teal lighten-1').removeClass('yellow darken-2 danger-color green darken-2')
             $('#speciesName').val('');
             $('label[for="speciesName"]').removeClass('active');
             $('#action').val('add');
@@ -22,13 +22,14 @@ class BackendAnimalSpecies {
         })
         $(document).on('click', '.edit-animal-species', function () {
             $('#addEditModalTitle').text('Edytuj gatunek')
-            $('.modal-header ').addClass('yellow darken-2').removeClass('teal lighten-1')
+            $('.modal-header ').addClass('yellow darken-2').removeClass('teal lighten-1 danger-color green')
             let AnimalSpeciesName = $(this).closest('tr').find('.animal-species-name').text();
             $('#speciesName').val(AnimalSpeciesName);
             $('label[for="speciesName"]').addClass('active');
             $('#action').val('edit');
             let AnimalSpeciesId = $(this).closest('tr').find('.animal-species-name').attr('data-animal-species-id');
             $('#animalSpeciesId').val(AnimalSpeciesId);
+            $('#form_result').html('');
             $('#addEditSpeciesModal').modal('show')
         })
 
@@ -49,13 +50,42 @@ class BackendAnimalSpecies {
             $('#confirmModal').modal('show');
         })
 
+        $(document).on('click', '.restore-animal-species, .delete-animal-species', function () {
+
+            if ($(this).hasClass('restore-animal-species')) {
+                $('#actionDeleteRestore').val('restore');
+                $('#animalRestoreText').removeClass('d-none').children().removeClass('d-none');
+                $('#animalDeleteText').addClass('d-none').children().addClass('d-none')
+                $('#confirmModalHeader').addClass('green darken-2').removeClass('danger-color yellow darken-2 teal lighten-1')
+            } else {
+                $('#actionDeleteRestore').val('delete');
+                $('#animalDeleteText').removeClass('d-none').children().removeClass('d-none');
+                $('#animalRestoreText').addClass('d-none').children().addClass('d-none')
+                $('#confirmModalHeader').addClass('danger-color').removeClass('green darken-2 yellow darken-2 teal lighten-1')
+            }
+
+            let animalSpeciesId = $(this).closest('tr').find('.characteristic-dictionary-name').attr('data-characteristic-dictionary-id');
+            $('#confirm-yes').attr('data-animal-species-id', animalSpeciesId);
+            let animalSpeciesName = $(this).closest('tr').find('.animal-species-name').text();
+            $('.confirm-animal-species-name').text(animalSpeciesName);
+            $('#showHideContent').show();
+            $('#confirmModal').modal('show');
+        })
+
         $('#confirm-yes').on('click', function () {
             let animalSpeciesId = $('#confirm-yes').attr('data-animal-species-id');
-            self.deleteAnimalSpecies(animalSpeciesId);
+            let action = $('#actionDeleteRestore').val();
+
+            if (action === 'restore'){
+                self.deleteRestoreAnimalSpecies(animalSpeciesId, base_url + "/restoreAnimalSpecies");
+            }else{
+                self.deleteRestoreAnimalSpecies(animalSpeciesId, base_url + "/deleteAnimalSpecies");
+            }
+
         })
     }
 
-    deleteAnimalSpecies(animalSpeciesId){
+    deleteRestoreAnimalSpecies(animalSpeciesId, url){
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -65,7 +95,7 @@ class BackendAnimalSpecies {
 
         $.ajax({
             type: 'POST',
-            url: base_url + "/deleteAnimalSpecies",
+            url: url,
             data: {
                 animalSpeciesId: animalSpeciesId,
             },
@@ -91,9 +121,10 @@ class BackendAnimalSpecies {
                 if(data.success)
                 {
                     html = '<div class="alert alert-success">' + data.success + '</div>';
+                    $('#showHideContent').slideUp();
                     $('#adminSpeciesTable').DataTable().ajax.reload();
                 }
-                $('#form_result').html(html);
+                $('#confirmFormResult').html(html);
             },
             complete: function () {
                 /*

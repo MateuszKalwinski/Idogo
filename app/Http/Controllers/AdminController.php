@@ -74,6 +74,13 @@ class AdminController extends Controller
         return $deleteAnimalSpecies;
     }
 
+    public function restoreAnimalSpecies(Request $request)
+    {
+        $restoreAnimalSpecies = $this->aG->restoreAnimalSpecies($request);
+
+        return $restoreAnimalSpecies;
+    }
+
 
     public function adminSpeciesWithGender()
     {
@@ -140,7 +147,8 @@ class AdminController extends Controller
         return $deleteAnimalCharacteristic;
     }
 
-    public function restoreAnimalCharacteristic(Request $request){
+    public function restoreAnimalCharacteristic(Request $request)
+    {
 
         $restoreAnimalCharacteristic = $this->aG->restoreAnimalCharacteristic($request);
 
