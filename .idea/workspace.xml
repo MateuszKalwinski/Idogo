@@ -21,8 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b2f87717-95e0-42d1-82e3-9be85e76505a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Hipuppy/Repositories/AdminRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Repositories/AdminRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/species/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/species/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -444,7 +443,8 @@
       <workItem from="1592061481738" duration="157000" />
       <workItem from="1594061822609" duration="6340000" />
       <workItem from="1594148920402" duration="3109000" />
-      <workItem from="1594232854691" duration="6249000" />
+      <workItem from="1594232854691" duration="6654000" />
+      <workItem from="1594322642224" duration="2701000" />
     </task>
     <task id="LOCAL-00001" summary="basic functionalities">
       <created>1586718573109</created>
@@ -554,11 +554,10 @@
       <screen x="3200" y="0" width="1920" height="1080" />
     </state>
     <state x="3263" y="0" width="1421" height="716" maximized="true" key="dock-window-1/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1594233155836" />
-    <state x="3430" y="0" width="1421" height="716" key="dock-window-2" timestamp="1594240617696">
-      <screen x="3200" y="0" width="1920" height="1080" />
+    <state x="1454" y="326" width="1421" height="716" key="dock-window-2" timestamp="1594322998657">
+      <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state x="3430" y="0" width="1421" height="716" key="dock-window-2/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1594240617696" />
-    <state x="1386" y="0" width="1543" height="614" maximized="true" key="dock-window-2/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1585609010785" />
+    <state x="1454" y="326" width="1421" height="716" key="dock-window-2/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1594322998657" />
     <state x="3478" y="273" width="1311" height="807" key="find.popup" timestamp="1590266376295">
       <screen x="3200" y="0" width="1920" height="1080" />
     </state>
