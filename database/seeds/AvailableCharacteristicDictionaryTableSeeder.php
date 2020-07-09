@@ -25,7 +25,7 @@ class AvailableCharacteristicDictionaryTableSeeder extends Seeder
         );
 
         foreach ($availableCharacteristicDictionary as $item){
-            DB::table('available_colors')->insert([
+            DB::table('available_characteristic_dictionary')->insert([
                 'species_id' => $item['species_id'],
                 'characteristic_dictionary_id' => $item['characteristic_dictionary_id'],
             ]);

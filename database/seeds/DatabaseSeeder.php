@@ -47,7 +47,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AnimalBreedDescriptionsTableSeeder::class);
         $this->call(ViolationReportsTableSeeder::class);
         $this->call(AvailableColorsTableSeeder::class);
+        $this->call(AvailableFursTableSeeder::class);
         $this->call(AvailableCharacteristicDictionaryTableSeeder::class);
-
     }
 }

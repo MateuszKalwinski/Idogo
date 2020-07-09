@@ -21,6 +21,10 @@
   <component name="ChangeListManager">
     <list default="true" id="b2f87717-95e0-42d1-82e3-9be85e76505a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_07_09_210219_create_available_characteristic_dictionary_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_07_09_210219_create_available_characteristic_dictionary_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_07_09_210900_create_available_furs_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_07_09_210900_create_available_furs_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/AvailableCharacteristicDictionaryTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/AvailableCharacteristicDictionaryTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/AvailableFursTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/AvailableFursTableSeeder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -444,7 +448,7 @@
       <workItem from="1594061822609" duration="6340000" />
       <workItem from="1594148920402" duration="3109000" />
       <workItem from="1594232854691" duration="6654000" />
-      <workItem from="1594322642224" duration="3862000" />
+      <workItem from="1594322642224" duration="5888000" />
     </task>
     <task id="LOCAL-00001" summary="basic functionalities">
       <created>1586718573109</created>
