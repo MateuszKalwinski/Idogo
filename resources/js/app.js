@@ -304,6 +304,10 @@ $(document).ready(function () {
         });
     }
 
+    $(".button-collapse").sideNav();
+    var sideNavScrollbar = document.querySelector('.custom-scrollbar');
+    var ps = new PerfectScrollbar(sideNavScrollbar);
+
 
 
     // (function () {

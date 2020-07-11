@@ -36,6 +36,10 @@
 </head>
 <body class="fixed-sn indigo-skin">
 
+<button data-activates="slide-out" class="m-2 mt-0 mb-0 btn-floating button-collapse btn-sm btn-dark border-none waves-effect waves-light position-fixed slide-nav-position" data-characteristic-dictionary-id="1">
+    <i class="fas fa-bars"></i>
+</button>
+
 <!--Double navigation-->
 <header class="position-relative h-auto">
     <!-- Sidebar navigation -->
@@ -72,6 +76,7 @@
                 <ul class="collapsible collapsible-accordion">
 
                     @if( Auth::user()->hasRole(['admin']) )
+
                         <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-user-shield"></i>Admin<i class="fas fa-angle-down rotate-icon"></i></a>
                             <div class="collapsible-body">
                                 <ul>
@@ -94,6 +99,8 @@
                                     <li><a href="{{route('adminAnimalCharacteristics')}}" class="waves-effect">Cechy zwierzaków</a>
                                     </li>
                                     <li><a href="{{route('adminAnimalColors')}}" class="waves-effect">Kolory zwierzaków</a>
+                                    </li>
+                                    <li><a href="{{route('adminAvailableColors')}}" class="waves-effect">Dostępne kolory dla ras</a>
                                     </li>
                                     <li><a href="{{route('adminAnimalFur')}}" class="waves-effect">Długość futra zwierzaków</a>
                                     </li>
@@ -157,6 +164,7 @@
                     aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
                 <ul class="navbar-nav w-100 position-relative justify-content-around">
                     <li class="nav-item">
