@@ -195,6 +195,17 @@ class AdminController extends Controller
         return $restoreAnimalColor;
     }
 
+    public function adminAvailableColors()
+    {
+        if (request()->ajax()) {
+            $datatable = $this->aR->adminAvailableColors();
+
+            return $datatable;
+        }
+
+        return view('backend.availableColors.index');
+    }
+
     public function adminViolationReports()
     {
         if (request()->ajax()) {

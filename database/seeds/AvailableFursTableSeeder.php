@@ -27,7 +27,7 @@ class AvailableFursTableSeeder extends Seeder
         foreach ($availableFurs as $availableFur){
             DB::table('available_furs')->insert([
                 'breed_id' => $availableFur['breed_id'],
-                'color_id' => $availableFur['fur_id'],
+                'fur_id' => $availableFur['fur_id'],
             ]);
         }
     }

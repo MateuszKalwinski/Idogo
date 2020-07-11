@@ -16,9 +16,7 @@ class CreateAvailableCharacteristicDictionaryTable extends Migration
         Schema::create('available_characteristic_dictionary', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('species_id')->unsigned();
-            $table->foreign('species_id')->references('id')->on('animal_species')->onDelete('cascade');
             $table->bigInteger('characteristic_dictionary_id')->unsigned();
-            $table->foreign('characteristic_dictionary_id', 'characteristic_d_id')->references('id')->on('characteristic_dictionary')->onDelete('cascade');
             $table->timestamps();
         });
     }

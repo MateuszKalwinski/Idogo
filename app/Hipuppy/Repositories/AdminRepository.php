@@ -1050,6 +1050,90 @@ class AdminRepository implements AdminRepositoryInterface
         return response()->json(['success' => 'Przywracanie zakończone pomyślnie.']);
     }
 
+    public function adminAvailableColors()
+    {
+        $datatable = datatables()->of($this->getAvailableColorsForDatatable())
+
+            ->addColumn('available_color_id', function ($data) {
+
+                $availableColorId = '<span data-available-color-id="' . $data->id . '">' . $data->id . '</span>';
+                return $availableColorId;
+            })
+            ->addColumn('species_name', function ($data) {
+
+                $speciesName = '<span class="animal-species-name" data-animal-species-id="' . $data->species_id . '">' . $data->species_name . '</span>';
+                return $speciesName;
+            })
+            ->addColumn('breed_name', function ($data) {
+
+                $breedName = '<span class="animal-breed-name" data-animal-breed-id="' . $data->breed_id . '">' . $data->breed_name . '</span>';
+                return $breedName;
+            })
+            ->addColumn('color_name', function ($data) {
+
+                $colorName = '<span class="animal-color-name" data-animal-color-id="' . $data->color_id . '">' . $data->color_name . '</span>';
+                return $colorName;
+            })
+            ->addColumn('available_color_created_at', function ($data) {
+
+                $availableColorCreatedAt = ($data->created_at) ? '<span>' . $data->created_at . '</span>' : '<span>Brak</span>';
+                return $availableColorCreatedAt;
+            })
+            ->addColumn('available_color_updated_at', function ($data) {
+                $animalColorUpdateddAt = ($data->updated_at) ? '<span>' . $data->updated_at . '</span>' : '<span>Brak</span>';
+                return $animalColorUpdateddAt;
+            })
+
+            ->addColumn('action', function ($data) {
+
+//                $actions = '<div class="d-flex">
+//                                <button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-yellow border-none edit-animal-color waves-effect waves-light" data-animal-color-id="' . $data->animal_color_id . '">
+//                                    <i class="fas fa-edit"></i>
+//                                </button>';
+//
+//                if ($data->animal_color_deleted_at) {
+//                    $actions .= '<button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-dark-green border-none restore-animal-color waves-effect waves-light" data-animal-color-id="' . $data->animal_color_id . '">
+//                                    <i class="fas fa-undo"></i>
+//                                </button>';
+//                } else {
+//                    $actions .= '<button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-danger border-none delete-animal-color waves-effect waves-light" data-animal-color-id="' . $data->animal_color_id . '">
+//                                    <i class="fas fa-trash-alt"></i>
+//                                </button>';
+//                }
+//                $actions .= '</div>';
+//
+//                return $actions;
+
+                return 'test';
+
+            })
+            ->rawColumns(['available_color_id', 'species_name', 'breed_name', 'color_name', 'available_color_created_at', 'available_color_updated_at', 'action'])
+            ->make(true);
+
+        return $datatable;
+    }
+
+    public function getAvailableColorsForDatatable()
+    {
+        $availableColorForDatatable = DB::table('available_colors AS ac')
+            ->select(
+                'ac.id as id',
+                'ab.id as breed_id',
+                'ab.name as breed_name',
+                'acol.id as color_id',
+                'acol.name as color_name',
+                'aspec.id as species_id',
+                'aspec.name as species_name',
+                'ac.created_at',
+                'ac.updated_at'
+            )
+            ->leftJoin('animal_breeds AS ab', 'ac.breed_id', '=', 'ab.id')
+            ->leftJoin('animal_colors AS acol', 'ac.color_id', '=', 'acol.id')
+            ->leftJoin('animal_species AS aspec', 'ab.species_id', '=', 'aspec.id')
+            ->get();
+        return $availableColorForDatatable;
+    }
+
     public function storeAnimalCharacteristic($request)
     {
         $isExist = CharacteristicDictionary::where('name', '=', $request->characteristicName)->exists();

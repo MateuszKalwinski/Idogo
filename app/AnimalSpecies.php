@@ -21,4 +21,9 @@ class AnimalSpecies extends Model
         return $this->hasMany('App\AnimalBreed', 'species_id');
     }
 
+    public function available_characteristic_dictionary()
+    {
+        return $this->hasMany('App\AvailableCharacteristicDictionary', 'species_id');
+    }
+
 }
