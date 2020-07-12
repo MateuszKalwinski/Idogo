@@ -70,17 +70,16 @@ class frontendAnimal {
             },
             dataType: 'json',
             beforeSend: function () {
-                $('#before_send').fadeIn();
+                $('#showPhoneNumbers').html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Wyświetl numery').addClass('disabled');
             },
             success: function (data) {
-                $('#showPhoneNumbers').addClass('d-none');
                 $('#user_phones').children().remove();
                 for (var i = 0; i < data.length; i++) {
                     $('#user_phones').append('<p class="card-text">' + data[i].phone + '</p>')
                 }
             },
             complete: function () {
-                $('#before_send').fadeOut();
+                $('#showPhoneNumbers').html('Wyświetl numery<i class=" ml-2 fas fa-lg text-white fa-phone"></i>').removeClass('disabled');
             },
             error: function (data) {
                 alert(data);

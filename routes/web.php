@@ -91,6 +91,11 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::post('/restoreAnimalColor', 'AdminController@restoreAnimalColor')->name('restoreAnimalColor');
 
     Route::get('/adminAvailableColors', 'AdminController@adminAvailableColors')->name('adminAvailableColors');
+    Route::post('/getBreeds', 'AdminController@getBreeds')->name('getBreeds');
+    Route::post('/getColors', 'AdminController@getColors')->name('getColors');
+
+
+
 
 
     Route::get('/adminAnimalFur', 'AdminController@adminAnimalFur')->name('adminAnimalFur');

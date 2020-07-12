@@ -43,6 +43,9 @@ $(document).ready(function () {
         if (module == 'backendAnimalSizes'){
             new BackendAnimalSizes(base_url);
         }
+        if (module == 'backendAvailableColors'){
+            new BackendAvailableColors(base_url);
+        }
     }
 
     $('.mdb-select').materialSelect();

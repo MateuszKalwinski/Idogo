@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
 
+    use \App\Hipuppy\Traits\AdminAjax;
+
     public function __construct(AdminGateway $adminGateway, AdminRepositoryInterface $adminRepository)
     {
         $this->middleware('CheckAdmin');
