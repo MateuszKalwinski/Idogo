@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\DB;
 
 class AdminRepository implements AdminRepositoryInterface
 {
-
     /*
      * TODO prawdopodobnie warto przy przy select i join stosować "AS" żeby oszczędzić sobie przepisywania nazw tabel
      * */
@@ -1053,7 +1052,6 @@ class AdminRepository implements AdminRepositoryInterface
     public function adminAvailableColors()
     {
         $datatable = datatables()->of($this->getAvailableColorsForDatatable())
-
             ->addColumn('available_color_id', function ($data) {
 
                 $availableColorId = '<span data-available-color-id="' . $data->id . '">' . $data->id . '</span>';
@@ -1083,7 +1081,6 @@ class AdminRepository implements AdminRepositoryInterface
                 $animalColorUpdateddAt = ($data->updated_at) ? '<span>' . $data->updated_at . '</span>' : '<span>Brak</span>';
                 return $animalColorUpdateddAt;
             })
-
             ->addColumn('action', function ($data) {
 
 //                $actions = '<div class="d-flex">
@@ -1620,5 +1617,21 @@ class AdminRepository implements AdminRepositoryInterface
         ]);
 
         return response()->json(['success' => 'Przywracanie zakończone pomyślnie.']);
+    }
+
+    /*
+     * TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS
+     * TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS
+     * TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS
+     * */
+
+    public function getBreeds($request)
+    {
+        return AnimalSpecies::with('animal_breed')->get();
+    }
+
+    public function getColors()
+    {
+        return AnimalColor::all();
     }
 }

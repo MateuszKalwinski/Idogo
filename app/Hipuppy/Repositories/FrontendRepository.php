@@ -22,7 +22,6 @@ use Illuminate\Support\Facades\Auth;
 class FrontendRepository implements FrontendRepositoryInterface
 {
 
-
     public function getAnimalForMainPage($paginate)
     {
 
