@@ -18,18 +18,23 @@
                            width="100%">
                         <thead>
                         <tr>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="ID dostępnego koloru">ID</th>
+                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="ID dostępnego koloru">
+                                ID
+                            </th>
                             <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Nazwa rasy zwierzaka">
                                 Gatunek
                             </th>
                             <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Nazwa rasy zwierzaka">
                                 Rasa
                             </th>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Nazwa dostępnego koloru">Kolor
+                            <th class="th-sm" data-toggle="tooltip" data-placement="top"
+                                title="Nazwa dostępnego koloru">Kolor
                             </th>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data dodania">Data dodania
+                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data dodania">Data
+                                dodania
                             </th>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data aktualizacja">Data aktualizacji
+                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data aktualizacja">Data
+                                aktualizacji
                             </th>
                             <th colspan="th-sm" data-toggle="tooltip" data-placement="top" title="Akcje Usuń/Edytuj">
                                 Akcje
@@ -41,12 +46,14 @@
             </div>
         </div>
 
-        <div class="modal fade" id="addEditAvailableColorModal" tabindex="-1" role="dialog" aria-labelledby="Dodaj/Edytuj kolor"
+        <div class="modal fade" id="addEditAvailableColorModal" tabindex="-1" role="dialog"
+             aria-labelledby="Dodaj/Edytuj kolor"
              aria-hidden="true">
             <div class="modal-dialog modal-lg modal-notify mt-5" role="document">
                 <div class="modal-content">
                     <div class="modal-header text-center teal lighten-1">
-                        <h4 class="modal-title white-text w-100 font-weight-bold py-2"><span id="addEditModalTitle">Dodaj kolor dla rasy</span></h4>
+                        <h4 class="modal-title white-text w-100 font-weight-bold py-2"><span id="addEditModalTitle">Dodaj kolor dla rasy</span>
+                        </h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" class="white-text">&times;</span>
                         </button>
@@ -59,29 +66,41 @@
                                 <div class="col m-2">
                                     <!-- First name -->
                                     <div class="md-form">
-                                        <select id="breeds" name="breeds" class="mdb-select md-form" multiple searchable="Wyszukaj rasę/y" data-visible-options="10" data-max-selected-options="-1">
+                                        <select id="breeds" name="breeds" class="mdb-select md-form" multiple
+                                                searchable="Wyszukaj rasę/y" data-visible-options="10"
+                                                data-max-selected-options="-1">
 
                                         </select>
-                                        <button type="button" class="btn indigo lighten-1 btn-rounded text-white waves-effect waves-light text-transform-none btn-sm btn-save">Wybierz</button>
+                                        <button type="button"
+                                                class="btn indigo lighten-1 btn-rounded text-white waves-effect waves-light text-transform-none btn-sm btn-save">
+                                            Wybierz
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="col m-2">
                                     <!-- First name -->
                                     <div class="md-form">
-                                        <select id="colors" name="colors" class="mdb-select md-form" multiple searchable="Wyszukaj kolor/y" data-visible-options="10" data-max-selected-options="-1">
+                                        <select id="colors" name="colors" class="mdb-select md-form" multiple
+                                                searchable="Wyszukaj kolor/y" data-visible-options="10"
+                                                data-max-selected-options="-1">
 
                                         </select>
-                                        <button type="button" class="btn indigo lighten-1 btn-rounded text-white waves-effect waves-light text-transform-none btn-sm btn-save">Wybierz</button>
+                                        <button type="button"
+                                                class="btn indigo lighten-1 btn-rounded text-white waves-effect waves-light text-transform-none btn-sm btn-save">
+                                            Wybierz
+                                        </button>
                                     </div>
                                 </div>
                             </div>
 
 
                             <div class="md-form mt-0 mb-0 text-left">
-                                <input type="hidden" name="action" id="action" />
-                                <input type="hidden" name="animalColorId" id="animalColorId" />
-                                <button type="submit" name="action_button" id="action_button" class="btn indigo lighten-1 btn-rounded pl-5 pr-5 text-white waves-effect waves-light text-transform-none m-0 mb-3">
-                                    Zapisz</button>
+                                <input type="hidden" name="action" id="action"/>
+                                <input type="hidden" name="animalColorId" id="animalColorId"/>
+                                <button type="submit" name="action_button" id="action_button"
+                                        class="btn indigo lighten-1 btn-rounded pl-5 pr-5 text-white waves-effect waves-light text-transform-none m-0 mb-3">
+                                    Zapisz
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -89,7 +108,8 @@
             </div>
         </div>
 
-        <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="Usuń kolor"
+        <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog"
+             aria-labelledby="Usuń dostępny kolor dla rasy"
              aria-hidden="true">
             <div class="modal-dialog modal-lg modal-notify mt-5" role="document">
                 <div class="modal-content">
@@ -100,19 +120,24 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <span id="form_result"></span>
-                        <p id="animalDeleteText" class="text-center">Czy na pewno chcesz usunąć kolor zwierzaka <span class="font-weight-bold confirm-animal-color-name d-none"></span></p>
-                        <p id="animalRestoreText" class="text-center">Czy na pewno chcesz przywrócić kolor zwierzaka <span class="font-weight-bold confirm-animal-color-name d-none"></span></p>
-                        <div class="w-50 mx-auto">
-                            <div class="d-flex justify-content-around">
-                                <button type="button" id="confirm-yes" data-animal-color-id="" class="btn success-color btn-rounded pl-5 pr-5 text-white waves-effect waves-light text-transform-none m-0 mb-3">
-                                    Tak
-                                </button>
-                                <button type="button" id="confirm-no" data-dismiss="modal" class="btn danger-color btn-rounded pl-5 pr-5 text-white waves-effect waves-light text-transform-none m-0 mb-3">
-                                    Nie
-                                </button>
+                        <span id="confirmFormResult"></span>
+                        <div id="showHideContent">
+                            <p id="animalDeleteText" class="text-center">Czy na pewno chcesz usunąć kolor <span
+                                    class="font-weight-bold confirm-animal-color-name"></span> dla <span
+                                    class="font-weight-bold confirm-animal-breed-name"></span>
+                            </p>
+                            <div class="w-50 mx-auto">
+                                <div class="d-flex justify-content-around">
+                                    <button type="button" id="confirm-yes" data-available-color-id=""
+                                            class="btn success-color btn-rounded pl-5 pr-5 text-white waves-effect waves-light text-transform-none m-0 mb-3">
+                                        Tak
+                                    </button>
+                                    <button type="button" id="confirm-no" data-dismiss="modal"
+                                            class="btn danger-color btn-rounded pl-5 pr-5 text-white waves-effect waves-light text-transform-none m-0 mb-3">
+                                        Nie
+                                    </button>
+                                </div>
                             </div>
-                            <input id="actionDeleteRestore" type="hidden" value="">
                         </div>
                     </div>
                 </div>
@@ -120,10 +145,9 @@
         </div>
 
 
-
         @push('scripts')
             <script>
-                $(document).ready(function(){
+                $(document).ready(function () {
                     $(function () {
                         $('[data-toggle="tooltip"]').tooltip()
                     })
@@ -160,9 +184,9 @@
                         ajax: {
                             url: "{{ route('adminAvailableColors') }}"
                         },
-                // ->rawColumns(['available_color_id', 'species_name', 'breed_name', 'color_name', 'available_color_created_at', 'available_color_updated_at', 'action'])
+                        // ->rawColumns(['available_color_id', 'species_name', 'breed_name', 'color_name', 'available_color_created_at', 'available_color_updated_at', 'action'])
 
-                    columns: [
+                        columns: [
                             {
                                 data: 'available_color_id',
                                 name: 'available_color_id',

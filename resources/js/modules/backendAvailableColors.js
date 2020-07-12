@@ -5,16 +5,32 @@ class BackendAvailableColors {
     }
 
     init(base_url) {
-        console.log('test');
         this.UX(base_url);
     }
 
-    UX() {
+    UX(base_url) {
         let self = this;
 
         $('#addAvailableColor').on('click', function () {
             self.getBreeds();
             self.getColors();
+        })
+
+        $(document).on('click', '.delete-available-color', function () {
+
+            let animalSpeciesName = $(this).closest('tr').find('.animal-species-name').text();
+            let animalBreedName = $(this).closest('tr').find('.animal-breed-name').text();
+            let animalColorName = $(this).closest('tr').find('.animal-color-name').text();
+            $('.confirm-animal-color-name').text(animalColorName)
+            $('.confirm-animal-breed-name').text(animalSpeciesName +' '+ animalBreedName);
+            $('#confirm-yes').attr('data-available-color-id', $(this).attr('data-available-color-id'))
+
+            $('#confirmModal').modal('show');
+        })
+
+        $('#confirm-yes').on('click', function () {
+            let availableColorId = $('#confirm-yes').attr('data-available-color-id');
+            self.deleteAvailableColor(availableColorId, base_url + "/deleteAvailableColor")
         })
     }
 
@@ -111,5 +127,55 @@ class BackendAvailableColors {
         })
     }
 
+    deleteAvailableColor(availableColorId, url){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: {
+                availableColorId: availableColorId,
+            },
+            dataType: 'json',
+            beforeSend: function () {
+
+                /*
+                * TODO DODAĆ EFEKT WCZYTYWANIA CAŁEJ TABELI
+                * */
+            },
+            success:function(data)
+            {
+                var html = '';
+                if(data.errors)
+                {
+                    html = '<div class="alert alert-danger">';
+                    for(var count = 0; count < data.errors.length; count++)
+                    {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+                }
+                if(data.success)
+                {
+                    html = '<div class="alert alert-success">' + data.success + '</div>';
+                    $('#showHideContent').slideUp();
+                    $('#adminAvailableColorsTable').DataTable().ajax.reload();
+                }
+                $('#confirmFormResult').html(html);
+            },
+            complete: function () {
+                /*
+                * TODO ZAKOŃCZYĆ EFEKT ŁADOWANIA CAŁEJ TABELI
+                * */
+            },
+            error: function (data) {
+
+            }
+        });
+    }
 }

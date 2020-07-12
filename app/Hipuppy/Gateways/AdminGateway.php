@@ -398,4 +398,22 @@ class AdminGateway
 
         return $this->aR->restoreAnimalSize($request);
     }
+
+    public function deleteAvailableColor($request)
+    {
+        $validator = Validator::make($request->all(), [
+            'availableColorId' => 'required|integer',
+        ],
+            [
+                'availableColorId.required' => 'Ups!coś poszło nie tak.',
+                'availableColorId.integer' => 'Ups!coś poszło nie tak.',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
+        return $this->aR->deleteAvailableColor($request);
+    }
 }

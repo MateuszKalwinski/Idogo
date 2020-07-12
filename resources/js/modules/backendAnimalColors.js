@@ -20,6 +20,7 @@ class BackendAnimalColors {
             $('#animalColorId').val('');
             $('#addEditColorModal').modal('show')
         })
+
         $(document).on('click', '.edit-animal-color', function () {
             $('#addEditModalTitle').text('Edytuj kolor')
             $('.modal-header ').addClass('yellow darken-2').removeClass('teal lighten-1 danger-color green')
@@ -40,7 +41,6 @@ class BackendAnimalColors {
                 self.saveAnimalColor(new FormData(this), base_url+ "/adminUpdateAnimalColor")
             }
         })
-        console.log('test');
 
         $(document).on('click', '.restore-animal-color, .delete-animal-color', function () {
 

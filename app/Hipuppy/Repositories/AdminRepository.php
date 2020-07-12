@@ -3,7 +3,7 @@
 namespace App\Hipuppy\Repositories;
 
 use App\{Hipuppy\Interfaces\AdminRepositoryInterface};
-use App\{AnimalColor, AnimalSpecies, CharacteristicDictionary, Fur, AnimalSize};
+use App\{AnimalColor, AnimalSpecies, CharacteristicDictionary, Fur, AnimalSize, AvailableColors};
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -1083,26 +1083,16 @@ class AdminRepository implements AdminRepositoryInterface
             })
             ->addColumn('action', function ($data) {
 
-//                $actions = '<div class="d-flex">
-//                                <button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-yellow border-none edit-animal-color waves-effect waves-light" data-animal-color-id="' . $data->animal_color_id . '">
-//                                    <i class="fas fa-edit"></i>
-//                                </button>';
-//
-//                if ($data->animal_color_deleted_at) {
-//                    $actions .= '<button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-dark-green border-none restore-animal-color waves-effect waves-light" data-animal-color-id="' . $data->animal_color_id . '">
-//                                    <i class="fas fa-undo"></i>
-//                                </button>';
-//                } else {
-//                    $actions .= '<button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-danger border-none delete-animal-color waves-effect waves-light" data-animal-color-id="' . $data->animal_color_id . '">
-//                                    <i class="fas fa-trash-alt"></i>
-//                                </button>';
-//                }
-//                $actions .= '</div>';
-//
-//                return $actions;
+                $actions = '<div class="d-flex">
+                                <button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-yellow border-none edit-available-color waves-effect waves-light" data-available-color-id="' . $data->id . '">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-danger border-none delete-available-color waves-effect waves-light" data-available-color-id="' . $data->id . '">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>';
 
-                return 'test';
-
+                return $actions;
             })
             ->rawColumns(['available_color_id', 'species_name', 'breed_name', 'color_name', 'available_color_created_at', 'available_color_updated_at', 'action'])
             ->make(true);
@@ -1617,6 +1607,20 @@ class AdminRepository implements AdminRepositoryInterface
         ]);
 
         return response()->json(['success' => 'Przywracanie zakończone pomyślnie.']);
+    }
+
+    public function deleteAvailableColor($request)
+    {
+        $isExist = AvailableColors::where('id', '=', $request->availableColorId)->exists();
+
+        if (!$isExist) {
+            return response()->json(['errors' => [__('Nie znaleziono takiego koloru dla podanej rasy.')]]);
+        }
+
+        $availableColor = AvailableColors::findOrFail($request->availableColorId);
+        $availableColor->delete();
+
+        return response()->json(['success' => 'Usuwanie zakończone pomyślnie.']);
     }
 
     /*
