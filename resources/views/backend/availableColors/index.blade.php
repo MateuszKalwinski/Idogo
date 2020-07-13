@@ -66,8 +66,8 @@
                                 <div class="col m-2">
                                     <!-- First name -->
                                     <div class="md-form">
-                                        <select id="breeds" name="breeds" class="mdb-select md-form" multiple
-                                                searchable="Wyszukaj rasę/y" data-visible-options="10"
+                                        <select id="breedId" name="breedId" class="mdb-select md-form"
+                                                searchable="Wyszukaj rasę" data-visible-options="10"
                                                 data-max-selected-options="-1">
 
                                         </select>
@@ -80,7 +80,7 @@
                                 <div class="col m-2">
                                     <!-- First name -->
                                     <div class="md-form">
-                                        <select id="colors" name="colors" class="mdb-select md-form" multiple
+                                        <select id="colors" name="colors[]" class="mdb-select md-form" multiple
                                                 searchable="Wyszukaj kolor/y" data-visible-options="10"
                                                 data-max-selected-options="-1">
 
@@ -92,8 +92,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
                             <div class="md-form mt-0 mb-0 text-left">
                                 <input type="hidden" name="action" id="action"/>
                                 <input type="hidden" name="animalColorId" id="animalColorId"/>
@@ -184,8 +182,6 @@
                         ajax: {
                             url: "{{ route('adminAvailableColors') }}"
                         },
-                        // ->rawColumns(['available_color_id', 'species_name', 'breed_name', 'color_name', 'available_color_created_at', 'available_color_updated_at', 'action'])
-
                         columns: [
                             {
                                 data: 'available_color_id',

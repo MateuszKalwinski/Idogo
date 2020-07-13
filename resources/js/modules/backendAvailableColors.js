@@ -16,6 +16,11 @@ class BackendAvailableColors {
             self.getColors();
         })
 
+        $('#addEditAvailableColor').on('submit', function (e) {
+            e.preventDefault();
+            self.saveAvailableColors(new FormData(this), base_url+ "/adminStoreAvailableColors")
+        })
+
         $(document).on('click', '.delete-available-color', function () {
 
             let animalSpeciesName = $(this).closest('tr').find('.animal-species-name').text();
@@ -31,6 +36,38 @@ class BackendAvailableColors {
         $('#confirm-yes').on('click', function () {
             let availableColorId = $('#confirm-yes').attr('data-available-color-id');
             self.deleteAvailableColor(availableColorId, base_url + "/deleteAvailableColor")
+        })
+    }
+
+    saveAvailableColors(formData, url){
+        $.ajax({
+            url: url,
+            method:"POST",
+            data: formData,
+            contentType: false,
+            cache:false,
+            processData: false,
+            dataType:"json",
+            success:function(data)
+            {
+                var html = '';
+                if(data.errors)
+                {
+                    html = '<div class="alert alert-danger">';
+                    for(var count = 0; count < data.errors.length; count++)
+                    {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+                }
+                if(data.success)
+                {
+                    html = '<div class="alert alert-success">' + data.success + '</div>';
+                    $('#characteristicName').val('');
+                    $('#adminAnimalCharacteristicsTable').DataTable().ajax.reload();
+                }
+                $('#formResult').html(html);
+            }
         })
     }
 
@@ -65,7 +102,7 @@ class BackendAvailableColors {
 
                 }else {
 
-                    $('#breeds').append('<option value="" disabled selected>Wybierz rasę/y</option>');
+                    $('#breedId').append('<option value="" disabled selected>Wybierz rasę</option>');
 
                     for (let i=0; i<data.length; i++){
                         let optionGroup = ''
@@ -75,7 +112,7 @@ class BackendAvailableColors {
                         }
                         optionGroup += '</optgroup>';
 
-                        $('#breeds').append(optionGroup);
+                        $('#breedId').append(optionGroup);
                     }
                 }
                 $('#form_result').html(html);
