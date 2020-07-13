@@ -416,4 +416,32 @@ class AdminGateway
 
         return $this->aR->deleteAvailableColor($request);
     }
+
+    public function storeAvailableColor($request)
+    {
+        $validator = Validator::make($request->all(), [
+            "breedId" => "required|integer",
+
+            "colors" => "required|array|min:1",
+            "colors.*" => "required|integer",
+        ],
+            [
+                'breedId.required' => 'Ups!coś poszło nie tak.',
+                'breedId.integer' => 'Ups!coś poszło nie tak.',
+
+                'colors.required' => 'Ups! Pole "rasy" jest wymagane.',
+                'colors.array' => 'Ups!coś poszło nie tak.',
+                'colors.min' => 'Wybierz przynajmniej jeden gatunek.',
+
+                'colors.*.required' => 'Ups!coś poszło nie tak.',
+                'colors.*.integer' => 'Ups!coś poszło nie tak.',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
+        return $this->aR->storeAvailableColor($request);
+    }
 }

@@ -1609,6 +1609,46 @@ class AdminRepository implements AdminRepositoryInterface
         return response()->json(['success' => 'Przywracanie zakończone pomyślnie.']);
     }
 
+    public function storeAvailableColor($request)
+    {
+        DB::beginTransaction();
+
+        try {
+
+            AvailableColors::where('breed_id', '=', $request->breedId)->delete();
+
+        } catch (ValidationException $e) {
+            DB::rollback();
+            return response()->json(['errors' => [__('Ups! coś poszło nie tak.')]]);
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+
+        try {
+            foreach ($request->colors as $color) {
+                AvailableColors::create([
+                    'breed_id' => $request->breedId,
+                    'color_id' => $color,
+                    'created_at' => Carbon::now('Europe/Warsaw'),
+                    'updated_at' => null,
+                ]);
+            }
+        } catch (ValidationException $e) {
+            DB::rollback();
+            return response()->json(['errors' => [__('Ups! coś poszło nie tak.')]]);
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+
+        DB::commit();
+        return response()->json(['success' => [__('Kolory zostały przypisane do podanej rasy')]]);
+
+    }
+
     public function deleteAvailableColor($request)
     {
         $isExist = AvailableColors::where('id', '=', $request->availableColorId)->exists();

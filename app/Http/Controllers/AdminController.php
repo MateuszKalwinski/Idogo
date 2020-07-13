@@ -208,6 +208,13 @@ class AdminController extends Controller
         return view('backend.availableColors.index');
     }
 
+    public function adminStoreAvailableColors(Request $request)
+    {
+        $storeAvailableColors = $this->aG->storeAvailableColor($request);
+
+        return $storeAvailableColors;
+    }
+
     public function deleteAvailableColor(Request $request)
     {
         $deleteAvailableColor = $this->aG->deleteAvailableColor($request);
