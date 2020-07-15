@@ -6,19 +6,39 @@ class BackendAvailableColors {
 
     init(base_url) {
         this.UX(base_url);
+        this.getBreeds();
+        this.getColors()
     }
 
     UX(base_url) {
         let self = this;
 
-        $('#addAvailableColor').on('click', function () {
-            self.getBreeds();
-            self.getColors();
+        $('#addAvailableColor').click(function () {
+            $('#addEditModalTitle').text('Dodaj kolor dla rasy');
+            $('.modal-header ').addClass('teal lighten-1').removeClass('yellow darken-2 danger-color green darken-2');
+            $('#breedId').val('');
+            $('#colors').val('');
+            $('#action').val('add');
+            $('#animalBreedId').val('');
+            $('#addEditAvailableColorModal').modal('show')
         })
+
+        $(document).on('click', '.edit-available-color', function () {
+            let animalBreedId = $(this).closest('tr').find('.animal-breed-name').attr('data-animal-breed-id');
+            self.getAvailableColorsForBreed(animalBreedId)
+            $('#addEditModalTitle').text('Edytuj cechę zwierzaka')
+            $('.modal-header ').addClass('yellow darken-2').removeClass('teal lighten-1 danger-color green')
+            $('#action').val('edit');
+        })
+
 
         $('#addEditAvailableColor').on('submit', function (e) {
             e.preventDefault();
-            self.saveAvailableColors(new FormData(this), base_url+ "/adminStoreAvailableColors")
+            if ($('#action').val() === 'add'){
+                self.saveAvailableColors(new FormData(this), base_url+ "/adminStoreAvailableColors")
+            }else{
+                console.log('edit');
+            }
         })
 
         $(document).on('click', '.delete-available-color', function () {
@@ -29,6 +49,7 @@ class BackendAvailableColors {
             $('.confirm-animal-color-name').text(animalColorName)
             $('.confirm-animal-breed-name').text(animalSpeciesName +' '+ animalBreedName);
             $('#confirm-yes').attr('data-available-color-id', $(this).attr('data-available-color-id'))
+            $('#confirmModalHeader').addClass('danger-color').removeClass('green darken-2 yellow darken-2 teal lighten-1')
 
             $('#confirmModal').modal('show');
         })
@@ -38,6 +59,51 @@ class BackendAvailableColors {
             self.deleteAvailableColor(availableColorId, base_url + "/deleteAvailableColor")
         })
     }
+
+    getAvailableColorsForBreed(animalBreedId){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'POST',
+            url: base_url + "/getAvailableColorsForBreed",
+            data: {
+                animalBreedId: animalBreedId,
+            },
+            dataType: 'json',
+            beforeSend: function () {
+                $(".edit-available-color[data-slide='" + animalBreedId +"']").html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Wyświetl numery').addClass('disabled');
+
+            },
+            success: function (data) {
+
+                if(data.errors)
+                {
+
+                }
+                if(data.success)
+                {
+                    for (let i=0; i<data.success.length; i++){
+                        $('#colors option[value=' + data.success[i].color_id + ']').attr('selected', true);
+                    }
+                    $('#colors').materialSelect();
+                    $('#breedId').val(animalBreedId)
+
+
+                }
+            },
+            complete: function () {
+                $(".edit-available-color[data-slide='" + animalBreedId +"']").html('<i class="fas fa-edit"></i>').removeClass('disabled');
+                $('#addEditAvailableColorModal').modal('show')
+            },
+            error: function (data) {
+
+            }
+        });
+    }
+
 
     saveAvailableColors(formData, url){
         $.ajax({
@@ -86,7 +152,7 @@ class BackendAvailableColors {
             cache:true,
             dataType:"json",
             beforeSend: function () {
-                $('#addAvailableColor').html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Dodaj kolor do rasy').addClass('disabled');
+
             },
             success:function(data)
             {
@@ -118,8 +184,6 @@ class BackendAvailableColors {
                 $('#form_result').html(html);
             },
             complete: function () {
-                $('#addEditAvailableColorModal').modal('show');
-                $('#addAvailableColor').html('Dodaj Kolor do rasy<i class="ml-2 fas fa-lg text-white fa-plus"></i>').removeClass('disabled');
 
             },
         })

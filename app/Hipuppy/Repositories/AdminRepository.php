@@ -1663,6 +1663,18 @@ class AdminRepository implements AdminRepositoryInterface
         return response()->json(['success' => 'Usuwanie zakończone pomyślnie.']);
     }
 
+    public function getAvailableColorsForBreed($request){
+
+        $availableColorsForBreed = AvailableColors::select('color_id')->where('breed_id', '=', $request->animalBreedId)->get();
+
+        if ($availableColorsForBreed->isEmpty()){
+            return response()->json(['errors' => [__('Nie znaleziono takiego koloru dla podanej rasy.')]]);
+
+        }
+
+        return response()->json(['success' => $availableColorsForBreed]);
+    }
+
     /*
      * TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS
      * TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS

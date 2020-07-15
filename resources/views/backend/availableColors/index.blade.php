@@ -94,7 +94,7 @@
                             </div>
                             <div class="md-form mt-0 mb-0 text-left">
                                 <input type="hidden" name="action" id="action"/>
-                                <input type="hidden" name="animalColorId" id="animalColorId"/>
+                                <input type="hidden" name="animalBreedId" id="animalColorId"/>
                                 <button type="submit" name="action_button" id="action_button"
                                         class="btn indigo lighten-1 btn-rounded pl-5 pr-5 text-white waves-effect waves-light text-transform-none m-0 mb-3">
                                     Zapisz

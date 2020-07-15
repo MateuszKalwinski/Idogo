@@ -444,4 +444,22 @@ class AdminGateway
 
         return $this->aR->storeAvailableColor($request);
     }
+
+    public function getAvailableColorsForBreed($request){
+
+        $validator = Validator::make($request->all(), [
+            'animalBreedId' => 'required|integer',
+        ],
+            [
+                'animalBreedId.required' => 'Ups!coś poszło nie tak.',
+                'animalBreedId.integer' => 'Ups!coś poszło nie tak.',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
+        return $this->aR->getAvailableColorsForBreed($request);
+    }
 }

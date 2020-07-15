@@ -215,6 +215,13 @@ class AdminController extends Controller
         return $storeAvailableColors;
     }
 
+    public function getAvailableColorsForBreed(Request $request)
+    {
+        $getAvailableColorsForBreed = $this->aG->getAvailableColorsForBreed($request);
+
+        return $getAvailableColorsForBreed;
+    }
+
     public function deleteAvailableColor(Request $request)
     {
         $deleteAvailableColor = $this->aG->deleteAvailableColor($request);

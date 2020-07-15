@@ -48,7 +48,13 @@ $(document).ready(function () {
         }
     }
 
-    $('.mdb-select').materialSelect();
+    $('.mdb-select').materialSelect({
+        labels: {
+            selectAll: 'Wybierz wszystkie',
+            optionsSelected: 'wybranych opcji',
+            noSearchResults: 'Brak wyników'
+        }
+    });
 
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
