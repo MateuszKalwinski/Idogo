@@ -1611,23 +1611,20 @@ class AdminRepository implements AdminRepositoryInterface
 
     public function storeAvailableColor($request)
     {
+        $availableColorForBreed = AvailableColors::select('color_id')->where('breed_id', '=', $request->breedId)->get();
+
+        $colors = collect($request->colors);
+
+        if (!$availableColorForBreed->isEmpty()){
+            $pluckedAvailableColorForBreed = $availableColorForBreed->pluck('color_id');
+            $colors = $colors->diff($pluckedAvailableColorForBreed);
+            dd('id');
+        }
+
         DB::beginTransaction();
 
         try {
-
-            AvailableColors::where('breed_id', '=', $request->breedId)->delete();
-
-        } catch (ValidationException $e) {
-            DB::rollback();
-            return response()->json(['errors' => [__('Ups! coś poszło nie tak.')]]);
-
-        } catch (\Exception $e) {
-            DB::rollback();
-            throw $e;
-        }
-
-        try {
-            foreach ($request->colors as $color) {
+            foreach ($colors as $color) {
                 AvailableColors::create([
                     'breed_id' => $request->breedId,
                     'color_id' => $color,
@@ -1635,18 +1632,18 @@ class AdminRepository implements AdminRepositoryInterface
                     'updated_at' => null,
                 ]);
             }
-        } catch (ValidationException $e) {
+        } catch(ValidationException $e)
+        {
             DB::rollback();
-            return response()->json(['errors' => [__('Ups! coś poszło nie tak.')]]);
-
-        } catch (\Exception $e) {
+            return response()->json(['errors' => [__('Ups! Coś poszło nie tak.')]]);
+        } catch(\Exception $e)
+        {
             DB::rollback();
             throw $e;
         }
 
         DB::commit();
         return response()->json(['success' => [__('Kolory zostały przypisane do podanej rasy')]]);
-
     }
 
     public function deleteAvailableColor($request)
