@@ -1618,7 +1618,6 @@ class AdminRepository implements AdminRepositoryInterface
         if (!$availableColorForBreed->isEmpty()){
             $pluckedAvailableColorForBreed = $availableColorForBreed->pluck('color_id');
             $colors = $colors->diff($pluckedAvailableColorForBreed);
-            dd('id');
         }
 
         DB::beginTransaction();
@@ -1644,6 +1643,10 @@ class AdminRepository implements AdminRepositoryInterface
 
         DB::commit();
         return response()->json(['success' => [__('Kolory zostały przypisane do podanej rasy')]]);
+    }
+
+    public function updateAvailableColor($request){
+//        TODO  there should be a transacion with delete all record for breed_id and then save again all color for breed_id. Probably the easiest way
     }
 
     public function deleteAvailableColor($request)

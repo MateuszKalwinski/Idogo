@@ -210,9 +210,16 @@ class AdminController extends Controller
 
     public function adminStoreAvailableColors(Request $request)
     {
-        $storeAvailableColors = $this->aG->storeAvailableColor($request);
+        $storeAvailableColors = $this->aG->storeUpdateAvailableColor($request);
 
         return $storeAvailableColors;
+    }
+
+    public function adminUpdateAvailAbleColors(Request $request)
+    {
+        $updateAvailableColors = $this->aG->storeUpdateAvailableColor($request);
+
+        return $updateAvailableColors;
     }
 
     public function getAvailableColorsForBreed(Request $request)
