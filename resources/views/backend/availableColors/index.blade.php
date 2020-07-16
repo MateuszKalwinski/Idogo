@@ -59,7 +59,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <span id="form_result"></span>
+                        <span id="formResult"></span>
                         <form id="addEditAvailableColor" style="color: #757575;" method="post">
                             @csrf
                             <div class="form-row">

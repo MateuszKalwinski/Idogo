@@ -21,7 +21,12 @@
   <component name="ChangeListManager">
     <list default="true" id="b2f87717-95e0-42d1-82e3-9be85e76505a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Hipuppy/Gateways/AdminGateway.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Gateways/AdminGateway.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Hipuppy/Repositories/AdminRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Repositories/AdminRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/modules/backendAvailableColors.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/modules/backendAvailableColors.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/availableColors/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/availableColors/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,8 +194,8 @@
     <option name="myCommands">
       <command value="npm run watch-poll" />
       <command value="php artisan migrate:fresh  --seed" />
-      <command value="npm run production" />
       <command value="npm run watch" />
+      <command value="npm run production" />
     </option>
   </component>
   <component name="RunManager" selected="PHPUnit.phpunit.xml">
@@ -230,8 +235,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.watch" />
         <item itemvalue="npm.production" />
+        <item itemvalue="npm.watch" />
         <item itemvalue="npm.watch-poll" />
       </list>
     </recent_temporary>
@@ -449,6 +454,7 @@
       <workItem from="1594571931984" duration="12418000" />
       <workItem from="1594669911593" duration="6202000" />
       <workItem from="1594839579818" duration="8567000" />
+      <workItem from="1594936285126" duration="1904000" />
     </task>
     <task id="LOCAL-00001" summary="basic functionalities">
       <created>1586718573109</created>
@@ -510,25 +516,25 @@
     </state>
     <state x="2023" y="297" width="424" height="484" key="FileChooserDialogImpl/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1594572158191" />
     <state x="3943" y="297" width="424" height="484" key="FileChooserDialogImpl/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1587922408556" />
-    <state width="1874" height="127" key="GridCell.Tab.0.bottom" timestamp="1594845340725">
+    <state width="1874" height="336" key="GridCell.Tab.0.bottom" timestamp="1594938087803">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="127" key="GridCell.Tab.0.bottom/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1594845340725" />
+    <state width="1874" height="336" key="GridCell.Tab.0.bottom/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1594938087803" />
     <state width="1874" height="127" key="GridCell.Tab.0.bottom/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1594479644780" />
-    <state width="1874" height="127" key="GridCell.Tab.0.center" timestamp="1594845340725">
+    <state width="1874" height="336" key="GridCell.Tab.0.center" timestamp="1594938087803">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="127" key="GridCell.Tab.0.center/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1594845340725" />
+    <state width="1874" height="336" key="GridCell.Tab.0.center/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1594938087803" />
     <state width="1874" height="127" key="GridCell.Tab.0.center/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1594479644780" />
-    <state width="1874" height="127" key="GridCell.Tab.0.left" timestamp="1594845340725">
+    <state width="1874" height="336" key="GridCell.Tab.0.left" timestamp="1594938087803">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="127" key="GridCell.Tab.0.left/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1594845340725" />
+    <state width="1874" height="336" key="GridCell.Tab.0.left/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1594938087803" />
     <state width="1874" height="127" key="GridCell.Tab.0.left/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1594479644780" />
-    <state width="1874" height="127" key="GridCell.Tab.0.right" timestamp="1594845340725">
+    <state width="1874" height="336" key="GridCell.Tab.0.right" timestamp="1594938087803">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="127" key="GridCell.Tab.0.right/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1594845340725" />
+    <state width="1874" height="336" key="GridCell.Tab.0.right/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1594938087803" />
     <state width="1874" height="127" key="GridCell.Tab.0.right/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1594479644780" />
     <state width="263" height="500" key="HiddenNamespacesPopup" timestamp="1589646396520">
       <screen x="1280" y="0" width="1920" height="1080" />
@@ -572,10 +578,10 @@
     </state>
     <state x="1505" y="113" width="1311" height="807" key="find.popup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1594589460107" />
     <state x="3478" y="273" width="1311" height="807" key="find.popup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1594489078993" />
-    <state x="1904" y="246" width="672" height="677" key="run.anything.popup" timestamp="1594844706361">
+    <state x="1904" y="246" width="672" height="677" key="run.anything.popup" timestamp="1594938075970">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state x="1904" y="246" width="672" height="677" key="run.anything.popup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1594844706361" />
+    <state x="1904" y="246" width="672" height="677" key="run.anything.popup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1594938075970" />
     <state x="3824" y="246" width="672" height="677" key="run.anything.popup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1594489268751" />
     <state x="1903" y="237" width="672" height="678" key="search.everywhere.popup" timestamp="1594572952122">
       <screen x="1280" y="0" width="1920" height="1080" />

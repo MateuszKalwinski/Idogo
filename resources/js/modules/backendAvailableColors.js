@@ -37,7 +37,7 @@ class BackendAvailableColors {
             if ($('#action').val() === 'add'){
                 self.saveAvailableColors(new FormData(this), base_url+ "/adminStoreAvailableColors")
             }else{
-                console.log('edit');
+                self.saveAvailableColors(new FormData(this), base_url+ '/adminUpdateAvailAbleColors')
             }
         })
 
@@ -74,7 +74,7 @@ class BackendAvailableColors {
             },
             dataType: 'json',
             beforeSend: function () {
-                $(".edit-available-color[data-slide='" + animalBreedId +"']").html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Wyświetl numery').addClass('disabled');
+                $(".edit-available-color[data-available-color-id='" + animalBreedId +"']").html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Wyświetl numery').addClass('disabled');
 
             },
             success: function (data) {
@@ -95,7 +95,7 @@ class BackendAvailableColors {
                 }
             },
             complete: function () {
-                $(".edit-available-color[data-slide='" + animalBreedId +"']").html('<i class="fas fa-edit"></i>').removeClass('disabled');
+                $(".edit-available-color[data-available-color-id='" + animalBreedId +"']").html('<i class="fas fa-edit"></i>').removeClass('disabled');
                 $('#addEditAvailableColorModal').modal('show')
             },
             error: function (data) {
@@ -103,7 +103,6 @@ class BackendAvailableColors {
             }
         });
     }
-
 
     saveAvailableColors(formData, url){
         $.ajax({
@@ -129,8 +128,7 @@ class BackendAvailableColors {
                 if(data.success)
                 {
                     html = '<div class="alert alert-success">' + data.success + '</div>';
-                    $('#characteristicName').val('');
-                    $('#adminAnimalCharacteristicsTable').DataTable().ajax.reload();
+                    $('#adminAvailableColorsTable').DataTable().ajax.reload();
                 }
                 $('#formResult').html(html);
             }
