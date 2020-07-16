@@ -417,10 +417,11 @@ class AdminGateway
         return $this->aR->deleteAvailableColor($request);
     }
 
-    public function storeAvailableColor($request)
+    public function storeUpdateAvailableColor($request)
     {
         $validator = Validator::make($request->all(), [
             "breedId" => "required|integer",
+            "action" => "required|string",
 
             "colors" => "required|array|min:1",
             "colors.*" => "required|integer",
@@ -428,6 +429,9 @@ class AdminGateway
             [
                 'breedId.required' => 'Ups!coś poszło nie tak.',
                 'breedId.integer' => 'Ups!coś poszło nie tak.',
+
+                'action.required' => 'Ups!coś poszło nie tak.',
+                'action.string' => 'Ups!coś poszło nie tak.',
 
                 'colors.required' => 'Ups! Pole "rasy" jest wymagane.',
                 'colors.array' => 'Ups!coś poszło nie tak.',
@@ -442,10 +446,17 @@ class AdminGateway
             return response()->json(['errors' => $validator->errors()->all()]);
         }
 
-        return $this->aR->storeAvailableColor($request);
+        if ($request->action === 'add') {
+            return $this->aR->storeAvailableColor($request);
+        } elseif ($request->action === 'edit') {
+            return $this->aR->updateAvailableColor($request);
+        } else {
+            return response()->json(['errors' => 'Nieprawidłowa operacja.']);
+        }
     }
 
-    public function getAvailableColorsForBreed($request){
+    public function getAvailableColorsForBreed($request)
+    {
 
         $validator = Validator::make($request->all(), [
             'animalBreedId' => 'required|integer',
