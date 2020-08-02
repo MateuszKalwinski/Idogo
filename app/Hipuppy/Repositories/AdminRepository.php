@@ -1646,7 +1646,35 @@ class AdminRepository implements AdminRepositoryInterface
     }
 
     public function updateAvailableColor($request){
-//        TODO  there should be a transacion with delete all record for breed_id and then save again all color for breed_id. Probably the easiest way
+
+
+        DB::beginTransaction();
+
+        try {
+            AvailableColors::where('breed_id', '=', $request->breedId)->delete();
+
+            foreach ($request->colors as $color) {
+                AvailableColors::create([
+                    'breed_id' => $request->breedId,
+                    'color_id' => $color,
+                    'created_at' => Carbon::now('Europe/Warsaw'),
+                    'updated_at' => null,
+                ]);
+            }
+        } catch(ValidationException $e)
+        {
+            DB::rollback();
+            return response()->json(['errors' => [__('Ups! Coś poszło nie tak.')]]);
+        } catch(\Exception $e)
+        {
+            DB::rollback();
+            throw $e;
+        }
+
+        DB::commit();
+        return response()->json(['success' => [__('Kolory zostały przypisane do podanej rasy')]]);
+
+
     }
 
     public function deleteAvailableColor($request)

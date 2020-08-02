@@ -457,7 +457,6 @@ class AdminGateway
 
     public function getAvailableColorsForBreed($request)
     {
-
         $validator = Validator::make($request->all(), [
             'animalBreedId' => 'required|integer',
         ],

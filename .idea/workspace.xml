@@ -20,13 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b2f87717-95e0-42d1-82e3-9be85e76505a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/commandlinetools/Laravel_02_08_2020__22_01.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/commandlinetools/schemas/frameworkDescriptionVersion1.1.4.xsd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Hipuppy/Gateways/AdminGateway.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Gateways/AdminGateway.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Hipuppy/Repositories/AdminRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Repositories/AdminRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/modules/backendAvailableColors.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/modules/backendAvailableColors.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/availableColors/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/availableColors/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,7 +163,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Artisan" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -241,6 +238,7 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -455,6 +453,7 @@
       <workItem from="1594669911593" duration="6202000" />
       <workItem from="1594839579818" duration="8567000" />
       <workItem from="1594936285126" duration="1904000" />
+      <workItem from="1596398480450" duration="2690000" />
     </task>
     <task id="LOCAL-00001" summary="basic functionalities">
       <created>1586718573109</created>
@@ -467,7 +466,7 @@
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
