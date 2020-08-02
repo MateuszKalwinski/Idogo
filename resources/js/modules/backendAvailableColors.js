@@ -50,6 +50,7 @@ class BackendAvailableColors {
             $('.confirm-animal-breed-name').text(animalSpeciesName +' '+ animalBreedName);
             $('#confirm-yes').attr('data-available-color-id', $(this).attr('data-available-color-id'))
             $('#confirmModalHeader').addClass('danger-color').removeClass('green darken-2 yellow darken-2 teal lighten-1')
+            $('#showHideContent').slideDown();
 
             $('#confirmModal').modal('show');
         })

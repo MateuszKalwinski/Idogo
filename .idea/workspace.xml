@@ -20,9 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b2f87717-95e0-42d1-82e3-9be85e76505a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/commandlinetools/Laravel_02_08_2020__22_01.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/commandlinetools/schemas/frameworkDescriptionVersion1.1.4.xsd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Hipuppy/Gateways/AdminGateway.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Gateways/AdminGateway.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Hipuppy/Repositories/AdminRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Repositories/AdminRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -453,7 +451,7 @@
       <workItem from="1594669911593" duration="6202000" />
       <workItem from="1594839579818" duration="8567000" />
       <workItem from="1594936285126" duration="1904000" />
-      <workItem from="1596398480450" duration="2690000" />
+      <workItem from="1596398480450" duration="4404000" />
     </task>
     <task id="LOCAL-00001" summary="basic functionalities">
       <created>1586718573109</created>
@@ -506,10 +504,6 @@
       <screen x="3200" y="0" width="1920" height="1080" />
     </state>
     <state x="3896" y="380" width="518" height="317" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1590241353563" />
-    <state x="3673" y="115" width="860" height="847" key="CommitChangelistDialog2" timestamp="1586718571960">
-      <screen x="3200" y="0" width="1920" height="1080" />
-    </state>
-    <state x="3673" y="115" width="860" height="847" key="CommitChangelistDialog2/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1586718571960" />
     <state x="2023" y="297" width="424" height="484" key="FileChooserDialogImpl" timestamp="1594572158191">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
@@ -543,22 +537,10 @@
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
     <state x="1729" y="174" key="SettingsEditor/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1587816190113" />
-    <state x="3755" y="275" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1586718757981">
-      <screen x="3200" y="0" width="1920" height="1080" />
-    </state>
-    <state x="3755" y="275" width="800" height="528" key="Vcs.Push.Dialog.v2/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1586718757981" />
-    <state x="3917" y="296" width="476" height="486" key="com.intellij.database.run.ParametersPanel.Standalone" timestamp="1587238983634">
-      <screen x="3200" y="0" width="1920" height="1080" />
-    </state>
-    <state x="3917" y="296" width="476" height="486" key="com.intellij.database.run.ParametersPanel.Standalone/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1587238983634" />
     <state x="3983" y="245" width="344" height="588" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1588193336426">
       <screen x="3200" y="0" width="1920" height="1080" />
     </state>
     <state x="3983" y="245" width="344" height="588" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1588193336426" />
-    <state x="1724" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1587685508014">
-      <screen x="1280" y="0" width="1920" height="1080" />
-    </state>
-    <state x="1724" y="345" key="com.intellij.ide.util.TipDialog/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1587685508014" />
     <state x="1850" y="152" width="770" height="773" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1588626675991">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
@@ -577,10 +559,10 @@
     </state>
     <state x="1505" y="113" width="1311" height="807" key="find.popup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1594589460107" />
     <state x="3478" y="273" width="1311" height="807" key="find.popup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1594489078993" />
-    <state x="1904" y="246" width="672" height="677" key="run.anything.popup" timestamp="1594938075970">
+    <state x="1904" y="246" width="672" height="677" key="run.anything.popup" timestamp="1596401465320">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state x="1904" y="246" width="672" height="677" key="run.anything.popup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1594938075970" />
+    <state x="1904" y="246" width="672" height="677" key="run.anything.popup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1596401465320" />
     <state x="3824" y="246" width="672" height="677" key="run.anything.popup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1594489268751" />
     <state x="1903" y="237" width="672" height="678" key="search.everywhere.popup" timestamp="1594572952122">
       <screen x="1280" y="0" width="1920" height="1080" />

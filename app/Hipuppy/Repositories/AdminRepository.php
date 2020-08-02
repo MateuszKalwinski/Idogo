@@ -1646,8 +1646,6 @@ class AdminRepository implements AdminRepositoryInterface
     }
 
     public function updateAvailableColor($request){
-
-
         DB::beginTransaction();
 
         try {
