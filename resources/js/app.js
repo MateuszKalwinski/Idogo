@@ -46,6 +46,9 @@ $(document).ready(function () {
         if (module == 'backendAvailableColors'){
             new BackendAvailableColors(base_url);
         }
+        if (module == 'backendAvailableFurs'){
+            new BackendAvailableFurs(base_url);
+        }
     }
 
     $('.mdb-select').materialSelect({

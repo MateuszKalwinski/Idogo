@@ -36,4 +36,17 @@ trait AdminAjax
 
         return response()->json($colorCollection);
     }
+
+    public function getFurs()
+    {
+        $furs = $this->aR->getFurs();
+
+        $furCollection = $furs->map(function ($furs) {
+            return collect($furs->toArray())
+                ->only(['id', 'name'])
+                ->all();
+        });
+
+        return response()->json($furCollection);
+    }
 }

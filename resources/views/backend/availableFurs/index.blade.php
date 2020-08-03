@@ -6,13 +6,13 @@
         <div id="contact" class="container-fluid mb-4 min-vh-100">
             <div class="row">
                 <div class="col-lg-12 col-md-12 mb-4">
-                    <h2 class="color-mid-grey">Kolory zwierzaków dla ras</h2>
+                    <h2 class="color-mid-grey">Futra zwierzaków dla ras</h2>
                 </div>
                 <div class="col-lg-12 col-md-12">
                     <div class="d-flex justify-content-end">
                         <button id="addAvailableFur"
                                 class="btn teal lighten-1 btn-rounded pl-5 pr-5 text-white waves-effect waves-light text-transform-none m-0 mb-3">
-                            Dodaj Kolor do rasy <i class="ml-2 fas fa-lg text-white fa-plus"></i></button>
+                            Dodaj Futro do rasy <i class="ml-2 fas fa-lg text-white fa-plus"></i></button>
                     </div>
                     <table id="adminAvailableFursTable" class="table table-striped table-bordered" cellspacing="0"
                            width="100%">

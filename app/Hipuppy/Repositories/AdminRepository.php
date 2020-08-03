@@ -1615,7 +1615,7 @@ class AdminRepository implements AdminRepositoryInterface
 
         $colors = collect($request->colors);
 
-        if (!$availableColorForBreed->isEmpty()){
+        if (!$availableColorForBreed->isEmpty()) {
             $pluckedAvailableColorForBreed = $availableColorForBreed->pluck('color_id');
             $colors = $colors->diff($pluckedAvailableColorForBreed);
         }
@@ -1631,12 +1631,10 @@ class AdminRepository implements AdminRepositoryInterface
                     'updated_at' => null,
                 ]);
             }
-        } catch(ValidationException $e)
-        {
+        } catch (ValidationException $e) {
             DB::rollback();
             return response()->json(['errors' => [__('Ups! Coś poszło nie tak.')]]);
-        } catch(\Exception $e)
-        {
+        } catch (\Exception $e) {
             DB::rollback();
             throw $e;
         }
@@ -1645,7 +1643,8 @@ class AdminRepository implements AdminRepositoryInterface
         return response()->json(['success' => [__('Kolory zostały przypisane do podanej rasy')]]);
     }
 
-    public function updateAvailableColor($request){
+    public function updateAvailableColor($request)
+    {
         DB::beginTransaction();
 
         try {
@@ -1659,12 +1658,10 @@ class AdminRepository implements AdminRepositoryInterface
                     'updated_at' => null,
                 ]);
             }
-        } catch(ValidationException $e)
-        {
+        } catch (ValidationException $e) {
             DB::rollback();
             return response()->json(['errors' => [__('Ups! Coś poszło nie tak.')]]);
-        } catch(\Exception $e)
-        {
+        } catch (\Exception $e) {
             DB::rollback();
             throw $e;
         }
@@ -1689,11 +1686,12 @@ class AdminRepository implements AdminRepositoryInterface
         return response()->json(['success' => 'Usuwanie zakończone pomyślnie.']);
     }
 
-    public function getAvailableColorsForBreed($request){
+    public function getAvailableColorsForBreed($request)
+    {
 
         $availableColorsForBreed = AvailableColors::select('color_id')->where('breed_id', '=', $request->animalBreedId)->get();
 
-        if ($availableColorsForBreed->isEmpty()){
+        if ($availableColorsForBreed->isEmpty()) {
             return response()->json(['errors' => [__('Nie znaleziono takiego koloru dla podanej rasy.')]]);
 
         }
@@ -1789,4 +1787,11 @@ class AdminRepository implements AdminRepositoryInterface
     {
         return AnimalColor::all();
     }
+
+    public function getFurs()
+    {
+        return Fur::all();
+    }
+
+
 }

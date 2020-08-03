@@ -90,17 +90,21 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::post('/deleteAnimalColor', 'AdminController@deleteAnimalColor')->name('deleteAnimalColor');
     Route::post('/restoreAnimalColor', 'AdminController@restoreAnimalColor')->name('restoreAnimalColor');
 
-    Route::get('/adminAvailableColors', 'AdminController@adminAvailableColors')->name('adminAvailableColors');
+    /*
+     * SIMPLE LIST DATA ROUTES - TRAITS ACTIONS
+     * */
     Route::post('/getBreeds', 'AdminController@getBreeds')->name('getBreeds');
     Route::post('/getColors', 'AdminController@getColors')->name('getColors');
+    Route::post('/getFurs', 'AdminController@getFurs')->name('getFurs');
+
+
+    Route::get('/adminAvailableColors', 'AdminController@adminAvailableColors')->name('adminAvailableColors');
     Route::post('/getAvailableColorsForBreed', 'AdminController@getAvailableColorsForBreed')->name('getAvailableColorsForBreed');
     Route::post('/adminStoreAvailableColors', 'AdminController@adminStoreAvailableColors')->name('adminStoreAvailableColors');
     Route::post('/adminUpdateAvailAbleColors', 'AdminController@adminUpdateAvailAbleColors')->name('adminUpdateAvailAbleColors');
     Route::post('/deleteAvailableColor', 'AdminController@deleteAvailableColor')->name('deleteAvailableColor');
 
     Route::get('/adminAvailableFurs', 'AdminController@adminAvailableFurs')->name('adminAvailableFurs');
-
-
 
 
     Route::get('/adminAnimalFur', 'AdminController@adminAnimalFur')->name('adminAnimalFur');
