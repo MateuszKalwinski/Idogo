@@ -20,8 +20,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b2f87717-95e0-42d1-82e3-9be85e76505a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/backend/availableFurs/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Hipuppy/Repositories/AdminRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Repositories/AdminRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/availableColors/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/availableColors/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/backend.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/backend.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,7 +166,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/backend/availableFurs" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -170,19 +175,19 @@
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/resources/views/backend/animalSize" />
-      <recent name="$PROJECT_DIR$/resources/views/backend/animalFur" />
-      <recent name="$PROJECT_DIR$/resources/views/backend/animalColors" />
-      <recent name="$PROJECT_DIR$/resources/views/backend/violationReports" />
-      <recent name="$PROJECT_DIR$/resources/views/backend/animalCharacteristics" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public/components" />
       <recent name="$PROJECT_DIR$/public/images" />
       <recent name="$PROJECT_DIR$/resources/sass" />
       <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$/resources/js" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/backend/availableFurs" />
+      <recent name="$PROJECT_DIR$/resources/views/backend/animalSize" />
+      <recent name="$PROJECT_DIR$/resources/views/backend/animalFur" />
+      <recent name="$PROJECT_DIR$/resources/views/backend/animalColors" />
+      <recent name="$PROJECT_DIR$/resources/views/backend/violationReports" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -451,7 +456,8 @@
       <workItem from="1594669911593" duration="6202000" />
       <workItem from="1594839579818" duration="8567000" />
       <workItem from="1594936285126" duration="1904000" />
-      <workItem from="1596398480450" duration="4404000" />
+      <workItem from="1596398480450" duration="4757000" />
+      <workItem from="1596480429613" duration="3124000" />
     </task>
     <task id="LOCAL-00001" summary="basic functionalities">
       <created>1586718573109</created>
@@ -509,25 +515,25 @@
     </state>
     <state x="2023" y="297" width="424" height="484" key="FileChooserDialogImpl/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1594572158191" />
     <state x="3943" y="297" width="424" height="484" key="FileChooserDialogImpl/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1587922408556" />
-    <state width="1874" height="336" key="GridCell.Tab.0.bottom" timestamp="1594938087803">
+    <state width="1874" height="287" key="GridCell.Tab.0.bottom" timestamp="1596404021606">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="336" key="GridCell.Tab.0.bottom/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1594938087803" />
+    <state width="1874" height="287" key="GridCell.Tab.0.bottom/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1596404021606" />
     <state width="1874" height="127" key="GridCell.Tab.0.bottom/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1594479644780" />
-    <state width="1874" height="336" key="GridCell.Tab.0.center" timestamp="1594938087803">
+    <state width="1874" height="287" key="GridCell.Tab.0.center" timestamp="1596404021605">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="336" key="GridCell.Tab.0.center/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1594938087803" />
+    <state width="1874" height="287" key="GridCell.Tab.0.center/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1596404021605" />
     <state width="1874" height="127" key="GridCell.Tab.0.center/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1594479644780" />
-    <state width="1874" height="336" key="GridCell.Tab.0.left" timestamp="1594938087803">
+    <state width="1874" height="287" key="GridCell.Tab.0.left" timestamp="1596404021605">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="336" key="GridCell.Tab.0.left/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1594938087803" />
+    <state width="1874" height="287" key="GridCell.Tab.0.left/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1596404021605" />
     <state width="1874" height="127" key="GridCell.Tab.0.left/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1594479644780" />
-    <state width="1874" height="336" key="GridCell.Tab.0.right" timestamp="1594938087803">
+    <state width="1874" height="287" key="GridCell.Tab.0.right" timestamp="1596404021606">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="336" key="GridCell.Tab.0.right/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1594938087803" />
+    <state width="1874" height="287" key="GridCell.Tab.0.right/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1596404021606" />
     <state width="1874" height="127" key="GridCell.Tab.0.right/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1594479644780" />
     <state width="263" height="500" key="HiddenNamespacesPopup" timestamp="1589646396520">
       <screen x="1280" y="0" width="1920" height="1080" />
@@ -559,10 +565,10 @@
     </state>
     <state x="1505" y="113" width="1311" height="807" key="find.popup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1594589460107" />
     <state x="3478" y="273" width="1311" height="807" key="find.popup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1594489078993" />
-    <state x="1904" y="246" width="672" height="677" key="run.anything.popup" timestamp="1596401465320">
+    <state x="1904" y="246" width="672" height="677" key="run.anything.popup" timestamp="1596403980611">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state x="1904" y="246" width="672" height="677" key="run.anything.popup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1596401465320" />
+    <state x="1904" y="246" width="672" height="677" key="run.anything.popup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1596403980611" />
     <state x="3824" y="246" width="672" height="677" key="run.anything.popup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1594489268751" />
     <state x="1903" y="237" width="672" height="678" key="search.everywhere.popup" timestamp="1594572952122">
       <screen x="1280" y="0" width="1920" height="1080" />

@@ -236,6 +236,17 @@ class AdminController extends Controller
         return $deleteAvailableColor;
     }
 
+    public function adminAvailableFurs()
+    {
+        if (request()->ajax()) {
+            $datatable = $this->aR->adminAvailableFurs();
+
+            return $datatable;
+        }
+
+        return view('backend.availableFurs.index');
+    }
+
     public function adminViolationReports()
     {
         if (request()->ajax()) {
