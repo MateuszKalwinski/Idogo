@@ -197,6 +197,13 @@ class AdminController extends Controller
         return $restoreAnimalColor;
     }
 
+    public function getAvailableDataForBreed(Request $request)
+    {
+        $getAvailableDataForBreed = $this->aG->getAvailableDataForBreed($request);
+
+        return $getAvailableDataForBreed;
+    }
+
     public function adminAvailableColors()
     {
         if (request()->ajax()) {
@@ -222,13 +229,6 @@ class AdminController extends Controller
         return $updateAvailableColors;
     }
 
-    public function getAvailableColorsForBreed(Request $request)
-    {
-        $getAvailableColorsForBreed = $this->aG->getAvailableColorsForBreed($request);
-
-        return $getAvailableColorsForBreed;
-    }
-
     public function deleteAvailableColor(Request $request)
     {
         $deleteAvailableColor = $this->aG->deleteAvailableColor($request);
@@ -245,6 +245,28 @@ class AdminController extends Controller
         }
 
         return view('backend.availableFurs.index');
+    }
+
+    public function adminStoreAvailableFurs(Request $request)
+    {
+        $storeAvailableFurs = $this->aG->storeUpdateAvailableFur($request);
+
+        return $storeAvailableFurs;
+    }
+
+    public function adminUpdateAvailAbleFurs(Request $request)
+    {
+        $updateAvailableFurs = $this->aG->storeUpdateAvailableColor($request);
+
+        return $updateAvailableFurs;
+    }
+
+
+    public function deleteAvailableFur(Request $request)
+    {
+        $deleteAvailableFur = $this->aG->deleteAvailableFur($request);
+
+        return $deleteAvailableFur;
     }
 
     public function adminViolationReports()

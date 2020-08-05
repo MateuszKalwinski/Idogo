@@ -455,7 +455,63 @@ class AdminGateway
         }
     }
 
-    public function getAvailableColorsForBreed($request)
+    public function deleteAvailableFur($request)
+    {
+        $validator = Validator::make($request->all(), [
+            'availableFurId' => 'required|integer',
+        ],
+            [
+                'availableFurId.required' => 'Ups!coś poszło nie tak.',
+                'availableFurId.integer' => 'Ups!coś poszło nie tak.',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
+        return $this->aR->deleteAvailableFur($request);
+    }
+
+    public function storeUpdateAvailableFur($request)
+    {
+        $validator = Validator::make($request->all(), [
+            "breedId" => "required|integer",
+            "action" => "required|string",
+
+            "furs" => "required|array|min:1",
+            "furs.*" => "required|integer",
+        ],
+            [
+                'breedId.required' => 'Ups!coś poszło nie tak.',
+                'breedId.integer' => 'Ups!coś poszło nie tak.',
+
+                'action.required' => 'Ups!coś poszło nie tak.',
+                'action.string' => 'Ups!coś poszło nie tak.',
+
+                'furs.required' => 'Ups! Pole "rasy" jest wymagane.',
+                'furs.array' => 'Ups!coś poszło nie tak.',
+                'furs.min' => 'Wybierz przynajmniej jeden gatunek.',
+
+                'furs.*.required' => 'Ups!coś poszło nie tak.',
+                'furs.*.integer' => 'Ups!coś poszło nie tak.',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
+        if ($request->action === 'add') {
+            return $this->aR->storeAvailableFur($request);
+        } elseif ($request->action === 'edit') {
+            return $this->aR->updateAvailableFur($request);
+        } else {
+            return response()->json(['errors' => 'Nieprawidłowa operacja.']);
+        }
+    }
+
+    public function getAvailableDataForBreed($request)
     {
         $validator = Validator::make($request->all(), [
             'animalBreedId' => 'required|integer',
@@ -470,6 +526,14 @@ class AdminGateway
             return response()->json(['errors' => $validator->errors()->all()]);
         }
 
-        return $this->aR->getAvailableColorsForBreed($request);
+        if ($request->type === 'colors') {
+            return $this->aR->getAvailableColorsForBreed($request);
+        } elseif ($request->type === 'furs') {
+            return $this->aR->getAvailableFursForBreed($request);
+        } else {
+            return response()->json(['errors' => 'Nieprawidłowa operacja.']);
+        }
+
+
     }
 }

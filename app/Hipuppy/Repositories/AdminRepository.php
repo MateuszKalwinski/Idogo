@@ -3,7 +3,7 @@
 namespace App\Hipuppy\Repositories;
 
 use App\{Hipuppy\Interfaces\AdminRepositoryInterface};
-use App\{AnimalColor, AnimalSpecies, CharacteristicDictionary, Fur, AnimalSize, AvailableColors};
+use App\{AnimalColor, AnimalSpecies, AvailableFurs, CharacteristicDictionary, Fur, AnimalSize, AvailableColors};
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -1668,8 +1668,6 @@ class AdminRepository implements AdminRepositoryInterface
 
         DB::commit();
         return response()->json(['success' => [__('Kolory zostały przypisane do podanej rasy')]]);
-
-
     }
 
     public function deleteAvailableColor($request)
@@ -1692,7 +1690,7 @@ class AdminRepository implements AdminRepositoryInterface
         $availableColorsForBreed = AvailableColors::select('color_id')->where('breed_id', '=', $request->animalBreedId)->get();
 
         if ($availableColorsForBreed->isEmpty()) {
-            return response()->json(['errors' => [__('Nie znaleziono takiego koloru dla podanej rasy.')]]);
+            return response()->json(['errors' => [__('Nie znaleziono dodanych kolorów dla wskazanej rasy.')]]);
 
         }
 
@@ -1717,10 +1715,10 @@ class AdminRepository implements AdminRepositoryInterface
                 $breedName = '<span class="animal-breed-name" data-animal-breed-id="' . $data->breed_id . '">' . $data->breed_name . '</span>';
                 return $breedName;
             })
-            ->addColumn('color_name', function ($data) {
+            ->addColumn('fur_name', function ($data) {
 
-                $colorName = '<span class="animal-fur-name" data-animal-fur-id="' . $data->fur_id . '">' . $data->fur_name . '</span>';
-                return $colorName;
+                $furName = '<span class="animal-fur-name" data-animal-fur-id="' . $data->fur_id . '">' . $data->fur_name . '</span>';
+                return $furName;
             })
             ->addColumn('available_fur_created_at', function ($data) {
 
@@ -1770,6 +1768,94 @@ class AdminRepository implements AdminRepositoryInterface
             ->get();
 
         return $availableFurForDatatable;
+    }
+
+    public function getAvailableFursForBreed($request)
+    {
+
+        $availableFursForBreed = AvailableFurs::select('fur_id')->where('breed_id', '=', $request->animalBreedId)->get();
+
+        if ($availableFursForBreed->isEmpty()) {
+            return response()->json(['errors' => [__('Nie znaleziono dodanych długości futer dla wskazanej rasy.')]]);
+
+        }
+
+        return response()->json(['success' => $availableFursForBreed]);
+    }
+
+    public function storeAvailableFur($request)
+    {
+        $availableFurForBreed = AvailableFurs::select('fur_id')->where('breed_id', '=', $request->breedId)->get();
+
+        $furs = collect($request->furs);
+
+        if (!$availableFurForBreed->isEmpty()) {
+            $pluckedAvailableFurForBreed = $availableFurForBreed->pluck('fur_id');
+            $furs = $furs->diff($pluckedAvailableFurForBreed);
+        }
+
+        DB::beginTransaction();
+
+        try {
+            foreach ($furs as $fur) {
+                AvailableFurs::create([
+                    'breed_id' => $request->breedId,
+                    'fur_id' => $fur,
+                    'created_at' => Carbon::now('Europe/Warsaw'),
+                    'updated_at' => null,
+                ]);
+            }
+        } catch (ValidationException $e) {
+            DB::rollback();
+            return response()->json(['errors' => [__('Ups! Coś poszło nie tak.')]]);
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+
+        DB::commit();
+        return response()->json(['success' => [__('Długości futra zostały przypisane do podanej rasy')]]);
+    }
+
+    public function updateAvailableFur($request)
+    {
+        DB::beginTransaction();
+
+        try {
+            AvailableFurs::where('breed_id', '=', $request->breedId)->delete();
+
+            foreach ($request->furs as $fur) {
+                AvailableColors::create([
+                    'breed_id' => $request->breedId,
+                    'color_id' => $fur,
+                    'created_at' => Carbon::now('Europe/Warsaw'),
+                    'updated_at' => null,
+                ]);
+            }
+        } catch (ValidationException $e) {
+            DB::rollback();
+            return response()->json(['errors' => [__('Ups! Coś poszło nie tak.')]]);
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+
+        DB::commit();
+        return response()->json(['success' => [__('Długości futra zostały przypisane do podanej rasy')]]);
+    }
+
+    public function deleteAvailableFur($request)
+    {
+        $isExist = AvailableFurs::where('id', '=', $request->availableFurId)->exists();
+
+        if (!$isExist) {
+            return response()->json(['errors' => [__('Nie znaleziono takiej długości futra dla podanej rasy.')]]);
+        }
+
+        $availableFur = AvailableFurs::findOrFail($request->availableFurId);
+        $availableFur->delete();
+
+        return response()->json(['success' => 'Usuwanie zakończone pomyślnie.']);
     }
 
     /*
