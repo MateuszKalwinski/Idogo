@@ -14,7 +14,7 @@ class BackendAvailableColors {
         let self = this;
 
         $('#addAvailableColor').click(function () {
-            $('#addEditModalTitle').text('Dodaj kolor dla rasy');
+            $('#addEditModalTitle').text('Dodaj dostępny kolor dla rasy');
             $('.modal-header ').addClass('teal lighten-1').removeClass('yellow darken-2 danger-color green darken-2');
             $('#breedId').val('');
             $('#colors').val('');
@@ -26,7 +26,7 @@ class BackendAvailableColors {
         $(document).on('click', '.edit-available-color', function () {
             let animalBreedId = $(this).closest('tr').find('.animal-breed-name').attr('data-animal-breed-id');
             self.getAvailableColorsForBreed(animalBreedId)
-            $('#addEditModalTitle').text('Edytuj cechę zwierzaka')
+            $('#addEditModalTitle').text('Edytuj dostępne kolory dla rasy')
             $('.modal-header ').addClass('yellow darken-2').removeClass('teal lighten-1 danger-color green')
             $('#action').val('edit');
         })
@@ -69,9 +69,10 @@ class BackendAvailableColors {
         });
         $.ajax({
             type: 'POST',
-            url: base_url + "/getAvailableColorsForBreed",
+            url: base_url + "/getAvailableDataForBreed",
             data: {
                 animalBreedId: animalBreedId,
+                type: 'colors',
             },
             dataType: 'json',
             beforeSend: function () {

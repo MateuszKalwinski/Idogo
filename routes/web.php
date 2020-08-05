@@ -96,15 +96,20 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::post('/getBreeds', 'AdminController@getBreeds')->name('getBreeds');
     Route::post('/getColors', 'AdminController@getColors')->name('getColors');
     Route::post('/getFurs', 'AdminController@getFurs')->name('getFurs');
+    Route::post('/getAvailableDataForBreed', 'AdminController@getAvailableDataForBreed')->name('getAvailableDataForBreed');
 
 
     Route::get('/adminAvailableColors', 'AdminController@adminAvailableColors')->name('adminAvailableColors');
-    Route::post('/getAvailableColorsForBreed', 'AdminController@getAvailableColorsForBreed')->name('getAvailableColorsForBreed');
     Route::post('/adminStoreAvailableColors', 'AdminController@adminStoreAvailableColors')->name('adminStoreAvailableColors');
     Route::post('/adminUpdateAvailAbleColors', 'AdminController@adminUpdateAvailAbleColors')->name('adminUpdateAvailAbleColors');
     Route::post('/deleteAvailableColor', 'AdminController@deleteAvailableColor')->name('deleteAvailableColor');
 
     Route::get('/adminAvailableFurs', 'AdminController@adminAvailableFurs')->name('adminAvailableFurs');
+    Route::post('/adminStoreAvailableFurs', 'AdminController@adminStoreAvailableFurs')->name('adminStoreAvailableFurs');
+    Route::post('/adminUpdateAvailAbleFurs', 'AdminController@adminUpdateAvailAbleFurs')->name('adminUpdateAvailAbleFurs');
+
+    Route::post('/deleteAvailableFur', 'AdminController@deleteAvailableFur')->name('deleteAvailableFur');
+
 
 
     Route::get('/adminAnimalFur', 'AdminController@adminAnimalFur')->name('adminAnimalFur');

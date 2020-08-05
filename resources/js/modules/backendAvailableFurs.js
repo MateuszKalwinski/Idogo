@@ -15,7 +15,7 @@ class BackendAvailableFurs {
         let self = this;
 
         $('#addAvailableFur').click(function () {
-            $('#addEditModalTitle').text('Dodaj futro dla rasy');
+            $('#addEditModalTitle').text('Dodaj dostępną długość futra dla rasy');
             $('.modal-header ').addClass('teal lighten-1').removeClass('yellow darken-2 danger-color green darken-2');
             $('#breedId').val('');
             $('#furs').val('');
@@ -24,10 +24,10 @@ class BackendAvailableFurs {
             $('#addEditAvailableFurModal').modal('show')
         })
 
-        $(document).on('click', '.edit-available-color', function () {
+        $(document).on('click', '.edit-available-fur', function () {
             let animalBreedId = $(this).closest('tr').find('.animal-breed-name').attr('data-animal-breed-id');
-            self.getAvailableColorsForBreed(animalBreedId)
-            $('#addEditModalTitle').text('Edytuj cechę zwierzaka')
+            self.getAvailableFursForBreed(animalBreedId)
+            $('#addEditModalTitle').text('Edytuj dostępną długość futra dla rasy')
             $('.modal-header ').addClass('yellow darken-2').removeClass('teal lighten-1 danger-color green')
             $('#action').val('edit');
         })
@@ -36,20 +36,20 @@ class BackendAvailableFurs {
         $('#addEditAvailableColor').on('submit', function (e) {
             e.preventDefault();
             if ($('#action').val() === 'add'){
-                self.saveAvailableColors(new FormData(this), base_url+ "/adminStoreAvailableColors")
+                self.saveAvailableFurs(new FormData(this), base_url+ "/adminStoreAvailableFurs")
             }else{
-                self.saveAvailableColors(new FormData(this), base_url+ '/adminUpdateAvailAbleColors')
+                self.saveAvailableFurs(new FormData(this), base_url+ '/adminUpdateAvailAbleFurs')
             }
         })
 
-        $(document).on('click', '.delete-available-color', function () {
+        $(document).on('click', '.delete-available-fur', function () {
 
             let animalSpeciesName = $(this).closest('tr').find('.animal-species-name').text();
             let animalBreedName = $(this).closest('tr').find('.animal-breed-name').text();
-            let animalColorName = $(this).closest('tr').find('.animal-color-name').text();
-            $('.confirm-animal-color-name').text(animalColorName)
+            let animalFurName = $(this).closest('tr').find('.animal-fur-name').text();
+            $('.confirm-animal-fur-name').text(animalFurName)
             $('.confirm-animal-breed-name').text(animalSpeciesName +' '+ animalBreedName);
-            $('#confirm-yes').attr('data-available-color-id', $(this).attr('data-available-color-id'))
+            $('#confirm-yes').attr('data-available-fur-id', $(this).attr('data-available-fur-id'))
             $('#confirmModalHeader').addClass('danger-color').removeClass('green darken-2 yellow darken-2 teal lighten-1')
             $('#showHideContent').slideDown();
 
@@ -57,12 +57,12 @@ class BackendAvailableFurs {
         })
 
         $('#confirm-yes').on('click', function () {
-            let availableColorId = $('#confirm-yes').attr('data-available-color-id');
-            self.deleteAvailableColor(availableColorId, base_url + "/deleteAvailableColor")
+            let availableFurId = $('#confirm-yes').attr('data-available-fur-id');
+            self.deleteAvailableFur(availableFurId, base_url + "/deleteAvailableFur")
         })
     }
 
-    getAvailableColorsForBreed(animalBreedId){
+    getAvailableFursForBreed(animalBreedId){
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -70,13 +70,14 @@ class BackendAvailableFurs {
         });
         $.ajax({
             type: 'POST',
-            url: base_url + "/getAvailableColorsForBreed",
+            url: base_url + "/getAvailableDataForBreed",
             data: {
                 animalBreedId: animalBreedId,
+                type: 'furs',
             },
             dataType: 'json',
             beforeSend: function () {
-                $(".edit-available-color[data-available-color-id='" + animalBreedId +"']").html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Wyświetl numery').addClass('disabled');
+                $(".edit-available-fur[data-available-fur-id='" + animalBreedId +"']").html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Wyświetl numery').addClass('disabled');
 
             },
             success: function (data) {
@@ -88,17 +89,17 @@ class BackendAvailableFurs {
                 if(data.success)
                 {
                     for (let i=0; i<data.success.length; i++){
-                        $('#colors option[value=' + data.success[i].color_id + ']').attr('selected', true);
+                        $('#furs option[value=' + data.success[i].fur_id + ']').attr('selected', true);
                     }
-                    $('#colors').materialSelect();
+                    $('#furs').materialSelect();
                     $('#breedId').val(animalBreedId)
 
 
                 }
             },
             complete: function () {
-                $(".edit-available-color[data-available-color-id='" + animalBreedId +"']").html('<i class="fas fa-edit"></i>').removeClass('disabled');
-                $('#addEditAvailableColorModal').modal('show')
+                $(".edit-available-fur[data-available-fur-id='" + animalBreedId +"']").html('<i class="fas fa-edit"></i>').removeClass('disabled');
+                $('#addEditAvailableFurModal').modal('show')
             },
             error: function (data) {
 
@@ -106,7 +107,7 @@ class BackendAvailableFurs {
         });
     }
 
-    saveAvailableColors(formData, url){
+    saveAvailableFurs(formData, url){
         $.ajax({
             url: url,
             method:"POST",
@@ -130,7 +131,7 @@ class BackendAvailableFurs {
                 if(data.success)
                 {
                     html = '<div class="alert alert-success">' + data.success + '</div>';
-                    $('#adminAvailableColorsTable').DataTable().ajax.reload();
+                    $('#adminAvailableFursTable').DataTable().ajax.reload();
                 }
                 $('#formResult').html(html);
             }
@@ -228,7 +229,7 @@ class BackendAvailableFurs {
         })
     }
 
-    deleteAvailableColor(availableColorId, url){
+    deleteAvailableFur(availableFurId, url){
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -240,7 +241,7 @@ class BackendAvailableFurs {
             type: 'POST',
             url: url,
             data: {
-                availableColorId: availableColorId,
+                availableFurId: availableFurId,
             },
             dataType: 'json',
             beforeSend: function () {
@@ -265,7 +266,7 @@ class BackendAvailableFurs {
                 {
                     html = '<div class="alert alert-success">' + data.success + '</div>';
                     $('#showHideContent').slideUp();
-                    $('#adminAvailableColorsTable').DataTable().ajax.reload();
+                    $('#adminAvailableFursTable').DataTable().ajax.reload();
                 }
                 $('#confirmFormResult').html(html);
             },
