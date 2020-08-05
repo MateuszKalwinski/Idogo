@@ -28,7 +28,7 @@
                                 Rasa
                             </th>
                             <th class="th-sm" data-toggle="tooltip" data-placement="top"
-                                title="Nazwa dostępnego futra">Kolor
+                                title="Nazwa dostępnego futra">Futro
                             </th>
                             <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data dodania">Data
                                 dodania
@@ -120,7 +120,7 @@
                     <div class="modal-body">
                         <span id="confirmFormResult"></span>
                         <div id="showHideContent">
-                            <p id="animalDeleteText" class="text-center">Czy na pewno chcesz usunąć kolor <span
+                            <p id="animalDeleteText" class="text-center">Czy na pewno chcesz usunąć futro <span
                                     class="font-weight-bold confirm-animal-fur-name"></span> dla <span
                                     class="font-weight-bold confirm-animal-breed-name"></span>
                             </p>
