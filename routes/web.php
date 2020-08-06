@@ -107,9 +107,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::get('/adminAvailableFurs', 'AdminController@adminAvailableFurs')->name('adminAvailableFurs');
     Route::post('/adminStoreAvailableFurs', 'AdminController@adminStoreAvailableFurs')->name('adminStoreAvailableFurs');
     Route::post('/adminUpdateAvailAbleFurs', 'AdminController@adminUpdateAvailAbleFurs')->name('adminUpdateAvailAbleFurs');
-
     Route::post('/deleteAvailableFur', 'AdminController@deleteAvailableFur')->name('deleteAvailableFur');
-
 
 
     Route::get('/adminAnimalFur', 'AdminController@adminAnimalFur')->name('adminAnimalFur');
@@ -125,20 +123,12 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::post('/restoreAnimalSize', 'AdminController@restoreAnimalSize')->name('restoreAnimalSize');
 
 
-
     Route::get('/adminViolationReports', 'AdminController@adminViolationReports')->name('adminViolationReports');
 
     Route::match(['GET','POST'],trans('routes.profile'),'BackendController@profile')->name('profile');
     Route::get('/deletePhoto/{id}', 'BackendController@deletePhoto')->name('deletePhoto');
 
-
-
-
     Route::resource('cities', 'CityController');
-
-
-
-
 
 });
 

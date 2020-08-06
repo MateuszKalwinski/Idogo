@@ -33,7 +33,7 @@ class BackendAvailableFurs {
         })
 
 
-        $('#addEditAvailableColor').on('submit', function (e) {
+        $('#addEditAvailableFur').on('submit', function (e) {
             e.preventDefault();
             if ($('#action').val() === 'add'){
                 self.saveAvailableFurs(new FormData(this), base_url+ "/adminStoreAvailableFurs")
@@ -52,8 +52,12 @@ class BackendAvailableFurs {
             $('#confirm-yes').attr('data-available-fur-id', $(this).attr('data-available-fur-id'))
             $('#confirmModalHeader').addClass('danger-color').removeClass('green darken-2 yellow darken-2 teal lighten-1')
             $('#showHideContent').slideDown();
-
+            $('#confirmFormResult').children().remove();
             $('#confirmModal').modal('show');
+
+            /*
+            * TODO THIS MIGHT BE NEW MAIL COLOR #657cff
+            * */
         })
 
         $('#confirm-yes').on('click', function () {
@@ -77,24 +81,34 @@ class BackendAvailableFurs {
             },
             dataType: 'json',
             beforeSend: function () {
+                $('#formResult').children().remove();
                 $(".edit-available-fur[data-available-fur-id='" + animalBreedId +"']").html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Wyświetl numery').addClass('disabled');
-
+                $('#furs option:selected').each(function() {
+                    $(this).prop('selected', false);
+                });
             },
             success: function (data) {
 
                 if(data.errors)
                 {
+               let html = '';
+                html = '<div class="alert alert-danger">';
+                for(var count = 0; count < data.errors.length; count++)
+                {
+                    html += '<p class="m-0">' + data.errors[count] + '</p>';
+                }
+                html += '</div>';
 
+                $('#formResult').html(html);
                 }
                 if(data.success)
                 {
                     for (let i=0; i<data.success.length; i++){
-                        $('#furs option[value=' + data.success[i].fur_id + ']').attr('selected', true);
+                        $('#furs option[value=' + data.success[i].fur_id + ']').prop('selected', true);
                     }
+
                     $('#furs').materialSelect();
                     $('#breedId').val(animalBreedId)
-
-
                 }
             },
             complete: function () {
