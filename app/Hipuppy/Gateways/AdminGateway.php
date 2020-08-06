@@ -433,9 +433,9 @@ class AdminGateway
                 'action.required' => 'Ups!coś poszło nie tak.',
                 'action.string' => 'Ups!coś poszło nie tak.',
 
-                'colors.required' => 'Ups! Pole "rasy" jest wymagane.',
+                'colors.required' => 'Ups! Pole "kolor" jest wymagane.',
                 'colors.array' => 'Ups!coś poszło nie tak.',
-                'colors.min' => 'Wybierz przynajmniej jeden gatunek.',
+                'colors.min' => 'Wybierz przynajmniej jeden kolor.',
 
                 'colors.*.required' => 'Ups!coś poszło nie tak.',
                 'colors.*.integer' => 'Ups!coś poszło nie tak.',
@@ -489,9 +489,9 @@ class AdminGateway
                 'action.required' => 'Ups!coś poszło nie tak.',
                 'action.string' => 'Ups!coś poszło nie tak.',
 
-                'furs.required' => 'Ups! Pole "rasy" jest wymagane.',
+                'furs.required' => 'Ups! Pole "futro" jest wymagane.',
                 'furs.array' => 'Ups!coś poszło nie tak.',
-                'furs.min' => 'Wybierz przynajmniej jeden gatunek.',
+                'furs.min' => 'Wybierz przynajmniej jedną głogość futra.',
 
                 'furs.*.required' => 'Ups!coś poszło nie tak.',
                 'furs.*.integer' => 'Ups!coś poszło nie tak.',

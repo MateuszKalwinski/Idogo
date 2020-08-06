@@ -256,7 +256,7 @@ class AdminController extends Controller
 
     public function adminUpdateAvailAbleFurs(Request $request)
     {
-        $updateAvailableFurs = $this->aG->storeUpdateAvailableColor($request);
+        $updateAvailableFurs = $this->aG->storeUpdateAvailableFur($request);
 
         return $updateAvailableFurs;
     }

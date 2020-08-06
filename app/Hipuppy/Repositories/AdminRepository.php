@@ -1636,7 +1636,7 @@ class AdminRepository implements AdminRepositoryInterface
             return response()->json(['errors' => [__('Ups! Coś poszło nie tak.')]]);
         } catch (\Exception $e) {
             DB::rollback();
-            throw $e;
+            return response()->json(['errors' => [__('Ups! Coś poszło nie tak.')]]);
         }
 
         DB::commit();
@@ -1663,7 +1663,7 @@ class AdminRepository implements AdminRepositoryInterface
             return response()->json(['errors' => [__('Ups! Coś poszło nie tak.')]]);
         } catch (\Exception $e) {
             DB::rollback();
-            throw $e;
+            return response()->json(['errors' => [__('Ups! Coś poszło nie tak.')]]);
         }
 
         DB::commit();
@@ -1810,7 +1810,7 @@ class AdminRepository implements AdminRepositoryInterface
             return response()->json(['errors' => [__('Ups! Coś poszło nie tak.')]]);
         } catch (\Exception $e) {
             DB::rollback();
-            throw $e;
+            return response()->json(['errors' => [__('Ups! Coś poszło nie tak.')]]);
         }
 
         DB::commit();
@@ -1825,9 +1825,9 @@ class AdminRepository implements AdminRepositoryInterface
             AvailableFurs::where('breed_id', '=', $request->breedId)->delete();
 
             foreach ($request->furs as $fur) {
-                AvailableColors::create([
+                AvailableFurs::create([
                     'breed_id' => $request->breedId,
-                    'color_id' => $fur,
+                    'fur_id' => $fur,
                     'created_at' => Carbon::now('Europe/Warsaw'),
                     'updated_at' => null,
                 ]);
@@ -1837,7 +1837,7 @@ class AdminRepository implements AdminRepositoryInterface
             return response()->json(['errors' => [__('Ups! Coś poszło nie tak.')]]);
         } catch (\Exception $e) {
             DB::rollback();
-            throw $e;
+            return response()->json(['errors' => [__('Ups! Coś poszło nie tak.')]]);
         }
 
         DB::commit();
