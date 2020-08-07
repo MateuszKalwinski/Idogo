@@ -29,6 +29,7 @@ mix.scripts(['resources/js/app.js'], 'public/js/app.js')
         'resources/js/modules/backendAnimalSpecies.js',
         'resources/js/modules/backendAvailableColors.js',
         'resources/js/modules/backendAvailableFurs.js',
+        'resources/js/modules/BackendAvailableCharacteristicDictionary.js',
         'resources/js/modules/errors.js',
         'resources/js/modules/success.js'
     ], 'public/js/main.js')

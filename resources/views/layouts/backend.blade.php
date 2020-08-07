@@ -98,6 +98,8 @@
                                     </li>
                                     <li><a href="{{route('adminAnimalCharacteristics')}}" class="waves-effect">Cechy zwierzaków</a>
                                     </li>
+                                    <li><a href="{{route('adminAvailableCharacteristicDictionary')}}" class="waves-effect">Dostępne cechy dla ras</a>
+                                    </li>
                                     <li><a href="{{route('adminAnimalColors')}}" class="waves-effect">Kolory zwierzaków</a>
                                     </li>
                                     <li><a href="{{route('adminAvailableColors')}}" class="waves-effect">Dostępne kolory dla ras</a>

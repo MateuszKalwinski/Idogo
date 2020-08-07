@@ -49,6 +49,9 @@ $(document).ready(function () {
         if (module == 'backendAvailableFurs'){
             new BackendAvailableFurs(base_url);
         }
+        if (module == 'BackendAvailableCharacteristicDictionary'){
+            new BackendAvailableCharacteristicDictionary(base_url);
+        }
     }
 
     $('.mdb-select').materialSelect({

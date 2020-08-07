@@ -2,7 +2,6 @@ class BackendAvailableFurs {
 
     constructor(base_url) {
         this.init(base_url);
-        console.log('test');
     }
 
     init(base_url) {
