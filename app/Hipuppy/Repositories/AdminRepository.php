@@ -1858,6 +1858,82 @@ class AdminRepository implements AdminRepositoryInterface
         return response()->json(['success' => 'Usuwanie zakończone pomyślnie.']);
     }
 
+    public function adminAvailableCharacteristicDictionary()
+    {
+        $datatable = datatables()->of($this->getAvailableCharacteristicDictionaryForDatatable())
+
+
+//               'achd.id as id',
+//                'chd.id as characteristic_dictionary_id',
+//                'chd.name as characteristic_dictionary_name',
+//                'aspec.id as species_id',
+//                'aspec.name as species_name',
+//                'af.created_at',
+//                'af.updated_at'
+//
+
+            ->addColumn('available_characteristic_id', function ($data) {
+
+                $availableCharacteristicDictionaryId = '<span data-available-characteristic-id="' . $data->id . '">' . $data->id . '</span>';
+                return $availableCharacteristicDictionaryId;
+            })
+            ->addColumn('species_name', function ($data) {
+
+                $speciesName = '<span class="animal-species-name" data-animal-species-id="' . $data->species_id . '">' . $data->species_name . '</span>';
+                return $speciesName;
+            })
+            ->addColumn('characteristic_name', function ($data) {
+
+                $characteristicName = '<span class="animal-characteristic-name" data-animal-characteristic-id="' . $data->characteristic_dictionary_id . '">' . $data->characteristic_dictionary_name . '</span>';
+                return $characteristicName;
+            })
+            ->addColumn('available_characteristic_created_at', function ($data) {
+
+                $availableCharacteristicCreatedAt = ($data->created_at) ? '<span>' . $data->created_at . '</span>' : '<span>Brak</span>';
+                return $availableCharacteristicCreatedAt;
+            })
+            ->addColumn('available_characteristic_updated_at', function ($data) {
+                $animalCharacteristicUpdatedAt = ($data->updated_at) ? '<span>' . $data->updated_at . '</span>' : '<span>Brak</span>';
+                return $animalCharacteristicUpdatedAt;
+            })
+            ->addColumn('action', function ($data) {
+
+                $actions = '<div class="d-flex">
+                                <button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-yellow border-none edit-available-characteristic waves-effect waves-light" data-available-characteristic-id="' . $data->id . '">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-danger border-none delete-available-characteristic waves-effect waves-light" data-available-characteristic-id="' . $data->id . '">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>';
+
+                return $actions;
+            })
+            ->rawColumns(['available_characteristic_id', 'species_name', 'characteristic_name', 'available_characteristic_created_at', 'available_characteristic_updated_at', 'action'])
+            ->make(true);
+
+        return $datatable;
+    }
+
+    public function getAvailableCharacteristicDictionaryForDatatable()
+    {
+        $availableCharacteristicDictionaryForDatatable = DB::table('available_characteristic_dictionary AS achd')
+            ->select(
+                'achd.id as id',
+                'chd.id as characteristic_dictionary_id',
+                'chd.name as characteristic_dictionary_name',
+                'aspec.id as species_id',
+                'aspec.name as species_name',
+                'achd.created_at',
+                'achd.updated_at'
+            )
+            ->leftJoin('characteristic_dictionary AS chd', 'achd.characteristic_dictionary_id', '=', 'chd.id')
+            ->leftJoin('animal_species AS aspec', 'achd.species_id', '=', 'aspec.id')
+            ->get();
+
+        return $availableCharacteristicDictionaryForDatatable;
+    }
+
     /*
      * TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS
      * TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS

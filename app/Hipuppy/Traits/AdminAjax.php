@@ -7,6 +7,17 @@ use Illuminate\Http\Request;
 
 trait AdminAjax
 {
+    public function getSpecies(Request $request)
+    {
+        $species = $this->aR->getSpecies($request);
+
+        $speciesCollection = $species->map(function ($singleSpecies) {
+            return collect($singleSpecies->toArray())
+                ->only(['id', 'name'])
+                ->all();
+        });
+    }
+
     public function getBreeds(Request $request)
     {
         $breeds = $this->aR->getBreeds($request);

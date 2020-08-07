@@ -269,6 +269,17 @@ class AdminController extends Controller
         return $deleteAvailableFur;
     }
 
+    public function adminAvailableCharacteristicDictionary()
+    {
+        if (request()->ajax()) {
+            $datatable = $this->aR->adminAvailableCharacteristicDictionary();
+
+            return $datatable;
+        }
+
+        return view('backend.availableCharacteristicDictionary.index');
+    }
+
     public function adminViolationReports()
     {
         if (request()->ajax()) {
