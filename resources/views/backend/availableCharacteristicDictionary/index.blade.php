@@ -221,6 +221,7 @@
                     $('#adminAvailableCharacteristicTable_wrapper select').removeClass(
                         'custom-select custom-select-sm form-control form-control-sm');
                     $('#adminAvailableCharacteristicTable_wrapper select').addClass('mdb-select');
+                    $('#adminAvailableCharacteristicTable_wrapper select').materialSelect();
                     $('#adminAvailableCharacteristicTable_wrapper .dataTables_filter').find('label').remove();
                 });
             </script>
