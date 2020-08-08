@@ -204,6 +204,13 @@ class AdminController extends Controller
         return $getAvailableDataForBreed;
     }
 
+    public function getAvailableDataForSpecies(Request $request)
+    {
+        $getAvailableDataForSpecies = $this->aG->getAvailableDataForSpecies($request);
+
+        return $getAvailableDataForSpecies;
+    }
+
     public function adminAvailableColors()
     {
         if (request()->ajax()) {
@@ -278,6 +285,27 @@ class AdminController extends Controller
         }
 
         return view('backend.availableCharacteristicDictionary.index');
+    }
+
+    public function adminStoreAvailableCharacteristics(Request $request)
+    {
+        $storeAvailableCharacteristics = $this->aG->storeUpdateAvailableCharacteristic($request);
+
+        return $storeAvailableCharacteristics;
+    }
+
+    public function adminUpdateAvailAbleCharacteristics(Request $request)
+    {
+        $udateAvailableCharacteristics = $this->aG->storeUpdateAvailableCharacteristic($request);
+
+        return $udateAvailableCharacteristics;
+    }
+
+    public function deleteAvailableCharacteristic(Request $request)
+    {
+        $deleteAvailableCharacteristics = $this->aG->deleteAvailableCharacteristic($request);
+
+        return $deleteAvailableCharacteristics;
     }
 
     public function adminViolationReports()
