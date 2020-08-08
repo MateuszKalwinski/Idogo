@@ -6,8 +6,8 @@ class BackendAvailableCharacteristicDictionary {
 
     init(base_url) {
         this.UX(base_url);
-        this.getBreeds();
-        this.getFurs()
+        this.getSpecies();
+        this.getCharacteristics()
     }
 
     UX(base_url) {
@@ -45,7 +45,7 @@ class BackendAvailableCharacteristicDictionary {
 
             let animalSpeciesName = $(this).closest('tr').find('.animal-species-name').text();
             let animalCharacteristicName = $(this).closest('tr').find('.animal-characteristic-name').text();
-            $('.confirm-animal-fur-name').text(animalCharacteristicName)
+            $('.confirm-animal-characteristic-name').text(animalCharacteristicName)
             $('.confirm-animal-species-name').text(animalSpeciesName );
             $('#confirm-yes').attr('data-available-characteristic-id', $(this).attr('data-available-characteristic-id'))
             $('#confirmModalHeader').addClass('danger-color').removeClass('green darken-2 yellow darken-2 teal lighten-1')
@@ -102,16 +102,16 @@ class BackendAvailableCharacteristicDictionary {
                 if(data.success)
                 {
                     for (let i=0; i<data.success.length; i++){
-                        $('#characteristics option[value=' + data.success[i].fur_id + ']').prop('selected', true);
+                        $('#characteristics option[value=' + data.success[i].characteristic_dictionary_id + ']').prop('selected', true);
                     }
 
                     $('#characteristics').materialSelect();
-                    $('#breedId').val(animalSpeciesId)
+                    $('#speciesId').val(animalSpeciesId)
                 }
             },
             complete: function () {
                 $(".edit-available-characteristic[data-available-characteristic-id='" + animalSpeciesId +"']").html('<i class="fas fa-edit"></i>').removeClass('disabled');
-                $('#addEditAvailableFurModal').modal('show')
+                $('#addEditAvailableCharacteristicModal').modal('show')
             },
             error: function (data) {
 
@@ -182,16 +182,9 @@ class BackendAvailableCharacteristicDictionary {
                 }else {
 
                     $('#speciesId').append('<option value="" disabled selected>Wybierz gatunek</option>');
-
                     for (let i=0; i<data.length; i++){
-                        let optionGroup = ''
-                        optionGroup += '<optgroup label="'+ data[i].species_name +'" data-species-id="'+ data[i].species_id +'">';
-                        for (let j=0; j<data[i].breeds.length; j++){
-                            optionGroup += '<option value="'+ data[i].breeds[j].id +'">'+ data[i].breeds[j].name +'</option>';
-                        }
-                        optionGroup += '</optgroup>';
 
-                        $('#breedId').append(optionGroup);
+                        $('#speciesId').append('<option value="'+ data[i].id +'">'+ data[i].name +'</option>');
                     }
                 }
                 $('#form_result').html(html);
@@ -228,11 +221,11 @@ class BackendAvailableCharacteristicDictionary {
 
                 }else {
 
-                    $('#furs').append('<option value="" disabled selected>Wybierz futro/a</option>');
+                    $('#characteristics').append('<option value="" disabled selected>Wybierz cechę/y</option>');
 
                     for (let i=0; i<data.length; i++){
 
-                        $('#furs').append('<option value="'+ data[i].id +'">'+ data[i].name +'</option>');
+                        $('#characteristics').append('<option value="'+ data[i].id +'">'+ data[i].name +'</option>');
                     }
 
                 }
@@ -241,7 +234,7 @@ class BackendAvailableCharacteristicDictionary {
         })
     }
 
-    deleteAvailableFur(availableFurId, url){
+    deleteAvailableCharacteristic(availableCharacteristicId, url){
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -253,7 +246,7 @@ class BackendAvailableCharacteristicDictionary {
             type: 'POST',
             url: url,
             data: {
-                availableFurId: availableFurId,
+                availableCharacteristicId: availableCharacteristicId,
             },
             dataType: 'json',
             beforeSend: function () {
@@ -278,7 +271,7 @@ class BackendAvailableCharacteristicDictionary {
                 {
                     html = '<div class="alert alert-success">' + data.success + '</div>';
                     $('#showHideContent').slideUp();
-                    $('#adminAvailableFursTable').DataTable().ajax.reload();
+                    $('#adminAvailableCharacteristicTable').DataTable().ajax.reload();
                 }
                 $('#confirmFormResult').html(html);
             },
