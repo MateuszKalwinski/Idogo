@@ -34,10 +34,10 @@ class BackendAvailableFurs {
 
         $('#addEditAvailableFur').on('submit', function (e) {
             e.preventDefault();
-            if ($('#action').val() === 'add'){
-                self.saveAvailableFurs(new FormData(this), base_url+ "/adminStoreAvailableFurs")
-            }else{
-                self.saveAvailableFurs(new FormData(this), base_url+ '/adminUpdateAvailAbleFurs')
+            if ($('#action').val() === 'add') {
+                self.saveAvailableFurs(new FormData(this), base_url + "/adminStoreAvailableFurs")
+            } else {
+                self.saveAvailableFurs(new FormData(this), base_url + '/adminUpdateAvailAbleFurs')
             }
         })
 
@@ -47,7 +47,7 @@ class BackendAvailableFurs {
             let animalBreedName = $(this).closest('tr').find('.animal-breed-name').text();
             let animalFurName = $(this).closest('tr').find('.animal-fur-name').text();
             $('.confirm-animal-fur-name').text(animalFurName)
-            $('.confirm-animal-breed-name').text(animalSpeciesName +' '+ animalBreedName);
+            $('.confirm-animal-breed-name').text(animalSpeciesName + ' ' + animalBreedName);
             $('#confirm-yes').attr('data-available-fur-id', $(this).attr('data-available-fur-id'))
             $('#confirmModalHeader').addClass('danger-color').removeClass('green darken-2 yellow darken-2 teal lighten-1')
             $('#showHideContent').slideDown();
@@ -65,7 +65,7 @@ class BackendAvailableFurs {
         })
     }
 
-    getAvailableFursForBreed(animalBreedId){
+    getAvailableFursForBreed(animalBreedId) {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -81,28 +81,25 @@ class BackendAvailableFurs {
             dataType: 'json',
             beforeSend: function () {
                 $('#formResult').children().remove();
-                $(".edit-available-fur[data-available-fur-id='" + animalBreedId +"']").html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Wyświetl numery').addClass('disabled');
-                $('#furs option:selected').each(function() {
+                $(".edit-available-fur[data-available-fur-id='" + animalBreedId + "']").html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Wyświetl numery').addClass('disabled');
+                $('#furs option:selected').each(function () {
                     $(this).prop('selected', false);
                 });
             },
             success: function (data) {
 
-                if(data.errors)
-                {
-               let html = '';
-                html = '<div class="alert alert-danger">';
-                for(var count = 0; count < data.errors.length; count++)
-                {
-                    html += '<p class="m-0">' + data.errors[count] + '</p>';
-                }
-                html += '</div>';
+                if (data.errors) {
+                    let html = '';
+                    html = '<div class="alert alert-danger">';
+                    for (var count = 0; count < data.errors.length; count++) {
+                        html += '<p class="m-0">' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
 
-                $('#formResult').html(html);
+                    $('#formResult').html(html);
                 }
-                if(data.success)
-                {
-                    for (let i=0; i<data.success.length; i++){
+                if (data.success) {
+                    for (let i = 0; i < data.success.length; i++) {
                         $('#furs option[value=' + data.success[i].fur_id + ']').prop('selected', true);
                     }
 
@@ -111,7 +108,7 @@ class BackendAvailableFurs {
                 }
             },
             complete: function () {
-                $(".edit-available-fur[data-available-fur-id='" + animalBreedId +"']").html('<i class="fas fa-edit"></i>').removeClass('disabled');
+                $(".edit-available-fur[data-available-fur-id='" + animalBreedId + "']").html('<i class="fas fa-edit"></i>').removeClass('disabled');
                 $('#addEditAvailableFurModal').modal('show')
             },
             error: function (data) {
@@ -120,29 +117,25 @@ class BackendAvailableFurs {
         });
     }
 
-    saveAvailableFurs(formData, url){
+    saveAvailableFurs(formData, url) {
         $.ajax({
             url: url,
-            method:"POST",
+            method: "POST",
             data: formData,
             contentType: false,
-            cache:false,
+            cache: false,
             processData: false,
-            dataType:"json",
-            success:function(data)
-            {
+            dataType: "json",
+            success: function (data) {
                 var html = '';
-                if(data.errors)
-                {
+                if (data.errors) {
                     html = '<div class="alert alert-danger">';
-                    for(var count = 0; count < data.errors.length; count++)
-                    {
+                    for (var count = 0; count < data.errors.length; count++) {
                         html += '<p>' + data.errors[count] + '</p>';
                     }
                     html += '</div>';
                 }
-                if(data.success)
-                {
+                if (data.success) {
                     html = '<div class="alert alert-success">' + data.success + '</div>';
                     $('#adminAvailableFursTable').DataTable().ajax.reload();
                 }
@@ -151,7 +144,7 @@ class BackendAvailableFurs {
         })
     }
 
-    getBreeds(breed_id = null){
+    getBreeds(breed_id = null) {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -159,36 +152,33 @@ class BackendAvailableFurs {
         });
         $.ajax({
             url: base_url + "/getBreeds",
-            method:"POST",
+            method: "POST",
             data: {
                 breed_id: breed_id
             },
-            cache:true,
-            dataType:"json",
+            cache: true,
+            dataType: "json",
             beforeSend: function () {
 
             },
-            success:function(data)
-            {
+            success: function (data) {
                 var html = '';
-                if(data.errors)
-                {
+                if (data.errors) {
                     html = '<div class="alert alert-danger">';
-                    for(var count = 0; count < data.errors.length; count++)
-                    {
+                    for (var count = 0; count < data.errors.length; count++) {
                         html += '<p>' + data.errors[count] + '</p>';
                     }
                     html += '</div>';
 
-                }else {
+                } else {
 
                     $('#breedId').append('<option value="" disabled selected>Wybierz rasę</option>');
 
-                    for (let i=0; i<data.length; i++){
+                    for (let i = 0; i < data.length; i++) {
                         let optionGroup = ''
-                        optionGroup += '<optgroup label="'+ data[i].species_name +'" data-species-id="'+ data[i].species_id +'">';
-                        for (let j=0; j<data[i].breeds.length; j++){
-                            optionGroup += '<option value="'+ data[i].breeds[j].id +'">'+ data[i].breeds[j].name +'</option>';
+                        optionGroup += '<optgroup label="' + data[i].species_name + '" data-species-id="' + data[i].species_id + '">';
+                        for (let j = 0; j < data[i].breeds.length; j++) {
+                            optionGroup += '<option value="' + data[i].breeds[j].id + '">' + data[i].breeds[j].name + '</option>';
                         }
                         optionGroup += '</optgroup>';
 
@@ -203,7 +193,7 @@ class BackendAvailableFurs {
         })
     }
 
-    getFurs(){
+    getFurs() {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -211,29 +201,26 @@ class BackendAvailableFurs {
         });
         $.ajax({
             url: base_url + "/getFurs",
-            method:"POST",
+            method: "POST",
             data: {},
-            cache:true,
-            dataType:"json",
-            success:function(data)
-            {
+            cache: true,
+            dataType: "json",
+            success: function (data) {
                 var html = '';
-                if(data.errors)
-                {
+                if (data.errors) {
                     html = '<div class="alert alert-danger">';
-                    for(var count = 0; count < data.errors.length; count++)
-                    {
+                    for (var count = 0; count < data.errors.length; count++) {
                         html += '<p>' + data.errors[count] + '</p>';
                     }
                     html += '</div>';
 
-                }else {
+                } else {
 
                     $('#furs').append('<option value="" disabled selected>Wybierz futro/a</option>');
 
-                    for (let i=0; i<data.length; i++){
+                    for (let i = 0; i < data.length; i++) {
 
-                        $('#furs').append('<option value="'+ data[i].id +'">'+ data[i].name +'</option>');
+                        $('#furs').append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
                     }
 
                 }
@@ -242,7 +229,7 @@ class BackendAvailableFurs {
         })
     }
 
-    deleteAvailableFur(availableFurId, url){
+    deleteAvailableFur(availableFurId, url) {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -263,20 +250,16 @@ class BackendAvailableFurs {
                 * TODO DODAĆ EFEKT WCZYTYWANIA CAŁEJ TABELI
                 * */
             },
-            success:function(data)
-            {
+            success: function (data) {
                 var html = '';
-                if(data.errors)
-                {
+                if (data.errors) {
                     html = '<div class="alert alert-danger">';
-                    for(var count = 0; count < data.errors.length; count++)
-                    {
+                    for (var count = 0; count < data.errors.length; count++) {
                         html += '<p>' + data.errors[count] + '</p>';
                     }
                     html += '</div>';
                 }
-                if(data.success)
-                {
+                if (data.success) {
                     html = '<div class="alert alert-success">' + data.success + '</div>';
                     $('#showHideContent').slideUp();
                     $('#adminAvailableFursTable').DataTable().ajax.reload();
