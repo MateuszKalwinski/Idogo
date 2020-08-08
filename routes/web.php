@@ -98,6 +98,8 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::post('/getColors', 'AdminController@getColors')->name('getColors');
     Route::post('/getFurs', 'AdminController@getFurs')->name('getFurs');
     Route::post('/getAvailableDataForBreed', 'AdminController@getAvailableDataForBreed')->name('getAvailableDataForBreed');
+    Route::post('/getAvailableDataForSpecies', 'AdminController@getAvailableDataForSpecies')->name('getAvailableDataForSpecies');
+    Route::post('/getCharacteristics', 'AdminController@getCharacteristics')->name('getCharacteristics');
 
 
     Route::get('/adminAvailableColors', 'AdminController@adminAvailableColors')->name('adminAvailableColors');
@@ -113,7 +115,9 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
 
 
     Route::get('/adminAvailableCharacteristicDictionary', 'AdminController@adminAvailableCharacteristicDictionary')->name('adminAvailableCharacteristicDictionary');
-
+    Route::post('/adminStoreAvailableCharacteristics', 'AdminController@adminStoreAvailableCharacteristics')->name('adminStoreAvailableCharacteristics');
+    Route::post('/adminUpdateAvailAbleCharacteristics', 'AdminController@adminUpdateAvailAbleCharacteristics')->name('adminUpdateAvailAbleCharacteristics');
+    Route::post('/deleteAvailableCharacteristic', 'AdminController@deleteAvailableCharacteristic')->name('deleteAvailableCharacteristic');
 
 
     Route::get('/adminAnimalFur', 'AdminController@adminAnimalFur')->name('adminAnimalFur');
