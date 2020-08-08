@@ -16,6 +16,8 @@ trait AdminAjax
                 ->only(['id', 'name'])
                 ->all();
         });
+
+        return response()->json($speciesCollection);
     }
 
     public function getBreeds(Request $request)
@@ -59,5 +61,18 @@ trait AdminAjax
         });
 
         return response()->json($furCollection);
+    }
+
+    public function getCharacteristics()
+    {
+        $characteristics = $this->aR->getCharacteristics();
+
+        $characteristicsCollection = $characteristics->map(function ($characteristic) {
+            return collect($characteristic->toArray())
+                ->only(['id', 'name'])
+                ->all();
+        });
+
+        return response()->json($characteristicsCollection);
     }
 }

@@ -3,7 +3,15 @@
 namespace App\Hipuppy\Repositories;
 
 use App\{Hipuppy\Interfaces\AdminRepositoryInterface};
-use App\{AnimalColor, AnimalSpecies, AvailableFurs, CharacteristicDictionary, Fur, AnimalSize, AvailableColors};
+use App\{AnimalColor,
+    AnimalSpecies,
+    AvailableCharacteristicDictionary,
+    AvailableFurs,
+    CharacteristicDictionary,
+    Fur,
+    AnimalSize,
+    AvailableColors
+};
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -444,12 +452,12 @@ class AdminRepository implements AdminRepositoryInterface
             })
             ->addColumn('animal_breed_name', function ($data) {
 
-                $animalBreedName = '<span data-animal-breed-id="' . $data->animal_breed_id . '">' . $data->animal_breed_name . '</span>';
+                $animalBreedName = '<span class="animal-breed-name" data-animal-breed-id="' . $data->animal_breed_id . '">' . $data->animal_breed_name . '</span>';
                 return $animalBreedName;
             })
             ->addColumn('animal_species_name', function ($data) {
 
-                $animalSpeciesName = '<span data-animal-species-id="' . $data->animal_breed_species_id . '">' . $data->animal_species_name . '</span>';
+                $animalSpeciesName = '<span class="animal-species-name" data-animal-species-id="' . $data->animal_breed_species_id . '">' . $data->animal_species_name . '</span>';
                 return $animalSpeciesName;
             })
             ->addColumn('count_animals_with_breed', function ($data) {
@@ -469,28 +477,57 @@ class AdminRepository implements AdminRepositoryInterface
             })
             ->addColumn('animal_breed_created_at', function ($data) {
 
-                $animalDictionaryCreatedAt = '<span>' . $data->animal_breed_created_at . '</span>';
-                return $animalDictionaryCreatedAt;
+                $animalBreedCreatedAt = '<span>' . $data->animal_breed_created_at . '</span>';
+                return $animalBreedCreatedAt;
             })
             ->addColumn('added_user', function ($data) {
 
                 $linkToUser = route('user', ['id' => $data->animal_breed_created_user_id]);
-                $nameAndSurname = '<a href="' . $linkToUser . '">' . $data->user_name . ' ' . $data->user_surname . '</a>';
+                $nameAndSurname = '<a href="' . $linkToUser . '">' . $data->created_user_name . ' ' . $data->created_user_surname . '</a>';
                 return $nameAndSurname;
             })
-            ->addColumn('action', function ($data) {
+            ->addColumn('animal_breed_edited_at', function ($data) {
 
+                $animalBreedEditedAt = '<span>' . $data->animal_breed_edited_at . '</span>';
+                return $animalBreedEditedAt;
+            })
+            ->addColumn('edited_user', function ($data) {
+
+                $linkToUser = route('user', ['id' => $data->animal_breed_edited_user_id]);
+                $nameAndSurname = '<a href="' . $linkToUser . '">' . $data->edited_user_name . ' ' . $data->edited_user_surname . '</a>';
+                return $nameAndSurname;
+            })
+            ->addColumn('animal_breed_deleted_at', function ($data) {
+
+                $animalBreedDeletedAt = '<span>' . $data->animal_breed_deleted_at . '</span>';
+                return $animalBreedDeletedAt;
+            })
+            ->addColumn('deleted_user', function ($data) {
+
+                $linkToUser = route('user', ['id' => $data->animal_breed_deleted_user_id]);
+                $nameAndSurname = '<a href="' . $linkToUser . '">' . $data->deleted_user_name . ' ' . $data->deleted_user_surname . '</a>';
+                return $nameAndSurname;
+            })
+
+            ->addColumn('action', function ($data) {
                 $actions = '<div class="d-flex">
-                                <button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-yellow border-none edit-species waves-effect waves-light" data-species-id="' . $data->animal_breed_id . '">
+                                <button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-yellow border-none edit-animal-breed waves-effect waves-light" data-animal-breed-id="' . $data->animal_breed_id . '">
                                     <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-danger border-none delete-species waves-effect waves-light" data-species-id="' . $data->animal_breed_id . '">
+                                </button>';
+
+                if ($data->animal_breed_deleted_at) {
+                    $actions .= '<button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-dark-green border-none restore-animal-breed waves-effect waves-light" data-animal-breed-id="' . $data->animal_breed_id . '">
+                                    <i class="fas fa-undo"></i>
+                                </button>';
+                } else {
+                    $actions .= '<button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-danger border-none delete-animal-breed waves-effect waves-light" data-animal-breed-id="' . $data->animal_breed_id . '">
                                     <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </div>';
+                                </button>';
+                }
+                $actions .= '</div>';
                 return $actions;
             })
-            ->rawColumns(['animal_breed_id', 'animal_breed_name', 'animal_species_name', 'count_animals_with_breed', 'breed_description', 'animal_breed_created_at', 'added_user', 'action'])
+            ->rawColumns(['animal_breed_id', 'animal_breed_name', 'animal_species_name', 'count_animals_with_breed', 'breed_description', 'animal_breed_created_at', 'added_user', 'animal_breed_edited_at', 'edited_user', 'animal_breed_deleted_at', 'deleted_user', 'action'])
             ->make(true);
 
         return $datatable;
@@ -498,26 +535,34 @@ class AdminRepository implements AdminRepositoryInterface
 
     public function getBreedsForDatatable()
     {
-        $breedsForDatatable = DB::table('animal_breeds')
+        $breedsForDatatable = DB::table('animal_breeds as ab')
             ->select(
-                'animal_breeds.id AS animal_breed_id',
-                'animal_breeds.name AS animal_breed_name',
-                'animal_breeds.species_id AS animal_breed_species_id',
-                'animal_species.name AS animal_species_name',
-                'animal_breeds.created_at AS animal_breed_created_at',
-                'animal_breeds.created_user_id AS animal_breed_created_user_id',
-                'users.name AS user_name',
-                'users.surname AS user_surname',
-                DB::raw("(SELECT COUNT(animals.id) FROM animals
-                                WHERE animals.breed_id = animal_breeds.id) as count_animals_with_breed"),
-                'animal_breed_descriptions.breed_id AS animal_breed_description_breed_id'
-
-
+                'ab.id AS animal_breed_id',
+                'ab.name AS animal_breed_name',
+                'ab.species_id AS animal_breed_species_id',
+                'asp.name AS animal_species_name',
+                'ab.created_at AS animal_breed_created_at',
+                'ab.created_user_id AS animal_breed_created_user_id',
+                'ab.edited_at AS animal_breed_edited_at',
+                'ab.edited_user_id AS animal_breed_edited_user_id',
+                'ab.deleted_at AS animal_breed_deleted_at',
+                'ab.deleted_user_id AS animal_breed_deleted_user_id',
+                'created_user.name AS created_user_name',
+                'created_user.surname AS created_user_surname',
+                'edited_user.name AS edited_user_name',
+                'edited_user.surname AS edited_user_surname',
+                'deleted_user.name AS deleted_user_name',
+                'deleted_user.surname AS deleted_user_surname',
+                DB::raw("(SELECT COUNT(a.id) FROM animals AS a
+                                WHERE a.breed_id = ab.id) as count_animals_with_breed"),
+                'abd.breed_id AS animal_breed_description_breed_id'
             )
-            ->leftJoin('animal_breed_descriptions', 'animal_breeds.id', '=', 'animal_breed_descriptions.breed_id')
-            ->leftJoin('users', 'animal_breeds.created_user_id', '=', 'users.id')
-            ->leftJoin('animal_species', 'animal_breeds.species_id', '=', 'animal_species.id')
-            ->orderBy('animal_breeds.id', 'asc')
+            ->leftJoin('users AS created_user', 'ab.created_user_id', '=', 'created_user.id')
+            ->leftJoin('users AS edited_user', 'ab.edited_user_id', '=', 'edited_user.id')
+            ->leftJoin('users AS deleted_user', 'ab.deleted_user_id', '=', 'deleted_user.id')
+            ->leftJoin('animal_breed_descriptions AS abd', 'ab.id', '=', 'abd.breed_id')
+            ->leftJoin('animal_species AS asp', 'ab.species_id', '=', 'asp.id')
+            ->orderBy('ab.id', 'asc')
             ->get();
 
         return $breedsForDatatable;
@@ -1772,7 +1817,6 @@ class AdminRepository implements AdminRepositoryInterface
 
     public function getAvailableFursForBreed($request)
     {
-
         $availableFursForBreed = AvailableFurs::select('fur_id')->where('breed_id', '=', $request->animalBreedId)->get();
 
         if ($availableFursForBreed->isEmpty()) {
@@ -1861,17 +1905,6 @@ class AdminRepository implements AdminRepositoryInterface
     public function adminAvailableCharacteristicDictionary()
     {
         $datatable = datatables()->of($this->getAvailableCharacteristicDictionaryForDatatable())
-
-
-//               'achd.id as id',
-//                'chd.id as characteristic_dictionary_id',
-//                'chd.name as characteristic_dictionary_name',
-//                'aspec.id as species_id',
-//                'aspec.name as species_name',
-//                'af.created_at',
-//                'af.updated_at'
-//
-
             ->addColumn('available_characteristic_id', function ($data) {
 
                 $availableCharacteristicDictionaryId = '<span data-available-characteristic-id="' . $data->id . '">' . $data->id . '</span>';
@@ -1934,11 +1967,103 @@ class AdminRepository implements AdminRepositoryInterface
         return $availableCharacteristicDictionaryForDatatable;
     }
 
+    public function getAvailableCharacteristicsForSpecies($request)
+    {
+        $availableCharacteristicsForSpecies = AvailableCharacteristicDictionary::select('characteristic_dictionary_id')->where('species_id', '=', $request->animalSpeciesId)->get();
+
+        if ($availableCharacteristicsForSpecies->isEmpty()) {
+            return response()->json(['errors' => [__('Nie znaleziono dodanych cech dla wskazanego gatinku.')]]);
+
+        }
+
+        return response()->json(['success' => $availableCharacteristicsForSpecies]);
+    }
+
+    public function storeAvailableCharacteristic($request)
+    {
+        $availableCharacteristicForSpecies = AvailableCharacteristicDictionary::select('characteristic_dictionary_id')->where('species_id', '=', $request->speciesId)->get();
+
+        $characteristics = collect($request->characteristics);
+
+        if (!$availableCharacteristicForSpecies->isEmpty()) {
+            $pluckedAvailableCharacteristicForSpecies = $availableCharacteristicForSpecies->pluck('characteristic_dictionary_id');
+            $characteristics = $characteristics->diff($pluckedAvailableCharacteristicForSpecies);
+        }
+
+        DB::beginTransaction();
+
+        try {
+            foreach ($characteristics as $characteristic) {
+                AvailableCharacteristicDictionary::create([
+                    'species_id' => $request->speciesId,
+                    'characteristic_dictionary_id' => $characteristic,
+                    'created_at' => Carbon::now('Europe/Warsaw'),
+                    'updated_at' => null,
+                ]);
+            }
+        } catch (ValidationException $e) {
+            DB::rollback();
+            return response()->json(['errors' => [__('Ups! Coś poszło nie tak.')]]);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['errors' => [__('Ups! Coś poszło nie tak.')]]);
+        }
+
+        DB::commit();
+        return response()->json(['success' => [__('Cechy zostały przypisane do podanego gatunku')]]);
+    }
+
+    public function updateAvailableCharacteristic($request)
+    {
+        DB::beginTransaction();
+
+        try {
+            AvailableCharacteristicDictionary::where('species_id', '=', $request->speciesId)->delete();
+
+            foreach ($request->characteristics as $characteristic) {
+                AvailableCharacteristicDictionary::create([
+                    'species_id' => $request->speciesId,
+                    'characteristic_dictionary_id' => $characteristic,
+                    'created_at' => Carbon::now('Europe/Warsaw'),
+                    'updated_at' => null,
+                ]);
+            }
+        } catch (ValidationException $e) {
+            DB::rollback();
+            return response()->json(['errors' => [__('Ups! Coś poszło nie tak.')]]);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['errors' => [__('Ups! Coś poszło nie tak.')]]);
+        }
+
+        DB::commit();
+        return response()->json(['success' => [__('Cechy zostały przypisane do podanego gatunku')]]);
+    }
+
+    public function deleteAvailableCharacteristic($request)
+    {
+        $isExist = AvailableCharacteristicDictionary::where('id', '=', $request->availableCharacteristicId)->exists();
+
+        if (!$isExist) {
+            return response()->json(['errors' => [__('Nie znaleziono takiej cechy dla podanej rasy.')]]);
+        }
+
+        $availableFur = AvailableCharacteristicDictionary::findOrFail($request->availableCharacteristicId);
+        $availableFur->delete();
+
+        return response()->json(['success' => 'Usuwanie zakończone pomyślnie.']);
+    }
+
     /*
      * TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS
      * TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS
      * TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS
      * */
+
+    public function getSpecies()
+    {
+        return AnimalSpecies::all();
+    }
 
     public function getBreeds()
     {
@@ -1953,6 +2078,11 @@ class AdminRepository implements AdminRepositoryInterface
     public function getFurs()
     {
         return Fur::all();
+    }
+
+    public function getCharacteristics()
+    {
+        return CharacteristicDictionary::all();
     }
 
 

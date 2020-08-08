@@ -511,6 +511,62 @@ class AdminGateway
         }
     }
 
+    public function deleteAvailableCharacteristic($request)
+    {
+        $validator = Validator::make($request->all(), [
+            'availableCharacteristicId' => 'required|integer',
+        ],
+            [
+                'availableCharacteristicId.required' => 'Ups!coś poszło nie tak.',
+                'availableCharacteristicId.integer' => 'Ups!coś poszło nie tak.',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
+        return $this->aR->deleteAvailableCharacteristic($request);
+    }
+
+    public function storeUpdateAvailableCharacteristic($request)
+    {
+        $validator = Validator::make($request->all(), [
+            "speciesId" => "required|integer",
+            "action" => "required|string",
+
+            "characteristics" => "required|array|min:1",
+            "characteristics.*" => "required|integer",
+        ],
+            [
+                'speciesId.required' => 'Ups!coś poszło nie tak.',
+                'speciesId.integer' => 'Ups!coś poszło nie tak.',
+
+                'action.required' => 'Ups!coś poszło nie tak.',
+                'action.string' => 'Ups!coś poszło nie tak.',
+
+                'characteristics.required' => 'Ups! Pole "futro" jest wymagane.',
+                'characteristics.array' => 'Ups!coś poszło nie tak.',
+                'characteristics.min' => 'Wybierz przynajmniej jedną głogość futra.',
+
+                'characteristics.*.required' => 'Ups!coś poszło nie tak.',
+                'characteristics.*.integer' => 'Ups!coś poszło nie tak.',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
+        if ($request->action === 'add') {
+            return $this->aR->storeAvailableCharacteristic($request);
+        } elseif ($request->action === 'edit') {
+            return $this->aR->updateAvailableCharacteristic($request);
+        } else {
+            return response()->json(['errors' => 'Nieprawidłowa operacja.']);
+        }
+    }
+
     public function getAvailableDataForBreed($request)
     {
         $validator = Validator::make($request->all(), [
@@ -533,7 +589,27 @@ class AdminGateway
         } else {
             return response()->json(['errors' => 'Nieprawidłowa operacja.']);
         }
+    }
 
+    public function getAvailableDataForSpecies($request)
+    {
+        $validator = Validator::make($request->all(), [
+            'animalSpeciesId' => 'required|integer',
+        ],
+            [
+                'animalSpeciesId.required' => 'Ups!coś poszło nie tak.',
+                'animalSpeciesId.integer' => 'Ups!coś poszło nie tak.',
+            ]
+        );
 
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
+        if ($request->type === 'characteristics') {
+            return $this->aR->getAvailableCharacteristicsForSpecies($request);
+        } else {
+            return response()->json(['errors' => 'Nieprawidłowa operacja.']);
+        }
     }
 }
