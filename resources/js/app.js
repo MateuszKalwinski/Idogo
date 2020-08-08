@@ -37,6 +37,9 @@ $(document).ready(function () {
         if (module == 'backendAnimalSpecies'){
             new BackendAnimalSpecies(base_url);
         }
+        if (module == 'backendAnimalBreeds'){
+            new BackendAnimalBreeds(base_url);
+        }
         if (module == 'backendAnimalFurs'){
             new BackendAnimalFurs(base_url)
         }
@@ -52,6 +55,7 @@ $(document).ready(function () {
         if (module == 'BackendAvailableCharacteristicDictionary'){
             new BackendAvailableCharacteristicDictionary(base_url);
         }
+
     }
 
     $('.mdb-select').materialSelect({
