@@ -197,7 +197,7 @@
             });
             $('#adminAnimalSizeTable_wrapper .dataTables_filter').find('input').each(function () {
                 const $this = $(this);
-                $this.attr("placeholder", "Search");
+                $this.attr("placeholder", "Szukaj");
                 $this.removeClass('form-control-sm');
             });
             $('#adminAnimalSizeTable_wrapper .dataTables_length').addClass('d-flex flex-row');

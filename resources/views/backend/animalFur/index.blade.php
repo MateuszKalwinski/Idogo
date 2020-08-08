@@ -80,7 +80,7 @@
             </div>
         </div>
 
-        <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="Usuń kolor"
+        <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="Usuń długość futra"
              aria-hidden="true">
             <div class="modal-dialog modal-lg modal-notify mt-5" role="document">
                 <div class="modal-content">
@@ -198,7 +198,7 @@
             });
             $('#adminAnimalFursTable_wrapper .dataTables_filter').find('input').each(function () {
                 const $this = $(this);
-                $this.attr("placeholder", "Search");
+                $this.attr("placeholder", "Szukaj");
                 $this.removeClass('form-control-sm');
             });
             $('#adminAnimalFursTable_wrapper .dataTables_length').addClass('d-flex flex-row');

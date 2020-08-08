@@ -220,7 +220,7 @@
                     });
                     $('#adminAvailableFursTable_wrapper .dataTables_filter').find('input').each(function () {
                         const $this = $(this);
-                        $this.attr("placeholder", "Search");
+                        $this.attr("placeholder", "Szukaj");
                         $this.removeClass('form-control-sm');
                     });
                     $('#adminAvailableFursTable_wrapper .dataTables_length').addClass('d-flex flex-row');
@@ -228,6 +228,7 @@
                     $('#adminAvailableFursTable_wrapper select').removeClass(
                         'custom-select custom-select-sm form-control form-control-sm');
                     $('#adminAvailableFursTable_wrapper select').addClass('mdb-select');
+                    $('#adminAvailableFursTable_wrapper select').materialSelect();
                     $('#adminAvailableFursTable_wrapper .dataTables_filter').find('label').remove();
                 });
             </script>
