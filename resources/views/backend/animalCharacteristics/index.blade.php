@@ -15,38 +15,42 @@
                                 class="btn teal lighten-1 btn-rounded pl-5 pr-5 text-white waves-effect waves-light text-transform-none m-0 mb-3">
                             Dodaj cechę zwierzaka <i class="ml-2 fas fa-lg text-white fa-plus"></i></button>
                     </div>
-                    <table id="adminAnimalCharacteristicsTable" class="table table-striped table-bordered"
-                           cellspacing="0" width="100%">
-                        <thead>
-                        <tr>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="ID rasy">ID</th>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Nazwa cechy zwierzaka">
-                                Nazwa cechy
-                            </th>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data dodania">Data
-                                dodania
-                            </th>
-                            <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
-                                title="Dodane przez użytkowania">Dodał
-                            </th>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data edycji">Data
-                                edycji
-                            </th>
-                            <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
-                                title="Edytowane przez użytkowania">Edytował
-                            </th>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data usunięcia">Data
-                                usunięcia
-                            </th>
-                            <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
-                                title="Usunięte przez użytkowania">Usunął
-                            </th>
-                            <th colspan="th-sm" data-toggle="tooltip" data-placement="top" title="Akcje Usuń/Edytuj">
-                                Akcje
-                            </th>
-                        </tr>
-                        </thead>
-                    </table>
+                    <div class="table-responsive">
+                        <table id="adminAnimalCharacteristicsTable" class="table table-striped table-bordered"
+                               cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th class="th-sm" data-toggle="tooltip" data-placement="top" title="ID rasy">ID</th>
+                                <th class="th-sm" data-toggle="tooltip" data-placement="top"
+                                    title="Nazwa cechy zwierzaka">
+                                    Nazwa cechy
+                                </th>
+                                <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data dodania">Data
+                                    dodania
+                                </th>
+                                <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
+                                    title="Dodane przez użytkowania">Dodał
+                                </th>
+                                <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data edycji">Data
+                                    edycji
+                                </th>
+                                <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
+                                    title="Edytowane przez użytkowania">Edytował
+                                </th>
+                                <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data usunięcia">Data
+                                    usunięcia
+                                </th>
+                                <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
+                                    title="Usunięte przez użytkowania">Usunął
+                                </th>
+                                <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
+                                    title="Akcje Usuń/Edytuj">
+                                    Akcje
+                                </th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

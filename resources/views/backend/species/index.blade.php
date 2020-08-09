@@ -15,44 +15,48 @@
                                 class="btn teal lighten-1 btn-rounded pl-5 pr-5 text-white waves-effect waves-light text-transform-none m-0 mb-3">
                             Dodaj gatunek <i class="ml-2 fas fa-lg text-white fa-plus"></i></button>
                     </div>
-                    <table id="adminSpeciesTable" class="table table-striped table-bordered" cellspacing="0"
-                           width="100%">
-                        <thead>
-                        <tr>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="ID gatunku">ID</th>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Nazwa gatunku">Nazwa
-                            </th>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top"
-                                title="Ilość zwierzaków o danym gatunku">Ilość zwierzaków
-                            </th>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data dodania">Data
-                                dodania
-                            </th>
-                            <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
-                                title="Dodane przez użytkowania">
-                                Dodał
-                            </th>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data edycji">Data edycji
-                            </th>
-                            <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
-                                title="Edytowane przez użytkowania">
-                                Edytował
-                            </th>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data
+                    <div class="table-responsive">
+                        <table id="adminSpeciesTable" class="table table-striped table-bordered" cellspacing="0"
+                               width="100%">
+                            <thead>
+                            <tr>
+                                <th class="th-sm" data-toggle="tooltip" data-placement="top" title="ID gatunku">ID</th>
+                                <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Nazwa gatunku">Nazwa
+                                </th>
+                                <th class="th-sm" data-toggle="tooltip" data-placement="top"
+                                    title="Ilość zwierzaków o danym gatunku">Ilość zwierzaków
+                                </th>
+                                <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data dodania">Data
+                                    dodania
+                                </th>
+                                <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
+                                    title="Dodane przez użytkowania">
+                                    Dodał
+                                </th>
+                                <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data edycji">Data
+                                    edycji
+                                </th>
+                                <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
+                                    title="Edytowane przez użytkowania">
+                                    Edytował
+                                </th>
+                                <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data
                                 usunięcia">Data
-                                usunięcia
-                            </th>
-                            <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
-                                title="Usunięte przez użytkowania">
-                                Usunął
-                            </th>
-                            <th colspan="th-sm" data-toggle="tooltip" data-placement="top" title="Akcje Usuń/Edytuj">
-                                Akcje
-                            </th>
+                                    usunięcia
+                                </th>
+                                <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
+                                    title="Usunięte przez użytkowania">
+                                    Usunął
+                                </th>
+                                <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
+                                    title="Akcje Usuń/Edytuj">
+                                    Akcje
+                                </th>
 
-                        </tr>
-                        </thead>
-                    </table>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
 
@@ -311,7 +315,7 @@
                         data: 'deleted_user',
                         name: 'deleted_user',
                     },
-                     {
+                    {
                         data: 'action',
                         name: 'action',
                         orderable: false,

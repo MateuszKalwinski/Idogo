@@ -14,31 +14,37 @@
                                 class="btn teal lighten-1 btn-rounded pl-5 pr-5 text-white waves-effect waves-light text-transform-none m-0 mb-3">
                             Dodaj cechę do rasy <i class="ml-2 fas fa-lg text-white fa-plus"></i></button>
                     </div>
-                    <table id="adminAvailableCharacteristicTable" class="table table-striped table-bordered" cellspacing="0"
-                           width="100%">
-                        <thead>
-                        <tr>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="ID dostępnej cechy">
-                                ID
-                            </th>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Nazwa gatunku zwierzaka">
-                                Gatunek
-                            </th>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top"
-                                title="Nazwa dostępnej cechy">Cecha
-                            </th>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data dodania">Data
-                                dodania
-                            </th>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data aktualizacja">Data
-                                aktualizacji
-                            </th>
-                            <th colspan="th-sm" data-toggle="tooltip" data-placement="top" title="Akcje Usuń/Edytuj">
-                                Akcje
-                            </th>
-                        </tr>
-                        </thead>
-                    </table>
+                    <div class="table-responsive">
+                        <table id="adminAvailableCharacteristicTable" class="table table-striped table-bordered"
+                               cellspacing="0"
+                               width="100%">
+                            <thead>
+                            <tr>
+                                <th class="th-sm" data-toggle="tooltip" data-placement="top" title="ID dostępnej cechy">
+                                    ID
+                                </th>
+                                <th class="th-sm" data-toggle="tooltip" data-placement="top"
+                                    title="Nazwa gatunku zwierzaka">
+                                    Gatunek
+                                </th>
+                                <th class="th-sm" data-toggle="tooltip" data-placement="top"
+                                    title="Nazwa dostępnej cechy">Cecha
+                                </th>
+                                <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data dodania">Data
+                                    dodania
+                                </th>
+                                <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data aktualizacja">
+                                    Data
+                                    aktualizacji
+                                </th>
+                                <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
+                                    title="Akcje Usuń/Edytuj">
+                                    Akcje
+                                </th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -77,7 +83,8 @@
                                 <div class="col m-2">
                                     <!-- First name -->
                                     <div class="md-form">
-                                        <select id="characteristics" name="characteristics[]" class="mdb-select md-form" multiple
+                                        <select id="characteristics" name="characteristics[]" class="mdb-select md-form"
+                                                multiple
                                                 searchable="Wyszukaj cechy" data-visible-options="10"
                                                 data-max-selected-options="-1">
 

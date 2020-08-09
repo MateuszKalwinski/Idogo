@@ -14,34 +14,41 @@
                                 class="btn teal lighten-1 btn-rounded pl-5 pr-5 text-white waves-effect waves-light text-transform-none m-0 mb-3">
                             Dodaj Futro do rasy <i class="ml-2 fas fa-lg text-white fa-plus"></i></button>
                     </div>
-                    <table id="adminAvailableFursTable" class="table table-striped table-bordered" cellspacing="0"
-                           width="100%">
-                        <thead>
-                        <tr>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="ID dostępnego futra">
-                                ID
-                            </th>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Nazwa gatunku zwierzaka">
-                                Gatunek
-                            </th>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Nazwa rasy zwierzaka">
-                                Rasa
-                            </th>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top"
-                                title="Nazwa dostępnego futra">Futro
-                            </th>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data dodania">Data
-                                dodania
-                            </th>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data aktualizacja">Data
-                                aktualizacji
-                            </th>
-                            <th colspan="th-sm" data-toggle="tooltip" data-placement="top" title="Akcje Usuń/Edytuj">
-                                Akcje
-                            </th>
-                        </tr>
-                        </thead>
-                    </table>
+                    <div class="table-responsive">
+                        <table id="adminAvailableFursTable" class="table table-striped table-bordered" cellspacing="0"
+                               width="100%">
+                            <thead>
+                            <tr>
+                                <th class="th-sm" data-toggle="tooltip" data-placement="top"
+                                    title="ID dostępnego futra">
+                                    ID
+                                </th>
+                                <th class="th-sm" data-toggle="tooltip" data-placement="top"
+                                    title="Nazwa gatunku zwierzaka">
+                                    Gatunek
+                                </th>
+                                <th class="th-sm" data-toggle="tooltip" data-placement="top"
+                                    title="Nazwa rasy zwierzaka">
+                                    Rasa
+                                </th>
+                                <th class="th-sm" data-toggle="tooltip" data-placement="top"
+                                    title="Nazwa dostępnego futra">Futro
+                                </th>
+                                <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data dodania">Data
+                                    dodania
+                                </th>
+                                <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data aktualizacja">
+                                    Data
+                                    aktualizacji
+                                </th>
+                                <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
+                                    title="Akcje Usuń/Edytuj">
+                                    Akcje
+                                </th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
