@@ -52,6 +52,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
 
     Route::get('/','BackendController@index')->name('adminHome');
 
+    Route::get('/addAnimal','AddAnimalController@index')->name('addAnimal');
 
     Route::get('/favourite', 'BackendController@favourite')->name('favourite');
 

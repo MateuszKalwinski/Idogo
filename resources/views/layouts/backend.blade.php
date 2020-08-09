@@ -119,7 +119,7 @@
                     </li>
                     <li><a href="{{route('adminHome')}}" class="collapsible-header waves-effect arrow-r text-decoration-none"><i class="fas fa-dog"></i>Dodane zwierzaki</a>
                     </li>
-                    <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-plus"></i>
+                    <li><a href="{{route('addAnimal')}}" class="collapsible-header waves-effect arrow-r"><i class="fas fa-plus"></i>
                             Dodaj zwierzaka</a>
                     </li>
                     <li><a href="{{route('favourite')}}" class="collapsible-header waves-effect arrow-r"><i class="fas fa-heart"></i>
