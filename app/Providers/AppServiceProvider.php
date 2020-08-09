@@ -111,6 +111,11 @@ class AppServiceProvider extends ServiceProvider
         {
             return new \App\Hipuppy\Repositories\BreedsRepository();
         });
+//        ADD ANIMAL INTERFACE
+        $this->app->bind(\App\Hipuppy\Interfaces\AddAnimalRepositoryInterface::class,function()
+        {
+            return new \App\Hipuppy\Repositories\AddAnimalRepository();
+        });
 
         if ($this->app->environment() !== 'production') {
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
