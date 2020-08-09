@@ -73,6 +73,12 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::get('/adminSpeciesWithGender', 'AdminController@adminSpeciesWithGender')->name('adminSpeciesWithGender');
 
     Route::get('/adminBreeds', 'AdminController@adminBreeds')->name('adminBreeds');
+    Route::post('/adminStoreAnimalBreed', 'AdminController@adminStoreAnimalBreed')->name('adminStoreAnimalBreed');
+    Route::post('/adminUpdateAnimalBreed', 'AdminController@adminUpdateAnimalBreed')->name('adminUpdateAnimalBreed');
+    Route::post('/deleteRestoreAnimalBreed', 'AdminController@deleteRestoreAnimalBreed')->name('deleteRestoreAnimalBreed');
+
+
+
 
     Route::get('/adminAnimals', 'AdminController@adminAnimals')->name('adminAnimals');
 

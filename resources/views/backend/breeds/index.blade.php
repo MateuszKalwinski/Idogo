@@ -14,45 +14,49 @@
                                 class="btn teal lighten-1 btn-rounded pl-5 pr-5 text-white waves-effect waves-light text-transform-none m-0 mb-3">
                             Dodaj rasę <i class="ml-2 fas fa-lg text-white fa-plus"></i></button>
                     </div>
-                    <table id="adminBreedsTable" class="table table-striped table-bordered" cellspacing="0"
-                           width="100%">
-                        <thead>
-                        <tr>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="ID rasy">ID</th>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Nazwa rasy">Nazwa rasy
-                            </th>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Nazwa gatunku">Nazwa
-                                gatunku
-                            </th>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top"
-                                title="Ilość zwierzaków o danej rasie">Ilość zwierzaków
-                            </th>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Opis rasy">Opis rasy
-                            </th>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data dodania">Data
-                                dodania
-                            </th>
-                            <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
-                                title="Dodane przez użytkowania">Dodał
-                            </th>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data edycji">Data
-                                edycji
-                            </th>
-                            <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
-                                title="Edytowane przez użytkowania">Edytował
-                            </th>
-                            <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data usunięcia">Data
-                                usunięcia
-                            </th>
-                            <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
-                                title="Usunięte przez użytkowania">Usunął
-                            </th>
-                            <th colspan="th-sm" data-toggle="tooltip" data-placement="top" title="Akcje Usuń/Edytuj">
-                                Akcje
-                            </th>
-                        </tr>
-                        </thead>
-                    </table>
+                    <div class="table-responsive">
+                        <table id="adminBreedsTable" class="table table-striped table-bordered" cellspacing="0"
+                               width="100%">
+                            <thead>
+                            <tr>
+                                <th class="th-sm" data-toggle="tooltip" data-placement="top" title="ID rasy">ID</th>
+                                <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Nazwa rasy">Nazwa
+                                    rasy
+                                </th>
+                                <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Nazwa gatunku">Nazwa
+                                    gatunku
+                                </th>
+                                <th class="th-sm" data-toggle="tooltip" data-placement="top"
+                                    title="Ilość zwierzaków o danej rasie">Ilość zwierzaków
+                                </th>
+                                <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Opis rasy">Opis rasy
+                                </th>
+                                <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data dodania">Data
+                                    dodania
+                                </th>
+                                <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
+                                    title="Dodane przez użytkowania">Dodał
+                                </th>
+                                <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data edycji">Data
+                                    edycji
+                                </th>
+                                <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
+                                    title="Edytowane przez użytkowania">Edytował
+                                </th>
+                                <th class="th-sm" data-toggle="tooltip" data-placement="top" title="Data usunięcia">Data
+                                    usunięcia
+                                </th>
+                                <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
+                                    title="Usunięte przez użytkowania">Usunął
+                                </th>
+                                <th colspan="th-sm" data-toggle="tooltip" data-placement="top"
+                                    title="Akcje Usuń/Edytuj">
+                                    Akcje
+                                </th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -120,13 +124,13 @@
                     </div>
                     <div class="modal-body">
                         <span id="form_result"></span>
-                        <p id="animalDeleteText" class="text-center">Czy na pewno chcesz usunąć długość furta <span
-                                class="font-weight-bold confirm-animal-fur-name d-none"></span></p>
-                        <p id="animalRestoreText" class="text-center">Czy na pewno chcesz przywrócić długość futra <span
-                                class="font-weight-bold confirm-animal-fur-name d-none"></span></p>
+                        <p id="animalDeleteText" class="text-center">Czy na pewno chcesz usunąć rasę <span
+                                class="font-weight-bold confirm-animal-breed-name d-none"></span></p>
+                        <p id="animalRestoreText" class="text-center">Czy na pewno chcesz przywrócić rasę <span
+                                class="font-weight-bold confirm-animal-breed-name d-none"></span></p>
                         <div class="w-50 mx-auto">
                             <div class="d-flex justify-content-around">
-                                <button type="button" id="confirm-yes" data-animal-fur-id=""
+                                <button type="button" id="confirm-yes" data-animal-breed-id=""
                                         class="btn success-color btn-rounded pl-5 pr-5 text-white waves-effect waves-light text-transform-none m-0 mb-3">
                                     Tak
                                 </button>
@@ -178,6 +182,7 @@
                 select: true,
                 processing: true,
                 serverSide: true,
+                responsive: true,
                 ajax: {
                     url: "{{ route('adminBreeds') }}"
                 },

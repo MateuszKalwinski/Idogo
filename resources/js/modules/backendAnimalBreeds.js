@@ -16,35 +16,39 @@ class BackendAnimalBreeds {
             $('#addEditModalTitle').text('Dodaj rasę')
             $('.modal-header ').addClass('teal lighten-1').removeClass('yellow darken-2')
             $('#breedName').val('');
+            $('#speciesId').val('');
             $('label[for="breedName"]').removeClass('active');
-            $('#action').val('add');
             $('#animalBreedId').val('');
+            $('#action').val('add');
             $('#addEditBreedModal').modal('show')
         })
-        $(document).on('click', '.edit-animal-fur', function () {
-            $('#addEditModalTitle').text('Edytuj długość futra')
+        $(document).on('click', '.edit-animal-breed', function () {
+            $('#addEditModalTitle').text('Edytuj rasę')
             $('.modal-header ').addClass('yellow darken-2').removeClass('teal lighten-1')
-            let animalFurName = $(this).closest('tr').find('.animal-fur-name').text();
-            $('#furName').val(animalFurName);
-            $('label[for="furName"]').addClass('active');
+            let animalBreedName = $(this).closest('tr').find('.animal-breed-name').text();
+            $('#breedName').val(animalBreedName);
+            let speciesId = $(this).closest('tr').find('.animal-species-name').attr('data-animal-species-id');
+            $('#speciesId').val(speciesId);
+
+            $('label[for="breedName"]').addClass('active');
             $('#action').val('edit');
-            let AnimalfurId = $(this).closest('tr').find('.animal-fur-name').attr('data-animal-fur-id');
-            $('#animalFurId').val(AnimalfurId);
-            $('#addEditFurModal').modal('show')
+            let animalBreedId = $(this).closest('tr').find('.animal-breed-name').attr('data-animal-breed-id');
+            $('#animalBreedId').val(animalBreedId);
+            $('#addEditBreedModal').modal('show')
         })
 
-        $('#addEditFur').on('submit', function (e) {
+        $('#addEditBreed').on('submit', function (e) {
             e.preventDefault();
             if ($('#action').val() === 'add') {
-                self.saveAnimalColor(new FormData(this), base_url + "/adminStoreAnimalFur")
+                self.saveAnimalBreed(new FormData(this), base_url + "/adminStoreAnimalBreed")
             } else {
-                self.saveAnimalColor(new FormData(this), base_url + "/adminUpdateAnimalFur")
+                self.saveAnimalBreed(new FormData(this), base_url + "/adminUpdateAnimalBreed")
             }
         })
 
-        $(document).on('click', '.restore-animal-fur, .delete-animal-fur', function () {
+        $(document).on('click', '.restore-animal-breed, .delete-animal-breed', function () {
 
-            if ($(this).hasClass('restore-animal-fur')) {
+            if ($(this).hasClass('restore-animal-breed')) {
                 $('#actionDeleteRestore').val('restore');
                 $('#animalRestoreText').removeClass('d-none').children().removeClass('d-none');
                 $('#animalDeleteText').addClass('d-none').children().addClass('d-none')
@@ -56,24 +60,23 @@ class BackendAnimalBreeds {
                 $('#confirmModalHeader').addClass('danger-color').removeClass('green darken-2 teal lighten-1 yellow darken-2')
             }
 
-            let animalFurId = $(this).closest('tr').find('.animal-fur-name').attr('data-animal-fur-id');
-            $('#confirm-yes').attr('data-animal-fur-id', animalFurId);
-            let animalFurName = $(this).closest('tr').find('.animal-fur-name').text();
-            $('.confirm-animal-fur-name').text(animalFurName);
+            let animalBreedId = $(this).closest('tr').find('.animal-breed-name').attr('data-animal-breed-id');
+            $('#confirm-yes').attr('data-animal-breed-id', animalBreedId);
+            let animalBreedName = $(this).closest('tr').find('.animal-breed-name').text();
+            $('.confirm-animal-breed-name').text(animalBreedName);
             $('#confirmModal').modal('show');
         })
 
         $('#confirm-yes').on('click', function () {
-            console.log($('#confirm-yes'));
-            let animalFurId = $('#confirm-yes').attr('data-animal-fur-id');
+            let animalBreedId = $('#confirm-yes').attr('data-animal-breed-id');
             let action = $('#actionDeleteRestore').val();
 
-            self.deleteRestoreAnimalFur(animalFurId, action, base_url + "/deleteRestoreAnimalFur");
+            self.deleteRestoreAnimalBreed(animalBreedId, action, base_url + "/deleteRestoreAnimalBreed");
 
         })
     }
 
-    deleteRestoreAnimalFur(animalFurId, action, url) {
+    deleteRestoreAnimalBreed(animalBreedId, action, url) {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -84,7 +87,7 @@ class BackendAnimalBreeds {
             type: 'POST',
             url: url,
             data: {
-                animalFurId: animalFurId,
+                animalBreedId: animalBreedId,
                 action: action,
             },
             dataType: 'json',
@@ -105,7 +108,7 @@ class BackendAnimalBreeds {
                 }
                 if (data.success) {
                     html = '<div class="alert alert-success">' + data.success + '</div>';
-                    $('#adminAnimalFursTable').DataTable().ajax.reload();
+                    $('#adminBreedsTable').DataTable().ajax.reload();
                 }
                 $('#form_result').html(html);
             },
@@ -120,7 +123,7 @@ class BackendAnimalBreeds {
         });
     }
 
-    saveAnimalColor(formData, url) {
+    saveAnimalBreed(formData, url) {
         $.ajax({
             url: url,
             method: "POST",
@@ -140,8 +143,9 @@ class BackendAnimalBreeds {
                 }
                 if (data.success) {
                     html = '<div class="alert alert-success">' + data.success + '</div>';
-                    $('#furName').val('');
-                    $('#adminAnimalFursTable').DataTable().ajax.reload();
+                    $('#speciesId').val('');
+                    $('#breedName').val('');
+                    $('#adminBreedsTable').DataTable().ajax.reload();
                 }
                 $('#form_result').html(html);
             }
