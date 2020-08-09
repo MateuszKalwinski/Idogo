@@ -8,6 +8,8 @@ class AnimalBreed extends Model
 {
 
     public $table = 'animal_breeds';
+    public $timestamps = false;
+    protected $fillable = ['species_id', 'name', 'created_at', 'created_user_id', 'edited_at', 'edited_user_id', 'deleted_at', 'deleted_user_id'];
 
     public function animal()
     {
