@@ -20,7 +20,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b2f87717-95e0-42d1-82e3-9be85e76505a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/Hipuppy/Gateways/AddAnimalGateway.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Hipuppy/Interfaces/AddAnimalRepositoryInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Hipuppy/Repositories/AddAnimalRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/backend/addAnimal/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Hipuppy/Repositories/FrontendRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Hipuppy/Repositories/FrontendRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/profile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/backend.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/backend.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/indexFronend.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/indexFronend.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,19 +186,19 @@
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/backend" />
+      <recent name="$PROJECT_DIR$/public/components" />
+      <recent name="$PROJECT_DIR$/public/images" />
+      <recent name="$PROJECT_DIR$/resources/sass" />
+      <recent name="$PROJECT_DIR$/public" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/resources/views/backend/availableCharacteristicDictionary" />
       <recent name="$PROJECT_DIR$/resources/views/backend/availableFurs" />
       <recent name="$PROJECT_DIR$/resources/views/backend/animalSize" />
       <recent name="$PROJECT_DIR$/resources/views/backend/animalFur" />
       <recent name="$PROJECT_DIR$/resources/views/backend/animalColors" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/public/components" />
-      <recent name="$PROJECT_DIR$/public/images" />
-      <recent name="$PROJECT_DIR$/resources/sass" />
-      <recent name="$PROJECT_DIR$/public" />
-      <recent name="$PROJECT_DIR$/resources/js" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -465,7 +475,7 @@
       <workItem from="1596826456157" duration="8782000" />
       <workItem from="1596894975770" duration="6121000" />
       <workItem from="1596912581453" duration="7802000" />
-      <workItem from="1596985678983" duration="862000" />
+      <workItem from="1596985678983" duration="5024000" />
     </task>
     <task id="LOCAL-00001" summary="basic functionalities">
       <created>1586718573109</created>
@@ -528,6 +538,10 @@
       <screen x="3200" y="0" width="1920" height="1080" />
     </state>
     <state x="3896" y="380" width="518" height="317" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1590241353563" />
+    <state width="254" height="195" key="DatabaseViewActions_Filter" timestamp="1596987456066">
+      <screen x="1280" y="0" width="1920" height="1080" />
+    </state>
+    <state width="254" height="195" key="DatabaseViewActions_Filter/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1596987456066" />
     <state x="1380" y="98" width="1720" height="882" key="DiffContextDialog" timestamp="1596967357496">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
@@ -536,25 +550,25 @@
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
     <state x="2023" y="297" width="424" height="484" key="FileChooserDialogImpl/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1594572158191" />
-    <state width="0" height="0" key="GridCell.Tab.0.bottom" timestamp="1596986456200">
+    <state width="1291" height="287" key="GridCell.Tab.0.bottom" timestamp="1596987553606">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="0" height="0" key="GridCell.Tab.0.bottom/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1596986456200" />
+    <state width="1291" height="287" key="GridCell.Tab.0.bottom/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1596987553606" />
     <state width="1874" height="127" key="GridCell.Tab.0.bottom/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1594479644780" />
-    <state width="0" height="0" key="GridCell.Tab.0.center" timestamp="1596986456200">
+    <state width="1291" height="287" key="GridCell.Tab.0.center" timestamp="1596987553606">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="0" height="0" key="GridCell.Tab.0.center/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1596986456200" />
+    <state width="1291" height="287" key="GridCell.Tab.0.center/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1596987553606" />
     <state width="1874" height="127" key="GridCell.Tab.0.center/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1594479644780" />
-    <state width="0" height="0" key="GridCell.Tab.0.left" timestamp="1596986456200">
+    <state width="1291" height="287" key="GridCell.Tab.0.left" timestamp="1596987553606">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="0" height="0" key="GridCell.Tab.0.left/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1596986456200" />
+    <state width="1291" height="287" key="GridCell.Tab.0.left/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1596987553606" />
     <state width="1874" height="127" key="GridCell.Tab.0.left/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1594479644780" />
-    <state width="0" height="0" key="GridCell.Tab.0.right" timestamp="1596986456200">
+    <state width="1291" height="287" key="GridCell.Tab.0.right" timestamp="1596987553606">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state width="0" height="0" key="GridCell.Tab.0.right/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1596986456200" />
+    <state width="1291" height="287" key="GridCell.Tab.0.right/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1596987553606" />
     <state width="1874" height="127" key="GridCell.Tab.0.right/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1594479644780" />
     <state width="263" height="500" key="HiddenNamespacesPopup" timestamp="1589646396520">
       <screen x="1280" y="0" width="1920" height="1080" />
@@ -581,20 +595,20 @@
     </state>
     <state x="1454" y="326" width="1421" height="716" key="dock-window-2/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1594322998657" />
     <state x="3374" y="326" width="1421" height="716" key="dock-window-2/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1594465646071" />
-    <state x="1505" y="113" width="1311" height="807" key="find.popup" timestamp="1596968155811">
+    <state x="1505" y="113" width="1311" height="807" key="find.popup" timestamp="1596986754151">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state x="1505" y="113" width="1311" height="807" key="find.popup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1596968155811" />
+    <state x="1505" y="113" width="1311" height="807" key="find.popup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1596986754151" />
     <state x="3478" y="273" width="1311" height="807" key="find.popup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1594489078993" />
-    <state x="1904" y="246" width="672" height="677" key="run.anything.popup" timestamp="1596970466436">
+    <state x="1904" y="246" width="672" height="677" key="run.anything.popup" timestamp="1596987829862">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state x="1904" y="246" width="672" height="677" key="run.anything.popup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1596970466436" />
+    <state x="1904" y="246" width="672" height="677" key="run.anything.popup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1596987829862" />
     <state x="3824" y="246" width="672" height="677" key="run.anything.popup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1594489268751" />
-    <state x="1903" y="237" width="672" height="678" key="search.everywhere.popup" timestamp="1596486911433">
+    <state x="1903" y="237" width="672" height="678" key="search.everywhere.popup" timestamp="1596988823217">
       <screen x="1280" y="0" width="1920" height="1080" />
     </state>
-    <state x="1903" y="237" width="672" height="678" key="search.everywhere.popup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1596486911433" />
+    <state x="1903" y="237" width="672" height="678" key="search.everywhere.popup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@1280.0.1920.1080" timestamp="1596988823217" />
     <state x="3823" y="237" width="672" height="678" key="search.everywhere.popup/0.83.1280.956/1280.0.1920.1080/3200.0.1920.1080@3200.0.1920.1080" timestamp="1590264344805" />
   </component>
 </project>

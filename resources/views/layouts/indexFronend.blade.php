@@ -35,7 +35,7 @@
 <header class="position-relative bg-mask ">
     <div class="overflow-hidden video-overview position-absolute w-100 h-100" style="bottom: 0; z-index: -1;">
         <video muted="muted" src="{{asset('images/footage/mainfootage.mp4')}}" autoplay="autoplay" loop="loop"
-               playsinline="" class="w-100 video-position position-absolute">
+               playsinline="" class="w-100 video-position">
             <div class="w-100 h-100"></div>
         </video>
     </div>

@@ -6,13 +6,9 @@ use App\{Animal,
     AnimalSpecies,
     Article,
     City,
-    Comment,
     Phone,
-    Reservation,
-    Room,
     Shelter,
     ShelterApplication,
-    TouristObject,
     User,
     ViolationReport};
 use App\Hipuppy\Interfaces\FrontendRepositoryInterface;

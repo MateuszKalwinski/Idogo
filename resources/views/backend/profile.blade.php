@@ -3,7 +3,7 @@
 
 @section('content')
 <div id="ModuleName" data-moduleName="backendProfile">
-    <div class="container mb-4">
+    <div class="container mb-4 min-vh-100">
         <div class="row">
             <div class="col-lg-12 col-md-12 mb-4">
                 <h2 class="color-mid-grey">Dane osobowe</h2>
