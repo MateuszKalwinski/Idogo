@@ -106,6 +106,27 @@ class AdminController extends Controller
         return view('backend.breeds.index');
     }
 
+    public function adminStoreAnimalBreed(Request $request)
+    {
+        $storeAnimalBreed = $this->aG->storeAnimalBreed($request);
+
+        return $storeAnimalBreed;
+    }
+
+    public function adminUpdateAnimalBreed(Request $request)
+    {
+        $updateAnimalBreed = $this->aG->updateAnimalBreed($request);
+
+        return $updateAnimalBreed;
+    }
+
+    public function deleteRestoreAnimalBreed(Request $request)
+    {
+        $deleteRestoreAnimalBreed = $this->aG->deleteRestoreAnimalBreed($request);
+
+        return $deleteRestoreAnimalBreed;
+    }
+
     public function adminAnimals()
     {
         if (request()->ajax()) {

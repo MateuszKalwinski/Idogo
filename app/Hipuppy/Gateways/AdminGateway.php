@@ -252,6 +252,86 @@ class AdminGateway
         return $this->aR->restoreAnimalSpecies($request);
     }
 
+    public function storeAnimalBreed($request)
+    {
+        $validator = Validator::make($request->all(), [
+            'breedName' => 'required|string|max:255',
+            'speciesId' => 'required|integer'
+        ],
+            [
+                'breedName.required' => __('Pole "rasa" jest wymagane.'),
+                'breedName.string' => __('Pole "rasa" musi być typu tekstowego.'),
+                'breedName.max' => __('Pole "rasa" nie może mieć więcej niż 255 znaków.'),
+
+                'speciesId.required' => __('Pole "gatunek" jest wymagane.'),
+                'speciesId.integer' => __('Ups!coś poszło nie tak.'),
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
+        return $this->aR->storeAnimalBreed($request);
+    }
+
+    public function updateAnimalBreed($request)
+    {
+        $validator = Validator::make($request->all(), [
+            'animalBreedId' => 'required|integer',
+            'breedName' => 'required|string|max:255',
+            'speciesId' => 'required|integer'
+        ],
+            [
+                'animalBreedId.required' => __('Ups!coś poszło nie tak.'),
+                'animalBreedId.integer' => __('Ups!coś poszło nie tak.'),
+
+                'breedName.required' => __('Pole "rasa" jest wymagane.'),
+                'breedName.string' => __('Pole "rasa" musi być typu tekstowego.'),
+                'breedName.max' => __('Pole "rasa" nie może mieć więcej niż 255 znaków.'),
+
+                'speciesId.required' => __('Pole "gatunek" jest wymagane.'),
+                'speciesId.integer' => __('Ups!coś poszło nie tak.'),
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
+        return $this->aR->updateAnimalBreed($request);
+    }
+
+    public function deleteRestoreAnimalBreed($request)
+    {
+        $validator = Validator::make($request->all(), [
+            'animalBreedId' => 'required|integer',
+            'action' => 'required|string',
+        ],
+            [
+                'animalBreedId.required' => 'Ups!coś poszło nie tak.',
+                'animalBreedId.integer' => 'Ups!coś poszło nie tak.',
+
+                'action.required' => 'Ups!coś poszło nie tak.',
+                'action.string' => 'Ups!coś poszło nie tak.',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
+        if ($request->action === 'delete') {
+            $executeActionResult = $this->aR->deleteAnimalBreed($request);
+        } elseif ($request->action === 'restore') {
+            $executeActionResult = $this->aR->restoreAnimalBreed($request);
+        } else {
+            return response()->json(['errors' => [__('Ups!coś poszło nie tak.')]]);
+        }
+
+        return $executeActionResult;
+    }
+
     public function storeAnimalFur($request)
     {
         $validator = Validator::make($request->all(), [

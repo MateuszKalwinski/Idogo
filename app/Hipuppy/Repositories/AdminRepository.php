@@ -3,7 +3,8 @@
 namespace App\Hipuppy\Repositories;
 
 use App\{Hipuppy\Interfaces\AdminRepositoryInterface};
-use App\{AnimalColor,
+use App\{AnimalBreed,
+    AnimalColor,
     AnimalSpecies,
     AvailableCharacteristicDictionary,
     AvailableFurs,
@@ -488,27 +489,34 @@ class AdminRepository implements AdminRepositoryInterface
             })
             ->addColumn('animal_breed_edited_at', function ($data) {
 
-                $animalBreedEditedAt = '<span>' . $data->animal_breed_edited_at . '</span>';
+                $animalBreedEditedAt = ($data->animal_breed_edited_at) ? '<span>' . $data->animal_breed_edited_at . '</span>' : '<span>Brak</span>';
                 return $animalBreedEditedAt;
             })
             ->addColumn('edited_user', function ($data) {
 
-                $linkToUser = route('user', ['id' => $data->animal_breed_edited_user_id]);
-                $nameAndSurname = '<a href="' . $linkToUser . '">' . $data->edited_user_name . ' ' . $data->edited_user_surname . '</a>';
+                if ($data->animal_breed_edited_user_id) {
+                    $linkToUser = route('user', ['id' => $data->animal_breed_edited_user_id]);
+                    $nameAndSurname = '<a href="' . $linkToUser . '">' . $data->edited_user_name . ' ' . $data->edited_user_surname . '</a>';
+                } else {
+                    $nameAndSurname = '<span>Brak</span>';
+                }
                 return $nameAndSurname;
             })
             ->addColumn('animal_breed_deleted_at', function ($data) {
 
-                $animalBreedDeletedAt = '<span>' . $data->animal_breed_deleted_at . '</span>';
+                $animalBreedDeletedAt = ($data->animal_breed_deleted_at) ? '<span>' . $data->animal_breed_deleted_at . '</span>' : '<span>Brak</span>';
                 return $animalBreedDeletedAt;
             })
             ->addColumn('deleted_user', function ($data) {
 
-                $linkToUser = route('user', ['id' => $data->animal_breed_deleted_user_id]);
-                $nameAndSurname = '<a href="' . $linkToUser . '">' . $data->deleted_user_name . ' ' . $data->deleted_user_surname . '</a>';
+                if ($data->animal_breed_deleted_user_id) {
+                    $linkToUser = route('user', ['id' => $data->animal_breed_deleted_user_id]);
+                    $nameAndSurname = '<a href="' . $linkToUser . '">' . $data->deleted_user_name . ' ' . $data->deleted_user_surname . '</a>';
+                } else {
+                    $nameAndSurname = '<span>Brak</span>';
+                }
                 return $nameAndSurname;
             })
-
             ->addColumn('action', function ($data) {
                 $actions = '<div class="d-flex">
                                 <button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-yellow border-none edit-animal-breed waves-effect waves-light" data-animal-breed-id="' . $data->animal_breed_id . '">
@@ -1229,6 +1237,76 @@ class AdminRepository implements AdminRepositoryInterface
         ]);
 
         return response()->json(['success' => __('Przywracanie zakończone pomyślnie.')]);
+    }
+
+    public function storeAnimalBreed($request)
+    {
+        $isExist = AnimalBreed::where('name', '=', $request->breedName)->where('species_id', '=', $request->speciesId)->exists();
+
+        if ($isExist) {
+            return response()->json(['errors' => [__('Taka rasa już istnieje.')]]);
+        }
+
+        AnimalBreed::create([
+            'species_id' => $request->speciesId,
+            'name' => $request->breedName,
+            'created_at' => Carbon::now('Europe/Warsaw'),
+            'created_user_id' => Auth::user()->id,
+        ]);
+
+        return response()->json(['success' => __('Dodano nową rasę.')]);
+    }
+
+    public function updateAnimalBreed($request)
+    {
+        $isExist = AnimalBreed::where('name', '=', $request->breedName)->where('species_id', '=', $request->speciesId)->where('id', '!=', $request->animalBreedId)->exists();
+
+        if ($isExist) {
+            return response()->json(['errors' => [__('Taka rasa już istnieje.')]]);
+        }
+
+        AnimalBreed::where('id', '=', $request->animalBreedId)->update([
+            'species_id' => $request->speciesId,
+            'name' => $request->breedName,
+            'edited_at' => Carbon::now('Europe/Warsaw'),
+            'edited_user_id' => Auth::user()->id,
+        ]);
+
+
+        return response()->json(['success' => __('Edycja zakończona pomyślnie.')]);
+    }
+
+    public function deleteAnimalBreed($request)
+    {
+        $isExist = AnimalBreed::where('id', '=', $request->animalBreedId)->exists();
+
+        if (!$isExist) {
+            return response()->json(['errors' => [__('Nie znaleziono takiej rasy')]]);
+        }
+
+        AnimalBreed::where('id', '=', $request->animalBreedId)->update([
+            'deleted_at' => Carbon::now('Europe/Warsaw'),
+            'deleted_user_id' => Auth::user()->id,
+        ]);
+
+        return response()->json(['success' => 'Usuwanie zakończone pomyślnie.']);
+    }
+
+    public function restoreAnimalBreed($request)
+    {
+
+        $isExist = AnimalBreed::where('id', '=', $request->animalBreedId)->exists();
+
+        if (!$isExist) {
+            return response()->json(['errors' => [__('Nie znaleziono takiej rasy.')]]);
+        }
+
+        AnimalBreed::where('id', '=', $request->animalBreedId)->update([
+            'deleted_at' => null,
+            'deleted_user_id' => null,
+        ]);
+
+        return response()->json(['success' => 'Przywracanie zakończone pomyślnie.']);
     }
 
     public function adminAnimalFur()
