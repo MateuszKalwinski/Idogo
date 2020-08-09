@@ -77,6 +77,7 @@
                 select: true,
                 processing: true,
                 serverSide: true,
+                responsive: true,
                 ajax: {
                     url: "{{ route('adminUsers') }}"
                 },

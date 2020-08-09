@@ -79,6 +79,7 @@
                 order: [[0, "desc"]],
                 processing: true,
                 serverSide: true,
+                responsive: true,
                 ajax: {
                     url: "{{ route('adminViolationReports') }}"
                 },
