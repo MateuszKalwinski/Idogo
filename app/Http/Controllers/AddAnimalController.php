@@ -22,4 +22,27 @@ class AddAnimalController extends Controller
     {
         return view('backend.addAnimal.index');
     }
+
+    public function getSpeciesForAddAnimal(Request $request)
+    {
+
+        $speciesForAddAnimal = $this->aaG->getSpeciesForAddAnimal($request);
+
+        return $speciesForAddAnimal;
+
+    }
+
+    public function getGendersForAddAnimal()
+    {
+        $gendersForAddAnimal = $this->aaR->getGendersForAddAnimal();
+
+        return $gendersForAddAnimal;
+    }
+
+    public function getSizesForAddAnimal()
+    {
+        $sizesForAddAnimal = $this->aaR->getSizesForAddAnimal();
+
+        return $sizesForAddAnimal;
+    }
 }
