@@ -16,4 +16,21 @@ class AddAnimalGateway
     {
         $this->aaR = $aaR;
     }
+
+    public function getSpeciesForAddAnimal($request)
+    {
+        $validator = Validator::make($request->all(), [
+            'speciesId' => 'nullable|integer',
+        ],
+            [
+                'speciesId.integer' => __('Ups!coś poszło nie tak.'),
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
+        return $this->aaR->getSpeciesForAddAnimal($request);
+    }
 }
