@@ -1181,6 +1181,7 @@ class AdminRepository implements AdminRepositoryInterface
 
         AnimalSpecies::create([
             'name' => $request->speciesName,
+            'icon' => null,
             'created_at' => Carbon::now('Europe/Warsaw'),
             'created_user_id' => Auth::user()->id,
         ]);
