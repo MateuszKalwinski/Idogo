@@ -85,7 +85,6 @@
                                     </div>
                                 </div>
                                 <div class="col m-2">
-                                    <!-- First name -->
                                     <div class="md-form">
                                         <select id="colors" name="colors[]" class="mdb-select md-form" multiple
                                                 searchable="Wyszukaj kolor/y" data-visible-options="10"
