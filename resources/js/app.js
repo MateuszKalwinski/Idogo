@@ -56,7 +56,7 @@ $(document).ready(function () {
             new BackendAvailableCharacteristicDictionary(base_url);
         }
         if (module == 'backendAddAnimal'){
-            new backendAddAnimal(base_url);
+            new BackendAddAnimal(base_url);
         }
 
     }

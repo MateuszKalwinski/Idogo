@@ -39,7 +39,6 @@ Route::get(trans('routes.user').'/{id}','FrontendController@user')->name('user')
 Route::get(trans('routes.city').'/{id}','FrontendController@city')->name('city');
 Route::get(trans('routes.province').'/{id}','FrontendController@province')->name('province');
 
-
 Route::get(trans('routes.joinShelter'), 'FrontendController@joinShelter')->name('joinShelter');
 Route::post('joinShelterForm', 'FrontendController@joinShelterForm')->name('joinShelterForm');
 
@@ -53,6 +52,9 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::get('/','BackendController@index')->name('adminHome');
 
     Route::get('/addAnimal','AddAnimalController@index')->name('addAnimal');
+    Route::post('/getSpeciesForAddAnimal', 'AddAnimalController@getSpeciesForAddAnimal')->name('getSpeciesForAddAnimal');
+    Route::post('/getGendersForAddAnimal', 'AddAnimalController@getGendersForAddAnimal')->name('getGendersForAddAnimal');
+    Route::post('/getSizesForAddAnimal', 'AddAnimalController@getSizesForAddAnimal')->name('getSizesForAddAnimal');
 
     Route::get('/favourite', 'BackendController@favourite')->name('favourite');
 
