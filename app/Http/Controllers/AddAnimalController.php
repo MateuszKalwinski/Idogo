@@ -25,10 +25,21 @@ class AddAnimalController extends Controller
 
     public function getSpeciesForAddAnimal(Request $request)
     {
+        $request->request->add(['type' => 'species']);
 
         $speciesForAddAnimal = $this->aaG->getSpeciesForAddAnimal($request);
 
         return $speciesForAddAnimal;
+
+    }
+
+    public function getBreedsForAddAnimal(Request $request)
+    {
+        $request->request->add(['type' => 'breeds']);
+
+        $breedsForAddAnimal = $this->aaG->getSpeciesForAddAnimal($request);
+
+        return $breedsForAddAnimal;
 
     }
 
@@ -44,5 +55,13 @@ class AddAnimalController extends Controller
         $sizesForAddAnimal = $this->aaR->getSizesForAddAnimal();
 
         return $sizesForAddAnimal;
+    }
+
+    public function getColorsForAddAnimal(Request $request){
+        $request->request->add(['type' => 'species']);
+
+        $speciesForAddAnimal = $this->aaG->getSpeciesForAddAnimal($request);
+
+        return $speciesForAddAnimal;
     }
 }
