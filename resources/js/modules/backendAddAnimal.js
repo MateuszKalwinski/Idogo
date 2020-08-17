@@ -3,12 +3,11 @@ class BackendAddAnimal {
     constructor(base_url) {
         this.init(base_url);
         this.getSpecies();
-        this.getBreeds(base_url);
-        this.getGenders(base_url);
-        this.getSizes(base_url);
-        this.getFurs(base_url);
-        this.getColors(base_url);
-        this.getCharacteristics(base_url);
+        this.getGenders();
+        this.getSizes();
+        this.getFurs();
+
+        this.getCharacteristics();
     }
 
     init(base_url) {
@@ -18,6 +17,15 @@ class BackendAddAnimal {
     UX() {
         let self = this;
 
+        $('#speciesId').on('change', function () {
+            let speciesId = $('#speciesId').val();
+            self.getBreeds(speciesId)
+        });
+
+        $('#breedId').on('change', function (){
+           let breedId = $('#breedId').val();
+            self.getColors(breedId);
+        });
     }
 
     getSpecies(speciesId = null){
@@ -67,8 +75,51 @@ class BackendAddAnimal {
         })
     }
 
-    getBreeds(base_url, speciesId = null){
+    getBreeds(speciesId = null){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: base_url + "/getBreedsForAddAnimal",
+            method:"POST",
+            data: {
+                speciesId: speciesId,
+            },
+            cache:true,
+            dataType:"json",
+            beforeSend: function () {
 
+            },
+            success:function(data)
+            {
+                var html = '';
+                if(data.errors)
+                {
+                    html = '<div class="alert alert-danger">';
+                    for(var count = 0; count < data.errors.length; count++)
+                    {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+
+                }else {
+
+                    $('#breedId').children().remove();
+
+                    $('#breedId').append('<option value="" disabled selected>Wybierz rasę *</option>');
+                    for (let i=0; i<data.success.length; i++){
+
+                        $('#breedId').append('<option value="'+ data.success[i].id +'">'+ data.success[i].name +'</option>');
+                    }
+                }
+                $('#form_result').html(html);
+            },
+            complete: function () {
+
+            },
+        })
     }
 
     getGenders(){
@@ -116,7 +167,7 @@ class BackendAddAnimal {
         })
     }
 
-    getSizes(base_url){
+    getSizes(){
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -165,8 +216,51 @@ class BackendAddAnimal {
 
     }
 
-    getColors(base_url){
+    getColors(breedId){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: base_url + "/getColorsForAddAnimal",
+            method:"POST",
+            data: {
+                breedId: breedId
+            },
+            cache:true,
+            dataType:"json",
+            beforeSend: function () {
 
+            },
+            success:function(data)
+            {
+                var html = '';
+                if(data.errors)
+                {
+                    html = '<div class="alert alert-danger">';
+                    for(var count = 0; count < data.errors.length; count++)
+                    {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+
+                }else {
+
+                    $('#animalColor').children().remove();
+
+                    $('#animalColor').append('<option value="" disabled selected>Wybierz kolor futra</option>');
+                    for (let i=0; i<data.success.length; i++){
+
+                        $('#animalColor').append('<option value="'+ data.success[i].id +'">'+ data.success[i].name +'</option>');
+                    }
+                }
+                $('#form_result').html(html);
+            },
+            complete: function () {
+
+            },
+        })
     }
 
     getCharacteristics(base_url){
