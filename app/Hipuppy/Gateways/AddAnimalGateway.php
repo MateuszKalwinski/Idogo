@@ -31,6 +31,18 @@ class AddAnimalGateway
             return response()->json(['errors' => $validator->errors()->all()]);
         }
 
-        return $this->aaR->getSpeciesForAddAnimal($request);
+        if ($request->type === 'species') {
+            return $this->aaR->getSpeciesForAddAnimal($request);
+        } elseif ($request->type === 'breeds') {
+            return $this->aaR->getBreedsForAddAnimal($request);
+        } else {
+            return response()->json(['errors' => [__('Ups!coś poszło nie tak.')]]);
+        }
+
+    }
+
+    public function getBreedsForAddAnimal($request)
+    {
+
     }
 }
