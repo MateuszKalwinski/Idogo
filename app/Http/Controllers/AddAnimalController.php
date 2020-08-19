@@ -25,9 +25,7 @@ class AddAnimalController extends Controller
 
     public function getSpeciesForAddAnimal(Request $request)
     {
-        $request->request->add(['type' => 'species']);
-
-        $speciesForAddAnimal = $this->aaG->getSpeciesForAddAnimal($request);
+        $speciesForAddAnimal = $this->aaG->getDataSpeciesForAddAnimal($request);
 
         return $speciesForAddAnimal;
 
@@ -35,9 +33,7 @@ class AddAnimalController extends Controller
 
     public function getBreedsForAddAnimal(Request $request)
     {
-        $request->request->add(['type' => 'breeds']);
-
-        $breedsForAddAnimal = $this->aaG->getSpeciesForAddAnimal($request);
+        $breedsForAddAnimal = $this->aaG->getDataSpeciesForAddAnimal($request);
 
         return $breedsForAddAnimal;
 
@@ -57,11 +53,29 @@ class AddAnimalController extends Controller
         return $sizesForAddAnimal;
     }
 
-    public function getColorsForAddAnimal(Request $request){
-        $request->request->add(['type' => 'species']);
+    public function getColorsForAddAnimal(Request $request)
+    {
+        $validateBreedId = $this->aaG->getDataBreedForAddAnimal($request);
 
-        $speciesForAddAnimal = $this->aaG->getSpeciesForAddAnimal($request);
+        if ($validateBreedId === 'ok') {
+            $colorsForAddAnimal = $this->aaR->getColorsForAddAnimal($request);
+        } else {
+            return $validateBreedId;
+        }
 
-        return $speciesForAddAnimal;
+        return $colorsForAddAnimal;
+    }
+
+    public function getFursForAddAnimal(Request $request)
+    {
+        $validateBreedId = $this->aaG->getDataBreedForAddAnimal($request);
+
+        if ($validateBreedId == 'ok') {
+            $fursForAddAnimal = $this->aaR->getFursForAddAnimal($request);
+        } else {
+            return $validateBreedId;
+        }
+
+        return $fursForAddAnimal;
     }
 }

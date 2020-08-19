@@ -57,6 +57,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::post('/getGendersForAddAnimal', 'AddAnimalController@getGendersForAddAnimal')->name('getGendersForAddAnimal');
     Route::post('/getSizesForAddAnimal', 'AddAnimalController@getSizesForAddAnimal')->name('getSizesForAddAnimal');
     Route::post('/getColorsForAddAnimal', 'AddAnimalController@getColorsForAddAnimal')->name('getColorsForAddAnimal');
+    Route::post('/getFursForAddAnimal', 'AddAnimalController@getFursForAddAnimal')->name('getFursForAddAnimal');
 
     Route::get('/favourite', 'BackendController@favourite')->name('favourite');
 
