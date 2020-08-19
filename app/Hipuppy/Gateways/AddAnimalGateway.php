@@ -17,7 +17,7 @@ class AddAnimalGateway
         $this->aaR = $aaR;
     }
 
-    public function getSpeciesForAddAnimal($request)
+    public function getDataSpeciesForAddAnimal($request)
     {
         $validator = Validator::make($request->all(), [
             'speciesId' => 'nullable|integer',
@@ -38,11 +38,22 @@ class AddAnimalGateway
         } else {
             return response()->json(['errors' => [__('Ups!coś poszło nie tak.')]]);
         }
-
     }
 
-    public function getBreedsForAddAnimal($request)
-    {
+    public function getDataBreedForAddAnimal($request){
+        $validator = Validator::make($request->all(), [
+            'breedId' => 'required|integer',
+        ],
+            [
+                'breedId.required' => __('Ups!coś poszło nie tak.'),
+                'breedId.integer' => __('Ups!coś poszło nie tak.'),
+            ]
+        );
 
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
+        return 'ok';
     }
 }

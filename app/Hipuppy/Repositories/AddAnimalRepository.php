@@ -16,6 +16,7 @@ use App\{AnimalBreed,
     AvailableColors,
     Gender
 };
+use Illuminate\Support\Facades\DB;
 
 class AddAnimalRepository implements AddAnimalRepositoryInterface
 {
@@ -77,5 +78,31 @@ class AddAnimalRepository implements AddAnimalRepositoryInterface
         });
 
         return response()->json(['success' => $sizeCollection]);
+    }
+
+    public function getColorsForAddAnimal($request)
+    {
+        $availableColors = DB::table('available_colors AS ac')
+            ->select(
+                'acol.id as color_id',
+                'acol.name as color_name'
+            )
+            ->leftJoin('animal_colors AS acol', 'ac.color_id', '=', 'acol.id')
+            ->where('ac.breed_id', '=', $request->breedId)->whereNull('acol.deleted_at')->get();
+
+        return response()->json(['success' => $availableColors]);
+    }
+
+    public function getFursForAddAnimal($request)
+    {
+        $availableFurs = DB::table('available_furs AS af')
+            ->select(
+                'f.id as fur_id',
+                'f.name as fur_name'
+            )
+            ->leftJoin('fur AS f', 'af.fur_id', '=', 'f.id')
+            ->where('af.breed_id', '=', $request->breedId)->whereNull('f.deleted_at')->get();
+
+        return response()->json(['success' => $availableFurs]);
     }
 }
