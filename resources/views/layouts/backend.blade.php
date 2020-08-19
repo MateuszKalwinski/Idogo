@@ -361,7 +361,6 @@
 <!-- DATATABLES -->
 <script type="text/javascript" src="{{asset('components/material/js/addons/datatables.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('components/material/js/addons/datatables-select.min.js')}}"></script>
-
 <script src="{{ asset('js/main.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/menu.js') }}"></script>

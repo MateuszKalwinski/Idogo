@@ -5,9 +5,6 @@ class BackendAddAnimal {
         this.getSpecies();
         this.getGenders();
         this.getSizes();
-        this.getFurs();
-
-        this.getCharacteristics();
     }
 
     init(base_url) {
@@ -25,6 +22,8 @@ class BackendAddAnimal {
         $('#breedId').on('change', function (){
            let breedId = $('#breedId').val();
             self.getColors(breedId);
+            self.getFurs(breedId)
+
         });
     }
 
@@ -38,7 +37,8 @@ class BackendAddAnimal {
             url: base_url + "/getSpeciesForAddAnimal",
             method:"POST",
             data: {
-                speciesId: speciesId
+                speciesId: speciesId,
+                type: 'species'
             },
             cache:true,
             dataType:"json",
@@ -86,6 +86,7 @@ class BackendAddAnimal {
             method:"POST",
             data: {
                 speciesId: speciesId,
+                type: 'breeds'
             },
             cache:true,
             dataType:"json",
@@ -213,7 +214,51 @@ class BackendAddAnimal {
     }
 
     getFurs(base_url){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: base_url + "/getFursForAddAnimal",
+            method:"POST",
+            data: {
+                breedId: breedId,
+                type: 'fur',
+            },
+            cache:true,
+            dataType:"json",
+            beforeSend: function () {
 
+            },
+            success:function(data)
+            {
+                var html = '';
+                if(data.errors)
+                {
+                    html = '<div class="alert alert-danger">';
+                    for(var count = 0; count < data.errors.length; count++)
+                    {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+
+                }else {
+
+                    $('#animalFur').children().remove();
+
+                    $('#animalFur').append('<option value="" disabled selected>Wybierz długość futra</option>');
+                    for (let i=0; i<data.success.length; i++){
+
+                        $('#animalFur').append('<option value="'+ data.success[i].fur_id +'">'+ data.success[i].fur_name +'</option>');
+                    }
+                }
+                $('#form_result').html(html);
+            },
+            complete: function () {
+
+            },
+        })
     }
 
     getColors(breedId){
@@ -226,7 +271,8 @@ class BackendAddAnimal {
             url: base_url + "/getColorsForAddAnimal",
             method:"POST",
             data: {
-                breedId: breedId
+                breedId: breedId,
+                type: 'color',
             },
             cache:true,
             dataType:"json",
@@ -252,7 +298,7 @@ class BackendAddAnimal {
                     $('#animalColor').append('<option value="" disabled selected>Wybierz kolor futra</option>');
                     for (let i=0; i<data.success.length; i++){
 
-                        $('#animalColor').append('<option value="'+ data.success[i].id +'">'+ data.success[i].name +'</option>');
+                        $('#animalColor').append('<option value="'+ data.success[i].color_id +'">'+ data.success[i].color_name +'</option>');
                     }
                 }
                 $('#form_result').html(html);
