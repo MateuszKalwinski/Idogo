@@ -1,1 +1,3062 @@
-class frontendIndex{constructor(e){this.init(e)}init(e){this.promotedAnimalsSlick(),this.promotedSheltersSlick(),this.getAnimalSpecies(e),this.counter(),this.UX(e)}UX(){$("#animalSpecies").on("change",function(){$("#searchAnimalsFrom").submit()})}promotedAnimalsSlick(){$(".promoted_animals").slick({slidesToShow:4,slidesToScroll:1,arrows:!0,fade:!1,responsive:[{breakpoint:1024,settings:{slidesToShow:2,slidesToScroll:2,infinite:!0,dots:!1}},{breakpoint:600,settings:{slidesToShow:2,slidesToScroll:2,infinite:!0,dots:!1}},{breakpoint:480,settings:{slidesToShow:1,slidesToScroll:1,infinite:!0,dots:!1}}]})}promotedSheltersSlick(){$(".promoted_shelter").slick({slidesToShow:4,slidesToScroll:1,arrows:!0,fade:!1,autoplay:!1,responsive:[{breakpoint:1024,settings:{slidesToShow:2,slidesToScroll:2,infinite:!0,dots:!1}},{breakpoint:600,settings:{slidesToShow:2,slidesToScroll:2,infinite:!0,dots:!1}},{breakpoint:480,settings:{slidesToShow:1,slidesToScroll:1,infinite:!0,dots:!1}}]})}counter(){!function(e){e.fn.counter=function(){const a=e(this),t=parseInt(a.attr("data-from")),r=parseInt(a.attr("data-to")),s=r-t,o=s>0?1:0,l=parseInt(a.attr("data-time"));let i=t,n=10*s/l;var d;d=setInterval(()=>{i+=n,(o&&i>=r||!o&&i<=r)&&(i=r),this.text(parseInt(i)),i==r&&clearInterval(d)},10)}}(jQuery),$(document).ready(function(){$(".count-up").counter(),$(".count1").counter(),$(".count2").counter(),$(".count3").counter(),(new WOW).init(),setTimeout(function(){$(".count5").counter()},3e3)})}getAnimalSpecies(e){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({type:"POST",url:e+"/getAnimalSpecies",data:{},dataType:"json",success:function(e){let a=$("#animalSpecies");a.children().remove(),a.append('<option value="" disabled selected>Znajdź...</option>');for(var t=0;t<e.length;t++)a.append('<option value="'+e[t].id+'">'+e[t].name+"</option>")},error:function(e){alert(e)}})}}class frontendAnimal{constructor(e){this.init(e)}init(e){this.UX(e),this.slider()}UX(){let e=this;$("#scrollToMap").click(function(){$([document.documentElement,document.body]).animate({scrollTop:$("#map").offset().top},1e3)}),$("#scrollToContact").click(function(){$([document.documentElement,document.body]).animate({scrollTop:$("#contact").offset().top},1e3)}),$("#showPhoneNumbers").click(function(){let a=$(this).attr("data-user-id");e.showPhoneNumbers(a)}),$("#sendReport").click(function(){e.sendReport()})}slider(){$(".slider-for").slick({slidesToShow:1,slidesToScroll:1,arrows:!0,fade:!0,asNavFor:".slider-nav"}),$(".slider-nav").slick({slidesToShow:5,slidesToScroll:1,asNavFor:".slider-for",dots:!1,centerMode:!1,arrows:!0,focusOnSelect:!0})}showPhoneNumbers(e){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({type:"POST",url:base_url+"/getPhoneNumbers",data:{user_id:e},dataType:"json",beforeSend:function(){$("#showPhoneNumbers").html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Wyświetl numery').addClass("disabled")},success:function(e){$("#user_phones").children().remove();for(var a=0;a<e.length;a++)$("#user_phones").append('<p class="card-text">'+e[a].phone+"</p>")},complete:function(){$("#showPhoneNumbers").html('Wyświetl numery<i class=" ml-2 fas fa-lg text-white fa-phone"></i>').removeClass("disabled")},error:function(e){alert(e)}})}sendReport(){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}});let e=$("#sendReport");$.ajax({type:"POST",url:base_url+"/sendReport",data:{reportViolationReason:$("input[name='reportViolation']:checked").val(),reportViolationText:$("#reportViolationText").val(),animalId:e.attr("data-animal-id")},dataType:"json",beforeSend:function(){e.prop("disabled",!0)},success:function(e){if(e.original){if(e.original.errors){var a="";jQuery.each(e.original.errors,function(e,t){a+=t+"<br>"}),(new Errors).showErrorModal(a)}}else e.errors?($("#reportViolationModal").modal("hide"),(new Errors).showErrorModal(e.errors.global)):($("#reportViolationModal").modal("hide"),(new Success).showSuccessModal("Zapisano",e.success.global))},complete:function(){e.prop("disabled",!1)},error:function(e){}})}}class frontendAnimals{constructor(e){this.init(e)}init(e){this.UX(e)}UX(){}}class frontendShelter{constructor(e){this.init(e)}init(e){this.UX(e),this.slider()}UX(){let e=this;$("#scrollToMap").click(function(){$([document.documentElement,document.body]).animate({scrollTop:$("#map").offset().top},1e3)}),$("#scrollToAnimalsForAdoption").click(function(){$([document.documentElement,document.body]).animate({scrollTop:$("#animalsForAdoption").offset().top},1e3)}),$("#scrollToAnimalsAdopted").click(function(){$([document.documentElement,document.body]).animate({scrollTop:$("#animalsAdopted").offset().top},1e3)}),$("#showPhoneNumbers").click(function(){let a=$(this).attr("data-user-id");e.showPhoneNumbers(a)})}slider(){$(".slider-for").slick({slidesToShow:1,slidesToScroll:1,arrows:!0,fade:!0,asNavFor:".slider-nav"}),$(".slider-nav").slick({slidesToShow:5,slidesToScroll:1,asNavFor:".slider-for",dots:!1,centerMode:!1,arrows:!0,focusOnSelect:!0})}showPhoneNumbers(e){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({type:"POST",url:base_url+"/getPhoneNumbers",data:{user_id:e},dataType:"json",beforeSend:function(){$("#before_send").fadeIn()},success:function(e){$("#showPhoneNumbers").addClass("d-none"),$("#user_phones").children().remove();for(var a=0;a<e.length;a++)$("#user_phones").append('<p class="card-text">'+e[a].phone+"</p>")},complete:function(){$("#before_send").fadeOut()},error:function(e){alert(e)}})}}class frontendShelters{constructor(e){this.init(e)}init(e){this.UX(e)}UX(){let e=this;$("#cityName").on("input",function(){let a=$("#cityName").val();a.length>=2&&e.searchCity(a)})}searchCity(e){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({type:"GET",url:base_url+"/searchCities",data:{term:e},dataType:"json",beforeSend:function(){},success:function(e){$("#cityName").autocomplete({source:e,select:function(e,a){$("#cityId").val(a.item.id)}})},complete:function(){},error:function(e){console.log(e)}})}}class frontendUser{constructor(e){this.init(e)}init(e){this.UX(e)}UX(){let e=this;$("#showPhoneNumbers").click(function(){let a=$(this).attr("data-user-id");e.showPhoneNumbers(a)})}showPhoneNumbers(e){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({type:"POST",url:base_url+"/getPhoneNumbers",data:{user_id:e},dataType:"json",beforeSend:function(){$("#before_send").fadeIn()},success:function(e){$("#showPhoneNumbers").addClass("d-none"),$("#user_phones").children().remove();for(var a=0;a<e.length;a++)$("#user_phones").append('<p class="card-text">'+e[a].phone+"</p>")},complete:function(){$("#before_send").fadeOut()},error:function(e){alert(e)}})}}class backendProfile{constructor(e){this.init(e)}init(e){this.UX(e)}UX(){let e=this;$("#add-phone-number").on("click",function(){$("#phone-title-modal").text("Dodaj numer telefonu"),$("#save-phone-number").attr("data-phone-id",""),$("#phone-number").val(""),$("label[for='phone-number']").removeClass("active"),$("#phone-modal").modal("show")}),$(".edit-phone-number ").on("click",function(){let e=$(this).closest("tr").find(".phone-number").text();$("#save-phone-number").attr("data-phone-id",$(this).attr("data-phone-id")),$("#phone-number").val(e),$("label[for='phone-number']").addClass("active"),$("#phone-title-modal").text("Edytuj numer telefonu"),$("#phone-modal").modal("show")}),$("#save-phone-number").on("click",function(){e.savePhoneNumber()}),$(".delete-phone-number").on("click",function(){let a=$(this).attr("data-phone-id");e.deletePhoneNumber(a)})}savePhoneNumber(){let e=$("#save-phone-number");$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({type:"POST",url:base_url+"/savePhoneNumber",data:{phoneId:e.attr("data-phone-id"),phoneNumber:$("#phone-number").val()},dataType:"json",beforeSend:function(){e.prop("disabled",!0)},success:function(e){if(e.original){if(e.original.errors){var a="";jQuery.each(e.original.errors,function(e,t){a+=t+"<br>"}),(new Errors).showErrorModal(a)}}else e.errors?(new Errors).showErrorModal(e.errors.global):(new Success).showSuccessModal("Zapisano",e.success.global)},complete:function(){e.prop("disabled",!1)},error:function(e){}})}deletePhoneNumber(e){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({type:"POST",url:base_url+"/deletePhoneNumber",data:{phoneId:e},dataType:"json",beforeSend:function(){},success:function(e){if(e.original){if(e.original.errors){var a="";jQuery.each(e.original.errors,function(e,t){a+=t+"<br>"}),(new Errors).showErrorModal(a)}}else e.errors?(new Errors).showErrorModal(e.errors.global):(new Success).showSuccessModal("Usunięto",e.success.global)},complete:function(){},error:function(e){}})}}class BackendAnimalColors{constructor(e){this.init(e)}init(e){this.UX(e)}UX(){let e=this;$("#addColor").click(function(){$("#addEditModalTitle").text("Dodaj kolor"),$(".modal-header ").addClass("teal lighten-1").removeClass("yellow darken-2 danger-color green darken-2"),$("#colorName").val(""),$('label[for="colorName"]').removeClass("active"),$("#action").val("add"),$("#animalColorId").val(""),$("#addEditColorModal").modal("show")}),$(document).on("click",".edit-animal-color",function(){$("#addEditModalTitle").text("Edytuj kolor"),$(".modal-header ").addClass("yellow darken-2").removeClass("teal lighten-1 danger-color green");let e=$(this).closest("tr").find(".animal-color-name").text();$("#colorName").val(e),$('label[for="colorName"]').addClass("active"),$("#action").val("edit");let a=$(this).closest("tr").find(".animal-color-name").attr("data-animal-color-id");$("#animalColorId").val(a),$("#addEditColorModal").modal("show")}),$("#addEditColor").on("submit",function(a){a.preventDefault(),"add"===$("#action").val()?e.saveAnimalColor(new FormData(this),base_url+"/adminStoreAnimalColor"):e.saveAnimalColor(new FormData(this),base_url+"/adminUpdateAnimalColor")}),$(document).on("click",".restore-animal-color, .delete-animal-color",function(){$(this).hasClass("restore-animal-color")?($("#actionDeleteRestore").val("restore"),$("#animalRestoreText").removeClass("d-none").children().removeClass("d-none"),$("#animalDeleteText").addClass("d-none").children().addClass("d-none"),$("#confirmModalHeader").addClass("green darken-2").removeClass("danger-color yellow darken-2 teal lighten-1")):($("#actionDeleteRestore").val("delete"),$("#animalDeleteText").removeClass("d-none").children().removeClass("d-none"),$("#animalRestoreText").addClass("d-none").children().addClass("d-none"),$("#confirmModalHeader").addClass("danger-color").removeClass("green darken-2 yellow darken-2 teal lighten-1"));let e=$(this).closest("tr").find(".animal-color-name").attr("data-animal-color-id");$("#confirm-yes").attr("data-animal-color-id",e);let a=$(this).closest("tr").find(".animal-color-name").text();$(".confirm-animal-color-name").text(a),$("#confirmModal").modal("show")}),$("#confirm-yes").on("click",function(){let a=$("#confirm-yes").attr("data-animal-color-id");"restore"===$("#actionDeleteRestore").val()?e.deleteRestoreAnimalColor(a,base_url+"/restoreAnimalColor"):e.deleteRestoreAnimalColor(a,base_url+"/deleteAnimalColor")})}deleteRestoreAnimalColor(e,a){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({type:"POST",url:a,data:{animalColorId:e},dataType:"json",beforeSend:function(){},success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}e.success&&(a='<div class="alert alert-success">'+e.success+"</div>",$("#adminAnimalColorsTable").DataTable().ajax.reload()),$("#form_result").html(a)},complete:function(){},error:function(e){}})}saveAnimalColor(e,a){$.ajax({url:a,method:"POST",data:e,contentType:!1,cache:!1,processData:!1,dataType:"json",success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}e.success&&(a='<div class="alert alert-success">'+e.success+"</div>",$("#colorName").val(""),$("#adminAnimalColorsTable").DataTable().ajax.reload()),$("#form_result").html(a)}})}}class BackendAnimalFurs{constructor(e){this.init(e)}init(e){this.UX(e)}UX(){let e=this;$("#addFur").click(function(){$("#addEditModalTitle").text("Dodaj długość futra"),$(".modal-header ").addClass("teal lighten-1").removeClass("yellow darken-2"),$("#furName").val(""),$('label[for="furName"]').removeClass("active"),$("#action").val("add"),$("#animalFurId").val(""),$("#addEditFurModal").modal("show")}),$(document).on("click",".edit-animal-fur",function(){$("#addEditModalTitle").text("Edytuj długość futra"),$(".modal-header ").addClass("yellow darken-2").removeClass("teal lighten-1");let e=$(this).closest("tr").find(".animal-fur-name").text();$("#furName").val(e),$('label[for="furName"]').addClass("active"),$("#action").val("edit");let a=$(this).closest("tr").find(".animal-fur-name").attr("data-animal-fur-id");$("#animalFurId").val(a),$("#addEditFurModal").modal("show")}),$("#addEditFur").on("submit",function(a){a.preventDefault(),"add"===$("#action").val()?e.saveAnimalColor(new FormData(this),base_url+"/adminStoreAnimalFur"):e.saveAnimalColor(new FormData(this),base_url+"/adminUpdateAnimalFur")}),$(document).on("click",".restore-animal-fur, .delete-animal-fur",function(){$(this).hasClass("restore-animal-fur")?($("#actionDeleteRestore").val("restore"),$("#animalRestoreText").removeClass("d-none").children().removeClass("d-none"),$("#animalDeleteText").addClass("d-none").children().addClass("d-none"),$("#confirmModalHeader").addClass("green darken-2").removeClass("danger-color teal lighten-1 yellow darken-2")):($("#actionDeleteRestore").val("delete"),$("#animalDeleteText").removeClass("d-none").children().removeClass("d-none"),$("#animalRestoreText").addClass("d-none").children().addClass("d-none"),$("#confirmModalHeader").addClass("danger-color").removeClass("green darken-2 teal lighten-1 yellow darken-2"));let e=$(this).closest("tr").find(".animal-fur-name").attr("data-animal-fur-id");$("#confirm-yes").attr("data-animal-fur-id",e);let a=$(this).closest("tr").find(".animal-fur-name").text();$(".confirm-animal-fur-name").text(a),$("#confirmModal").modal("show")}),$("#confirm-yes").on("click",function(){console.log($("#confirm-yes"));let a=$("#confirm-yes").attr("data-animal-fur-id"),t=$("#actionDeleteRestore").val();e.deleteRestoreAnimalFur(a,t,base_url+"/deleteRestoreAnimalFur")})}deleteRestoreAnimalFur(e,a,t){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({type:"POST",url:t,data:{animalFurId:e,action:a},dataType:"json",beforeSend:function(){},success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}e.success&&(a='<div class="alert alert-success">'+e.success+"</div>",$("#adminAnimalFursTable").DataTable().ajax.reload()),$("#form_result").html(a)},complete:function(){},error:function(e){}})}saveAnimalColor(e,a){$.ajax({url:a,method:"POST",data:e,contentType:!1,cache:!1,processData:!1,dataType:"json",success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}e.success&&(a='<div class="alert alert-success">'+e.success+"</div>",$("#furName").val(""),$("#adminAnimalFursTable").DataTable().ajax.reload()),$("#form_result").html(a)}})}}class BackendAnimalSizes{constructor(e){this.init(e)}init(e){this.UX(e)}UX(){let e=this;$("#addSize").click(function(){$("#addEditModalTitle").text("Dodaj wielkość zwierzaka"),$(".modal-header ").addClass("teal lighten-1").removeClass("yellow darken-2 danger-color green darken-2"),$("#sizeName").val(""),$('label[for="sizeName"]').removeClass("active"),$("#action").val("add"),$("#animalSizeId").val(""),$("#addEditSizeModal").modal("show")}),$(document).on("click",".edit-animal-size",function(){$("#addEditModalTitle").text("Edytuj wielkość zwierzaka"),$(".modal-header ").addClass("yellow darken-2").removeClass("teal lighten-1 danger-color green");let e=$(this).closest("tr").find(".animal-size-name").text();$("#sizeName").val(e),$('label[for="sizeName"]').addClass("active"),$("#action").val("edit");let a=$(this).closest("tr").find(".animal-size-name").attr("data-animal-size-id");$("#animalSizeId").val(a),$("#form_result").html(""),$("#addEditSizeModal").modal("show")}),$("#addEditSize").on("submit",function(a){a.preventDefault(),"add"===$("#action").val()?e.saveAnimalSize(new FormData(this),base_url+"/adminStoreAnimalSize"):e.saveAnimalSize(new FormData(this),base_url+"/adminUpdateAnimalSize")}),$(document).on("click",".restore-animal-size, .delete-animal-size",function(){$(this).hasClass("restore-animal-size")?($("#actionDeleteRestore").val("restore"),$("#animalRestoreText").removeClass("d-none").children().removeClass("d-none"),$("#animalDeleteText").addClass("d-none").children().addClass("d-none"),$("#confirmModalHeader").addClass("green darken-2").removeClass("danger-color yellow darken-2 teal lighten-1")):($("#actionDeleteRestore").val("delete"),$("#animalDeleteText").removeClass("d-none").children().removeClass("d-none"),$("#animalRestoreText").addClass("d-none").children().addClass("d-none"),$("#confirmModalHeader").addClass("danger-color").removeClass("green darken-2 yellow darken-2 teal lighten-1"));let e=$(this).closest("tr").find(".animal-size-name").attr("data-animal-size-id");$("#confirm-yes").attr("data-animal-size-id",e);let a=$(this).closest("tr").find(".animal-size-name").text();$(".confirm-animal-size-name").text(a),$("#confirmModal").modal("show")}),$("#confirm-yes").on("click",function(){let a=$("#confirm-yes").attr("data-animal-size-id");"restore"===$("#actionDeleteRestore").val()?e.deleteRestoreAnimalSize(a,base_url+"/restoreAnimalSize"):e.deleteRestoreAnimalSize(a,base_url+"/deleteAnimalSize")})}deleteRestoreAnimalSize(e,a){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({type:"POST",url:a,data:{animalSizeId:e},dataType:"json",beforeSend:function(){},success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}e.success&&(a='<div class="alert alert-success">'+e.success+"</div>",$("#adminAnimalSizeTable").DataTable().ajax.reload()),$("#form_result").html(a)},complete:function(){},error:function(e){}})}saveAnimalSize(e,a){$.ajax({url:a,method:"POST",data:e,contentType:!1,cache:!1,processData:!1,dataType:"json",success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}e.success&&(a='<div class="alert alert-success">'+e.success+"</div>",$("#sizeName").val(""),$("#adminAnimalSizeTable").DataTable().ajax.reload()),$("#form_result").html(a)}})}}class backendAnimalCharacteristics{constructor(e){this.init(e)}init(e){this.UX(e)}UX(){let e=this;$("#addCharacteristic").click(function(){$("#addEditModalTitle").text("Dodaj cechę zwierzaka"),$(".modal-header ").addClass("teal lighten-1").removeClass("yellow darken-2 danger-color green darken-2"),$("#characteristicName").val(""),$('label[for="colorName"]').removeClass("active"),$("#action").val("add"),$("#animalCharacteristicId").val(""),$("#addEditCharacteristicModal").modal("show")}),$(document).on("click",".edit-dictionary-characteristic",function(){$("#addEditModalTitle").text("Edytuj cechę zwierzaka"),$(".modal-header ").addClass("yellow darken-2").removeClass("teal lighten-1 danger-color green");let e=$(this).closest("tr").find(".characteristic-dictionary-name").text();$("#characteristicName").val(e),$('label[for="characteristicName"]').addClass("active"),$("#action").val("edit");let a=$(this).closest("tr").find(".characteristic-dictionary-name").attr("data-characteristic-dictionary-id");$("#animalCharacteristicId").val(a),$("#addEditCharacteristicModal").modal("show")}),$("#addEditCharacteristic").on("submit",function(a){a.preventDefault(),"add"===$("#action").val()?e.saveAnimalCharacteristic(new FormData(this),base_url+"/adminStoreAnimalCharacteristic"):e.saveAnimalCharacteristic(new FormData(this),base_url+"/adminUpdateAnimalCharacteristic")}),$(document).on("click",".restore-dictionary-characteristic, .delete-dictionary-characteristic",function(){$(this).hasClass("restore-dictionary-characteristic")?($("#actionDeleteRestore").val("restore"),$("#animalRestoreText").removeClass("d-none").children().removeClass("d-none"),$("#animalDeleteText").addClass("d-none").children().addClass("d-none"),$("#confirmModalHeader").addClass("green darken-2").removeClass("danger-color yellow darken-2 teal lighten-1")):($("#actionDeleteRestore").val("delete"),$("#animalDeleteText").removeClass("d-none").children().removeClass("d-none"),$("#animalRestoreText").addClass("d-none").children().addClass("d-none"),$("#confirmModalHeader").addClass("danger-color").removeClass("green darken-2 yellow darken-2 teal lighten-1"));let e=$(this).closest("tr").find(".characteristic-dictionary-name").attr("data-characteristic-dictionary-id");$("#confirm-yes").attr("data-dictionary-characteristic-id",e);let a=$(this).closest("tr").find(".characteristic-dictionary-name").text();$(".confirm-dictionary-characteristic-name").text(a),$("#showHideContent").show(),$("#confirmModal").modal("show")}),$("#confirm-yes").on("click",function(){let a=$("#confirm-yes").attr("data-dictionary-characteristic-id");"restore"===$("#actionDeleteRestore").val()?e.deleteRestoreDictionaryCharacteristic(a,base_url+"/restoreAnimalCharacteristic"):e.deleteRestoreDictionaryCharacteristic(a,base_url+"/deleteAnimalCharacteristic")})}deleteRestoreDictionaryCharacteristic(e,a){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({type:"POST",url:a,data:{animalCharacteristicId:e},dataType:"json",beforeSend:function(){},success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}e.success&&(a='<div class="alert alert-success">'+e.success+"</div>",$("#showHideContent").slideUp(),$("#adminAnimalCharacteristicsTable").DataTable().ajax.reload()),$("#confirmFormResult").html(a)},complete:function(){},error:function(e){}})}saveAnimalCharacteristic(e,a){$.ajax({url:a,method:"POST",data:e,contentType:!1,cache:!1,processData:!1,dataType:"json",success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}e.success&&(a='<div class="alert alert-success">'+e.success+"</div>",$("#characteristicName").val(""),$("#adminAnimalCharacteristicsTable").DataTable().ajax.reload()),$("#formResult").html(a)}})}}class BackendAnimalSpecies{constructor(e){this.init(e)}init(e){this.UX(e)}UX(){let e=this;$("#addSpecies").click(function(){$("#addEditModalTitle").text("Dodaj gatunek"),$(".modal-header ").addClass("teal lighten-1").removeClass("yellow darken-2 danger-color green darken-2"),$("#speciesName").val(""),$('label[for="speciesName"]').removeClass("active"),$("#action").val("add"),$("#animalSpeciesId").val(""),$("#addEditSpeciesModal").modal("show")}),$(document).on("click",".edit-animal-species",function(){$("#addEditModalTitle").text("Edytuj gatunek"),$(".modal-header ").addClass("yellow darken-2").removeClass("teal lighten-1 danger-color green");let e=$(this).closest("tr").find(".animal-species-name").text();$("#speciesName").val(e),$('label[for="speciesName"]').addClass("active"),$("#action").val("edit");let a=$(this).closest("tr").find(".animal-species-name").attr("data-animal-species-id");$("#animalSpeciesId").val(a),$("#form_result").html(""),$("#addEditSpeciesModal").modal("show")}),$("#addEditSpecies").on("submit",function(a){a.preventDefault(),"add"===$("#action").val()?e.saveAnimalSpecies(new FormData(this),base_url+"/adminStoreAnimalSpecies"):e.saveAnimalSpecies(new FormData(this),base_url+"/adminUpdateAnimalSpecies")}),$(document).on("click",".delete-animal-species",function(){let e=$(this).closest("tr").find(".animal-species-name").attr("data-animal-species-id");$("#confirm-yes").attr("data-animal-species-id",e);let a=$(this).closest("tr").find(".animal-species-name").text();$("#animalSpeciesName").text(a),$("#confirmModal").modal("show")}),$(document).on("click",".restore-animal-species, .delete-animal-species",function(){$(this).hasClass("restore-animal-species")?($("#actionDeleteRestore").val("restore"),$("#animalRestoreText").removeClass("d-none").children().removeClass("d-none"),$("#animalDeleteText").addClass("d-none").children().addClass("d-none"),$("#confirmModalHeader").addClass("green darken-2").removeClass("danger-color yellow darken-2 teal lighten-1")):($("#actionDeleteRestore").val("delete"),$("#animalDeleteText").removeClass("d-none").children().removeClass("d-none"),$("#animalRestoreText").addClass("d-none").children().addClass("d-none"),$("#confirmModalHeader").addClass("danger-color").removeClass("green darken-2 yellow darken-2 teal lighten-1"));let e=$(this).closest("tr").find(".characteristic-dictionary-name").attr("data-characteristic-dictionary-id");$("#confirm-yes").attr("data-animal-species-id",e);let a=$(this).closest("tr").find(".animal-species-name").text();$(".confirm-animal-species-name").text(a),$("#showHideContent").show(),$("#confirmModal").modal("show")}),$("#confirm-yes").on("click",function(){let a=$("#confirm-yes").attr("data-animal-species-id");"restore"===$("#actionDeleteRestore").val()?e.deleteRestoreAnimalSpecies(a,base_url+"/restoreAnimalSpecies"):e.deleteRestoreAnimalSpecies(a,base_url+"/deleteAnimalSpecies")})}deleteRestoreAnimalSpecies(e,a){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({type:"POST",url:a,data:{animalSpeciesId:e},dataType:"json",beforeSend:function(){},success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}e.success&&(a='<div class="alert alert-success">'+e.success+"</div>",$("#showHideContent").slideUp(),$("#adminSpeciesTable").DataTable().ajax.reload()),$("#confirmFormResult").html(a)},complete:function(){},error:function(e){}})}saveAnimalSpecies(e,a){$.ajax({url:a,method:"POST",data:e,contentType:!1,cache:!1,processData:!1,dataType:"json",success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}e.success&&(a='<div class="alert alert-success">'+e.success+"</div>",$("#colorName").val(""),$("#adminSpeciesTable").DataTable().ajax.reload()),$("#form_result").html(a)}})}}class BackendAnimalBreeds{constructor(e){this.init(e)}init(e){this.UX(e),this.getSpecies()}UX(){let e=this;$("#addBreed").click(function(){$("#addEditModalTitle").text("Dodaj rasę"),$(".modal-header ").addClass("teal lighten-1").removeClass("yellow darken-2"),$("#breedName").val(""),$("#speciesId").val(""),$('label[for="breedName"]').removeClass("active"),$("#animalBreedId").val(""),$("#action").val("add"),$("#addEditBreedModal").modal("show")}),$(document).on("click",".edit-animal-breed",function(){$("#addEditModalTitle").text("Edytuj rasę"),$(".modal-header ").addClass("yellow darken-2").removeClass("teal lighten-1");let e=$(this).closest("tr").find(".animal-breed-name").text();$("#breedName").val(e);let a=$(this).closest("tr").find(".animal-species-name").attr("data-animal-species-id");$("#speciesId").val(a),$('label[for="breedName"]').addClass("active"),$("#action").val("edit");let t=$(this).closest("tr").find(".animal-breed-name").attr("data-animal-breed-id");$("#animalBreedId").val(t),$("#addEditBreedModal").modal("show")}),$("#addEditBreed").on("submit",function(a){a.preventDefault(),"add"===$("#action").val()?e.saveAnimalBreed(new FormData(this),base_url+"/adminStoreAnimalBreed"):e.saveAnimalBreed(new FormData(this),base_url+"/adminUpdateAnimalBreed")}),$(document).on("click",".restore-animal-breed, .delete-animal-breed",function(){$(this).hasClass("restore-animal-breed")?($("#actionDeleteRestore").val("restore"),$("#animalRestoreText").removeClass("d-none").children().removeClass("d-none"),$("#animalDeleteText").addClass("d-none").children().addClass("d-none"),$("#confirmModalHeader").addClass("green darken-2").removeClass("danger-color teal lighten-1 yellow darken-2")):($("#actionDeleteRestore").val("delete"),$("#animalDeleteText").removeClass("d-none").children().removeClass("d-none"),$("#animalRestoreText").addClass("d-none").children().addClass("d-none"),$("#confirmModalHeader").addClass("danger-color").removeClass("green darken-2 teal lighten-1 yellow darken-2"));let e=$(this).closest("tr").find(".animal-breed-name").attr("data-animal-breed-id");$("#confirm-yes").attr("data-animal-breed-id",e);let a=$(this).closest("tr").find(".animal-breed-name").text();$(".confirm-animal-breed-name").text(a),$("#confirmModal").modal("show")}),$("#confirm-yes").on("click",function(){let a=$("#confirm-yes").attr("data-animal-breed-id"),t=$("#actionDeleteRestore").val();e.deleteRestoreAnimalBreed(a,t,base_url+"/deleteRestoreAnimalBreed")})}deleteRestoreAnimalBreed(e,a,t){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({type:"POST",url:t,data:{animalBreedId:e,action:a},dataType:"json",beforeSend:function(){},success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}e.success&&(a='<div class="alert alert-success">'+e.success+"</div>",$("#adminBreedsTable").DataTable().ajax.reload()),$("#form_result").html(a)},complete:function(){},error:function(e){}})}saveAnimalBreed(e,a){$.ajax({url:a,method:"POST",data:e,contentType:!1,cache:!1,processData:!1,dataType:"json",success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}e.success&&(a='<div class="alert alert-success">'+e.success+"</div>",$("#speciesId").val(""),$("#breedName").val(""),$("#adminBreedsTable").DataTable().ajax.reload()),$("#form_result").html(a)}})}getSpecies(e=null){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({url:base_url+"/getSpecies",method:"POST",data:{species_id:e},cache:!0,dataType:"json",beforeSend:function(){},success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}else{$("#speciesId").append('<option value="" disabled selected>Wybierz gatunek</option>');for(let a=0;a<e.length;a++)$("#speciesId").append('<option value="'+e[a].id+'">'+e[a].name+"</option>")}$("#form_result").html(a)},complete:function(){}})}}class BackendAvailableColors{constructor(e){this.init(e)}init(e){this.UX(e),this.getBreeds(),this.getColors()}UX(e){let a=this;$("#addAvailableColor").click(function(){$("#addEditModalTitle").text("Dodaj dostępny kolor dla rasy"),$(".modal-header ").addClass("teal lighten-1").removeClass("yellow darken-2 danger-color green darken-2"),$("#breedId").val(""),$("#colors").val(""),$("#action").val("add"),$("#animalBreedId").val(""),$("#addEditAvailableColorModal").modal("show")}),$(document).on("click",".edit-available-color",function(){let e=$(this).closest("tr").find(".animal-breed-name").attr("data-animal-breed-id");a.getAvailableColorsForBreed(e),$("#addEditModalTitle").text("Edytuj dostępne kolory dla rasy"),$(".modal-header ").addClass("yellow darken-2").removeClass("teal lighten-1 danger-color green"),$("#action").val("edit")}),$("#addEditAvailableColor").on("submit",function(t){t.preventDefault(),"add"===$("#action").val()?a.saveAvailableColors(new FormData(this),e+"/adminStoreAvailableColors"):a.saveAvailableColors(new FormData(this),e+"/adminUpdateAvailAbleColors")}),$(document).on("click",".delete-available-color",function(){let e=$(this).closest("tr").find(".animal-species-name").text(),a=$(this).closest("tr").find(".animal-breed-name").text(),t=$(this).closest("tr").find(".animal-color-name").text();$(".confirm-animal-color-name").text(t),$(".confirm-animal-breed-name").text(e+" "+a),$("#confirm-yes").attr("data-available-color-id",$(this).attr("data-available-color-id")),$("#confirmModalHeader").addClass("danger-color").removeClass("green darken-2 yellow darken-2 teal lighten-1"),$("#showHideContent").slideDown(),$("#confirmModal").modal("show")}),$("#confirm-yes").on("click",function(){let t=$("#confirm-yes").attr("data-available-color-id");a.deleteAvailableColor(t,e+"/deleteAvailableColor")})}getAvailableColorsForBreed(e){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({type:"POST",url:base_url+"/getAvailableDataForBreed",data:{animalBreedId:e,type:"colors"},dataType:"json",beforeSend:function(){$(".edit-available-color[data-available-color-id='"+e+"']").html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Wyświetl numery').addClass("disabled")},success:function(a){if(a.errors,a.success){for(let e=0;e<a.success.length;e++)$("#colors option[value="+a.success[e].color_id+"]").attr("selected",!0);$("#colors").materialSelect(),$("#breedId").val(e)}},complete:function(){$(".edit-available-color[data-available-color-id='"+e+"']").html('<i class="fas fa-edit"></i>').removeClass("disabled"),$("#addEditAvailableColorModal").modal("show")},error:function(e){}})}saveAvailableColors(e,a){$.ajax({url:a,method:"POST",data:e,contentType:!1,cache:!1,processData:!1,dataType:"json",success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}e.success&&(a='<div class="alert alert-success">'+e.success+"</div>",$("#adminAvailableColorsTable").DataTable().ajax.reload()),$("#formResult").html(a)}})}getBreeds(e=null){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({url:base_url+"/getBreeds",method:"POST",data:{breed_id:e},cache:!0,dataType:"json",beforeSend:function(){},success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}else{$("#breedId").append('<option value="" disabled selected>Wybierz rasę</option>');for(let a=0;a<e.length;a++){let t="";t+='<optgroup label="'+e[a].species_name+'" data-species-id="'+e[a].species_id+'">';for(let r=0;r<e[a].breeds.length;r++)t+='<option value="'+e[a].breeds[r].id+'">'+e[a].breeds[r].name+"</option>";t+="</optgroup>",$("#breedId").append(t)}}$("#form_result").html(a)},complete:function(){}})}getColors(){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({url:base_url+"/getColors",method:"POST",data:{},cache:!0,dataType:"json",success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}else{$("#colors").append('<option value="" disabled selected>Wybierz kolor/y</option>');for(let a=0;a<e.length;a++)$("#colors").append('<option value="'+e[a].id+'">'+e[a].name+"</option>")}$("#form_result").html(a)}})}deleteAvailableColor(e,a){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({type:"POST",url:a,data:{availableColorId:e},dataType:"json",beforeSend:function(){},success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}e.success&&(a='<div class="alert alert-success">'+e.success+"</div>",$("#showHideContent").slideUp(),$("#adminAvailableColorsTable").DataTable().ajax.reload()),$("#confirmFormResult").html(a)},complete:function(){},error:function(e){}})}}class BackendAvailableFurs{constructor(e){this.init(e)}init(e){this.UX(e),this.getBreeds(),this.getFurs()}UX(e){let a=this;$("#addAvailableFur").click(function(){$("#addEditModalTitle").text("Dodaj dostępną długość futra dla rasy"),$(".modal-header ").addClass("teal lighten-1").removeClass("yellow darken-2 danger-color green darken-2"),$("#breedId").val(""),$("#furs").val(""),$("#action").val("add"),$("#animalBreedId").val(""),$("#addEditAvailableFurModal").modal("show")}),$(document).on("click",".edit-available-fur",function(){let e=$(this).closest("tr").find(".animal-breed-name").attr("data-animal-breed-id");a.getAvailableFursForBreed(e),$("#addEditModalTitle").text("Edytuj dostępną długość futra dla rasy"),$(".modal-header ").addClass("yellow darken-2").removeClass("teal lighten-1 danger-color green"),$("#action").val("edit")}),$("#addEditAvailableFur").on("submit",function(t){t.preventDefault(),"add"===$("#action").val()?a.saveAvailableFurs(new FormData(this),e+"/adminStoreAvailableFurs"):a.saveAvailableFurs(new FormData(this),e+"/adminUpdateAvailAbleFurs")}),$(document).on("click",".delete-available-fur",function(){let e=$(this).closest("tr").find(".animal-species-name").text(),a=$(this).closest("tr").find(".animal-breed-name").text(),t=$(this).closest("tr").find(".animal-fur-name").text();$(".confirm-animal-fur-name").text(t),$(".confirm-animal-breed-name").text(e+" "+a),$("#confirm-yes").attr("data-available-fur-id",$(this).attr("data-available-fur-id")),$("#confirmModalHeader").addClass("danger-color").removeClass("green darken-2 yellow darken-2 teal lighten-1"),$("#showHideContent").slideDown(),$("#confirmFormResult").children().remove(),$("#confirmModal").modal("show")}),$("#confirm-yes").on("click",function(){let t=$("#confirm-yes").attr("data-available-fur-id");a.deleteAvailableFur(t,e+"/deleteAvailableFur")})}getAvailableFursForBreed(e){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({type:"POST",url:base_url+"/getAvailableDataForBreed",data:{animalBreedId:e,type:"furs"},dataType:"json",beforeSend:function(){$("#formResult").children().remove(),$(".edit-available-fur[data-available-fur-id='"+e+"']").html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Wyświetl numery').addClass("disabled"),$("#furs option:selected").each(function(){$(this).prop("selected",!1)})},success:function(a){if(a.errors){let e="";e='<div class="alert alert-danger">';for(var t=0;t<a.errors.length;t++)e+='<p class="m-0">'+a.errors[t]+"</p>";e+="</div>",$("#formResult").html(e)}if(a.success){for(let e=0;e<a.success.length;e++)$("#furs option[value="+a.success[e].fur_id+"]").prop("selected",!0);$("#furs").materialSelect(),$("#breedId").val(e)}},complete:function(){$(".edit-available-fur[data-available-fur-id='"+e+"']").html('<i class="fas fa-edit"></i>').removeClass("disabled"),$("#addEditAvailableFurModal").modal("show")},error:function(e){}})}saveAvailableFurs(e,a){$.ajax({url:a,method:"POST",data:e,contentType:!1,cache:!1,processData:!1,dataType:"json",success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}e.success&&(a='<div class="alert alert-success">'+e.success+"</div>",$("#adminAvailableFursTable").DataTable().ajax.reload()),$("#formResult").html(a)}})}getBreeds(e=null){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({url:base_url+"/getBreeds",method:"POST",data:{breed_id:e},cache:!0,dataType:"json",beforeSend:function(){},success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}else{$("#breedId").append('<option value="" disabled selected>Wybierz rasę</option>');for(let a=0;a<e.length;a++){let t="";t+='<optgroup label="'+e[a].species_name+'" data-species-id="'+e[a].species_id+'">';for(let r=0;r<e[a].breeds.length;r++)t+='<option value="'+e[a].breeds[r].id+'">'+e[a].breeds[r].name+"</option>";t+="</optgroup>",$("#breedId").append(t)}}$("#form_result").html(a)},complete:function(){}})}getFurs(){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({url:base_url+"/getFurs",method:"POST",data:{},cache:!0,dataType:"json",success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}else{$("#furs").append('<option value="" disabled selected>Wybierz futro/a</option>');for(let a=0;a<e.length;a++)$("#furs").append('<option value="'+e[a].id+'">'+e[a].name+"</option>")}$("#form_result").html(a)}})}deleteAvailableFur(e,a){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({type:"POST",url:a,data:{availableFurId:e},dataType:"json",beforeSend:function(){},success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}e.success&&(a='<div class="alert alert-success">'+e.success+"</div>",$("#showHideContent").slideUp(),$("#adminAvailableFursTable").DataTable().ajax.reload()),$("#confirmFormResult").html(a)},complete:function(){},error:function(e){}})}}class BackendAvailableCharacteristicDictionary{constructor(e){this.init(e)}init(e){this.UX(e),this.getSpecies(),this.getCharacteristics()}UX(e){let a=this;$("#addAvailableCharacteristic").click(function(){$("#addEditModalTitle").text("Dodaj cechę dla rasy"),$(".modal-header ").addClass("teal lighten-1").removeClass("yellow darken-2 danger-color green darken-2"),$("#speciesId").val(""),$("#characteristics").val(""),$("#action").val("add"),$("#animalSpeciesId").val(""),$("#addEditAvailableCharacteristicModal").modal("show")}),$(document).on("click",".edit-available-characteristic",function(){let e=$(this).closest("tr").find(".animal-species-name").attr("data-animal-species-id");a.getAvailableCharacteristicForSpecies(e),$("#addEditModalTitle").text("Edytuj cechę dla rasy"),$(".modal-header ").addClass("yellow darken-2").removeClass("teal lighten-1 danger-color green"),$("#action").val("edit")}),$("#addEditAvailableCharacteristic").on("submit",function(t){t.preventDefault(),"add"===$("#action").val()?a.saveAvailableCharacteristics(new FormData(this),e+"/adminStoreAvailableCharacteristics"):a.saveAvailableCharacteristics(new FormData(this),e+"/adminUpdateAvailAbleCharacteristics")}),$(document).on("click",".delete-available-characteristic",function(){let e=$(this).closest("tr").find(".animal-species-name").text(),a=$(this).closest("tr").find(".animal-characteristic-name").text();$(".confirm-animal-characteristic-name").text(a),$(".confirm-animal-species-name").text(e),$("#confirm-yes").attr("data-available-characteristic-id",$(this).attr("data-available-characteristic-id")),$("#confirmModalHeader").addClass("danger-color").removeClass("green darken-2 yellow darken-2 teal lighten-1"),$("#showHideContent").slideDown(),$("#confirmFormResult").children().remove(),$("#confirmModal").modal("show")}),$("#confirm-yes").on("click",function(){let t=$("#confirm-yes").attr("data-available-characteristic-id");a.deleteAvailableCharacteristic(t,e+"/deleteAvailableCharacteristic")})}getAvailableCharacteristicForSpecies(e){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({type:"POST",url:base_url+"/getAvailableDataForSpecies",data:{animalSpeciesId:e,type:"characteristics"},dataType:"json",beforeSend:function(){$("#formResult").children().remove(),$(".edit-available-characteristic[data-available-characteristic-id='"+e+"']").html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Wyświetl numery').addClass("disabled"),$("#characteristics option:selected").each(function(){$(this).prop("selected",!1)})},success:function(a){if(a.errors){let e="";e='<div class="alert alert-danger">';for(var t=0;t<a.errors.length;t++)e+='<p class="m-0">'+a.errors[t]+"</p>";e+="</div>",$("#formResult").html(e)}if(a.success){for(let e=0;e<a.success.length;e++)$("#characteristics option[value="+a.success[e].characteristic_dictionary_id+"]").prop("selected",!0);$("#characteristics").materialSelect(),$("#speciesId").val(e)}},complete:function(){$(".edit-available-characteristic[data-available-characteristic-id='"+e+"']").html('<i class="fas fa-edit"></i>').removeClass("disabled"),$("#addEditAvailableCharacteristicModal").modal("show")},error:function(e){}})}saveAvailableCharacteristics(e,a){$.ajax({url:a,method:"POST",data:e,contentType:!1,cache:!1,processData:!1,dataType:"json",success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}e.success&&(a='<div class="alert alert-success">'+e.success+"</div>",$("#adminAvailableCharacteristicTable").DataTable().ajax.reload()),$("#formResult").html(a)}})}getSpecies(e=null){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({url:base_url+"/getSpecies",method:"POST",data:{species_id:e},cache:!0,dataType:"json",beforeSend:function(){},success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}else{$("#speciesId").append('<option value="" disabled selected>Wybierz gatunek</option>');for(let a=0;a<e.length;a++)$("#speciesId").append('<option value="'+e[a].id+'">'+e[a].name+"</option>")}$("#form_result").html(a)},complete:function(){}})}getCharacteristics(){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({url:base_url+"/getCharacteristics",method:"POST",data:{},cache:!0,dataType:"json",success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}else{$("#characteristics").append('<option value="" disabled selected>Wybierz cechę/y</option>');for(let a=0;a<e.length;a++)$("#characteristics").append('<option value="'+e[a].id+'">'+e[a].name+"</option>")}$("#form_result").html(a)}})}deleteAvailableCharacteristic(e,a){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({type:"POST",url:a,data:{availableCharacteristicId:e},dataType:"json",beforeSend:function(){},success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}e.success&&(a='<div class="alert alert-success">'+e.success+"</div>",$("#showHideContent").slideUp(),$("#adminAvailableCharacteristicTable").DataTable().ajax.reload()),$("#confirmFormResult").html(a)},complete:function(){},error:function(e){}})}}class BackendAddAnimal{constructor(e){this.init(e),this.getSpecies(),this.getGenders(),this.getSizes()}init(e){this.UX(e)}UX(){let e=this;$("#speciesId").on("change",function(){let a=$("#speciesId").val();e.getBreeds(a)}),$("#breedId").on("change",function(){let a=$("#breedId").val();e.getColors(a),e.getFurs(a)})}getSpecies(e=null){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({url:base_url+"/getSpeciesForAddAnimal",method:"POST",data:{speciesId:e,type:"species"},cache:!0,dataType:"json",beforeSend:function(){},success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}else{$("#speciesId").children().remove(),$("#speciesId").append('<option value="" disabled selected>Wybierz gatunek *</option>');for(let a=0;a<e.success.length;a++)$("#speciesId").append('<option value="'+e.success[a].id+'">'+e.success[a].name+"</option>")}$("#form_result").html(a)},complete:function(){}})}getBreeds(e=null){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({url:base_url+"/getBreedsForAddAnimal",method:"POST",data:{speciesId:e,type:"breeds"},cache:!0,dataType:"json",beforeSend:function(){},success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}else{$("#breedId").children().remove(),$("#breedId").append('<option value="" disabled selected>Wybierz rasę *</option>');for(let a=0;a<e.success.length;a++)$("#breedId").append('<option value="'+e.success[a].id+'">'+e.success[a].name+"</option>")}$("#form_result").html(a)},complete:function(){}})}getGenders(){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({url:base_url+"/getGendersForAddAnimal",method:"POST",data:{},cache:!0,dataType:"json",beforeSend:function(){},success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}else{$("#genderId").children().remove(),$("#genderId").append('<option value="" disabled selected>Wybierz płeć *</option>');for(let a=0;a<e.success.length;a++)$("#genderId").append('<option value="'+e.success[a].id+'">'+e.success[a].name+"</option>")}$("#form_result").html(a)},complete:function(){}})}getSizes(){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({url:base_url+"/getSizesForAddAnimal",method:"POST",data:{},cache:!0,dataType:"json",beforeSend:function(){},success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}else{$("#sizeId").children().remove(),$("#sizeId").append('<option value="" disabled selected>Wybierz wielkość *</option>');for(let a=0;a<e.success.length;a++)$("#sizeId").append('<option value="'+e.success[a].id+'">'+e.success[a].name+"</option>")}$("#form_result").html(a)},complete:function(){}})}getFurs(e){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({url:e+"/getFursForAddAnimal",method:"POST",data:{breedId:breedId,type:"fur"},cache:!0,dataType:"json",beforeSend:function(){},success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}else{$("#animalFur").children().remove(),$("#animalFur").append('<option value="" disabled selected>Wybierz długość futra</option>');for(let a=0;a<e.success.length;a++)$("#animalFur").append('<option value="'+e.success[a].fur_id+'">'+e.success[a].fur_name+"</option>")}$("#form_result").html(a)},complete:function(){}})}getColors(e){$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$.ajax({url:base_url+"/getColorsForAddAnimal",method:"POST",data:{breedId:e,type:"color"},cache:!0,dataType:"json",beforeSend:function(){},success:function(e){var a="";if(e.errors){a='<div class="alert alert-danger">';for(var t=0;t<e.errors.length;t++)a+="<p>"+e.errors[t]+"</p>";a+="</div>"}else{$("#animalColor").children().remove(),$("#animalColor").append('<option value="" disabled selected>Wybierz kolor futra</option>');for(let a=0;a<e.success.length;a++)$("#animalColor").append('<option value="'+e.success[a].color_id+'">'+e.success[a].color_name+"</option>")}$("#form_result").html(a)},complete:function(){}})}getCharacteristics(e){}}class Errors{constructor(e){this.init(e)}init(e){this.UX(e)}UX(){$(document).on("click",".modal-error-close",function(){$("#modalError").modal("hide"),setTimeout(function(){$("#modalError").remove()},1e3)})}showErrorModal(e){$("body").append('    <div class="modal fade right" id="modalError" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"      aria-hidden="true" data-backdrop="true">      <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-danger" role="document">        <div class="modal-content">          <div class="modal-header">            <p class="heading">Ups! coś poszło nie tak. </p>          </div>          <div class="modal-body">            <div class="row">              <div class="col-12">                <p>'+e+'</p>              </div>            </div>          </div>            <div class="modal-footer flex-center">              <button class="modal-error-close w-50 btn btn-danger btn-rounded text-white waves-effect waves-light text-transform-none">                  Zamknij              </button>            </div>          </div>        </div>      </div>    </div>'),$("#modalError").modal({backdrop:"static",keyboard:!1}),$("#modalError").modal("show")}}class Success{constructor(e){this.init(e)}init(e){this.UX(e)}UX(){$(document).on("click",".modal-success-close",function(){$("#modalSuccess").modal("hide"),setTimeout(function(){$("#modalSuccess").remove()},1e3)})}showSuccessModal(e,a){$("body").append('    <div class="modal fade right" id="modalSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"      aria-hidden="true" data-backdrop="true">      <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-success" role="document">        <div class="modal-content">          <div class="modal-header">            <p class="heading">'+e+' </p>          </div>          <div class="modal-body">            <div class="row">              <div class="col-12">                <p>'+a+'</p>              </div>            </div>          </div>            <div class="modal-footer flex-center">              <button class="modal-success-close w-50 btn btn-success btn-rounded text-white waves-effect waves-light text-transform-none">                  Zamknij              </button>            </div>          </div>        </div>      </div>    </div>'),$("#modalSuccess").modal({backdrop:"static",keyboard:!1}),$("#modalSuccess").modal("show")}}
+class frontendIndex {
+
+    constructor(base_url) {
+        this.init(base_url);
+    }
+
+    init(base_url) {
+        this.promotedAnimalsSlick();
+        this.promotedSheltersSlick();
+        this.getAnimalSpecies(base_url);
+        this.counter();
+        this.UX(base_url);
+    }
+
+    UX() {
+        let self = this;
+
+
+        $('#animalSpecies').on('change', function () {
+            $('#searchAnimalsFrom').submit();
+        });
+
+    }
+
+    promotedAnimalsSlick(){
+        $('.promoted_animals').slick({
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            arrows: true,
+            fade: false,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                        infinite: true,
+                        dots: false
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                        infinite: true,
+                        dots: false
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        dots: false
+                    }
+                },
+            ]
+        });
+    }
+
+    promotedSheltersSlick(){
+        $('.promoted_shelter').slick({
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            arrows: true,
+            fade: false,
+            autoplay:false,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                        infinite: true,
+                        dots: false
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                        infinite: true,
+                        dots: false
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        dots: false
+                    }
+                },
+            ]
+        });
+    }
+
+    counter(){
+        (function ($){
+            $.fn.counter = function() {
+                const $this = $(this),
+                    numberFrom = parseInt($this.attr('data-from')),
+                    numberTo = parseInt($this.attr('data-to')),
+                    delta = numberTo - numberFrom,
+                    deltaPositive = delta > 0 ? 1 : 0,
+                    time = parseInt($this.attr('data-time')),
+                    changeTime = 10;
+
+                let currentNumber = numberFrom,
+                    value = delta*changeTime/time;
+                var interval1;
+                const changeNumber = () => {
+                    currentNumber += value;
+                    //checks if currentNumber reached numberTo
+                    (deltaPositive && currentNumber >= numberTo) || (!deltaPositive &&currentNumber<= numberTo) ? currentNumber=numberTo : currentNumber;
+                    this.text(parseInt(currentNumber));
+                    currentNumber == numberTo ? clearInterval(interval1) : currentNumber;
+                }
+
+                interval1 = setInterval(changeNumber,changeTime);
+            }
+        }(jQuery));
+
+        $(document).ready(function(){
+
+            $('.count-up').counter();
+            $('.count1').counter();
+            $('.count2').counter();
+            $('.count3').counter();
+
+            new WOW().init();
+
+            setTimeout(function () {
+                $('.count5').counter();
+            }, 3000);
+        });
+    }
+
+
+    getAnimalSpecies(base_url){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: base_url + "/getAnimalSpecies",
+            data: {},
+            dataType: 'json',
+            success: function(data) {
+
+                let animal_species = $('#animalSpecies');
+
+                animal_species.children().remove();
+
+                animal_species.append('<option value="" disabled selected>Znajdź...</option>');
+
+                for (var i = 0; i<data.length; i++){
+                    animal_species.append('<option value="'+ data[i]['id'] +'">'+ data[i]['name'] +'</option>');
+                }
+
+            },
+            error: function(data) {
+                alert(data);
+            }
+        });
+    }
+}
+
+class frontendAnimal {
+
+    constructor(base_url) {
+        this.init(base_url);
+    }
+
+    init(base_url) {
+        this.UX(base_url);
+        this.slider()
+    }
+
+    UX() {
+        let self = this;
+
+        $("#scrollToMap").click(function () {
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $("#map").offset().top
+            }, 1000);
+        });
+
+        $("#scrollToContact").click(function () {
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $("#contact").offset().top
+            }, 1000);
+        });
+
+        $('#showPhoneNumbers').click(function () {
+            let userId = $(this).attr('data-user-id');
+            self.showPhoneNumbers(userId);
+        });
+
+        $('#sendReport').click(function () {
+            self.sendReport();
+        })
+
+
+    }
+
+    slider() {
+        $('.slider-for').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: true,
+            fade: true,
+            asNavFor: '.slider-nav',
+        });
+        $('.slider-nav').slick({
+            slidesToShow: 5,
+            slidesToScroll: 1,
+            asNavFor: '.slider-for',
+            dots: false,
+            centerMode: false,
+            arrows: true,
+            focusOnSelect: true
+        });
+    }
+
+    showPhoneNumbers(user_id) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: base_url + "/getPhoneNumbers",
+            data: {
+                user_id: user_id,
+            },
+            dataType: 'json',
+            beforeSend: function () {
+                $('#showPhoneNumbers').html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Wyświetl numery').addClass('disabled');
+            },
+            success: function (data) {
+                $('#user_phones').children().remove();
+                for (var i = 0; i < data.length; i++) {
+                    $('#user_phones').append('<p class="card-text">' + data[i].phone + '</p>')
+                }
+            },
+            complete: function () {
+                $('#showPhoneNumbers').html('Wyświetl numery<i class=" ml-2 fas fa-lg text-white fa-phone"></i>').removeClass('disabled');
+            },
+            error: function (data) {
+                alert(data);
+            }
+        });
+    }
+
+    sendReport(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        let sendBtn = $('#sendReport')
+        $.ajax({
+            type: 'POST',
+            url: base_url + "/sendReport",
+            data: {
+                reportViolationReason: $("input[name='reportViolation']:checked").val(),
+                reportViolationText: $('#reportViolationText').val(),
+                animalId: sendBtn.attr('data-animal-id'),
+            },
+            dataType: 'json',
+            beforeSend: function () {
+                sendBtn.prop('disabled', true);
+            },
+            success: function (data) {
+
+                if (data.original) {
+
+                    if (data.original.errors) {
+                        var msg = ''
+
+                        jQuery.each(data.original.errors, function (key, value) {
+                            msg += value + '<br>'
+                        });
+
+                        new Errors().showErrorModal(msg);
+                    }
+
+                }else {
+
+                    if (!data['errors']) {
+                        $('#reportViolationModal').modal('hide');
+                        new Success().showSuccessModal('Zapisano',data['success']['global']);
+
+                    } else {
+                        $('#reportViolationModal').modal('hide');
+                        new Errors().showErrorModal(data['errors']['global']);
+                    }
+
+                }
+
+            },
+            complete: function () {
+                sendBtn.prop('disabled', false);
+            },
+            error: function (data) {
+
+            }
+        });
+    }
+
+
+}
+
+class frontendAnimals {
+
+    constructor(base_url) {
+        this.init(base_url);
+    }
+
+    init(base_url) {
+        this.UX(base_url);
+    }
+
+    UX() {
+        let self = this;
+
+    }
+
+
+
+    // searchAnimals(){
+    //     $.ajaxSetup({
+    //         headers: {
+    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //         }
+    //     });
+    //
+    //     $.ajax({
+    //         type: 'GET',
+    //         url: base_url + "/searchAnimals",
+    //         data: {
+    //             animalSpecies: $('#animalSpecies').val(),
+    //             animalBreeds: $('#animalBreeds').val(),
+    //             animalAge: $('#animalAge').val(),
+    //             animalSizes: $('#animalSizes').val(),
+    //             animalGender: $('#animalGender').val(),
+    //             animalColor: $('#animalColor').val(),
+    //             animalFurs: $('#animalFurs').val(),
+    //             option_1: ($('#option_1').is(':checked')) ? 'on' : 'off',
+    //             option_2: ($('#option_2').is(':checked')) ? 'on' : 'off',
+    //             option_3: ($('#option_3').is(':checked')) ? 'on' : 'off',
+    //             option_4: ($('#option_4').is(':checked')) ? 'on' : 'off',
+    //             option_5: ($('#option_5').is(':checked')) ? 'on' : 'off',
+    //             option_6: ($('#option_6').is(':checked')) ? 'on' : 'off',
+    //             option_7: ($('#option_7').is(':checked')) ? 'on' : 'off',
+    //             option_8: ($('#option_8').is(':checked')) ? 'on' : 'off',
+    //
+    //         },
+    //         dataType: 'json',
+    //         success: function(data) {
+    //
+    //
+    //         },
+    //         error: function(data) {
+    //             alert(data);
+    //         }
+    //     });
+    // }
+
+}
+
+class frontendShelter {
+
+    constructor(base_url) {
+        this.init(base_url);
+    }
+
+    init(base_url) {
+        this.UX(base_url);
+        this.slider()
+    }
+
+    UX() {
+
+        let self = this;
+
+        $("#scrollToMap").click(function() {
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $("#map").offset().top
+            }, 1000);
+        });
+
+        $("#scrollToAnimalsForAdoption").click(function() {
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $("#animalsForAdoption").offset().top
+            }, 1000);
+        });
+
+        $("#scrollToAnimalsAdopted").click(function() {
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $("#animalsAdopted").offset().top
+            }, 1000);
+        });
+
+        $('#showPhoneNumbers').click(function () {
+            let userId = $(this).attr('data-user-id');
+            self.showPhoneNumbers(userId);
+        });
+
+    }
+
+    slider(){
+        $('.slider-for').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: true,
+            fade: true,
+            asNavFor: '.slider-nav'
+        });
+        $('.slider-nav').slick({
+            slidesToShow: 5,
+            slidesToScroll: 1,
+            asNavFor: '.slider-for',
+            dots: false,
+            centerMode: false,
+            arrows: true,
+            focusOnSelect: true
+        });
+    }
+
+    showPhoneNumbers(user_id){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: base_url + "/getPhoneNumbers",
+            data: {
+                user_id: user_id,
+            },
+            dataType: 'json',
+            beforeSend: function() {
+                $('#before_send').fadeIn();
+            },
+            success: function(data) {
+                $('#showPhoneNumbers').addClass('d-none');
+                $('#user_phones').children().remove();
+                for (var i=0; i<data.length; i++){
+                    $('#user_phones').append('<p class="card-text">'+ data[i].phone +'</p>')
+                }
+            },
+            complete: function() {
+                $('#before_send').fadeOut();
+            },
+            error: function(data) {
+                alert(data);
+            }
+        });
+    }
+
+
+
+}
+
+class frontendShelters {
+
+    constructor(base_url) {
+        this.init(base_url);
+    }
+
+    init(base_url) {
+        this.UX(base_url);
+    }
+
+    UX() {
+
+        let self = this;
+
+        $('#cityName').on('input', function () {
+            let cityName = $('#cityName').val();
+            if (cityName.length >= 2){
+                self.searchCity(cityName);
+            }
+        })
+
+    }
+
+        searchCity(cityName) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+
+        $.ajax({
+            type: 'GET',
+            url: base_url + "/searchCities",
+            data: {
+                term: cityName,
+            },
+            dataType: 'json',
+            beforeSend: function () {
+                // btn.prop('disabled', true);
+            },
+            success: function (data) {
+
+                $("#cityName").autocomplete({
+                    source: data,
+                    select: function (event, ui) {
+                        $('#cityId').val(ui.item.id)
+                    }
+                })
+
+            },
+            complete: function () {
+                // btn.prop('disabled', false);
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    }
+
+
+    // searchCity(cityName) {
+
+        // $("#cityName").mdbAutocomplete({
+        //     data: base_url + "/searchCities", /* Lecture 17 */
+        //     minLength: 2,
+        //     select: function (event, ui) {
+        //        console.log(ui.item.value);
+        //     }
+        //
+        //
+        // });
+    // }
+
+
+}
+
+class frontendUser {
+
+    constructor(base_url) {
+        this.init(base_url);
+    }
+
+    init(base_url) {
+        this.UX(base_url);
+    }
+
+    UX() {
+
+        let self = this;
+
+        $('#showPhoneNumbers').click(function () {
+            let userId = $(this).attr('data-user-id');
+            self.showPhoneNumbers(userId);
+        });
+
+
+
+    }
+
+    showPhoneNumbers(user_id){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: base_url + "/getPhoneNumbers",
+            data: {
+                user_id: user_id,
+            },
+            dataType: 'json',
+            beforeSend: function() {
+                $('#before_send').fadeIn();
+            },
+            success: function(data) {
+                $('#showPhoneNumbers').addClass('d-none');
+                $('#user_phones').children().remove();
+                for (var i=0; i<data.length; i++){
+                    $('#user_phones').append('<p class="card-text">'+ data[i].phone +'</p>')
+                }
+            },
+            complete: function() {
+                $('#before_send').fadeOut();
+            },
+            error: function(data) {
+                alert(data);
+            }
+        });
+    }
+}
+
+class backendProfile {
+
+    constructor(base_url) {
+        this.init(base_url);
+    }
+
+    init(base_url) {
+        this.UX(base_url);
+    }
+
+    UX() {
+        let self = this;
+
+        /*
+        * DODAWANIE NUMERU TELEFONU
+        * */
+        $('#add-phone-number').on('click', function () {
+            $('#phone-title-modal').text('Dodaj numer telefonu')
+            $('#save-phone-number').attr('data-phone-id', '');
+            $('#phone-number').val('');
+            $("label[for='phone-number']").removeClass('active');
+            $('#phone-modal').modal('show');
+        })
+
+        /*
+        * EDYCJA NUMERU TELEFONU
+        * */
+        $('.edit-phone-number ').on('click', function () {
+            let phoneNumber = $(this).closest('tr').find('.phone-number').text();
+            $('#save-phone-number').attr('data-phone-id', $(this).attr('data-phone-id'));
+            $('#phone-number').val(phoneNumber);
+            $("label[for='phone-number']").addClass('active');
+            $('#phone-title-modal').text('Edytuj numer telefonu');
+            $('#phone-modal').modal('show');
+        })
+
+        /*
+        * ZAPIS DODAWANIA/EDYCJI TELEFONU
+        * */
+        $('#save-phone-number').on('click', function () {
+            self.savePhoneNumber()
+        })
+
+        $('.delete-phone-number').on('click', function () {
+            let phoneId = $(this).attr('data-phone-id')
+            self.deletePhoneNumber(phoneId);
+        })
+    }
+
+    savePhoneNumber() {
+
+        let saveBtn = $('#save-phone-number');
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+
+        $.ajax({
+            type: 'POST',
+            url: base_url + "/savePhoneNumber",
+            data: {
+                phoneId: saveBtn.attr('data-phone-id'),
+                phoneNumber: $('#phone-number').val()
+            },
+            dataType: 'json',
+            beforeSend: function () {
+                saveBtn.prop('disabled', true);
+            },
+            success: function (data) {
+
+                if (data.original) {
+
+                    if (data.original.errors) {
+                        var msg = ''
+
+                        jQuery.each(data.original.errors, function (key, value) {
+                            msg += value + '<br>'
+                        });
+
+                        new Errors().showErrorModal(msg);
+                    }
+
+                }else {
+
+                    if (!data['errors']) {
+
+                        new Success().showSuccessModal('Zapisano',data['success']['global']);
+
+                    } else {
+                        new Errors().showErrorModal(data['errors']['global']);
+                    }
+
+                }
+
+            },
+            complete: function () {
+                saveBtn.prop('disabled', false);
+            },
+            error: function (data) {
+
+            }
+        });
+    }
+
+    deletePhoneNumber(phoneId){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+
+        $.ajax({
+            type: 'POST',
+            url: base_url + "/deletePhoneNumber",
+            data: {
+                phoneId: phoneId,
+            },
+            dataType: 'json',
+            beforeSend: function () {
+
+                /*
+                * TODO DODAĆ EFEKT WCZYTYWANIA CAŁEJ TABELI
+                * */
+            },
+            success: function (data) {
+
+                if (data.original) {
+
+                    if (data.original.errors) {
+                        var msg = ''
+
+                        jQuery.each(data.original.errors, function (key, value) {
+                            msg += value + '<br>'
+                        });
+
+                        new Errors().showErrorModal(msg);
+                    }
+
+                }else {
+
+                    if (!data['errors']) {
+
+                        new Success().showSuccessModal('Usunięto', data['success']['global'])
+
+                    } else {
+                        new Errors().showErrorModal(data['errors']['global']);
+                    }
+
+                }
+
+            },
+            complete: function () {
+                /*
+                * TODO ZAKOŃCZYĆ EFEKT ŁADOWANIA CAŁEJ TABELI
+                * */
+            },
+            error: function (data) {
+
+            }
+        });
+    }
+}
+
+class BackendAnimalColors {
+
+    constructor(base_url) {
+        this.init(base_url);
+    }
+
+    init(base_url) {
+        this.UX(base_url);
+    }
+
+    UX() {
+        let self = this;
+
+        $('#addColor').click(function () {
+            $('#addEditModalTitle').text('Dodaj kolor')
+            $('.modal-header ').addClass('teal lighten-1').removeClass('yellow darken-2 danger-color green darken-2')
+            $('#colorName').val('');
+            $('label[for="colorName"]').removeClass('active');
+            $('#action').val('add');
+            $('#animalColorId').val('');
+            $('#addEditColorModal').modal('show')
+        })
+
+        $(document).on('click', '.edit-animal-color', function () {
+            $('#addEditModalTitle').text('Edytuj kolor')
+            $('.modal-header ').addClass('yellow darken-2').removeClass('teal lighten-1 danger-color green')
+            let animalColorName = $(this).closest('tr').find('.animal-color-name').text();
+            $('#colorName').val(animalColorName);
+            $('label[for="colorName"]').addClass('active');
+            $('#action').val('edit');
+            let AnimalColorId = $(this).closest('tr').find('.animal-color-name').attr('data-animal-color-id');
+            $('#animalColorId').val(AnimalColorId);
+            $('#addEditColorModal').modal('show')
+        })
+
+        $('#addEditColor').on('submit', function (e) {
+            e.preventDefault();
+            if ($('#action').val() === 'add'){
+                self.saveAnimalColor(new FormData(this), base_url+ "/adminStoreAnimalColor")
+            }else{
+                self.saveAnimalColor(new FormData(this), base_url+ "/adminUpdateAnimalColor")
+            }
+        })
+
+        $(document).on('click', '.restore-animal-color, .delete-animal-color', function () {
+
+            if ($(this).hasClass('restore-animal-color')) {
+                $('#actionDeleteRestore').val('restore');
+                $('#animalRestoreText').removeClass('d-none').children().removeClass('d-none');
+                $('#animalDeleteText').addClass('d-none').children().addClass('d-none')
+                $('#confirmModalHeader').addClass('green darken-2').removeClass('danger-color yellow darken-2 teal lighten-1')
+            } else {
+                $('#actionDeleteRestore').val('delete');
+                $('#animalDeleteText').removeClass('d-none').children().removeClass('d-none');
+                $('#animalRestoreText').addClass('d-none').children().addClass('d-none')
+                $('#confirmModalHeader').addClass('danger-color').removeClass('green darken-2 yellow darken-2 teal lighten-1')
+            }
+
+            let animalColorId = $(this).closest('tr').find('.animal-color-name').attr('data-animal-color-id');
+            $('#confirm-yes').attr('data-animal-color-id', animalColorId);
+            let animalColorName = $(this).closest('tr').find('.animal-color-name').text();
+            $('.confirm-animal-color-name').text(animalColorName);
+            $('#confirmModal').modal('show');
+        })
+
+        $('#confirm-yes').on('click', function () {
+            let animalColorId = $('#confirm-yes').attr('data-animal-color-id');
+            let action = $('#actionDeleteRestore').val();
+
+            if (action === 'restore'){
+                self.deleteRestoreAnimalColor(animalColorId, base_url + "/restoreAnimalColor");
+            }else{
+                self.deleteRestoreAnimalColor(animalColorId, base_url + "/deleteAnimalColor");
+            }
+
+        })
+    }
+
+    deleteRestoreAnimalColor(animalColorId, url){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: {
+                animalColorId: animalColorId,
+            },
+            dataType: 'json',
+            beforeSend: function () {
+
+                /*
+                * TODO DODAĆ EFEKT WCZYTYWANIA CAŁEJ TABELI
+                * */
+            },
+            success:function(data)
+            {
+                var html = '';
+                if(data.errors)
+                {
+                    html = '<div class="alert alert-danger">';
+                    for(var count = 0; count < data.errors.length; count++)
+                    {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+                }
+                if(data.success)
+                {
+                    html = '<div class="alert alert-success">' + data.success + '</div>';
+                    $('#adminAnimalColorsTable').DataTable().ajax.reload();
+                }
+                $('#form_result').html(html);
+            },
+            complete: function () {
+                /*
+                * TODO ZAKOŃCZYĆ EFEKT ŁADOWANIA CAŁEJ TABELI
+                * */
+            },
+            error: function (data) {
+
+            }
+        });
+    }
+
+    saveAnimalColor(formData, url){
+        $.ajax({
+            url: url,
+            method:"POST",
+            data: formData,
+            contentType: false,
+            cache:false,
+            processData: false,
+            dataType:"json",
+            success:function(data)
+            {
+                var html = '';
+                if(data.errors)
+                {
+                    html = '<div class="alert alert-danger">';
+                    for(var count = 0; count < data.errors.length; count++)
+                    {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+                }
+                if(data.success)
+                {
+                    html = '<div class="alert alert-success">' + data.success + '</div>';
+                    $('#colorName').val('');
+                    $('#adminAnimalColorsTable').DataTable().ajax.reload();
+                }
+                $('#form_result').html(html);
+            }
+        })
+    }
+}
+
+class BackendAnimalFurs {
+
+    constructor(base_url) {
+        this.init(base_url);
+    }
+
+    init(base_url) {
+        this.UX(base_url);
+    }
+
+    UX() {
+        let self = this;
+
+        $('#addFur').click(function () {
+            $('#addEditModalTitle').text('Dodaj długość futra')
+            $('.modal-header ').addClass('teal lighten-1').removeClass('yellow darken-2')
+            $('#furName').val('');
+            $('label[for="furName"]').removeClass('active');
+            $('#action').val('add');
+            $('#animalFurId').val('');
+            $('#addEditFurModal').modal('show')
+        })
+        $(document).on('click', '.edit-animal-fur', function () {
+            $('#addEditModalTitle').text('Edytuj długość futra')
+            $('.modal-header ').addClass('yellow darken-2').removeClass('teal lighten-1')
+            let animalFurName = $(this).closest('tr').find('.animal-fur-name').text();
+            $('#furName').val(animalFurName);
+            $('label[for="furName"]').addClass('active');
+            $('#action').val('edit');
+            let AnimalfurId = $(this).closest('tr').find('.animal-fur-name').attr('data-animal-fur-id');
+            $('#animalFurId').val(AnimalfurId);
+            $('#addEditFurModal').modal('show')
+        })
+
+        $('#addEditFur').on('submit', function (e) {
+            e.preventDefault();
+            if ($('#action').val() === 'add') {
+                self.saveAnimalColor(new FormData(this), base_url + "/adminStoreAnimalFur")
+            } else {
+                self.saveAnimalColor(new FormData(this), base_url + "/adminUpdateAnimalFur")
+            }
+        })
+
+        $(document).on('click', '.restore-animal-fur, .delete-animal-fur', function () {
+
+            if ($(this).hasClass('restore-animal-fur')) {
+                $('#actionDeleteRestore').val('restore');
+                $('#animalRestoreText').removeClass('d-none').children().removeClass('d-none');
+                $('#animalDeleteText').addClass('d-none').children().addClass('d-none')
+                $('#confirmModalHeader').addClass('green darken-2').removeClass('danger-color teal lighten-1 yellow darken-2')
+            } else {
+                $('#actionDeleteRestore').val('delete');
+                $('#animalDeleteText').removeClass('d-none').children().removeClass('d-none');
+                $('#animalRestoreText').addClass('d-none').children().addClass('d-none')
+                $('#confirmModalHeader').addClass('danger-color').removeClass('green darken-2 teal lighten-1 yellow darken-2')
+            }
+
+            let animalFurId = $(this).closest('tr').find('.animal-fur-name').attr('data-animal-fur-id');
+            $('#confirm-yes').attr('data-animal-fur-id', animalFurId);
+            let animalFurName = $(this).closest('tr').find('.animal-fur-name').text();
+            $('.confirm-animal-fur-name').text(animalFurName);
+            $('#confirmModal').modal('show');
+        })
+
+        $('#confirm-yes').on('click', function () {
+            console.log($('#confirm-yes'));
+            let animalFurId = $('#confirm-yes').attr('data-animal-fur-id');
+            let action = $('#actionDeleteRestore').val();
+
+            self.deleteRestoreAnimalFur(animalFurId, action, base_url + "/deleteRestoreAnimalFur");
+
+        })
+    }
+
+    deleteRestoreAnimalFur(animalFurId, action, url) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: {
+                animalFurId: animalFurId,
+                action: action,
+            },
+            dataType: 'json',
+            beforeSend: function () {
+
+                /*
+                * TODO DODAĆ EFEKT WCZYTYWANIA CAŁEJ TABELI
+                * */
+            },
+            success: function (data) {
+                var html = '';
+                if (data.errors) {
+                    html = '<div class="alert alert-danger">';
+                    for (var count = 0; count < data.errors.length; count++) {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+                }
+                if (data.success) {
+                    html = '<div class="alert alert-success">' + data.success + '</div>';
+                    $('#adminAnimalFursTable').DataTable().ajax.reload();
+                }
+                $('#form_result').html(html);
+            },
+            complete: function () {
+                /*
+                * TODO ZAKOŃCZYĆ EFEKT ŁADOWANIA CAŁEJ TABELI
+                * */
+            },
+            error: function (data) {
+
+            }
+        });
+    }
+
+    saveAnimalColor(formData, url) {
+        $.ajax({
+            url: url,
+            method: "POST",
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData: false,
+            dataType: "json",
+            success: function (data) {
+                var html = '';
+                if (data.errors) {
+                    html = '<div class="alert alert-danger">';
+                    for (var count = 0; count < data.errors.length; count++) {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+                }
+                if (data.success) {
+                    html = '<div class="alert alert-success">' + data.success + '</div>';
+                    $('#furName').val('');
+                    $('#adminAnimalFursTable').DataTable().ajax.reload();
+                }
+                $('#form_result').html(html);
+            }
+        })
+    }
+}
+
+class BackendAnimalSizes {
+
+    constructor(base_url) {
+        this.init(base_url);
+    }
+
+    init(base_url) {
+        this.UX(base_url);
+    }
+
+    UX() {
+        let self = this;
+
+        $('#addSize').click(function () {
+            $('#addEditModalTitle').text('Dodaj wielkość zwierzaka')
+            $('.modal-header ').addClass('teal lighten-1').removeClass('yellow darken-2 danger-color green darken-2')
+            $('#sizeName').val('');
+            $('label[for="sizeName"]').removeClass('active');
+            $('#action').val('add');
+            $('#animalSizeId').val('');
+            $('#addEditSizeModal').modal('show')
+        })
+        $(document).on('click', '.edit-animal-size', function () {
+            $('#addEditModalTitle').text('Edytuj wielkość zwierzaka')
+            $('.modal-header ').addClass('yellow darken-2').removeClass('teal lighten-1 danger-color green')
+            let animalSizeName = $(this).closest('tr').find('.animal-size-name').text();
+            $('#sizeName').val(animalSizeName);
+            $('label[for="sizeName"]').addClass('active');
+            $('#action').val('edit');
+            let animalSizeId = $(this).closest('tr').find('.animal-size-name').attr('data-animal-size-id');
+            $('#animalSizeId').val(animalSizeId);
+            $('#form_result').html('');
+            $('#addEditSizeModal').modal('show')
+        })
+
+        $('#addEditSize').on('submit', function (e) {
+            e.preventDefault();
+            if ($('#action').val() === 'add') {
+                self.saveAnimalSize(new FormData(this), base_url + "/adminStoreAnimalSize")
+            } else {
+                self.saveAnimalSize(new FormData(this), base_url + "/adminUpdateAnimalSize")
+            }
+        })
+
+        $(document).on('click', '.restore-animal-size, .delete-animal-size', function () {
+
+            if ($(this).hasClass('restore-animal-size')) {
+                $('#actionDeleteRestore').val('restore');
+                $('#animalRestoreText').removeClass('d-none').children().removeClass('d-none');
+                $('#animalDeleteText').addClass('d-none').children().addClass('d-none')
+                $('#confirmModalHeader').addClass('green darken-2').removeClass('danger-color yellow darken-2 teal lighten-1')
+            } else {
+                $('#actionDeleteRestore').val('delete');
+                $('#animalDeleteText').removeClass('d-none').children().removeClass('d-none');
+                $('#animalRestoreText').addClass('d-none').children().addClass('d-none')
+                $('#confirmModalHeader').addClass('danger-color').removeClass('green darken-2 yellow darken-2 teal lighten-1')
+            }
+
+            let animalSizeId = $(this).closest('tr').find('.animal-size-name').attr('data-animal-size-id');
+            $('#confirm-yes').attr('data-animal-size-id', animalSizeId);
+            let animalSizeName = $(this).closest('tr').find('.animal-size-name').text();
+            $('.confirm-animal-size-name').text(animalSizeName);
+            $('#confirmModal').modal('show');
+        })
+
+
+        $('#confirm-yes').on('click', function () {
+            let animalSizeId = $('#confirm-yes').attr('data-animal-size-id');
+            let action = $('#actionDeleteRestore').val();
+
+            if (action === 'restore'){
+                self.deleteRestoreAnimalSize(animalSizeId, base_url + "/restoreAnimalSize");
+            }else{
+                self.deleteRestoreAnimalSize(animalSizeId, base_url + "/deleteAnimalSize");
+            }
+
+        })
+    }
+
+    deleteRestoreAnimalSize(animalSizeId, url) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: {
+                animalSizeId: animalSizeId,
+            },
+            dataType: 'json',
+            beforeSend: function () {
+
+                /*
+                * TODO DODAĆ EFEKT WCZYTYWANIA CAŁEJ TABELI
+                * */
+            },
+            success: function (data) {
+                var html = '';
+                if (data.errors) {
+                    html = '<div class="alert alert-danger">';
+                    for (var count = 0; count < data.errors.length; count++) {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+                }
+                if (data.success) {
+                    html = '<div class="alert alert-success">' + data.success + '</div>';
+                    $('#adminAnimalSizeTable').DataTable().ajax.reload();
+                }
+                $('#form_result').html(html);
+            },
+            complete: function () {
+                /*
+                * TODO ZAKOŃCZYĆ EFEKT ŁADOWANIA CAŁEJ TABELI
+                * */
+            },
+            error: function (data) {
+
+            }
+        });
+    }
+
+    saveAnimalSize(formData, url) {
+        $.ajax({
+            url: url,
+            method: "POST",
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData: false,
+            dataType: "json",
+            success: function (data) {
+                var html = '';
+                if (data.errors) {
+                    html = '<div class="alert alert-danger">';
+                    for (var count = 0; count < data.errors.length; count++) {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+                }
+                if (data.success) {
+                    html = '<div class="alert alert-success">' + data.success + '</div>';
+                    $('#sizeName').val('');
+                    $('#adminAnimalSizeTable').DataTable().ajax.reload();
+                }
+                $('#form_result').html(html);
+            }
+        })
+    }
+}
+
+class backendAnimalCharacteristics {
+
+    constructor(base_url) {
+        this.init(base_url);
+    }
+
+    init(base_url) {
+        this.UX(base_url);
+    }
+
+    UX() {
+        let self = this;
+
+        $('#addCharacteristic').click(function () {
+            $('#addEditModalTitle').text('Dodaj cechę zwierzaka');
+            $('.modal-header ').addClass('teal lighten-1').removeClass('yellow darken-2 danger-color green darken-2');
+            $('#characteristicName').val('');
+            $('label[for="colorName"]').removeClass('active');
+            $('#action').val('add');
+            $('#animalCharacteristicId').val('');
+            $('#addEditCharacteristicModal').modal('show')
+        })
+        $(document).on('click', '.edit-dictionary-characteristic', function () {
+            $('#addEditModalTitle').text('Edytuj cechę zwierzaka')
+            $('.modal-header ').addClass('yellow darken-2').removeClass('teal lighten-1 danger-color green')
+            let animalCharacteristicName = $(this).closest('tr').find('.characteristic-dictionary-name').text();
+            $('#characteristicName').val(animalCharacteristicName);
+            $('label[for="characteristicName"]').addClass('active');
+            $('#action').val('edit');
+            let AnimalCharacteristicId = $(this).closest('tr').find('.characteristic-dictionary-name').attr('data-characteristic-dictionary-id');
+            $('#animalCharacteristicId').val(AnimalCharacteristicId);
+            $('#addEditCharacteristicModal').modal('show')
+        })
+
+        $('#addEditCharacteristic').on('submit', function (e) {
+            e.preventDefault();
+            if ($('#action').val() === 'add'){
+                self.saveAnimalCharacteristic(new FormData(this), base_url+ "/adminStoreAnimalCharacteristic")
+            }else{
+                self.saveAnimalCharacteristic(new FormData(this), base_url+ "/adminUpdateAnimalCharacteristic")
+            }
+        })
+
+        $(document).on('click', '.restore-dictionary-characteristic, .delete-dictionary-characteristic', function () {
+
+            if ($(this).hasClass('restore-dictionary-characteristic')) {
+                $('#actionDeleteRestore').val('restore');
+                $('#animalRestoreText').removeClass('d-none').children().removeClass('d-none');
+                $('#animalDeleteText').addClass('d-none').children().addClass('d-none')
+                $('#confirmModalHeader').addClass('green darken-2').removeClass('danger-color yellow darken-2 teal lighten-1')
+            } else {
+                $('#actionDeleteRestore').val('delete');
+                $('#animalDeleteText').removeClass('d-none').children().removeClass('d-none');
+                $('#animalRestoreText').addClass('d-none').children().addClass('d-none')
+                $('#confirmModalHeader').addClass('danger-color').removeClass('green darken-2 yellow darken-2 teal lighten-1')
+            }
+
+            let dictionaryCharacteristicId = $(this).closest('tr').find('.characteristic-dictionary-name').attr('data-characteristic-dictionary-id');
+            $('#confirm-yes').attr('data-dictionary-characteristic-id', dictionaryCharacteristicId);
+            let dictionaryCharacteristicName = $(this).closest('tr').find('.characteristic-dictionary-name').text();
+            $('.confirm-dictionary-characteristic-name').text(dictionaryCharacteristicName);
+            $('#showHideContent').show();
+            $('#confirmModal').modal('show');
+        })
+
+        $('#confirm-yes').on('click', function () {
+            let dictionaryCharacteristicId = $('#confirm-yes').attr('data-dictionary-characteristic-id');
+            let action = $('#actionDeleteRestore').val();
+
+            if (action === 'restore'){
+                self.deleteRestoreDictionaryCharacteristic(dictionaryCharacteristicId, base_url + "/restoreAnimalCharacteristic");
+            }else{
+                self.deleteRestoreDictionaryCharacteristic(dictionaryCharacteristicId, base_url + "/deleteAnimalCharacteristic");
+            }
+
+        })
+    }
+
+    deleteRestoreDictionaryCharacteristic(animalCharacteristicId, url){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: {
+                animalCharacteristicId: animalCharacteristicId,
+            },
+            dataType: 'json',
+            beforeSend: function () {
+
+                /*
+                * TODO DODAĆ EFEKT WCZYTYWANIA CAŁEJ TABELI
+                * */
+            },
+            success:function(data)
+            {
+                var html = '';
+                if(data.errors)
+                {
+                    html = '<div class="alert alert-danger">';
+                    for(var count = 0; count < data.errors.length; count++)
+                    {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+                }
+                if(data.success)
+                {
+                    html = '<div class="alert alert-success">' + data.success + '</div>';
+                    $('#showHideContent').slideUp();
+                    $('#adminAnimalCharacteristicsTable').DataTable().ajax.reload();
+                }
+                $('#confirmFormResult').html(html);
+            },
+            complete: function () {
+                /*
+                * TODO ZAKOŃCZYĆ EFEKT ŁADOWANIA CAŁEJ TABELI
+                * */
+            },
+            error: function (data) {
+
+            }
+        });
+    }
+
+    saveAnimalCharacteristic(formData, url){
+        $.ajax({
+            url: url,
+            method:"POST",
+            data: formData,
+            contentType: false,
+            cache:false,
+            processData: false,
+            dataType:"json",
+            success:function(data)
+            {
+                var html = '';
+                if(data.errors)
+                {
+                    html = '<div class="alert alert-danger">';
+                    for(var count = 0; count < data.errors.length; count++)
+                    {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+                }
+                if(data.success)
+                {
+                    html = '<div class="alert alert-success">' + data.success + '</div>';
+                    $('#characteristicName').val('');
+                    $('#adminAnimalCharacteristicsTable').DataTable().ajax.reload();
+                }
+                $('#formResult').html(html);
+            }
+        })
+    }
+}
+
+class BackendAnimalSpecies {
+
+    constructor(base_url) {
+        this.init(base_url);
+    }
+
+    init(base_url) {
+        this.UX(base_url);
+    }
+
+    UX() {
+        let self = this;
+
+        $('#addSpecies').click(function () {
+            $('#addEditModalTitle').text('Dodaj gatunek')
+            $('.modal-header ').addClass('teal lighten-1').removeClass('yellow darken-2 danger-color green darken-2')
+            $('#speciesName').val('');
+            $('label[for="speciesName"]').removeClass('active');
+            $('#action').val('add');
+            $('#animalSpeciesId').val('');
+            $('#addEditSpeciesModal').modal('show')
+        })
+        $(document).on('click', '.edit-animal-species', function () {
+            $('#addEditModalTitle').text('Edytuj gatunek')
+            $('.modal-header ').addClass('yellow darken-2').removeClass('teal lighten-1 danger-color green')
+            let AnimalSpeciesName = $(this).closest('tr').find('.animal-species-name').text();
+            $('#speciesName').val(AnimalSpeciesName);
+            $('label[for="speciesName"]').addClass('active');
+            $('#action').val('edit');
+            let AnimalSpeciesId = $(this).closest('tr').find('.animal-species-name').attr('data-animal-species-id');
+            $('#animalSpeciesId').val(AnimalSpeciesId);
+            $('#form_result').html('');
+            $('#addEditSpeciesModal').modal('show')
+        })
+
+        $('#addEditSpecies').on('submit', function (e) {
+            e.preventDefault();
+            if ($('#action').val() === 'add'){
+                self.saveAnimalSpecies(new FormData(this), base_url+ "/adminStoreAnimalSpecies")
+            }else{
+                self.saveAnimalSpecies(new FormData(this), base_url+ "/adminUpdateAnimalSpecies")
+            }
+        })
+
+        $(document).on('click', '.delete-animal-species', function () {
+            let animalSpeciesId = $(this).closest('tr').find('.animal-species-name').attr('data-animal-species-id');
+            $('#confirm-yes').attr('data-animal-species-id', animalSpeciesId);
+            let animalSpeciesName = $(this).closest('tr').find('.animal-species-name').text();
+            $('#animalSpeciesName').text(animalSpeciesName);
+            $('#confirmModal').modal('show');
+        })
+
+        $(document).on('click', '.restore-animal-species, .delete-animal-species', function () {
+
+            if ($(this).hasClass('restore-animal-species')) {
+                $('#actionDeleteRestore').val('restore');
+                $('#animalRestoreText').removeClass('d-none').children().removeClass('d-none');
+                $('#animalDeleteText').addClass('d-none').children().addClass('d-none')
+                $('#confirmModalHeader').addClass('green darken-2').removeClass('danger-color yellow darken-2 teal lighten-1')
+            } else {
+                $('#actionDeleteRestore').val('delete');
+                $('#animalDeleteText').removeClass('d-none').children().removeClass('d-none');
+                $('#animalRestoreText').addClass('d-none').children().addClass('d-none')
+                $('#confirmModalHeader').addClass('danger-color').removeClass('green darken-2 yellow darken-2 teal lighten-1')
+            }
+
+            let animalSpeciesId = $(this).closest('tr').find('.characteristic-dictionary-name').attr('data-characteristic-dictionary-id');
+            $('#confirm-yes').attr('data-animal-species-id', animalSpeciesId);
+            let animalSpeciesName = $(this).closest('tr').find('.animal-species-name').text();
+            $('.confirm-animal-species-name').text(animalSpeciesName);
+            $('#showHideContent').show();
+            $('#confirmModal').modal('show');
+        })
+
+        $('#confirm-yes').on('click', function () {
+            let animalSpeciesId = $('#confirm-yes').attr('data-animal-species-id');
+            let action = $('#actionDeleteRestore').val();
+
+            if (action === 'restore'){
+                self.deleteRestoreAnimalSpecies(animalSpeciesId, base_url + "/restoreAnimalSpecies");
+            }else{
+                self.deleteRestoreAnimalSpecies(animalSpeciesId, base_url + "/deleteAnimalSpecies");
+            }
+
+        })
+    }
+
+    deleteRestoreAnimalSpecies(animalSpeciesId, url){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: {
+                animalSpeciesId: animalSpeciesId,
+            },
+            dataType: 'json',
+            beforeSend: function () {
+
+                /*
+                * TODO DODAĆ EFEKT WCZYTYWANIA CAŁEJ TABELI
+                * */
+            },
+            success:function(data)
+            {
+                var html = '';
+                if(data.errors)
+                {
+                    html = '<div class="alert alert-danger">';
+                    for(var count = 0; count < data.errors.length; count++)
+                    {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+                }
+                if(data.success)
+                {
+                    html = '<div class="alert alert-success">' + data.success + '</div>';
+                    $('#showHideContent').slideUp();
+                    $('#adminSpeciesTable').DataTable().ajax.reload();
+                }
+                $('#confirmFormResult').html(html);
+            },
+            complete: function () {
+                /*
+                * TODO ZAKOŃCZYĆ EFEKT ŁADOWANIA CAŁEJ TABELI
+                * */
+            },
+            error: function (data) {
+
+            }
+        });
+    }
+
+    saveAnimalSpecies(formData, url){
+        $.ajax({
+            url: url,
+            method:"POST",
+            data: formData,
+            contentType: false,
+            cache:false,
+            processData: false,
+            dataType:"json",
+            success:function(data)
+            {
+                var html = '';
+                if(data.errors)
+                {
+                    html = '<div class="alert alert-danger">';
+                    for(var count = 0; count < data.errors.length; count++)
+                    {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+                }
+                if(data.success)
+                {
+                    html = '<div class="alert alert-success">' + data.success + '</div>';
+                    $('#colorName').val('');
+                    $('#adminSpeciesTable').DataTable().ajax.reload();
+                }
+                $('#form_result').html(html);
+            }
+        })
+    }
+}
+
+class BackendAnimalBreeds {
+
+    constructor(base_url) {
+        this.init(base_url);
+    }
+
+    init(base_url) {
+        this.UX(base_url);
+        this.getSpecies();
+    }
+
+    UX() {
+        let self = this;
+
+        $('#addBreed').click(function () {
+            $('#addEditModalTitle').text('Dodaj rasę')
+            $('.modal-header ').addClass('teal lighten-1').removeClass('yellow darken-2')
+            $('#breedName').val('');
+            $('#speciesId').val('');
+            $('label[for="breedName"]').removeClass('active');
+            $('#animalBreedId').val('');
+            $('#action').val('add');
+            $('#addEditBreedModal').modal('show')
+        })
+        $(document).on('click', '.edit-animal-breed', function () {
+            $('#addEditModalTitle').text('Edytuj rasę')
+            $('.modal-header ').addClass('yellow darken-2').removeClass('teal lighten-1')
+            let animalBreedName = $(this).closest('tr').find('.animal-breed-name').text();
+            $('#breedName').val(animalBreedName);
+            let speciesId = $(this).closest('tr').find('.animal-species-name').attr('data-animal-species-id');
+            $('#speciesId').val(speciesId);
+
+            $('label[for="breedName"]').addClass('active');
+            $('#action').val('edit');
+            let animalBreedId = $(this).closest('tr').find('.animal-breed-name').attr('data-animal-breed-id');
+            $('#animalBreedId').val(animalBreedId);
+            $('#addEditBreedModal').modal('show')
+        })
+
+        $('#addEditBreed').on('submit', function (e) {
+            e.preventDefault();
+            if ($('#action').val() === 'add') {
+                self.saveAnimalBreed(new FormData(this), base_url + "/adminStoreAnimalBreed")
+            } else {
+                self.saveAnimalBreed(new FormData(this), base_url + "/adminUpdateAnimalBreed")
+            }
+        })
+
+        $(document).on('click', '.restore-animal-breed, .delete-animal-breed', function () {
+
+            if ($(this).hasClass('restore-animal-breed')) {
+                $('#actionDeleteRestore').val('restore');
+                $('#animalRestoreText').removeClass('d-none').children().removeClass('d-none');
+                $('#animalDeleteText').addClass('d-none').children().addClass('d-none')
+                $('#confirmModalHeader').addClass('green darken-2').removeClass('danger-color teal lighten-1 yellow darken-2')
+            } else {
+                $('#actionDeleteRestore').val('delete');
+                $('#animalDeleteText').removeClass('d-none').children().removeClass('d-none');
+                $('#animalRestoreText').addClass('d-none').children().addClass('d-none')
+                $('#confirmModalHeader').addClass('danger-color').removeClass('green darken-2 teal lighten-1 yellow darken-2')
+            }
+
+            let animalBreedId = $(this).closest('tr').find('.animal-breed-name').attr('data-animal-breed-id');
+            $('#confirm-yes').attr('data-animal-breed-id', animalBreedId);
+            let animalBreedName = $(this).closest('tr').find('.animal-breed-name').text();
+            $('.confirm-animal-breed-name').text(animalBreedName);
+            $('#confirmModal').modal('show');
+        })
+
+        $('#confirm-yes').on('click', function () {
+            let animalBreedId = $('#confirm-yes').attr('data-animal-breed-id');
+            let action = $('#actionDeleteRestore').val();
+
+            self.deleteRestoreAnimalBreed(animalBreedId, action, base_url + "/deleteRestoreAnimalBreed");
+
+        })
+    }
+
+    deleteRestoreAnimalBreed(animalBreedId, action, url) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: {
+                animalBreedId: animalBreedId,
+                action: action,
+            },
+            dataType: 'json',
+            beforeSend: function () {
+
+                /*
+                * TODO DODAĆ EFEKT WCZYTYWANIA CAŁEJ TABELI
+                * */
+            },
+            success: function (data) {
+                var html = '';
+                if (data.errors) {
+                    html = '<div class="alert alert-danger">';
+                    for (var count = 0; count < data.errors.length; count++) {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+                }
+                if (data.success) {
+                    html = '<div class="alert alert-success">' + data.success + '</div>';
+                    $('#adminBreedsTable').DataTable().ajax.reload();
+                }
+                $('#form_result').html(html);
+            },
+            complete: function () {
+                /*
+                * TODO ZAKOŃCZYĆ EFEKT ŁADOWANIA CAŁEJ TABELI
+                * */
+            },
+            error: function (data) {
+
+            }
+        });
+    }
+
+    saveAnimalBreed(formData, url) {
+        $.ajax({
+            url: url,
+            method: "POST",
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData: false,
+            dataType: "json",
+            success: function (data) {
+                var html = '';
+                if (data.errors) {
+                    html = '<div class="alert alert-danger">';
+                    for (var count = 0; count < data.errors.length; count++) {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+                }
+                if (data.success) {
+                    html = '<div class="alert alert-success">' + data.success + '</div>';
+                    $('#speciesId').val('');
+                    $('#breedName').val('');
+                    $('#adminBreedsTable').DataTable().ajax.reload();
+                }
+                $('#form_result').html(html);
+            }
+        })
+    }
+
+    getSpecies(species_id = null){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: base_url + "/getSpecies",
+            method:"POST",
+            data: {
+                species_id: species_id
+            },
+            cache:true,
+            dataType:"json",
+            beforeSend: function () {
+
+            },
+            success:function(data)
+            {
+                var html = '';
+                if(data.errors)
+                {
+                    html = '<div class="alert alert-danger">';
+                    for(var count = 0; count < data.errors.length; count++)
+                    {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+
+                }else {
+
+                    $('#speciesId').append('<option value="" disabled selected>Wybierz gatunek</option>');
+                    for (let i=0; i<data.length; i++){
+
+                        $('#speciesId').append('<option value="'+ data[i].id +'">'+ data[i].name +'</option>');
+                    }
+                }
+                $('#form_result').html(html);
+            },
+            complete: function () {
+
+            },
+        })
+    }
+}
+
+class BackendAvailableColors {
+
+    constructor(base_url) {
+        this.init(base_url);
+    }
+
+    init(base_url) {
+        this.UX(base_url);
+        this.getBreeds();
+        this.getColors()
+    }
+
+    UX(base_url) {
+        let self = this;
+
+        $('#addAvailableColor').click(function () {
+            $('#addEditModalTitle').text('Dodaj dostępny kolor dla rasy');
+            $('.modal-header ').addClass('teal lighten-1').removeClass('yellow darken-2 danger-color green darken-2');
+            $('#breedId').val('');
+            $('#colors').val('');
+            $('#action').val('add');
+            $('#animalBreedId').val('');
+            $('#addEditAvailableColorModal').modal('show')
+        })
+
+        $(document).on('click', '.edit-available-color', function () {
+            let animalBreedId = $(this).closest('tr').find('.animal-breed-name').attr('data-animal-breed-id');
+            self.getAvailableColorsForBreed(animalBreedId)
+            $('#addEditModalTitle').text('Edytuj dostępne kolory dla rasy')
+            $('.modal-header ').addClass('yellow darken-2').removeClass('teal lighten-1 danger-color green')
+            $('#action').val('edit');
+        })
+
+
+        $('#addEditAvailableColor').on('submit', function (e) {
+            e.preventDefault();
+            if ($('#action').val() === 'add'){
+                self.saveAvailableColors(new FormData(this), base_url+ "/adminStoreAvailableColors")
+            }else{
+                self.saveAvailableColors(new FormData(this), base_url+ '/adminUpdateAvailAbleColors')
+            }
+        })
+
+        $(document).on('click', '.delete-available-color', function () {
+
+            let animalSpeciesName = $(this).closest('tr').find('.animal-species-name').text();
+            let animalBreedName = $(this).closest('tr').find('.animal-breed-name').text();
+            let animalColorName = $(this).closest('tr').find('.animal-color-name').text();
+            $('.confirm-animal-color-name').text(animalColorName)
+            $('.confirm-animal-breed-name').text(animalSpeciesName +' '+ animalBreedName);
+            $('#confirm-yes').attr('data-available-color-id', $(this).attr('data-available-color-id'))
+            $('#confirmModalHeader').addClass('danger-color').removeClass('green darken-2 yellow darken-2 teal lighten-1')
+            $('#showHideContent').slideDown();
+
+            $('#confirmModal').modal('show');
+        })
+
+        $('#confirm-yes').on('click', function () {
+            let availableColorId = $('#confirm-yes').attr('data-available-color-id');
+            self.deleteAvailableColor(availableColorId, base_url + "/deleteAvailableColor")
+        })
+    }
+
+    getAvailableColorsForBreed(animalBreedId){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'POST',
+            url: base_url + "/getAvailableDataForBreed",
+            data: {
+                animalBreedId: animalBreedId,
+                type: 'colors',
+            },
+            dataType: 'json',
+            beforeSend: function () {
+                $(".edit-available-color[data-available-color-id='" + animalBreedId +"']").html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Wyświetl numery').addClass('disabled');
+
+            },
+            success: function (data) {
+
+                if(data.errors)
+                {
+
+                }
+                if(data.success)
+                {
+                    for (let i=0; i<data.success.length; i++){
+                        $('#colors option[value=' + data.success[i].color_id + ']').attr('selected', true);
+                    }
+                    $('#colors').materialSelect();
+                    $('#breedId').val(animalBreedId)
+
+
+                }
+            },
+            complete: function () {
+                $(".edit-available-color[data-available-color-id='" + animalBreedId +"']").html('<i class="fas fa-edit"></i>').removeClass('disabled');
+                $('#addEditAvailableColorModal').modal('show')
+            },
+            error: function (data) {
+
+            }
+        });
+    }
+
+    saveAvailableColors(formData, url){
+        $.ajax({
+            url: url,
+            method:"POST",
+            data: formData,
+            contentType: false,
+            cache:false,
+            processData: false,
+            dataType:"json",
+            success:function(data)
+            {
+                var html = '';
+                if(data.errors)
+                {
+                    html = '<div class="alert alert-danger">';
+                    for(var count = 0; count < data.errors.length; count++)
+                    {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+                }
+                if(data.success)
+                {
+                    html = '<div class="alert alert-success">' + data.success + '</div>';
+                    $('#adminAvailableColorsTable').DataTable().ajax.reload();
+                }
+                $('#formResult').html(html);
+            }
+        })
+    }
+
+    getBreeds(breed_id = null){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: base_url + "/getBreeds",
+            method:"POST",
+            data: {
+                breed_id: breed_id
+            },
+            cache:true,
+            dataType:"json",
+            beforeSend: function () {
+
+            },
+            success:function(data)
+            {
+                var html = '';
+                if(data.errors)
+                {
+                    html = '<div class="alert alert-danger">';
+                    for(var count = 0; count < data.errors.length; count++)
+                    {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+
+                }else {
+
+                    $('#breedId').append('<option value="" disabled selected>Wybierz rasę</option>');
+
+                    for (let i=0; i<data.length; i++){
+                        let optionGroup = ''
+                        optionGroup += '<optgroup label="'+ data[i].species_name +'" data-species-id="'+ data[i].species_id +'">';
+                        for (let j=0; j<data[i].breeds.length; j++){
+                            optionGroup += '<option value="'+ data[i].breeds[j].id +'">'+ data[i].breeds[j].name +'</option>';
+                        }
+                        optionGroup += '</optgroup>';
+
+                        $('#breedId').append(optionGroup);
+                    }
+                }
+                $('#form_result').html(html);
+            },
+            complete: function () {
+
+            },
+        })
+    }
+
+    getColors(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: base_url + "/getColors",
+            method:"POST",
+            data: {},
+            cache:true,
+            dataType:"json",
+            success:function(data)
+            {
+                var html = '';
+                if(data.errors)
+                {
+                    html = '<div class="alert alert-danger">';
+                    for(var count = 0; count < data.errors.length; count++)
+                    {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+
+                }else {
+
+                    $('#colors').append('<option value="" disabled selected>Wybierz kolor/y</option>');
+
+                    for (let i=0; i<data.length; i++){
+
+                        $('#colors').append('<option value="'+ data[i].id +'">'+ data[i].name +'</option>');
+                    }
+
+                }
+                $('#form_result').html(html);
+            }
+        })
+    }
+
+    deleteAvailableColor(availableColorId, url){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: {
+                availableColorId: availableColorId,
+            },
+            dataType: 'json',
+            beforeSend: function () {
+
+                /*
+                * TODO DODAĆ EFEKT WCZYTYWANIA CAŁEJ TABELI
+                * */
+            },
+            success:function(data)
+            {
+                var html = '';
+                if(data.errors)
+                {
+                    html = '<div class="alert alert-danger">';
+                    for(var count = 0; count < data.errors.length; count++)
+                    {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+                }
+                if(data.success)
+                {
+                    html = '<div class="alert alert-success">' + data.success + '</div>';
+                    $('#showHideContent').slideUp();
+                    $('#adminAvailableColorsTable').DataTable().ajax.reload();
+                }
+                $('#confirmFormResult').html(html);
+            },
+            complete: function () {
+                /*
+                * TODO ZAKOŃCZYĆ EFEKT ŁADOWANIA CAŁEJ TABELI
+                * */
+            },
+            error: function (data) {
+
+            }
+        });
+    }
+}
+
+class BackendAvailableFurs {
+
+    constructor(base_url) {
+        this.init(base_url);
+    }
+
+    init(base_url) {
+        this.UX(base_url);
+        this.getBreeds();
+        this.getFurs()
+    }
+
+    UX(base_url) {
+        let self = this;
+
+        $('#addAvailableFur').click(function () {
+            $('#addEditModalTitle').text('Dodaj dostępną długość futra dla rasy');
+            $('.modal-header ').addClass('teal lighten-1').removeClass('yellow darken-2 danger-color green darken-2');
+            $('#breedId').val('');
+            $('#furs').val('');
+            $('#action').val('add');
+            $('#animalBreedId').val('');
+            $('#addEditAvailableFurModal').modal('show')
+        })
+
+        $(document).on('click', '.edit-available-fur', function () {
+            let animalBreedId = $(this).closest('tr').find('.animal-breed-name').attr('data-animal-breed-id');
+            self.getAvailableFursForBreed(animalBreedId)
+            $('#addEditModalTitle').text('Edytuj dostępną długość futra dla rasy')
+            $('.modal-header ').addClass('yellow darken-2').removeClass('teal lighten-1 danger-color green')
+            $('#action').val('edit');
+        })
+
+
+        $('#addEditAvailableFur').on('submit', function (e) {
+            e.preventDefault();
+            if ($('#action').val() === 'add') {
+                self.saveAvailableFurs(new FormData(this), base_url + "/adminStoreAvailableFurs")
+            } else {
+                self.saveAvailableFurs(new FormData(this), base_url + '/adminUpdateAvailAbleFurs')
+            }
+        })
+
+        $(document).on('click', '.delete-available-fur', function () {
+
+            let animalSpeciesName = $(this).closest('tr').find('.animal-species-name').text();
+            let animalBreedName = $(this).closest('tr').find('.animal-breed-name').text();
+            let animalFurName = $(this).closest('tr').find('.animal-fur-name').text();
+            $('.confirm-animal-fur-name').text(animalFurName)
+            $('.confirm-animal-breed-name').text(animalSpeciesName + ' ' + animalBreedName);
+            $('#confirm-yes').attr('data-available-fur-id', $(this).attr('data-available-fur-id'))
+            $('#confirmModalHeader').addClass('danger-color').removeClass('green darken-2 yellow darken-2 teal lighten-1')
+            $('#showHideContent').slideDown();
+            $('#confirmFormResult').children().remove();
+            $('#confirmModal').modal('show');
+
+            /*
+            * TODO THIS MIGHT BE NEW MAIL COLOR #657cff
+            * */
+        })
+
+        $('#confirm-yes').on('click', function () {
+            let availableFurId = $('#confirm-yes').attr('data-available-fur-id');
+            self.deleteAvailableFur(availableFurId, base_url + "/deleteAvailableFur")
+        })
+    }
+
+    getAvailableFursForBreed(animalBreedId) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'POST',
+            url: base_url + "/getAvailableDataForBreed",
+            data: {
+                animalBreedId: animalBreedId,
+                type: 'furs',
+            },
+            dataType: 'json',
+            beforeSend: function () {
+                $('#formResult').children().remove();
+                $(".edit-available-fur[data-available-fur-id='" + animalBreedId + "']").html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Wyświetl numery').addClass('disabled');
+                $('#furs option:selected').each(function () {
+                    $(this).prop('selected', false);
+                });
+            },
+            success: function (data) {
+
+                if (data.errors) {
+                    let html = '';
+                    html = '<div class="alert alert-danger">';
+                    for (var count = 0; count < data.errors.length; count++) {
+                        html += '<p class="m-0">' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+
+                    $('#formResult').html(html);
+                }
+                if (data.success) {
+                    for (let i = 0; i < data.success.length; i++) {
+                        $('#furs option[value=' + data.success[i].fur_id + ']').prop('selected', true);
+                    }
+
+                    $('#furs').materialSelect();
+                    $('#breedId').val(animalBreedId)
+                }
+            },
+            complete: function () {
+                $(".edit-available-fur[data-available-fur-id='" + animalBreedId + "']").html('<i class="fas fa-edit"></i>').removeClass('disabled');
+                $('#addEditAvailableFurModal').modal('show')
+            },
+            error: function (data) {
+
+            }
+        });
+    }
+
+    saveAvailableFurs(formData, url) {
+        $.ajax({
+            url: url,
+            method: "POST",
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData: false,
+            dataType: "json",
+            success: function (data) {
+                var html = '';
+                if (data.errors) {
+                    html = '<div class="alert alert-danger">';
+                    for (var count = 0; count < data.errors.length; count++) {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+                }
+                if (data.success) {
+                    html = '<div class="alert alert-success">' + data.success + '</div>';
+                    $('#adminAvailableFursTable').DataTable().ajax.reload();
+                }
+                $('#formResult').html(html);
+            }
+        })
+    }
+
+    getBreeds(breed_id = null) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: base_url + "/getBreeds",
+            method: "POST",
+            data: {
+                breed_id: breed_id
+            },
+            cache: true,
+            dataType: "json",
+            beforeSend: function () {
+
+            },
+            success: function (data) {
+                var html = '';
+                if (data.errors) {
+                    html = '<div class="alert alert-danger">';
+                    for (var count = 0; count < data.errors.length; count++) {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+
+                } else {
+
+                    $('#breedId').append('<option value="" disabled selected>Wybierz rasę</option>');
+
+                    for (let i = 0; i < data.length; i++) {
+                        let optionGroup = ''
+                        optionGroup += '<optgroup label="' + data[i].species_name + '" data-species-id="' + data[i].species_id + '">';
+                        for (let j = 0; j < data[i].breeds.length; j++) {
+                            optionGroup += '<option value="' + data[i].breeds[j].id + '">' + data[i].breeds[j].name + '</option>';
+                        }
+                        optionGroup += '</optgroup>';
+
+                        $('#breedId').append(optionGroup);
+                    }
+                }
+                $('#form_result').html(html);
+            },
+            complete: function () {
+
+            },
+        })
+    }
+
+    getFurs() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: base_url + "/getFurs",
+            method: "POST",
+            data: {},
+            cache: true,
+            dataType: "json",
+            success: function (data) {
+                var html = '';
+                if (data.errors) {
+                    html = '<div class="alert alert-danger">';
+                    for (var count = 0; count < data.errors.length; count++) {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+
+                } else {
+
+                    $('#furs').append('<option value="" disabled selected>Wybierz futro/a</option>');
+
+                    for (let i = 0; i < data.length; i++) {
+
+                        $('#furs').append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+                    }
+
+                }
+                $('#form_result').html(html);
+            }
+        })
+    }
+
+    deleteAvailableFur(availableFurId, url) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: {
+                availableFurId: availableFurId,
+            },
+            dataType: 'json',
+            beforeSend: function () {
+
+                /*
+                * TODO DODAĆ EFEKT WCZYTYWANIA CAŁEJ TABELI
+                * */
+            },
+            success: function (data) {
+                var html = '';
+                if (data.errors) {
+                    html = '<div class="alert alert-danger">';
+                    for (var count = 0; count < data.errors.length; count++) {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+                }
+                if (data.success) {
+                    html = '<div class="alert alert-success">' + data.success + '</div>';
+                    $('#showHideContent').slideUp();
+                    $('#adminAvailableFursTable').DataTable().ajax.reload();
+                }
+                $('#confirmFormResult').html(html);
+            },
+            complete: function () {
+                /*
+                * TODO ZAKOŃCZYĆ EFEKT ŁADOWANIA CAŁEJ TABELI
+                * */
+            },
+            error: function (data) {
+
+            }
+        });
+    }
+}
+
+class BackendAvailableCharacteristicDictionary {
+
+    constructor(base_url) {
+        this.init(base_url);
+    }
+
+    init(base_url) {
+        this.UX(base_url);
+        this.getSpecies();
+        this.getCharacteristics()
+    }
+
+    UX(base_url) {
+        let self = this;
+
+        $('#addAvailableCharacteristic').click(function () {
+            $('#addEditModalTitle').text('Dodaj cechę dla rasy');
+            $('.modal-header ').addClass('teal lighten-1').removeClass('yellow darken-2 danger-color green darken-2');
+            $('#speciesId').val('');
+            $('#characteristics').val('');
+            $('#action').val('add');
+            $('#animalSpeciesId').val('');
+            $('#addEditAvailableCharacteristicModal').modal('show')
+        })
+
+        $(document).on('click', '.edit-available-characteristic', function () {
+            let animalSpeciesId = $(this).closest('tr').find('.animal-species-name').attr('data-animal-species-id');
+            self.getAvailableCharacteristicForSpecies(animalSpeciesId)
+            $('#addEditModalTitle').text('Edytuj cechę dla rasy')
+            $('.modal-header ').addClass('yellow darken-2').removeClass('teal lighten-1 danger-color green')
+            $('#action').val('edit');
+        })
+
+
+        $('#addEditAvailableCharacteristic').on('submit', function (e) {
+            e.preventDefault();
+            if ($('#action').val() === 'add'){
+                self.saveAvailableCharacteristics(new FormData(this), base_url+ "/adminStoreAvailableCharacteristics")
+            }else{
+                self.saveAvailableCharacteristics(new FormData(this), base_url+ '/adminUpdateAvailAbleCharacteristics')
+            }
+        })
+
+        $(document).on('click', '.delete-available-characteristic', function () {
+
+            let animalSpeciesName = $(this).closest('tr').find('.animal-species-name').text();
+            let animalCharacteristicName = $(this).closest('tr').find('.animal-characteristic-name').text();
+            $('.confirm-animal-characteristic-name').text(animalCharacteristicName)
+            $('.confirm-animal-species-name').text(animalSpeciesName );
+            $('#confirm-yes').attr('data-available-characteristic-id', $(this).attr('data-available-characteristic-id'))
+            $('#confirmModalHeader').addClass('danger-color').removeClass('green darken-2 yellow darken-2 teal lighten-1')
+            $('#showHideContent').slideDown();
+            $('#confirmFormResult').children().remove();
+            $('#confirmModal').modal('show');
+
+            /*
+            * TODO THIS MIGHT BE NEW MAIL COLOR #657cff
+            * */
+        })
+
+        $('#confirm-yes').on('click', function () {
+            let availableCharacteristicId = $('#confirm-yes').attr('data-available-characteristic-id');
+            self.deleteAvailableCharacteristic(availableCharacteristicId, base_url + "/deleteAvailableCharacteristic")
+        })
+    }
+
+    getAvailableCharacteristicForSpecies(animalSpeciesId){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'POST',
+            url: base_url + "/getAvailableDataForSpecies",
+            data: {
+                animalSpeciesId: animalSpeciesId,
+                type: 'characteristics',
+            },
+            dataType: 'json',
+            beforeSend: function () {
+                $('#formResult').children().remove();
+                $(".edit-available-characteristic[data-available-characteristic-id='" + animalSpeciesId +"']").html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Wyświetl numery').addClass('disabled');
+                $('#characteristics option:selected').each(function() {
+                    $(this).prop('selected', false);
+                });
+            },
+            success: function (data) {
+
+                if(data.errors)
+                {
+                    let html = '';
+                    html = '<div class="alert alert-danger">';
+                    for(var count = 0; count < data.errors.length; count++)
+                    {
+                        html += '<p class="m-0">' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+
+                    $('#formResult').html(html);
+                }
+                if(data.success)
+                {
+                    for (let i=0; i<data.success.length; i++){
+                        $('#characteristics option[value=' + data.success[i].characteristic_dictionary_id + ']').prop('selected', true);
+                    }
+
+                    $('#characteristics').materialSelect();
+                    $('#speciesId').val(animalSpeciesId)
+                }
+            },
+            complete: function () {
+                $(".edit-available-characteristic[data-available-characteristic-id='" + animalSpeciesId +"']").html('<i class="fas fa-edit"></i>').removeClass('disabled');
+                $('#addEditAvailableCharacteristicModal').modal('show')
+            },
+            error: function (data) {
+
+            }
+        });
+    }
+
+    saveAvailableCharacteristics(formData, url){
+        $.ajax({
+            url: url,
+            method:"POST",
+            data: formData,
+            contentType: false,
+            cache:false,
+            processData: false,
+            dataType:"json",
+            success:function(data)
+            {
+                var html = '';
+                if(data.errors)
+                {
+                    html = '<div class="alert alert-danger">';
+                    for(var count = 0; count < data.errors.length; count++)
+                    {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+                }
+                if(data.success)
+                {
+                    html = '<div class="alert alert-success">' + data.success + '</div>';
+                    $('#adminAvailableCharacteristicTable').DataTable().ajax.reload();
+                }
+                $('#formResult').html(html);
+            }
+        })
+    }
+
+    getSpecies(species_id = null){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: base_url + "/getSpecies",
+            method:"POST",
+            data: {
+                species_id: species_id
+            },
+            cache:true,
+            dataType:"json",
+            beforeSend: function () {
+
+            },
+            success:function(data)
+            {
+                var html = '';
+                if(data.errors)
+                {
+                    html = '<div class="alert alert-danger">';
+                    for(var count = 0; count < data.errors.length; count++)
+                    {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+
+                }else {
+
+                    $('#speciesId').append('<option value="" disabled selected>Wybierz gatunek</option>');
+                    for (let i=0; i<data.length; i++){
+
+                        $('#speciesId').append('<option value="'+ data[i].id +'">'+ data[i].name +'</option>');
+                    }
+                }
+                $('#form_result').html(html);
+            },
+            complete: function () {
+
+            },
+        })
+    }
+
+    getCharacteristics(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: base_url + "/getCharacteristics",
+            method:"POST",
+            data: {},
+            cache:true,
+            dataType:"json",
+            success:function(data)
+            {
+                var html = '';
+                if(data.errors)
+                {
+                    html = '<div class="alert alert-danger">';
+                    for(var count = 0; count < data.errors.length; count++)
+                    {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+
+                }else {
+
+                    $('#characteristics').append('<option value="" disabled selected>Wybierz cechę/y</option>');
+
+                    for (let i=0; i<data.length; i++){
+
+                        $('#characteristics').append('<option value="'+ data[i].id +'">'+ data[i].name +'</option>');
+                    }
+
+                }
+                $('#form_result').html(html);
+            }
+        })
+    }
+
+    deleteAvailableCharacteristic(availableCharacteristicId, url){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: {
+                availableCharacteristicId: availableCharacteristicId,
+            },
+            dataType: 'json',
+            beforeSend: function () {
+
+                /*
+                * TODO DODAĆ EFEKT WCZYTYWANIA CAŁEJ TABELI
+                * */
+            },
+            success:function(data)
+            {
+                var html = '';
+                if(data.errors)
+                {
+                    html = '<div class="alert alert-danger">';
+                    for(var count = 0; count < data.errors.length; count++)
+                    {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+                }
+                if(data.success)
+                {
+                    html = '<div class="alert alert-success">' + data.success + '</div>';
+                    $('#showHideContent').slideUp();
+                    $('#adminAvailableCharacteristicTable').DataTable().ajax.reload();
+                }
+                $('#confirmFormResult').html(html);
+            },
+            complete: function () {
+                /*
+                * TODO ZAKOŃCZYĆ EFEKT ŁADOWANIA CAŁEJ TABELI
+                * */
+            },
+            error: function (data) {
+
+            }
+        });
+    }
+}
+
+class BackendAddAnimal {
+
+    constructor(base_url) {
+        this.init(base_url);
+        this.getSpecies();
+        this.getGenders();
+        this.getSizes();
+    }
+
+    init(base_url) {
+        this.UX();
+    }
+
+    UX() {
+        let self = this;
+
+        $('#speciesId').on('change', function () {
+            let speciesId = $('#speciesId').val();
+            self.getBreeds(speciesId)
+        });
+
+        $('#breedId').on('change', function (e) {
+            let breedId = $('#breedId').val();
+            self.getFurs(breedId)
+            self.getColors(breedId);
+
+        });
+    }
+
+    getSpecies(speciesId = null) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: base_url + "/getSpeciesForAddAnimal",
+            method: "POST",
+            data: {
+                speciesId: speciesId,
+                type: 'species'
+            },
+            cache: true,
+            dataType: "json",
+            beforeSend: function () {
+
+            },
+            success: function (data) {
+                var html = '';
+                if (data.errors) {
+                    html = '<div class="alert alert-danger">';
+                    for (var count = 0; count < data.errors.length; count++) {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+
+                } else {
+
+                    $('#speciesId').children().remove();
+
+                    $('#speciesId').append('<option value="" disabled selected>Wybierz gatunek *</option>');
+                    for (let i = 0; i < data.success.length; i++) {
+
+                        $('#speciesId').append('<option value="' + data.success[i].id + '">' + data.success[i].name + '</option>');
+                    }
+                }
+                $('#form_result').html(html);
+            },
+            complete: function () {
+
+            },
+        })
+    }
+
+    getBreeds(speciesId) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: base_url + "/getBreedsForAddAnimal",
+            method: "POST",
+            data: {
+                speciesId: speciesId,
+                type: 'breeds'
+            },
+            cache: true,
+            dataType: "json",
+            beforeSend: function () {
+
+            },
+            success: function (data) {
+                var html = '';
+                if (data.errors) {
+                    html = '<div class="alert alert-danger">';
+                    for (var count = 0; count < data.errors.length; count++) {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+
+                } else {
+                    let breedId = $('#breedId');
+                    breedId.children().remove();
+                    breedId.append('<option value="" disabled selected>Wybierz rasę *</option>');
+
+                    let breeds = '';
+                    $.each(data.success, function (i, breed) {
+                        breeds += '<option value="' + breed.id + '">' + breed.name + '</option>';
+                    });
+                    breedId.append(breeds);
+
+                    breedId.materialSelect();
+                }
+            },
+            complete: function () {
+
+            },
+        })
+    }
+
+    getGenders() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: base_url + "/getGendersForAddAnimal",
+            method: "POST",
+            data: {},
+            cache: true,
+            dataType: "json",
+            beforeSend: function () {
+
+            },
+            success: function (data) {
+                var html = '';
+                if (data.errors) {
+                    html = '<div class="alert alert-danger">';
+                    for (var count = 0; count < data.errors.length; count++) {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+
+                } else {
+
+                    $('#genderId').children().remove();
+
+                    $('#genderId').append('<option value="" disabled selected>Wybierz płeć *</option>');
+                    for (let i = 0; i < data.success.length; i++) {
+
+                        $('#genderId').append('<option value="' + data.success[i].id + '">' + data.success[i].name + '</option>');
+                    }
+                }
+                $('#form_result').html(html);
+            },
+            complete: function () {
+
+            },
+        })
+    }
+
+    getSizes() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: base_url + "/getSizesForAddAnimal",
+            method: "POST",
+            data: {},
+            cache: true,
+            dataType: "json",
+            beforeSend: function () {
+
+            },
+            success: function (data) {
+                var html = '';
+                if (data.errors) {
+                    html = '<div class="alert alert-danger">';
+                    for (var count = 0; count < data.errors.length; count++) {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+
+                } else {
+
+                    $('#sizeId').children().remove();
+
+                    $('#sizeId').append('<option value="" disabled selected>Wybierz wielkość *</option>');
+                    for (let i = 0; i < data.success.length; i++) {
+
+                        $('#sizeId').append('<option value="' + data.success[i].id + '">' + data.success[i].name + '</option>');
+                    }
+                }
+                $('#form_result').html(html);
+            },
+            complete: function () {
+
+            },
+        })
+    }
+
+    getFurs(breedId) {
+        console.log('test');
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        console.log('test1');
+        console.log(base_url + "/getFursForAddAnimal")
+
+        $.ajax({
+            url: base_url + "/getFursForAddAnimal",
+            method: "POST",
+            data: {
+                breedId: breedId,
+                type: 'fur'
+            },
+            // cache:true,
+            dataType: "json",
+            beforeSend: function () {
+                console.log('test2');
+
+            },
+            success: function (data) {
+                console.log('test3');
+
+                var html = '';
+                if (data.errors) {
+                    html = '<div class="alert alert-danger">';
+                    for (var count = 0; count < data.errors.length; count++) {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+
+                } else {
+                    let animalFur = $('#animalFur');
+                    animalFur.children().remove();
+
+
+                    animalFur.append('<option value="" disabled selected>Wybierz długość futra</option>');
+
+                    let colors = '';
+                    $.each(data.success, function (i, fur) {
+                        colors += '<option value="' + fur.fur_id + '">' + fur.fur_name + '</option>';
+                    });
+                    animalFur.append(colors);
+                }
+                $('#form_result').html(html);
+            },
+            complete: function () {
+
+            },
+        })
+    }
+
+    getColors(breedId) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: base_url + "/getColorsForAddAnimal",
+            method: "POST",
+            data: {
+                breedId: breedId,
+                type: 'color',
+            },
+            cache: true,
+            dataType: "json",
+            beforeSend: function () {
+
+            },
+            success: function (data) {
+                var html = '';
+                if (data.errors) {
+                    html = '<div class="alert alert-danger">';
+                    for (var count = 0; count < data.errors.length; count++) {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+
+                } else {
+
+                    let animalColor = $('#animalColor');
+                    animalColor.children().remove();
+
+
+                    animalColor.append('<option value="" disabled selected>Wybierz kolor futra</option>');
+
+                    let colors = '';
+                    $.each(data.success, function (i, color) {
+                        colors += '<option value="' + color.color_id + '">' + color.color_name + '</option>';
+                    });
+                    animalColor.append(colors);
+
+                    // animalColor.materialSelect();
+                }
+            },
+            complete: function () {
+
+            },
+        })
+    }
+
+    getCharacteristics(base_url) {
+
+    }
+}
+
+class Errors {
+
+    constructor(base_url) {
+        this.init(base_url);
+    }
+
+    init(base_url) {
+        this.UX(base_url);
+    }
+
+    UX() {
+        let self = this;
+        $(document).on('click', '.modal-error-close', function () {
+            $('#modalError').modal('hide');
+
+            setTimeout(function(){
+                $('#modalError').remove();
+            }, 1000);
+
+
+        });
+    }
+
+    showErrorModal(msg) {
+        $('body').append(
+            '    <div class="modal fade right" id="modalError" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"' +
+            '      aria-hidden="true" data-backdrop="true">' +
+            '      <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-danger" role="document">' +
+            '        <div class="modal-content">' +
+            '          <div class="modal-header">' +
+            '            <p class="heading">Ups! coś poszło nie tak. </p>' +
+            '          </div>' +
+            '          <div class="modal-body">' +
+            '            <div class="row">' +
+            '              <div class="col-12">' +
+            '                <p>' + msg + '</p>' +
+            '              </div>' +
+            '            </div>' +
+            '          </div>' +
+            '            <div class="modal-footer flex-center">' +
+            '              <button class="modal-error-close w-50 btn btn-danger btn-rounded text-white waves-effect waves-light text-transform-none">' +
+            '                  Zamknij' +
+            '              </button>'+
+            '            </div>' +
+            '          </div>' +
+            '        </div>' +
+
+
+            '      </div>' +
+            '    </div>'
+        );
+
+        $('#modalError').modal({backdrop: 'static', keyboard: false});
+        $('#modalError').modal('show');
+    }
+
+}
+
+class Success {
+
+    constructor(base_url) {
+        this.init(base_url);
+    }
+
+    init(base_url) {
+        this.UX(base_url);
+    }
+
+    UX() {
+        let self = this;
+        $(document).on('click', '.modal-success-close', function () {
+            $('#modalSuccess').modal('hide');
+
+            setTimeout(function(){
+                $('#modalSuccess').remove();
+            }, 1000);
+
+
+        });
+    }
+
+    showSuccessModal(title, msg) {
+        $('body').append(
+            '    <div class="modal fade right" id="modalSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"' +
+            '      aria-hidden="true" data-backdrop="true">' +
+            '      <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-success" role="document">' +
+            '        <div class="modal-content">' +
+            '          <div class="modal-header">' +
+            '            <p class="heading">'+ title +' </p>' +
+            '          </div>' +
+            '          <div class="modal-body">' +
+            '            <div class="row">' +
+            '              <div class="col-12">' +
+            '                <p>' + msg + '</p>' +
+            '              </div>' +
+            '            </div>' +
+            '          </div>' +
+            '            <div class="modal-footer flex-center">' +
+            '              <button class="modal-success-close w-50 btn btn-success btn-rounded text-white waves-effect waves-light text-transform-none">' +
+            '                  Zamknij' +
+            '              </button>'+
+            '            </div>' +
+            '          </div>' +
+            '        </div>' +
+
+
+            '      </div>' +
+            '    </div>'
+        );
+
+        $('#modalSuccess').modal({backdrop: 'static', keyboard: false});
+        $('#modalSuccess').modal('show');
+    }
+
+}

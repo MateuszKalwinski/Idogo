@@ -83,11 +83,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::post('/adminUpdateAnimalBreed', 'AdminController@adminUpdateAnimalBreed')->name('adminUpdateAnimalBreed');
     Route::post('/deleteRestoreAnimalBreed', 'AdminController@deleteRestoreAnimalBreed')->name('deleteRestoreAnimalBreed');
 
-
-
-
     Route::get('/adminAnimals', 'AdminController@adminAnimals')->name('adminAnimals');
-
 
     Route::get('/adminAnimalCharacteristics', 'AdminController@adminAnimalCharacteristics')->name('adminAnimalCharacteristics');
     Route::post('/adminStoreAnimalCharacteristic', 'AdminController@adminStoreAnimalCharacteristic')->name('adminStoreAnimalCharacteristic');
