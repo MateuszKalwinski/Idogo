@@ -181,10 +181,7 @@
                 </div>
             </div>
         </nav>
-
     </div>
-
-
 </header>
 
 @yield('content')
@@ -292,7 +289,8 @@
 
 </footer>
 <!-- Footer -->
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="{{asset('components/material/js/jquery.min.js')}}"></script>
 <!-- Bootstrap tooltips -->
 <script type="text/javascript" src="{{asset('components/material/js/popper.min.js')}}"></script>
@@ -303,8 +301,8 @@
 <!-- SLICK -->
 <script type="text/javascript" src="{{asset('components/slick-1.8.1/slick/slick.min.js')}}"></script>
 
-<script src="{{ asset('js/main.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/main.js') }}"></script>
 <script src="{{ asset('js/menu.js') }}"></script>
 
 

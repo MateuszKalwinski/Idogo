@@ -8,7 +8,7 @@ class BackendAddAnimal {
     }
 
     init(base_url) {
-        this.UX(base_url);
+        this.UX();
     }
 
     UX() {
@@ -19,15 +19,15 @@ class BackendAddAnimal {
             self.getBreeds(speciesId)
         });
 
-        $('#breedId').on('change', function (){
-           let breedId = $('#breedId').val();
-            self.getColors(breedId);
+        $('#breedId').on('change', function (e) {
+            let breedId = $('#breedId').val();
             self.getFurs(breedId)
+            self.getColors(breedId);
 
         });
     }
 
-    getSpecies(speciesId = null){
+    getSpecies(speciesId = null) {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -35,36 +35,33 @@ class BackendAddAnimal {
         });
         $.ajax({
             url: base_url + "/getSpeciesForAddAnimal",
-            method:"POST",
+            method: "POST",
             data: {
                 speciesId: speciesId,
                 type: 'species'
             },
-            cache:true,
-            dataType:"json",
+            cache: true,
+            dataType: "json",
             beforeSend: function () {
 
             },
-            success:function(data)
-            {
+            success: function (data) {
                 var html = '';
-                if(data.errors)
-                {
+                if (data.errors) {
                     html = '<div class="alert alert-danger">';
-                    for(var count = 0; count < data.errors.length; count++)
-                    {
+                    for (var count = 0; count < data.errors.length; count++) {
                         html += '<p>' + data.errors[count] + '</p>';
                     }
                     html += '</div>';
 
-                }else {
+                } else {
 
                     $('#speciesId').children().remove();
 
                     $('#speciesId').append('<option value="" disabled selected>Wybierz gatunek *</option>');
-                    for (let i=0; i<data.success.length; i++){
+                    for (let i = 0; i < data.success.length; i++) {
 
-                        $('#speciesId').append('<option value="'+ data.success[i].id +'">'+ data.success[i].name +'</option>');
+                        $('#speciesId').append('<option value="' + data.success[i].id + '">' + data.success[i].name + '</option>');
                     }
                 }
                 $('#form_result').html(html);
@@ -75,7 +72,7 @@ class BackendAddAnimal {
         })
     }
 
-    getBreeds(speciesId = null){
+    getBreeds(speciesId) {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -83,39 +80,38 @@ class BackendAddAnimal {
         });
         $.ajax({
             url: base_url + "/getBreedsForAddAnimal",
-            method:"POST",
+            method: "POST",
             data: {
                 speciesId: speciesId,
                 type: 'breeds'
             },
-            cache:true,
-            dataType:"json",
+            cache: true,
+            dataType: "json",
             beforeSend: function () {
 
             },
-            success:function(data)
-            {
+            success: function (data) {
                 var html = '';
-                if(data.errors)
-                {
+                if (data.errors) {
                     html = '<div class="alert alert-danger">';
-                    for(var count = 0; count < data.errors.length; count++)
-                    {
+                    for (var count = 0; count < data.errors.length; count++) {
                         html += '<p>' + data.errors[count] + '</p>';
                     }
                     html += '</div>';
 
-                }else {
+                } else {
+                    let breedId = $('#breedId');
+                    breedId.children().remove();
+                    breedId.append('<option value="" disabled selected>Wybierz rasę *</option>');
 
-                    $('#breedId').children().remove();
+                    let breeds = '';
+                    $.each(data.success, function (i, breed) {
+                        breeds += '<option value="' + breed.id + '">' + breed.name + '</option>';
+                    });
+                    breedId.append(breeds);
 
-                    $('#breedId').append('<option value="" disabled selected>Wybierz rasę *</option>');
-                    for (let i=0; i<data.success.length; i++){
-
-                        $('#breedId').append('<option value="'+ data.success[i].id +'">'+ data.success[i].name +'</option>');
-                    }
+                    breedId.materialSelect();
                 }
-                $('#form_result').html(html);
             },
             complete: function () {
 
@@ -123,7 +119,7 @@ class BackendAddAnimal {
         })
     }
 
-    getGenders(){
+    getGenders() {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -131,33 +127,30 @@ class BackendAddAnimal {
         });
         $.ajax({
             url: base_url + "/getGendersForAddAnimal",
-            method:"POST",
+            method: "POST",
             data: {},
-            cache:true,
-            dataType:"json",
+            cache: true,
+            dataType: "json",
             beforeSend: function () {
 
             },
-            success:function(data)
-            {
+            success: function (data) {
                 var html = '';
-                if(data.errors)
-                {
+                if (data.errors) {
                     html = '<div class="alert alert-danger">';
-                    for(var count = 0; count < data.errors.length; count++)
-                    {
+                    for (var count = 0; count < data.errors.length; count++) {
                         html += '<p>' + data.errors[count] + '</p>';
                     }
                     html += '</div>';
 
-                }else {
+                } else {
 
                     $('#genderId').children().remove();
 
                     $('#genderId').append('<option value="" disabled selected>Wybierz płeć *</option>');
-                    for (let i=0; i<data.success.length; i++){
+                    for (let i = 0; i < data.success.length; i++) {
 
-                        $('#genderId').append('<option value="'+ data.success[i].id +'">'+ data.success[i].name +'</option>');
+                        $('#genderId').append('<option value="' + data.success[i].id + '">' + data.success[i].name + '</option>');
                     }
                 }
                 $('#form_result').html(html);
@@ -168,7 +161,7 @@ class BackendAddAnimal {
         })
     }
 
-    getSizes(){
+    getSizes() {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -176,33 +169,30 @@ class BackendAddAnimal {
         });
         $.ajax({
             url: base_url + "/getSizesForAddAnimal",
-            method:"POST",
+            method: "POST",
             data: {},
-            cache:true,
-            dataType:"json",
+            cache: true,
+            dataType: "json",
             beforeSend: function () {
 
             },
-            success:function(data)
-            {
+            success: function (data) {
                 var html = '';
-                if(data.errors)
-                {
+                if (data.errors) {
                     html = '<div class="alert alert-danger">';
-                    for(var count = 0; count < data.errors.length; count++)
-                    {
+                    for (var count = 0; count < data.errors.length; count++) {
                         html += '<p>' + data.errors[count] + '</p>';
                     }
                     html += '</div>';
 
-                }else {
+                } else {
 
                     $('#sizeId').children().remove();
 
                     $('#sizeId').append('<option value="" disabled selected>Wybierz wielkość *</option>');
-                    for (let i=0; i<data.success.length; i++){
+                    for (let i = 0; i < data.success.length; i++) {
 
-                        $('#sizeId').append('<option value="'+ data.success[i].id +'">'+ data.success[i].name +'</option>');
+                        $('#sizeId').append('<option value="' + data.success[i].id + '">' + data.success[i].name + '</option>');
                     }
                 }
                 $('#form_result').html(html);
@@ -213,45 +203,52 @@ class BackendAddAnimal {
         })
     }
 
-    getFurs(base_url){
+    getFurs(breedId) {
+        console.log('test');
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+        console.log('test1');
+        console.log(base_url + "/getFursForAddAnimal")
+
         $.ajax({
             url: base_url + "/getFursForAddAnimal",
-            method:"POST",
+            method: "POST",
             data: {
                 breedId: breedId,
-                type: 'fur',
+                type: 'fur'
             },
-            cache:true,
-            dataType:"json",
+            // cache:true,
+            dataType: "json",
             beforeSend: function () {
+                console.log('test2');
 
             },
-            success:function(data)
-            {
+            success: function (data) {
+                console.log('test3');
+
                 var html = '';
-                if(data.errors)
-                {
+                if (data.errors) {
                     html = '<div class="alert alert-danger">';
-                    for(var count = 0; count < data.errors.length; count++)
-                    {
+                    for (var count = 0; count < data.errors.length; count++) {
                         html += '<p>' + data.errors[count] + '</p>';
                     }
                     html += '</div>';
 
-                }else {
+                } else {
+                    let animalFur = $('#animalFur');
+                    animalFur.children().remove();
 
-                    $('#animalFur').children().remove();
 
-                    $('#animalFur').append('<option value="" disabled selected>Wybierz długość futra</option>');
-                    for (let i=0; i<data.success.length; i++){
+                    animalFur.append('<option value="" disabled selected>Wybierz długość futra</option>');
 
-                        $('#animalFur').append('<option value="'+ data.success[i].fur_id +'">'+ data.success[i].fur_name +'</option>');
-                    }
+                    let colors = '';
+                    $.each(data.success, function (i, fur) {
+                        colors += '<option value="' + fur.fur_id + '">' + fur.fur_name + '</option>';
+                    });
+                    animalFur.append(colors);
                 }
                 $('#form_result').html(html);
             },
@@ -261,7 +258,7 @@ class BackendAddAnimal {
         })
     }
 
-    getColors(breedId){
+    getColors(breedId) {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -269,39 +266,41 @@ class BackendAddAnimal {
         });
         $.ajax({
             url: base_url + "/getColorsForAddAnimal",
-            method:"POST",
+            method: "POST",
             data: {
                 breedId: breedId,
                 type: 'color',
             },
-            cache:true,
-            dataType:"json",
+            cache: true,
+            dataType: "json",
             beforeSend: function () {
 
             },
-            success:function(data)
-            {
+            success: function (data) {
                 var html = '';
-                if(data.errors)
-                {
+                if (data.errors) {
                     html = '<div class="alert alert-danger">';
-                    for(var count = 0; count < data.errors.length; count++)
-                    {
+                    for (var count = 0; count < data.errors.length; count++) {
                         html += '<p>' + data.errors[count] + '</p>';
                     }
                     html += '</div>';
 
-                }else {
+                } else {
 
-                    $('#animalColor').children().remove();
+                    let animalColor = $('#animalColor');
+                    animalColor.children().remove();
 
-                    $('#animalColor').append('<option value="" disabled selected>Wybierz kolor futra</option>');
-                    for (let i=0; i<data.success.length; i++){
 
-                        $('#animalColor').append('<option value="'+ data.success[i].color_id +'">'+ data.success[i].color_name +'</option>');
-                    }
+                    animalColor.append('<option value="" disabled selected>Wybierz kolor futra</option>');
+
+                    let colors = '';
+                    $.each(data.success, function (i, color) {
+                        colors += '<option value="' + color.color_id + '">' + color.color_name + '</option>';
+                    });
+                    animalColor.append(colors);
+
+                    // animalColor.materialSelect();
                 }
-                $('#form_result').html(html);
             },
             complete: function () {
 
@@ -309,7 +308,7 @@ class BackendAddAnimal {
         })
     }
 
-    getCharacteristics(base_url){
+    getCharacteristics(base_url) {
 
     }
 }
