@@ -13,10 +13,11 @@ return [
     | a conventional file to locate the various service credentials.
     |
     */
+
     'facebook' => [
-        'client_id' => '1524799221035318',
-        'client_secret' => '6127486c3f0f428b01c619ad1fdb0a33',
-        'redirect' => 'http://localhost/hi-puppy/hi-puppy/public/callback',
+        'client_id' => env('FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
+        'redirect' => env('FACEBOOK_REDIRECT'),
     ],
 
     'mailgun' => [
@@ -38,5 +39,4 @@ return [
     'sparkpost' => [
         'secret' => env('SPARKPOST_SECRET'),
     ],
-
 ];
