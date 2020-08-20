@@ -35,12 +35,15 @@ class AddAnimalGateway
             return $this->aaR->getSpeciesForAddAnimal($request);
         } elseif ($request->type === 'breeds') {
             return $this->aaR->getBreedsForAddAnimal($request);
+        } elseif ($request->type === 'characteristic') {
+            return $this->aaR->getCharacteristicsForAddAnimal($request);
         } else {
             return response()->json(['errors' => [__('Ups!coś poszło nie tak.')]]);
         }
     }
 
-    public function getDataBreedForAddAnimal($request){
+    public function getDataBreedForAddAnimal($request)
+    {
         $validator = Validator::make($request->all(), [
             'breedId' => 'required|integer',
         ],

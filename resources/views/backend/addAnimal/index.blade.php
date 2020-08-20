@@ -13,7 +13,7 @@
                     <div class="row">
                         <div class="col-md-12 mb-md-0 mb-5">
                             <form {{ $novalidate    }} class="text-center" style="color: #757575;"
-                                  method="POST" action="{{ route('joinShelterForm') }}">
+                                  method="POST" action="{{ route('joinShelterForm') }}" enctype="multipart/form-data">
                                 @csrf
                                 <h4 class="card-title text-left">Dane zwierzaka:</h4>
                                 <div class="form-row">
@@ -185,7 +185,7 @@
                                 </div>
 
                                 <div class="form-row">
-                                    <div class="col-6 pl-2 pr-2">
+                                    <div class="col-12 pl-2 pr-2">
                                         <div class="md-form">
                                             <select id="animalCharacteristics" name="animalCharacteristics[]"
                                                     class="mdb-select md-form {{ $errors->has('animalCharacteristics') ? ' is-invalid' : '' }}"
@@ -226,9 +226,7 @@
                                 <div class="form-row">
                                     <div class="col-12 pl-2 pr-2">
                                         <div class="md-form">
-                                            <div class="file-upload-wrapper">
-                                                <input type="file" id="input-file-now" class="file-upload" />
-                                            </div>
+                                            <div class="input-images-1" style="padding-top: .5rem;"></div>
                                             @if ($errors->has('animalDescription'))
                                                 <span
                                                     class="invalid-feedback"><strong>{{ $errors->first('animalDescription') }}</strong>

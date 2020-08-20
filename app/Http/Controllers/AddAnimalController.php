@@ -39,6 +39,13 @@ class AddAnimalController extends Controller
 
     }
 
+    public function getCharacteristicsForAddAnimal(Request $request)
+    {
+        $characteristicsForAddAnimal = $this->aaG->getDataSpeciesForAddAnimal($request);
+
+        return $characteristicsForAddAnimal;
+    }
+
     public function getGendersForAddAnimal()
     {
         $gendersForAddAnimal = $this->aaR->getGendersForAddAnimal();

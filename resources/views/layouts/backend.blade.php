@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="{{asset('components/material/css/bootstrap.min.css')}}">
     <!-- Material Design Bootstrap -->
     <link rel="stylesheet" href="{{asset('components/material/css/mdb.min.css')}}">
+    <!-- Image uploader -->
+    <link rel="stylesheet" href="{{asset('components/image-uploader/dist/image-uploader.min.css')}}">
     <!-- Your custom styles (optional) -->
     <link rel="stylesheet" href="{{asset('components/material/css/style.css')}}">
     <!-- SLICK (optional) -->
@@ -98,7 +100,7 @@
                                     </li>
                                     <li><a href="{{route('adminAnimalCharacteristics')}}" class="waves-effect">Cechy zwierzaków</a>
                                     </li>
-                                    <li><a href="{{route('adminAvailableCharacteristicDictionary')}}" class="waves-effect">Dostępne cechy dla ras</a>
+                                    <li><a href="{{route('adminAvailableCharacteristicDictionary')}}" class="waves-effect">Dostępne cechy dla gatunków</a>
                                     </li>
                                     <li><a href="{{route('adminAnimalColors')}}" class="waves-effect">Kolory zwierzaków</a>
                                     </li>
@@ -219,7 +221,7 @@
                             <div class="dropdown-menu dropdown-dark mt-1 border-none z-depth-1"
                                  aria-labelledby="navbarDropdownMenuLink-55">
                                 <a class="dropdown-item" href="{{ route('adminHome') }}">Mój profil</a>
-                                <a class="dropdown-item" href="{{ route('adminHome') }}">Dodaj zwierzaka</a>
+                                <a class="dropdown-item" href="{{ route('addAnimal') }}">Dodaj zwierzaka</a>
                                 <a class="dropdown-item" href="{{ route('adminHome') }}">Ustawienia</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
@@ -361,6 +363,7 @@
 <!-- DATATABLES -->
 <script type="text/javascript" src="{{asset('components/material/js/addons/datatables.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('components/material/js/addons/datatables-select.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('components/image-uploader/dist/image-uploader.min.js')}}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/menu.js') }}"></script>

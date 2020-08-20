@@ -39,7 +39,6 @@ class AddAnimalRepository implements AddAnimalRepositoryInterface
 
     public function getBreedsForAddAnimal($request)
     {
-
         $breedCollection = DB::table('animal_breeds AS ab')
             ->select(
                 'ab.id as id',
@@ -48,6 +47,19 @@ class AddAnimalRepository implements AddAnimalRepositoryInterface
             ->where('ab.species_id', '=', $request->speciesId)->whereNull('ab.deleted_at')->get();
 
         return response()->json(['success' => $breedCollection]);
+    }
+
+    public function getCharacteristicsForAddAnimal($request)
+    {
+        $characteristics = DB::table('available_characteristic_dictionary AS achd')
+            ->select(
+                'chd.id as id',
+                'chd.name as name'
+            )
+            ->leftJoin('characteristic_dictionary AS chd', 'achd.characteristic_dictionary_id', '=', 'chd.id')
+            ->where('achd.species_id', '=', $request->speciesId)->whereNull('chd.deleted_at')->get();
+
+        return response()->json(['success' => $characteristics]);
     }
 
     public function getGendersForAddAnimal()

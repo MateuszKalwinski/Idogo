@@ -105,7 +105,7 @@
                             <div class="dropdown-menu dropdown-dark mt-1 border-none z-depth-1"
                                  aria-labelledby="navbarDropdownMenuLink-55">
                                 <a class="dropdown-item" href="{{ route('profile') }}">Mój profil</a>
-                                <a class="dropdown-item" href="{{ route('adminHome') }}">Dodaj zwierzaka</a>
+                                <a class="dropdown-item" href="{{ route('addAnimal') }}">Dodaj zwierzaka</a>
                                 <a class="dropdown-item" href="{{ route('adminHome') }}">Ustawienia</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('logout') }}"

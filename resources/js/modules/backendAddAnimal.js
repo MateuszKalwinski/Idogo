@@ -13,10 +13,11 @@ class BackendAddAnimal {
 
     UX() {
         let self = this;
-
+        $('.input-images-1').imageUploader();
         $('#speciesId').on('change', function () {
             let speciesId = $('#speciesId').val();
-            self.getBreeds(speciesId)
+            self.getBreeds(speciesId);
+            self.getCharacteristics(speciesId);
         });
 
         $('#breedId').on('change', function (e) {
@@ -204,13 +205,11 @@ class BackendAddAnimal {
     }
 
     getFurs(breedId) {
-        console.log('test');
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        console.log('test1');
         console.log(base_url + "/getFursForAddAnimal")
 
         $.ajax({
@@ -223,11 +222,9 @@ class BackendAddAnimal {
             // cache:true,
             dataType: "json",
             beforeSend: function () {
-                console.log('test2');
 
             },
             success: function (data) {
-                console.log('test3');
 
                 var html = '';
                 if (data.errors) {
@@ -308,7 +305,53 @@ class BackendAddAnimal {
         })
     }
 
-    getCharacteristics(base_url) {
+    getCharacteristics(speciesId) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: base_url + "/getCharacteristicsForAddAnimal",
+            method: "POST",
+            data: {
+                speciesId: speciesId,
+                type: 'characteristic',
+            },
+            cache: true,
+            dataType: "json",
+            beforeSend: function () {
 
+            },
+            success: function (data) {
+                var html = '';
+                if (data.errors) {
+                    html = '<div class="alert alert-danger">';
+                    for (var count = 0; count < data.errors.length; count++) {
+                        html += '<p>' + data.errors[count] + '</p>';
+                    }
+                    html += '</div>';
+
+                } else {
+
+                    let animalCharacteristics = $('#animalCharacteristics');
+                    animalCharacteristics.children().remove();
+
+
+                    animalCharacteristics.append('<option value="" disabled selected>Wybierz cechy zwierzaka</option>');
+
+                    let characteristics = '';
+                    $.each(data.success, function (i, characteristic) {
+                        characteristics += '<option value="' + characteristic.id + '">' + characteristic.name + '</option>';
+                    });
+                    animalCharacteristics.append(characteristics);
+
+                    animalCharacteristics.materialSelect();
+                }
+            },
+            complete: function () {
+
+            },
+        })
     }
 }
