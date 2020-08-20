@@ -39,17 +39,13 @@ class AddAnimalRepository implements AddAnimalRepositoryInterface
 
     public function getBreedsForAddAnimal($request)
     {
-        if (isset($request->speciesId)) {
-            $breeds = AnimalBreed::whereNull('deleted_at')->where('species_id', '=', $request->speciesId)->get();
-        } else {
-            $breeds = AnimalBreed::whereNull('deleted_at')->get();
-        }
 
-        $breedCollection = $breeds->map(function ($breed) {
-            return collect($breed->toArray())
-                ->only(['id', 'name'])
-                ->all();
-        });
+        $breedCollection = DB::table('animal_breeds AS ab')
+            ->select(
+                'ab.id as id',
+                'ab.name as name'
+            )
+            ->where('ab.species_id', '=', $request->speciesId)->whereNull('ab.deleted_at')->get();
 
         return response()->json(['success' => $breedCollection]);
     }
