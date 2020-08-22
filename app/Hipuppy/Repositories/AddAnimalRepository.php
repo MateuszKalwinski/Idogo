@@ -113,4 +113,15 @@ class AddAnimalRepository implements AddAnimalRepositoryInterface
 
         return response()->json(['success' => $availableFurs]);
     }
+
+    public function createAnimal($request)
+    {
+
+        if ($request->has('breedId')) {
+            dd('ok');
+        } else {
+            dd('okok');
+        }
+
+    }
 }

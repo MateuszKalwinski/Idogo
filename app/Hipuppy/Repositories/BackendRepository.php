@@ -170,6 +170,20 @@ class BackendRepository implements BackendRepositoryInterface
 
     }
 
+    public function getUserPhones(){
+
+        $userPhones = Phone::where('user_id', '=', Auth::user()->id)->get();
+
+        $phonesCollection = $userPhones->map(function ($userPhone) {
+            return collect($userPhone->toArray())
+                ->only(['id', 'phone'])
+                ->all();
+        });
+
+        return response()->json(['success' => $phonesCollection]);
+
+    }
+
     public function getCities()
     {
         return City::orderBy('name', 'asc')->get();
