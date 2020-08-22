@@ -22,13 +22,7 @@ class frontendShelters {
     }
 
         searchCity(cityName) {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-
+        new Helper().ajaxSetup()
         $.ajax({
             type: 'GET',
             url: base_url + "/searchCities",
@@ -57,20 +51,4 @@ class frontendShelters {
             }
         });
     }
-
-
-    // searchCity(cityName) {
-
-        // $("#cityName").mdbAutocomplete({
-        //     data: base_url + "/searchCities", /* Lecture 17 */
-        //     minLength: 2,
-        //     select: function (event, ui) {
-        //        console.log(ui.item.value);
-        //     }
-        //
-        //
-        // });
-    // }
-
-
 }

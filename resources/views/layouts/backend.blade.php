@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{{asset('components/material/css/bootstrap.min.css')}}">
     <!-- Material Design Bootstrap -->
     <link rel="stylesheet" href="{{asset('components/material/css/mdb.min.css')}}">
+    <link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons" >
     <!-- Image uploader -->
     <link rel="stylesheet" href="{{asset('components/image-uploader/dist/image-uploader.min.css')}}">
     <!-- Your custom styles (optional) -->
@@ -352,6 +353,7 @@
 <!-- Footer -->
 
 <script type="text/javascript" src="{{asset('components/material/js/jquery.min.js')}}"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- Bootstrap tooltips -->
 <script type="text/javascript" src="{{asset('components/material/js/popper.min.js')}}"></script>
 <!-- Bootstrap core JavaScript -->

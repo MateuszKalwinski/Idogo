@@ -61,6 +61,14 @@ $(document).ready(function () {
 
     }
 
+    function ajaxSetup() {
+     return $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    }
+
     $('.mdb-select').materialSelect({
         labels: {
             selectAll: 'Wybierz wszystkie',
@@ -72,7 +80,6 @@ $(document).ready(function () {
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
-
     jQuery.event.special.touchstart = {
         setup: function( _, ns, handle ){
             if ( ns.includes("noPreventDefault") ) {

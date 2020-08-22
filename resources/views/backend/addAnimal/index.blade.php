@@ -13,7 +13,7 @@
                     <div class="row">
                         <div class="col-md-12 mb-md-0 mb-5">
                             <form {{ $novalidate    }} class="text-center" style="color: #757575;"
-                                  method="POST" action="{{ route('joinShelterForm') }}" enctype="multipart/form-data">
+                                  method="POST" action="{{ route('addAnimalForm') }}" enctype="multipart/form-data">
                                 @csrf
                                 <h4 class="card-title text-left">Dane zwierzaka:</h4>
                                 <div class="form-row">
@@ -57,9 +57,9 @@
                                         <div class="md-form">
                                             <select id="breedId" name="breedId"
                                                     class="mdb-select md-form {{ $errors->has('breedId') ? ' is-invalid' : '' }}"
-                                                    searchable="Wybierz rasę *" data-visible-options="10"
+                                                    searchable="Wybierz rasę" data-visible-options="10"
                                                     data-max-selected-options="1">
-                                                <option value="" disabled selected>Wybierz rasę *</option>
+                                                <option value="" disabled selected>Wybierz rasę</option>
                                             </select>
                                             <button type="button"
                                                     class="btn indigo lighten-1 btn-rounded text-white waves-effect waves-light text-transform-none btn-sm btn-save">
@@ -75,13 +75,13 @@
                                     <div class="col-2 pr-2">
                                         <div class="md-form">
                                             <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" id="materialUnchecked">
-                                                <label class="form-check-label" for="materialUnchecked">W typie
+                                                <input type="checkbox" class="form-check-input" id="inBreedType" name="inBreedType">
+                                                <label class="form-check-label" for="inBreedType">W typie
                                                     rasy</label>
-                                                <a href="#" class="text-black-50" data-toggle="tooltip"
-                                                   data-placement="top"
-                                                   title="Zaznacz jeśli Twój zwierzak jest podony do wybranej rasy"><i
-                                                        class="far fa-question-circle"></i></a>
+                                                 <i data-toggle="tooltip"
+                                                    data-placement="top"
+                                                    title="Zaznacz jeśli Twój zwierzak jest podony do wybranej rasy"
+                                                        class="far fa-question-circle"></i>
                                             </div>
 
                                         </div>
@@ -212,7 +212,7 @@
                                     <div class="col-12 pl-2 pr-2">
                                         <div class="md-form">
                                             <textarea id="animalDescription" name="animalDescription"
-                                                      class="md-textarea form-control" rows="2"
+                                                      class="md-textarea form-control {{ $errors->has('animalDescription') ? ' is-invalid' : '' }}" rows="2"
                                                       placeholder="Opis zwierzaka *"></textarea>
                                             @if ($errors->has('animalDescription'))
                                                 <span
@@ -241,7 +241,7 @@
                                 <div class="form-row">
                                     <div class="col-5 pl-2 pr-2">
                                         <div class="md-form">
-                                            <input type="search" id="cityName" name="cityName" value="{{app('request')->input('cityName')}}" class="form-control mdb-autocomplete">
+                                            <input type="search" id="cityName" name="cityName" value="{{app('request')->input('cityName')}}" class="form-control mdb-autocomplete {{ $errors->has('cityName') ? ' is-invalid' : '' }}">
                                             <button class="mdb-autocomplete-clear">
                                                 <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="https://www.w3.org/2000/svg">
                                                     <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
@@ -295,14 +295,21 @@
                                 <div class="form-row">
                                     <div class="col-6 pl-2 pr-2">
                                         <div class="md-form">
-                                            <input type="phone" id="phone" name="phone" disabled="disabled"
-                                                   class="form-control {{ $errors->has('phone') ? ' is-invalid' : '' }}"
-                                                   value="{{ old('phone') }}" required>
-                                            <label for="name">{{ __('Telefon *') }}</label>
+                                            <select id="phones" name="phones[]"
+                                                    class="mdb-select md-form {{ $errors->has('phones') ? ' is-invalid' : '' }}"
+                                                    multiple
+                                                    searchable="Wybierz numer telefonu *" data-visible-options="10"
+                                                    data-max-selected-options="3">
+                                                <option value="" disabled selected>Wybierz numer telefonu *</option>
 
-                                            @if ($errors->has('phone'))
+                                            </select>
+                                            <button type="button"
+                                                    class="btn indigo lighten-1 btn-rounded text-white waves-effect waves-light text-transform-none btn-sm btn-save">
+                                                Wybierz
+                                            </button>
+                                            @if ($errors->has('phones'))
                                                 <span
-                                                    class="invalid-feedback"><strong>{{ $errors->first('phone') }}</strong>
+                                                    class="invalid-feedback"><strong>{{ $errors->first('phones') }}</strong>
                                                 </span>
                                             @endif
                                         </div>
@@ -311,7 +318,7 @@
                                         <div class="md-form">
                                             <input type="email" id="email" name="email" disabled="disabled"
                                                    class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}"
-                                                   value="{{ old('email') }}" required>
+                                                   value="{{ old('email') ? old('email') : Auth::user()->email }}" required>
                                             <label for="name">{{ __('E-mail *') }}</label>
 
                                             @if ($errors->has('email'))

@@ -1,15 +1,14 @@
 class Success {
 
-    constructor(base_url) {
-        this.init(base_url);
+    constructor() {
+        this.init();
     }
 
-    init(base_url) {
-        this.UX(base_url);
+    init() {
+        this.UX();
     }
 
     UX() {
-        let self = this;
         $(document).on('click', '.modal-success-close', function () {
             $('#modalSuccess').modal('hide');
 
@@ -44,8 +43,6 @@ class Success {
             '            </div>' +
             '          </div>' +
             '        </div>' +
-
-
             '      </div>' +
             '    </div>'
         );

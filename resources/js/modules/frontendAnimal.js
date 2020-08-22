@@ -73,6 +73,7 @@ class frontendAnimal {
                 $('#showPhoneNumbers').html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Wyświetl numery').addClass('disabled');
             },
             success: function (data) {
+                $('#showPhoneNumbers').addClass('d-none')
                 $('#user_phones').children().remove();
                 for (var i = 0; i < data.length; i++) {
                     $('#user_phones').append('<p class="card-text">' + data[i].phone + '</p>')
