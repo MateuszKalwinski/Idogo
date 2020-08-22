@@ -85,4 +85,10 @@ class AddAnimalController extends Controller
 
         return $fursForAddAnimal;
     }
+
+    public function addAnimalForm(Request $request){
+
+        $addAnimal = $this->aaG->addAnimalForm($request);
+
+    }
 }
