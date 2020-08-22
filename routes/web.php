@@ -59,6 +59,10 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::post('/getSizesForAddAnimal', 'AddAnimalController@getSizesForAddAnimal')->name('getSizesForAddAnimal');
     Route::post('/getColorsForAddAnimal', 'AddAnimalController@getColorsForAddAnimal')->name('getColorsForAddAnimal');
     Route::post('/getFursForAddAnimal', 'AddAnimalController@getFursForAddAnimal')->name('getFursForAddAnimal');
+    Route::post('/addAnimalForm', 'AddAnimalController@addAnimalForm')->name('addAnimalForm');
+
+
+
 
     Route::get('/favourite', 'BackendController@favourite')->name('favourite');
 
@@ -66,6 +70,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
 
     Route::get('/adminShelterApplication', 'AdminController@adminShelterApplication')->name('adminShelterApplication');
 
+    Route::post('/getUserPhones', 'BackendController@getUserPhones')->name('getUserPhones');
     Route::post('/savePhoneNumber', 'BackendController@savePhoneNumber')->name('savePhoneNumber');
     Route::post('/deletePhoneNumber', 'BackendController@deletePhoneNumber')->name('deletePhoneNumber');
 

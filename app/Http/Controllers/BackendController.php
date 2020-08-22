@@ -100,4 +100,12 @@ class BackendController extends Controller
 
         return redirect()->back();
     }
+
+    public function getUserPhones(){
+
+        $userPhones = $this->bR->getUserPhones();
+
+        return $userPhones;
+
+    }
 }

@@ -33,7 +33,8 @@ mix.scripts(['resources/js/app.js'], 'public/js/app.js')
         'resources/js/modules/backendAvailableCharacteristicDictionary.js',
         'resources/js/modules/backendAddAnimal.js',
         'resources/js/modules/errors.js',
-        'resources/js/modules/success.js'
+        'resources/js/modules/success.js',
+        'resources/js/modules/helper.js'
     ], 'public/js/main.js')
 
     .babel(['resources/js/admin.js'], 'public/js/admin.js')
