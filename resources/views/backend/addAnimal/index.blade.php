@@ -295,27 +295,6 @@
                                 <div class="form-row">
                                     <div class="col-6 pl-2 pr-2">
                                         <div class="md-form">
-                                            <select id="phones" name="phones[]"
-                                                    class="mdb-select md-form {{ $errors->has('phones') ? ' is-invalid' : '' }}"
-                                                    multiple
-                                                    searchable="Wybierz numer telefonu *" data-visible-options="10"
-                                                    data-max-selected-options="3">
-                                                <option value="" disabled selected>Wybierz numer telefonu *</option>
-
-                                            </select>
-                                            <button type="button"
-                                                    class="btn indigo lighten-1 btn-rounded text-white waves-effect waves-light text-transform-none btn-sm btn-save">
-                                                Wybierz
-                                            </button>
-                                            @if ($errors->has('phones'))
-                                                <span
-                                                    class="invalid-feedback"><strong>{{ $errors->first('phones') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="col-6 pl-2 pr-2">
-                                        <div class="md-form">
                                             <input type="email" id="email" name="email" disabled="disabled"
                                                    class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}"
                                                    value="{{ old('email') ? old('email') : Auth::user()->email }}" required>
@@ -329,6 +308,20 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                @if ($errors->any())
+                                    <br>
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                                @if(Session::has('message'))
+                                    <p class="card-text">{{ Session::get('message') }}</p>
+                                @endif
 
                                 <button type="submit"
                                         class="btn btn indigo lighten-1 btn-rounded text-white pl-5 pr-5 waves-effect waves-light text-transform-none m-4">

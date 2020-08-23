@@ -5,7 +5,6 @@ class BackendAddAnimal {
         this.getSpecies();
         this.getGenders();
         this.getSizes();
-        this.getUserPhones();
     }
 
     init(base_url) {
@@ -366,53 +365,6 @@ class BackendAddAnimal {
                         animalColor.prop('disabled', true);
                         animalColor.append('<option value="" disabled selected>Brak kolorów dla wybranej rasy</option>');
                     }
-                }
-            },
-            complete: function () {
-
-            },
-        })
-    }
-
-    getUserPhones() {
-        new Helper().ajaxSetup();
-        $.ajax({
-            url: base_url + "/getUserPhones",
-            method: "POST",
-            data: {},
-            cache: true,
-            dataType: "json",
-            beforeSend: function () {
-
-            },
-            success: function (data) {
-                var html = '';
-                if (data.errors) {
-                    html = '<div class="alert alert-danger">';
-                    for (var count = 0; count < data.errors.length; count++) {
-                        html += '<p>' + data.errors[count] + '</p>';
-                    }
-                    html += '</div>';
-
-                } else {
-                    let userPhones = $('#phones');
-                    userPhones.children().remove();
-                    if (data.success.length > 0) {
-
-                        userPhones.append('<option value="" disabled selected>Wybierz numer Telefonu</option>');
-
-                        let phones = '';
-                        $.each(data.success, function (i, phone) {
-                            phones += '<option value="' + phone.id + '">' + phone.phone + '</option>';
-                        });
-                        userPhones.append(phones);
-                        userPhones.prop('disabled', false);
-                    } else {
-                        userPhones.prop('disabled', true);
-                        userPhones.append('<option value="" disabled selected>Nie masz żadnych numerów telefonu. Dodaj jakieś!</option>');
-                    }
-
-                    userPhones.materialSelect();
                 }
             },
             complete: function () {
