@@ -19,7 +19,7 @@ class CreateAddressesTable extends Migration
             $table->bigInteger('addressable_id');
             $table->bigInteger('city_id')->unsigned();
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
-            $table->integer('number');
+            $table->string('number');
             $table->string('street');
             $table->float('lon',8,5);
             $table->float('lat',8,5);
