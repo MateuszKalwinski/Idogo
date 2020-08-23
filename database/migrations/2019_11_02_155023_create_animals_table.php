@@ -16,7 +16,7 @@ class CreateAnimalsTable extends Migration
         Schema::create('animals', function (Blueprint $table) {
             $table->engine = "InnoDB";
             $table->bigIncrements('id');
-            $table->string('title');
+            $table->string('title')->nullable();
             $table->string('name');
             $table->integer('age');
             $table->text('description');
@@ -29,10 +29,7 @@ class CreateAnimalsTable extends Migration
             $table->bigInteger('size_id')->unsigned()->nullable();
             $table->bigInteger('breed_id')->unsigned()->nullable();
             $table->boolean('breed_mix');
-            $table->boolean('spayed_castrated');
-            $table->boolean('deworming');
             $table->unsignedBigInteger('animal_status_id')->unsigned();
-            $table->boolean('promoted')->default(false);
             $table->boolean('recommended')->default(false);
             $table->dateTime('created_at');
             $table->integer('created_user_id');
