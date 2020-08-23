@@ -9,6 +9,29 @@ class Animal extends Model
 {
     public $table = 'animals';
     public $timestamps = false;
+    protected $fillable = [
+        'title',
+        'name',
+        'age',
+        'description',
+        'price',
+        'animalable_type',
+        'animalable_id',
+        'species_id',
+        'color_id',
+        'fur_id',
+        'size_id',
+        'breed_id',
+        'breed_mix',
+        'animal_status_id',
+        'recommended',
+        'created_at',
+        'created_user_id',
+        'edited_at',
+        'edited_user_id',
+        'deleted_at',
+        'deleted_user_id',
+    ];
 
 
     public function animalable()
