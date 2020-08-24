@@ -2,7 +2,6 @@
 
 @section('content')
 <div id="ModuleName" data-moduleName="frontendAnimal">
-
     <div class="container mt-5 mb-5">
         <div class="row">
             <div class="col-lg-12 col-md-12 mb-4">
@@ -45,7 +44,7 @@
                             @endauth
 
                             <div class="slider-for overflow-hidden mb-4">
-                                @if(empty($animal->photo))
+                                @if(empty($animal->photos))
                                     <div class="slider-container">
                                         <img class="w-100" src="{{ $placeholder}}" alt="">
                                     </div>
@@ -57,14 +56,16 @@
                                     </div>
                                 @else
                                     @foreach($animal->photos as $photo)
-                                        <img src="{{ $photo->path ?? $placeholder}}" alt="">
+                                        <div style="max-height: 500px;">
+                                            <img style="max-height: 500px;" class="mx-auto" src="{{ $photo->path ?? $placeholder}}" alt="">
+                                        </div>
                                     @endforeach
                                 @endif
 
                             </div>
 
                             <div class="slider-nav overflow-hidden">
-                                @if(empty($animal->photo))
+                                @if(empty($animal->photos))
                                     <div class="slider-nav-container ml-3 mr-3 cursor-pointer">
                                         <img class="w-100" src="{{ $placeholder}}" alt="">
                                     </div>
@@ -82,7 +83,6 @@
                                     </div>
                                 @else
                                     @foreach($animal->photos as $photo)
-
                                         <img src="{{ $photo->path ?? $placeholder}}" alt="">
                                     @endforeach
                                 @endif
@@ -225,7 +225,8 @@
 
                     <!-- Card image -->
                     <div class="view view-cascade overlay">
-                        <img class="card-img-top" src="{{ $animal->photos->first()->path ?? $placeholderShelter}}"
+                        <img class="card-img-top" src="{{$placeholderShelter}}"
+{{--                        <img class="card-img-top" src="{{ $animal->photos->first()->path ?? $placeholderShelter}}"--}}
                              alt="Card image cap">
                         <a>
                             <div class="mask rgba-white-slight"></div>
