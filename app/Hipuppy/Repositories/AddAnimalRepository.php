@@ -126,7 +126,7 @@ class AddAnimalRepository implements AddAnimalRepositoryInterface
                 ->whereNull('deleted_at')
                 ->exists();
 
-            if (!$isExistSpecies) {
+            if ($isExistSpecies) {
                 array_push($errors, 'Wybrano błędny gatunek zwierzaka');
             }
         }
