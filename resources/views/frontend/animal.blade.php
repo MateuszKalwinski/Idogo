@@ -56,8 +56,8 @@
                                     </div>
                                 @else
                                     @foreach($animal->photos as $photo)
-                                        <div style="max-height: 500px;">
-                                            <img style="max-height: 500px;" class="mx-auto" src="{{ $photo->path ?? $placeholder}}" alt="">
+                                        <div class="slick-max-image-height">
+                                            <img class="mx-auto slick-max-image-height" src="{{ $photo->path ?? $placeholder}}" alt="">
                                         </div>
                                     @endforeach
                                 @endif
