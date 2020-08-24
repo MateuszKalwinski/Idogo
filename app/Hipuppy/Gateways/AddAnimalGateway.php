@@ -134,6 +134,20 @@ class AddAnimalGateway
             ]
         );
 
+        if ($request->hasFile('images')) {
+            $this->validate($request, [
+                'userPicture' => "image|max:2000",
+                'images" => "nullable|array',
+                'images.*" => "image|max:4000',
+
+            ],
+                [
+                    'images.array' => 'Ups!coś poszło nie tak.',
+                    'images.*.image' => 'Pole "zdjęcia" musi być mieć rozszerzenie jpg, jpeg lub png.',
+                    'images.*.max' => 'Maksymalny rozmiar zdjęcia to 4MB',
+                ]);
+        }
+
         $addAnimal = $this->aaR->createAnimal($request);
 
         return $addAnimal;
