@@ -44,7 +44,7 @@
                             @endauth
 
                             <div class="slider-for overflow-hidden mb-4">
-                                @if(empty($animal->photos))
+                                @if($animal->photos->isEmpty())
                                     <div class="slider-container">
                                         <img class="w-100" src="{{ $placeholder}}" alt="">
                                     </div>
@@ -65,7 +65,7 @@
                             </div>
 
                             <div class="slider-nav overflow-hidden">
-                                @if(empty($animal->photos))
+                                @if($animal->photos->isEmpty())
                                     <div class="slider-nav-container ml-3 mr-3 cursor-pointer">
                                         <img class="w-100" src="{{ $placeholder}}" alt="">
                                     </div>
