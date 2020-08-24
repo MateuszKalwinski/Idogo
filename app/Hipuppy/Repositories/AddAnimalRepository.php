@@ -9,7 +9,6 @@ use App\{Address,
     Animal,
     AnimalBreed,
     AnimalCharacteristic,
-    AnimalDictionary,
     AnimalDictionarySpecies,
     AnimalSpecies,
     AvailableCharacteristicDictionary,
@@ -17,9 +16,9 @@ use App\{Address,
     AnimalSize,
     AvailableColors,
     Gender,
-    Shelter};
+    Photo
+};
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redirect;
 
 class AddAnimalRepository implements AddAnimalRepositoryInterface
 {
@@ -317,6 +316,28 @@ class AddAnimalRepository implements AddAnimalRepositoryInterface
             } catch (\Exception $e) {
                 DB::rollback();
                 throw $e;
+            }
+
+            if ($request->hasFile('images')){
+
+                try {
+
+                    foreach ($request->images as $image) {
+
+                        $path = $image->store('animals', 'public');
+
+                        $photo = new Photo;
+                        $photo->path = $path;
+                        $animal->photos()->save($photo);
+                    }
+
+                } catch (ValidationException $e) {
+                    DB::rollback();
+                    return redirect()->back()->withErrors('message', 'Ups! Coś poszło nie tak.');
+                } catch (\Exception $e) {
+                    DB::rollback();
+                    throw $e;
+                }
             }
 
             try {
