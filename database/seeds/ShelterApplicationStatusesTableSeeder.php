@@ -16,8 +16,6 @@ class ShelterApplicationStatusesTableSeeder extends Seeder
            'Weryfikacja mailowa',
            'Weryfikacja telefoniczna',
            'Weryfikacja osobista',
-           'Zweryfikowano pozytywnie',
-           'Zweryfikowano negatywnie',
            'Dodano',
            'Odrzucono'
        ];
