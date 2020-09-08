@@ -58,6 +58,9 @@ $(document).ready(function () {
         if (module == 'backendAddAnimal'){
             new BackendAddAnimal(base_url);
         }
+        if (module == 'BackendShelterApplications'){
+            new BackendShelterApplications(base_url);
+        }
 
     }
 
