@@ -44,6 +44,13 @@ class AdminController extends Controller
         return view('backend.shelterApplication.index');
     }
 
+    public function getShelterApplicationStatuses(Request $request)
+    {
+        $shelterApplicationStatuses = $this->aG->getShelterApplicationStatuses($request);
+
+        return $shelterApplicationStatuses;
+    }
+
     public function adminSpecies()
     {
         if (request()->ajax()) {
