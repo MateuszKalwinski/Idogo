@@ -11,8 +11,9 @@ use App\{AnimalBreed,
     CharacteristicDictionary,
     Fur,
     AnimalSize,
-    AvailableColors
-};
+    AvailableColors,
+    ShelterApplication,
+    ShelterApplicationStatus};
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -137,10 +138,10 @@ class AdminRepository implements AdminRepositoryInterface
         $datatable = datatables()->of($this->gerShelterApplicationsForDatatable())
             ->addColumn('action', function ($data) {
                 $actions = '<div class="d-flex">
-                                <button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-yellow border-none edit-species waves-effect waves-light" data-shelter-application-id="' . $data->id . '">
+                                <button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-yellow border-none edit-shelter-application waves-effect waves-light" data-shelter-application-id="' . $data->id . '">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                <button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-danger border-none delete-species waves-effect waves-light" data-shelter-application-id="' . $data->id . '">
+                                <button class="ml-2 mr-2 mt-0 mb-0 btn-floating btn-sm btn-danger border-none edit-shelter-application waves-effect waves-light" data-shelter-application-id="' . $data->id . '">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                             </div>';
@@ -157,20 +158,24 @@ class AdminRepository implements AdminRepositoryInterface
             })
             ->addColumn('nameAndSurname', function ($data) {
 
-
-                $nameAndSurname = $data->name . ' ' . $data->surname;
+                $nameAndSurname = '<span class="application-user-full-name">'. $data->name . ' ' . $data->surname .'</span>';
                 return $nameAndSurname;
+            })
+            ->addColumn('shelterName', function ($data) {
+
+                $shelterName = '<span class="application-shelter-name">'. $data->shelter_name .'</span>';
+                return $shelterName;
             })
             ->addColumn('address', function ($data) {
 
-                $address = '<a href="https://maps.google.com/?q=' . $data->street . ' ' . $data->city . ' ' . $data->zip_code . '">' . $data->street . ' ' . $data->city . ' ' . $data->zip_code . '</a>';
+                $address = '<a class="application-shelter-address" href="https://maps.google.com/?q=' . $data->street . ' ' . $data->city . ' ' . $data->zip_code . '">' . $data->street . ' ' . $data->city . ' ' . $data->zip_code . '</a>';
                 return $address;
             })
             ->addColumn('shelterApplicationStatus', function ($data) {
                 $shelterApplicationStatus = '<span data-shelter-application-stauts-id="' . $data->shelter_application_status_id . '">' . $data->shelter_application_status_name . '</span>';
                 return $shelterApplicationStatus;
             })
-            ->rawColumns(['nameAndSurname', 'action', 'address', 'shelterApplicationStatus', 'user'])
+            ->rawColumns(['nameAndSurname', 'action', 'address', 'shelterApplicationStatus', 'user', 'shelterName'])
             ->make(true);
 
 
@@ -2131,6 +2136,19 @@ class AdminRepository implements AdminRepositoryInterface
         $availableFur->delete();
 
         return response()->json(['success' => 'Usuwanie zakończone pomyślnie.']);
+    }
+
+    public function getShelterApplicationStatuses($request){
+
+        $shelterApplicationStatuses = ShelterApplicationStatus::where('id' ,'>=', $request->applicationShelterId)->get();
+
+        $shelterApplicationStatusesCollection = $shelterApplicationStatuses->map(function ($shelterApplicationStatus) {
+            return collect($shelterApplicationStatus->toArray())
+                ->only(['id', 'name'])
+                ->all();
+        });
+
+        return response()->json(['success' => $shelterApplicationStatusesCollection]);
     }
 
     /*

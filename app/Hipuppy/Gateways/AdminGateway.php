@@ -692,4 +692,22 @@ class AdminGateway
             return response()->json(['errors' => 'Nieprawidłowa operacja.']);
         }
     }
+
+    public function getShelterApplicationStatuses($request)
+    {
+        $validator = Validator::make($request->all(), [
+            'applicationShelterId' => 'required|integer',
+        ],
+            [
+                'applicationShelterId.required' => 'Ups!coś poszło nie tak.',
+                'applicationShelterId.integer' => 'Ups!coś poszło nie tak.',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
+        return $this->aR->getShelterApplicationStatuses($request);
+    }
 }
