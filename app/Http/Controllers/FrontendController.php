@@ -118,4 +118,12 @@ class FrontendController extends Controller
         return response()->json($sendReport);
     }
 
+    public function regulation(){
+
+        $regulation = $this->fR->getRegulation();
+
+        return view('frontend.regulation', ['regulation' => $regulation]);
+
+    }
+
 }

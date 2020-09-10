@@ -2,11 +2,13 @@
 
 namespace App\Hipuppy\Repositories;
 
-use App\{Animal,
+use App\{AcceptedRegulation,
+    Animal,
     AnimalSpecies,
     Article,
     City,
     Phone,
+    Regulation,
     Shelter,
     ShelterApplication,
     User,
@@ -14,6 +16,7 @@ use App\{Animal,
 use App\Hipuppy\Interfaces\FrontendRepositoryInterface;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class FrontendRepository implements FrontendRepositoryInterface
 {
@@ -203,6 +206,10 @@ class FrontendRepository implements FrontendRepositoryInterface
 
     public function createShelterApplication($request)
     {
+        DB::beginTransaction();
+
+        try {
+
 
         $date = Carbon::now('Europe/Warsaw');
         $date->toDateTimeString();
@@ -223,7 +230,50 @@ class FrontendRepository implements FrontendRepositoryInterface
         $shelter_application->created_at = $date;
 
         $shelter_application->save();
+        }catch (ValidationException $e) {
+            DB::rollback();
+            return redirect()->back()->withErrors('message', 'Ups! Coś poszło nie tak. 1');
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+        try {
 
+            $regulation =  DB::table('regulations AS r')
+                ->select(
+                    'r.id'
+                )
+                ->where('r.active', '=', true)
+                ->get();
+
+            if (count($regulation) !== 1){
+                return redirect()->back()->withErrors('message', 'Ups! Coś poszło nie tak. 1');
+            }
+
+        } catch (ValidationException $e) {
+            DB::rollback();
+            return redirect()->back()->withErrors('message', 'Ups! Coś poszło nie tak. 1');
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+
+        try {
+
+            $acceptedRegulation = new AcceptedRegulation;
+            $acceptedRegulation->regulation_id = $regulation[0]->id;
+            $shelter_application->acceptedRegulation()->save($acceptedRegulation);
+
+
+        } catch (ValidationException $e) {
+            DB::rollback();
+            return redirect()->back()->withErrors('message', 'Ups! Coś poszło nie tak. 1');
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+
+        DB::commit();
         return $shelter_application;
     }
 
@@ -252,6 +302,14 @@ class FrontendRepository implements FrontendRepositoryInterface
         }
 
         return $result;
+    }
+
+    public function getRegulation()
+    {
+        $regulation = Regulation::where('active', '=', 1)->get();
+
+        return $regulation;
+
     }
 }
 

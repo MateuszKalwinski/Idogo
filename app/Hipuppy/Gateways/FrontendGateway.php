@@ -105,6 +105,7 @@ class FrontendGateway
             'shelterCity' => 'required|string|max:255',
             'ShelterTaxNumber' => 'required|string|max:14',
             'shelterRegonNumber' => 'required|string|max:14',
+            'accept_regulation' => 'required|accepted',
         ],
             [
                 'name.required' => 'Pole "imie" jest wymagane',
@@ -145,6 +146,9 @@ class FrontendGateway
                 'shelterRegonNumber.required' => 'Pole "REGON" jest wymagane',
                 'shelterRegonNumber.string' => 'Pole "REGON" musi być typu tekstowego',
                 'shelterRegonNumber.max' => 'Pole "REGON" nie może mieć więcej niż 14 znaków',
+
+                'accept_regulation.required' => 'Pole "akceptuje regulamin" jest wymagane.',
+                'accept_regulation.accepted' => 'Pole "akceptuje regulamin" musi być zaakceptowane.',
             ]
         );
 
