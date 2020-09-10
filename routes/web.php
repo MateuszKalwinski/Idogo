@@ -1,6 +1,7 @@
 <?php
 
 Route::get('/','FrontendController@index')->name('home');
+Route::get(trans('routes.regulation'), 'FrontendController@regulation')->name('regulation');
 
 
 Route::get(trans('routes.animals').'/{id?}','AnimalsController@animals')->name('animals');
@@ -60,8 +61,6 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::post('/getColorsForAddAnimal', 'AddAnimalController@getColorsForAddAnimal')->name('getColorsForAddAnimal');
     Route::post('/getFursForAddAnimal', 'AddAnimalController@getFursForAddAnimal')->name('getFursForAddAnimal');
     Route::post('/addAnimalForm', 'AddAnimalController@addAnimalForm')->name('addAnimalForm');
-
-
 
 
     Route::get('/favourite', 'BackendController@favourite')->name('favourite');
