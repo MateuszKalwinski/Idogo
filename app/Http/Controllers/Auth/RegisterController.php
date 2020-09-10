@@ -3,7 +3,8 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\{User,Role};
+use Illuminate\Support\Facades\DB;
+use App\{AcceptedRegulation, User, Role};
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -48,12 +49,37 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-        ]);
+            'accept_regulation' => 'required|accepted'
+            ],
+            [
+                'name.required' => 'Pole "imię" jest wymagane.',
+                'name.string' => 'Pole "imię" musi być typu tekstowego.',
+                'name.max' => 'Pole "imię" nie może mieć więcej niż 255 znaków.',
+
+                'surname.required' => 'Pole "nazwisko" jest wymagane.',
+                'surname.string' => 'Pole "nazwisko" musi być typu tekstowego.',
+                'surname.max' => 'Pole "nazwisko" nie może mieć więcej niż 255 znaków.',
+
+                'email.required' => 'Pole "email" jest wymagane.',
+                'email.string' => 'Pole "email" musi być typu tekstowego.',
+                'email.max' => 'Pole "email" nie może mieć więcej niż 255 znaków.',
+                'email.email' =>  'Pole "email" musi być poprawnym mailem.',
+
+                'password.required' => 'Pole "hasło" jest wymagane.',
+                'password.string' => 'Pole "hasło" musi być typu tekstowego.',
+                'password.min' => 'Pole "hasło" nie może mieć mniej niż 6 znaków.',
+                'password.confirmed' => 'Pole "hasło" musi być idenczne jak pole "powtórz hasło".',
+
+                'accept_regulation.required' => 'Pole "akceptuje regulamin" jest wymagane.',
+                'accept_regulation.accepted' => 'Pole "akceptuje regulamin" musi być zaakceptowane.',
+            ]
+        );
     }
 
     /**
@@ -64,22 +90,61 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        /* Lecture 36 */
-        $user =  User::create([
-            'name' => $data['name'],
-            'surname' => $data['surname'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        DB::beginTransaction();
 
-        /* Lecture 36 */
-        if(!Role::where('name','owner')->exists())
-        {
-            Role::create(['name'=>'owner']);
-            Role::create(['name'=>'tourist']);
-            Role::create(['name'=>'admin']);
+        try {
+
+            $user =  User::create([
+                'name' => $data['name'],
+                'surname' => $data['surname'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+            ]);
+
+        } catch (ValidationException $e) {
+            DB::rollback();
+            return redirect()->back()->withErrors('message', 'Ups! Coś poszło nie tak. 1');
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
         }
 
-        return $user; /* Lecture 36 */
+        try {
+
+            $regulation =  DB::table('regulations AS r')
+                ->select(
+                    'r.id'
+                )
+                ->where('r.active', '=', true)
+                ->get();
+
+            if (count($regulation) !== 1){
+                return redirect()->back()->withErrors('message', 'Ups! Coś poszło nie tak. 1');
+            }
+
+        } catch (ValidationException $e) {
+            DB::rollback();
+            return redirect()->back()->withErrors('message', 'Ups! Coś poszło nie tak. 1');
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+
+        try {
+
+            $acceptedRegulation = new AcceptedRegulation;
+            $acceptedRegulation->regulation_id = $regulation[0]->id;
+            $user->acceptedRegulation()->save($acceptedRegulation);
+
+
+        } catch (ValidationException $e) {
+            DB::rollback();
+            return redirect()->back()->withErrors('message', 'Ups! Coś poszło nie tak. 1');
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+        DB::commit();
+        return $user;
     }
 }
