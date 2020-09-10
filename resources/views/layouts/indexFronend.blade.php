@@ -241,7 +241,7 @@
                         <a href="#!">Polityka plików "cookies"</a>
                     </li>
                     <li>
-                        <a href="#!">Regulamin Idogo</a>
+                        <a href="{{ route('regulation') }}">Regulamin Idogo</a>
                     </li>
                 </ul>
 
