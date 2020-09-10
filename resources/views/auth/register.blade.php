@@ -8,9 +8,6 @@
             <div class="row">
 
                 <div class="col-lg-7 col-md-12 my-auto mx-auto p-5">
-                    @foreach ($errors->all() as $error)
-                        {{ $error }}
-                    @endforeach
                     <div class="intro-info-content">
                         <h1 class="display-4 white-text mb-4 quotes font-weight-light">Adoptuj pupila</h1>
                         <h1 class="display-4 white-text mb-4 quotes font-weight-light">Wspomóż schroniska</h1>
@@ -40,11 +37,8 @@
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="md-form">
-                                            <input type="text" id="name" name="name"
-                                                   class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}"  value="{{ old('name') }}
-                                            " required>
+                                            <input type="text" id="name" name="name" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" value="{{ old('name') }}" required>
                                             <label for="name">{{ __('Imie *') }}</label>
-
                                             @if ($errors->has('name'))
                                                 <span class="invalid-feedback"><strong>{{ $errors->first('name') }}</strong>
                                                 </span>
@@ -53,9 +47,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="md-form">
-                                            <input type="text" id="surname" name="surname"
-                                                   class="form-control {{ $errors->has('surname') ? ' is-invalid' : '' }}" value="{{ old('surname') }}
-                                            " required>
+                                            <input type="text" id="surname" name="surname" class="form-control {{ $errors->has('surname') ? ' is-invalid' : '' }}" value="{{ old('surname') }}" required>
                                             <label for="surname">{{ __('Nazwisko *') }}</label>
 
                                             @if ($errors->has('surname'))
@@ -70,8 +62,7 @@
 
                                 <div class="md-form">
                                     <input type="email" id="email" name="email"
-                                           class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}
-                                    " required>
+                                           class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" required>
                                     <label for="email">{{ __('Adres email *') }}</label>
 
                                     @if ($errors->has('email'))
@@ -83,8 +74,7 @@
 
                                 <div class="md-form">
                                     <input type="password" id="password" name="password"
-                                           class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" value="{{ old('password') }}
-                                    " required>
+                                           class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" value="{{ old('password') }}" required>
                                     <label for="password">{{ __('Hasło *') }}</label>
 
                                     @if ($errors->has('password'))
@@ -95,9 +85,7 @@
                                 </div>
 
                                 <div class="md-form">
-                                    <input type="password" id="password_confirmation" name="password_confirmation"
-                                           class="form-control {{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}" value="{{ old('password_confirmation') }}
-                                    " required>
+                                    <input type="password" id="password_confirmation" name="password_confirmation" class="form-control {{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}" value="{{ old('password_confirmation') }}" required>
                                     <label for="password_confirmation">{{ __('Powtórz hasło *') }}</label>
 
                                     @if ($errors->has('password_confirmation'))
@@ -105,6 +93,20 @@
                                         <strong>{{ $errors->first('password_confirmation') }}</strong>
                                     </span>
                                     @endif
+                                </div>
+
+                                <div class="d-flex">
+                                <div class="form-check text-left p-0">
+                                    <input type="checkbox" class="form-check-input  {{ $errors->has('accept_regulation') ? ' is-invalid' : '' }}" id="accept_regulation" name="accept_regulation" value="1">
+                                    <label class="form-check-label" for="accept_regulation">{{ __('Akceptuje regulamin *') }}</label>
+                                    @if ($errors->has('accept_regulation'))
+                                        <span class="invalid-feedback"><strong>{{ $errors->first('accept_regulation') }}</strong>
+                                                </span>
+                                    @endif
+                                </div>
+
+
+                                    <a class="ml-3" href="{{ route('regulation') }}">Regulamin Idogo</a>
                                 </div>
 
                                 <button type="submit"

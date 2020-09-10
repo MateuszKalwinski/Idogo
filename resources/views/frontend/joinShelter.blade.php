@@ -173,6 +173,18 @@
                                     </div>
                                 </div>
 
+                                <div class="d-flex">
+                                    <div class="form-check text-left p-0">
+                                        <input type="checkbox" class="form-check-input  {{ $errors->has('accept_regulation') ? ' is-invalid' : '' }}" id="accept_regulation" name="accept_regulation" value="1">
+                                        <label class="form-check-label" for="accept_regulation">{{ __('Akceptuje regulamin *') }}</label>
+                                        @if ($errors->has('accept_regulation'))
+                                            <span class="invalid-feedback"><strong>{{ $errors->first('accept_regulation') }}</strong>
+                                                </span>
+                                        @endif
+                                    </div>
+                                    <a class="ml-3" href="{{ route('regulation') }}">Regulamin Idogo</a>
+                                </div>
+
                                 <button type="submit"
                                         class="btn btn indigo lighten-1 btn-rounded text-white pl-5 pr-5 waves-effect waves-light text-transform-none m-4">
                                     {{ __('Wyjślij formularz') }}
