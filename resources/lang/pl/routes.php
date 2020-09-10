@@ -2,7 +2,8 @@
 
 return [
 
-
+    'login' => 'login',
+    'register' => 'rejestracja',
     'article' => 'artykul',
     'object' => 'obiekt',
     'animals' => 'zwierzaki',
@@ -19,5 +20,6 @@ return [
     'province' => 'wojewodztwo',
     'animal' => 'zwierzak',
     'profile' => 'profil',
+    'regulation' => 'regulamin',
 
 ];

@@ -1,10 +1,9 @@
 <?php
 
-
-
 return [
 
-
+    'login' => 'login',
+    'register' => 'register',
     'article' => 'article',
     'animals' => 'animals',
     'searchAnimals' => 'searchAnimals',
@@ -20,4 +19,5 @@ return [
     'province' => 'province',
     'animal' => 'animal',
     'profile' => 'profile',
+    'regulation' => 'regulation',
 ];
