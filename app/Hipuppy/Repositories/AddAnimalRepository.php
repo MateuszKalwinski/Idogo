@@ -264,7 +264,7 @@ class AddAnimalRepository implements AddAnimalRepositoryInterface
 
             } catch (ValidationException $e) {
                 DB::rollback();
-                return redirect()->back()->withErrors('message', 'Ups! Coś poszło nie tak. 1');
+                return redirect()->back()->withErrors('message', 'Ups! Coś poszło nie tak.');
             } catch (\Exception $e) {
                 DB::rollback();
                 throw $e;
