@@ -50,5 +50,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ViolationReportsTableSeeder::class);
         $this->call(AvailableColorsTableSeeder::class);
         $this->call(AvailableFursTableSeeder::class);
+        $this->call(RegulationsTableSeeder::class);
+        $this->call(AcceptedRegulationsTableSeeder::class);
     }
 }

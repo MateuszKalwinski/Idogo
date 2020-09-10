@@ -14,10 +14,10 @@ class CreateFavouriteablesTable extends Migration
     public function up()
     {
         Schema::create('favouriteables', function (Blueprint $table) {
-            $table->string('favouriteable_type'); /* Lecture 8 */
-            $table->bigInteger('favouriteable_id'); /* Lecture 8 */
-            $table->bigInteger('user_id')->unsigned(); /* Lecture 8 */
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); /* Lecture 8 */
+            $table->string('favouriteable_type');
+            $table->bigInteger('favouriteable_id');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
