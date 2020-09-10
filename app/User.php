@@ -31,6 +31,11 @@ class User extends Authenticatable
         return $this->morphMany('App\Animal', 'animalable');
     }
 
+    public function acceptedRegulation()
+    {
+        return $this->morphMany('App\AcceptedRegulation', 'acceptedregulationable');
+    }
+
     public function addressable()
     {
         return $this->morphMany('App\Address', 'addressable');

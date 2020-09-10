@@ -13,4 +13,9 @@ class ShelterApplication extends Model
     {
         return $this->hasOne('App\ShelterApplicationStatus', 'shelter_application_status_id');
     }
+
+    public function acceptedRegulation()
+    {
+        return $this->morphMany('App\AcceptedRegulation', 'acceptedregulationable');
+    }
 }
