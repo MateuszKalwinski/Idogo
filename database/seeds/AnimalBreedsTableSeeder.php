@@ -429,7 +429,7 @@ class AnimalBreedsTableSeeder extends Seeder
         foreach ($breeds as $breed){
             DB::table('animal_breeds')->insert([
                 'species_id' => $breed['species_id'],
-                'name' => strtolower($breed['name']),
+                'name' => mb_strtolower($breed['name']),
                 'created_at' => $faker->dateTime,
                 'created_user_id' => 1,
                 'edited_at' => null,
@@ -438,5 +438,9 @@ class AnimalBreedsTableSeeder extends Seeder
                 'deleted_user_id' => null,
             ]);
         }
+        DB::table('role_user')->insert([
+            'user_id' => 31,
+            'role_id' => $faker->randomElement($array = array (1,2,3))
+        ]);
     }
 }

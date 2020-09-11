@@ -12,14 +12,11 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        /* Lecture 11 */
-        $faker = Faker\Factory::create();
+        $roles = ['user','shelter','admin'];
 
-        /* Lecture 11 */
-        for ($i = 1; $i <= 3; $i++) {
-
+        foreach ($roles as $role){
             DB::table('roles')->insert([
-                'name' => $faker->unique()->randomElement($array = array ('user','shelter','admin'))
+                'name' => $role
             ]);
         }
     }

@@ -36,8 +36,6 @@ var Ajax = {
         });
     },
 
-
-    /* Lecture 50 */
     set: function (data = {}, url, success = null) {
 
         $.ajax({
@@ -60,41 +58,39 @@ var Ajax = {
 
 };
 
-/* Lecture 30 */
 var App = {
 
-    timestamp: null, /* Lecture 51 */
+    timestamp: null,
 
-    idsOfNotShownNotifications: [], /* Lecture 52 */
+    idsOfNotShownNotifications: [],
 
 
-    GetReservationData: function (id, calendar_id/* Lecture 32 */, date) {
+    GetReservationData: function (id, calendar_id, date) {
 
-        App.calendar_id = calendar_id; /* Lecture 32 */
-        Ajax.get('ajaxGetReservationData?fromWebApp=1', 'AfterGetReservationData',{room_id: id, date: date},'BeforeGetReservationData'); /* Lecture 31 ?fromWebApp=1 */
+        App.calendar_id = calendar_id;
+        Ajax.get('ajaxGetReservationData?fromWebApp=1', 'AfterGetReservationData',{room_id: id, date: date},'BeforeGetReservationData');
 
 
     },
     BeforeGetReservationData: function() {
 
 
-        $('.loader_' + App.calendar_id).hide(); /* Lecture 32 */
-        $('.hidden_' + App.calendar_id).show(); /* Lecture 32 */
+        $('.loader_' + App.calendar_id).hide();
+        $('.hidden_' + App.calendar_id).show();
 
 
     },
     AfterGetReservationData: function(response) {
 
 
-        $('.hidden_' + App.calendar_id + " .reservation_data_room_number").html(response.room_number); /* Lecture 32 */
+        $('.hidden_' + App.calendar_id + " .reservation_data_room_number").html(response.room_number);
 
-        $('.hidden_' + App.calendar_id + " .reservation_data_day_in").html(response.day_in); /* Lecture 33 */
-        $('.hidden_' + App.calendar_id + " .reservation_data_day_out").html(response.day_out); /* Lecture 33 */
-        $('.hidden_' + App.calendar_id + " .reservation_data_person").html(response.FullName); /* Lecture 33 */
-        $('.hidden_' + App.calendar_id + " .reservation_data_person").attr('href', response.userLink); /* Lecture 33 */
-        $('.hidden_' + App.calendar_id + " .reservation_data_delete_reservation").attr('href', response.deleteResLink); /* Lecture 33 */
+        $('.hidden_' + App.calendar_id + " .reservation_data_day_in").html(response.day_in);
+        $('.hidden_' + App.calendar_id + " .reservation_data_day_out").html(response.day_out);
+        $('.hidden_' + App.calendar_id + " .reservation_data_person").html(response.FullName);
+        $('.hidden_' + App.calendar_id + " .reservation_data_person").attr('href', response.userLink);
+        $('.hidden_' + App.calendar_id + " .reservation_data_delete_reservation").attr('href', response.deleteResLink);
 
-        /* Lecture 33 */
         if (response.status)
         {
             $('.hidden_' + App.calendar_id + " .reservation_data_confirm_reservation").removeAttr('href');
@@ -108,40 +104,32 @@ var App = {
 
     },
 
-    /* Lecture 50 */
     SetReadNotification: function (id) {
 
         Ajax.set({id: id}, 'ajaxSetReadNotification?fromWebApp=1');
     },
 
-
-    /* Lecture 50 */
     GetNotShownNotifications: function() {
 
-        /* Lecture 51 */
         Ajax.get("ajaxGetNotShownNotifications?fromWebApp=1&timestamp=" + App.timestamp, 'AfterGetNotShownNotifications');
 
     },
 
-    /* Lecture 51 */
     AfterGetNotShownNotifications: function(response) {
 
-        var json = JSON.parse(response); /* Lecture 52 */
+        var json = JSON.parse(response);
 
-        App.timestamp = json['timestamp']; /* Lecture 52 */
-        setTimeout(App.GetNotShownNotifications(), 100); /* Lecture 52 */
+        App.timestamp = json['timestamp'];
+        setTimeout(App.GetNotShownNotifications(), 100);
 
-
-        /* Lecture 52 */
         if (jQuery.isEmptyObject(json['notifications']))
             return;
 
 
-        $('#app-notifications-count').show(); /* Lecture 52 */
-        $('#app-notifications-count').removeClass('hidden'); /* Lecture 52 */
+        $('#app-notifications-count').show();
+        $('#app-notifications-count').removeClass('hidden');
 
 
-        /* Lecture 52 */
         for (var i = 0; i <= json['notifications'].length - 1; i++)
         {
             App.idsOfNotShownNotifications.push(json['notifications'][i].id);
@@ -151,30 +139,24 @@ var App = {
         }
 
 
-        App.SetShownNotifications(App.idsOfNotShownNotifications); /* Lecture 52 */
+        App.SetShownNotifications(App.idsOfNotShownNotifications);
 
 
     },
 
-
-    /* Lecture 52 */
     SetShownNotifications: function (ids) {
 
         Ajax.set({idsOfNotShownNotifications: ids}, 'ajaxSetShownNotifications?fromWebApp=1');
 
     }
-
-
 };
 
 
-/* Lecture 34 */
 $(document).on('click', '.dropdown', function (e) {
     e.stopPropagation();
 });
 
 
-/* Lecture 50 */
 $(document).on("click", ".unread_notification", function (event) {
 
     event.preventDefault();
@@ -198,7 +180,6 @@ $(document).on("click", ".unread_notification", function (event) {
 });
 
 
-/* Lecture 50 */
 $(function () {
 
     App.GetNotShownNotifications();

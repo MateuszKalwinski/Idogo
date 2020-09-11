@@ -20,7 +20,6 @@ class ShelterApplicationStatusesTableSeeder extends Seeder
            'Odrzucono'
        ];
 
-        /* Lecture 10 */
         foreach ($shelterApplicationStatuses as $applicationStatus)
         {
 

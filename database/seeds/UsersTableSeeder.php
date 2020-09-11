@@ -12,11 +12,10 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        /* Lecture 10 */
+
         $faker = Faker\Factory::create();
         //$faker = Faker\Factory::create('pl_PL');
 
-        /* Lecture 10 */
         for($i=1;$i<=30;$i++)
         {
             DB::table('users')->insert([
@@ -29,5 +28,15 @@ class UsersTableSeeder extends Seeder
                 'deleted_ad' => null,
             ]);
         }
+
+        DB::table('users')->insert([
+            'name' => 'Mateusz',
+            'surname' => 'Kalwinski',
+            'email' => 'Mateucz27@gmail.com',
+            'password' => bcrypt('kalwinski'),
+            'created_at' => $faker->dateTime,
+            'edited_ad' => null,
+            'deleted_ad' => null,
+        ]);
     }
 }

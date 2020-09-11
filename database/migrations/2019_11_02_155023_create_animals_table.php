@@ -21,8 +21,8 @@ class CreateAnimalsTable extends Migration
             $table->integer('age');
             $table->text('description');
             $table->integer('price')->nullable();
-            $table->string('animalable_type'); /* Lecture 8 */
-            $table->bigInteger('animalable_id'); /* Lecture 8 */
+            $table->string('animalable_type');
+            $table->bigInteger('animalable_id');
             $table->bigInteger('species_id');
             $table->bigInteger('color_id')->unsigned()->nullable();
             $table->bigInteger('fur_id')->unsigned()->nullable();

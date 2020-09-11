@@ -12,7 +12,6 @@ class CitiesTableSeeder extends Seeder
      */
     public function run()
     {
-        /* Lecture 10 */
 
       $cities =  array (
           1 =>

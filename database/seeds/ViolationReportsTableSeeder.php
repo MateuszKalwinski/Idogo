@@ -13,7 +13,6 @@ class ViolationReportsTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        /* Lecture 10 */
         for($i=1;$i<=10;$i++)
         {
             DB::table('violation_reports')->insert([

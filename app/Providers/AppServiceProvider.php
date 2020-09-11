@@ -39,7 +39,6 @@ class AppServiceProvider extends ServiceProvider
             $view->with('placeholderGlobalArticle', asset('images/placeholder-global-article.jpg'));
         });
 
-        /* Lecture 34 */
         if (App::environment('local'))
         {
 
