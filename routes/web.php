@@ -69,6 +69,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
 
     Route::get('/adminShelterApplication', 'AdminController@adminShelterApplication')->name('adminShelterApplication');
     Route::post('/getShelterApplicationStatuses', 'AdminController@getShelterApplicationStatuses')->name('getShelterApplicationStatuses');
+    Route::post('/adminUpdateShelterApplication', 'AdminController@adminUpdateShelterApplication')->name('adminUpdateShelterApplication');
 
     Route::post('/getUserPhones', 'BackendController@getUserPhones')->name('getUserPhones');
     Route::post('/savePhoneNumber', 'BackendController@savePhoneNumber')->name('savePhoneNumber');
