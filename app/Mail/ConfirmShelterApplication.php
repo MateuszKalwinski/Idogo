@@ -29,7 +29,7 @@ class ConfirmShelterApplication extends Mailable
      */
     public function build()
     {
-        return $this->subject('Hipuppy potwierdzenie aplikacji schronsika')->view('emails.ConfirmShelterApplication');
+        return $this->subject('Idogo potwierdzenie aplikacji schronsika')->view('emails.ConfirmShelterApplication');
 
     }
 }
