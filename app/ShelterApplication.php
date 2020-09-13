@@ -18,4 +18,8 @@ class ShelterApplication extends Model
     {
         return $this->morphMany('App\AcceptedRegulation', 'acceptedregulationable');
     }
+
+    public function shelterApplicationActivationCode(){
+        return $this->belongsTo('App\ShelterApplicationActivationCode', 'shelter_application_id');
+    }
 }
