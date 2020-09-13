@@ -710,4 +710,27 @@ class AdminGateway
 
         return $this->aR->getShelterApplicationStatuses($request);
     }
+
+    public function adminUpdateShelterApplication($request)
+    {
+        $validator = Validator::make($request->all(), [
+            'animalStatusesId' => 'required|integer',
+            'applicationShelterId' => 'required|integer',
+        ],
+            [
+                'animalStatusesId.required' => 'Ups! Pole "status" jest wymagane.',
+                'animalStatusesId.integer' => 'Ups!coś poszło nie tak.',
+
+                'applicationShelterId.required' => 'Ups!coś poszło nie tak.',
+                'applicationShelterId.integer' => 'Ups!coś poszło nie tak.',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
+        return $this->aR->adminUpdateShelterApplication($request);
+
+    }
 }

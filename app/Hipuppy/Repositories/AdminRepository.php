@@ -12,11 +12,16 @@ use App\{AnimalBreed,
     Fur,
     AnimalSize,
     AvailableColors,
+    Mail\ConfirmShelterApplication,
     ShelterApplication,
-    ShelterApplicationStatus};
+    ShelterApplicationActivationCode,
+    ShelterApplicationStatus
+};
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class AdminRepository implements AdminRepositoryInterface
 {
@@ -158,12 +163,12 @@ class AdminRepository implements AdminRepositoryInterface
             })
             ->addColumn('nameAndSurname', function ($data) {
 
-                $nameAndSurname = '<span class="application-user-full-name">'. $data->name . ' ' . $data->surname .'</span>';
+                $nameAndSurname = '<span class="application-user-full-name">' . $data->name . ' ' . $data->surname . '</span>';
                 return $nameAndSurname;
             })
             ->addColumn('shelterName', function ($data) {
 
-                $shelterName = '<span class="application-shelter-name">'. $data->shelter_name .'</span>';
+                $shelterName = '<span class="application-shelter-name">' . $data->shelter_name . '</span>';
                 return $shelterName;
             })
             ->addColumn('address', function ($data) {
@@ -172,7 +177,7 @@ class AdminRepository implements AdminRepositoryInterface
                 return $address;
             })
             ->addColumn('shelterApplicationStatus', function ($data) {
-                $shelterApplicationStatus = '<span data-shelter-application-stauts-id="' . $data->shelter_application_status_id . '">' . $data->shelter_application_status_name . '</span>';
+                $shelterApplicationStatus = '<span class="shelter-application-status" data-shelter-application-stauts-id="' . $data->shelter_application_status_id . '">' . $data->shelter_application_status_name . '</span>';
                 return $shelterApplicationStatus;
             })
             ->rawColumns(['nameAndSurname', 'action', 'address', 'shelterApplicationStatus', 'user', 'shelterName'])
@@ -2138,9 +2143,16 @@ class AdminRepository implements AdminRepositoryInterface
         return response()->json(['success' => 'Usuwanie zakończone pomyślnie.']);
     }
 
-    public function getShelterApplicationStatuses($request){
+    public function getShelterApplicationStatuses($request)
+    {
 
-        $shelterApplicationStatuses = ShelterApplicationStatus::where('id' ,'>=', $request->applicationShelterId)->get();
+        $shelterApplicationCurrentStatuses = DB::table('shelter_application AS sa')
+            ->select(
+                'sa.shelter_application_status_id as shelter_application_status_id'
+            )
+            ->find($request->applicationShelterId);
+
+        $shelterApplicationStatuses = ShelterApplicationStatus::where('id', '>=', $shelterApplicationCurrentStatuses->shelter_application_status_id)->get();
 
         $shelterApplicationStatusesCollection = $shelterApplicationStatuses->map(function ($shelterApplicationStatus) {
             return collect($shelterApplicationStatus->toArray())
@@ -2148,8 +2160,74 @@ class AdminRepository implements AdminRepositoryInterface
                 ->all();
         });
 
+
         return response()->json(['success' => $shelterApplicationStatusesCollection]);
     }
+
+    public function adminUpdateShelterApplication($request)
+    {
+
+        $shelterApplication = ShelterApplication::find($request->applicationShelterId);
+        $additionalMessage = '';
+
+        if ($shelterApplication === null) {
+            return response()->json(['errors' => [__('Nie znaleziono aplikacji schroniska.')]]);
+        } else {
+
+            if ($request->animalStatusesId == 2 && $shelterApplication->shelter_application_status_id == 1) {
+
+                DB::beginTransaction();
+
+                try {
+                    ShelterApplicationActivationCode::create([
+                        'shelter_application_id' => $shelterApplication->id,
+                        'code' => Str::uuid(),
+                        'created_at' => Carbon::now('Europe/Warsaw'),
+                        'updated_at' => null,
+                    ]);
+
+                } catch (ValidationException $e) {
+                    DB::rollback();
+                    return response()->json(['errors' => [__('Ups! Coś poszło nie tak.')]]);
+                } catch (\Exception $e) {
+                    DB::rollback();
+                    return response()->json(['errors' => [__('Ups! Coś poszło nie tak.')]]);
+                }
+
+                DB::commit();
+
+                Mail::to($shelterApplication->email)->send(new ConfirmShelterApplication($shelterApplication));
+                $additionalMessage = ' oraz wysłano wiadomość email.';
+
+            } else {
+
+                return response()->json(['errors' => [__('Wygląda na to, że weryfikacji mailowa została już przeprowadzona lub jest w toku.')]]);
+            }
+
+            DB::beginTransaction();
+
+            try {
+                ShelterApplication::where('id', '=', $request->applicationShelterId)->update([
+                    'shelter_application_status_id' => $request->animalStatusesId,
+                    'edited_at' => Carbon::now('Europe/Warsaw'),
+                    'edited_user_id' => Auth::user()->id,
+                ]);
+
+            } catch (ValidationException $e) {
+                DB::rollback();
+                return response()->json(['errors' => [__('Ups! Coś poszło nie tak.')]]);
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['errors' => [__('Ups! Coś poszło nie tak.')]]);
+            }
+
+            DB::commit();
+            return response()->json(['success' => [__('Pomyślnie zmieniono status aplikacji schroniska' . $additionalMessage)]]);
+
+        }
+
+    }
+
 
     /*
      * TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS    TRAIT ACTIONS

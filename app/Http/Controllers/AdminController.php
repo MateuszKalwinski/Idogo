@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 
 use App\Hipuppy\Gateways\AdminGateway;
 use App\Hipuppy\Interfaces\AdminRepositoryInterface;
+use App\Mail\ConfirmShelterApplication;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
@@ -49,6 +51,13 @@ class AdminController extends Controller
         $shelterApplicationStatuses = $this->aG->getShelterApplicationStatuses($request);
 
         return $shelterApplicationStatuses;
+    }
+
+    public function adminUpdateShelterApplication(Request $request)
+    {
+        $adminUpdateShelterApplication = $this->aG->adminUpdateShelterApplication($request);
+
+        return $adminUpdateShelterApplication;
     }
 
     public function adminSpecies()
