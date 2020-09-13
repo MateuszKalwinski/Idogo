@@ -27,6 +27,7 @@ class CreateShelterApplicationTable extends Migration
             $table->string('regon');
             $table->string('krs')->nullable();
             $table->bigInteger('shelter_application_status_id');
+            $table->boolean('confirmed_email')->default(false);
             $table->dateTime('created_at');
             $table->dateTime('edited_at')->nullable();
             $table->integer('edited_user_id')->nullable();

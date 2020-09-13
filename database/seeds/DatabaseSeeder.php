@@ -52,5 +52,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AvailableFursTableSeeder::class);
         $this->call(RegulationsTableSeeder::class);
         $this->call(AcceptedRegulationsTableSeeder::class);
+        $this->call(ShelterApplicationActivationCodesTableSeeder::class);
     }
 }

@@ -438,9 +438,5 @@ class AnimalBreedsTableSeeder extends Seeder
                 'deleted_user_id' => null,
             ]);
         }
-        DB::table('role_user')->insert([
-            'user_id' => 31,
-            'role_id' => $faker->randomElement($array = array (1,2,3))
-        ]);
     }
 }

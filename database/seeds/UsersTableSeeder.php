@@ -2,6 +2,7 @@
 
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class UsersTableSeeder extends Seeder
 {
@@ -23,6 +24,7 @@ class UsersTableSeeder extends Seeder
                 'surname' => $faker->lastName,
                 'email' => $faker->email,
                 'password' => bcrypt('passw'),
+                'remember_token' => Str::random(10),
                 'created_at' => $faker->dateTime,
                 'edited_ad' => null,
                 'deleted_ad' => null,
@@ -34,6 +36,7 @@ class UsersTableSeeder extends Seeder
             'surname' => 'Kalwinski',
             'email' => 'Mateucz27@gmail.com',
             'password' => bcrypt('kalwinski'),
+            'remember_token' => Str::random(10),
             'created_at' => $faker->dateTime,
             'edited_ad' => null,
             'deleted_ad' => null,

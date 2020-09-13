@@ -28,6 +28,7 @@ class ShelterApplicationTableSeeder extends Seeder
                 'regon' => $faker->randomNumber(),
                 'krs' => null,
                 'shelter_application_status_id' => 1,
+                'confirmed_email' => false,
                 'created_at' => $faker->dateTime,
                 'edited_at' => null,
                 'edited_user_id' => null,

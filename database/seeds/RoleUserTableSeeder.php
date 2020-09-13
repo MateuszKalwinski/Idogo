@@ -21,5 +21,10 @@ class RoleUserTableSeeder extends Seeder
                 'role_id' => $faker->randomElement($array = array (1,2,3))
             ]);
         }
+
+        DB::table('role_user')->insert([
+            'user_id' => 31,
+            'role_id' => 3,
+        ]);
     }
 }
