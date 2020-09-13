@@ -25,6 +25,7 @@ class BackendShelterApplications {
             let applicationShelterId = $(this).closest('tr').find('.edit-shelter-application').attr('data-shelter-application-id');
             $('#applicationShelterId').val(applicationShelterId);
 
+
             self.getShelterApplicationStatuses(applicationShelterId);
 
             $('#EditShelterApplicationModal').modal('show')
@@ -106,6 +107,9 @@ class BackendShelterApplications {
                     });
 
                     applicationStatuses.append(species)
+
+                    $('#animalStatusesId').val(data.success[0].id);
+
                 }
                 $('#form_result').html(html);
             },
@@ -167,34 +171,34 @@ class BackendShelterApplications {
     }
 
     saveShelterApplication(formData, url){
-        // $.ajax({
-        //     url: url,
-        //     method:"POST",
-        //     data: formData,
-        //     contentType: false,
-        //     cache:false,
-        //     processData: false,
-        //     dataType:"json",
-        //     success:function(data)
-        //     {
-        //         var html = '';
-        //         if(data.errors)
-        //         {
-        //             html = '<div class="alert alert-danger">';
-        //             for(var count = 0; count < data.errors.length; count++)
-        //             {
-        //                 html += '<p>' + data.errors[count] + '</p>';
-        //             }
-        //             html += '</div>';
-        //         }
-        //         if(data.success)
-        //         {
-        //             html = '<div class="alert alert-success">' + data.success + '</div>';
-        //             $('#colorName').val('');
-        //             $('#adminAnimalColorsTable').DataTable().ajax.reload();
-        //         }
-        //         $('#form_result').html(html);
-        //     }
-        // })
+        $.ajax({
+            url: url,
+            method:"POST",
+            data: formData,
+            contentType: false,
+            cache:false,
+            processData: false,
+            dataType:"json",
+            success:function(data)
+            {
+                // var html = '';
+                // if(data.errors)
+                // {
+                //     html = '<div class="alert alert-danger">';
+                //     for(var count = 0; count < data.errors.length; count++)
+                //     {
+                //         html += '<p>' + data.errors[count] + '</p>';
+                //     }
+                //     html += '</div>';
+                // }
+                // if(data.success)
+                // {
+                //     html = '<div class="alert alert-success">' + data.success + '</div>';
+                //     $('#colorName').val('');
+                //     $('#adminAnimalColorsTable').DataTable().ajax.reload();
+                // }
+                // $('#form_result').html(html);
+            }
+        })
     }
 }
