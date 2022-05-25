@@ -190,9 +190,6 @@
                             <button
                                 class="btn pink lighten-1 btn-rounded text-white waves-effect waves-light text-transform-none w-100 m-0 mb-3">
                                 Wirtualna adopcja <i class="ml-2 fas fa-lg text-white fa-heart fa-beat"></i></button>
-                        @elseif($animal->animalable_type == 'App\User')
-                            @php setlocale(LC_MONETARY, 'pl_PL'); @endphp
-                            <h4 class="card-title text-center mb-4">{{ money_format('%i', $animal->price) .' zł'}} </h4>
                         @endif
 
                         {{--                        <button class="btn pink lighten-1 btn-rounded text-white waves-effect waves-light text-transform-none w-100 m-0 mb-3">Wirtualna adopcja <i class="ml-2 fas fa-lg text-white fa-heart fa-beat"></i></button>--}}
